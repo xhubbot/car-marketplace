@@ -1,5 +1,5 @@
-import Navbar from '../../../components/Navbar';
-import prisma from '../../../lib/prisma';
+import Navbar from '@/components/Navbar';
+import prisma from '@/lib/prisma';
 
 export default async function Browse() {
   const cars = await prisma.car.findMany({

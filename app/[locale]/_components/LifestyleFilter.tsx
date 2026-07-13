@@ -8,18 +8,15 @@ interface LifestyleFilterProps {
   setSelectedLifestyle: (lifestyle: string) => void;
 }
 
-export default function LifestyleFilter({
-  selectedLifestyle,
-  setSelectedLifestyle,
-}: LifestyleFilterProps) {
-  const categories = [
-    { id: 'all', label: 'All Inventory', icon: Compass, color: 'text-neutral-500' },
-    { id: 'commute', label: 'Silent Commute', icon: Zap, color: 'text-sky-500' },
-    { id: 'adventure', label: 'Wanderlust Rig', icon: Map, color: 'text-amber-500' },
-    { id: 'speed', label: 'Speed Therapy', icon: Flame, color: 'text-rose-500' },
-    { id: 'pragmatic', label: 'Daily Workhorse', icon: Sparkles, color: 'text-emerald-500' },
-  ];
+const categories = [
+  { id: 'all', label: 'All Inventory', icon: Compass, color: 'text-neutral-500' },
+  { id: 'commute', label: 'Silent Commute', icon: Zap, color: 'text-sky-500' },
+  { id: 'adventure', label: 'Wanderlust Rig', icon: Map, color: 'text-amber-500' },
+  { id: 'speed', label: 'Speed Therapy', icon: Flame, color: 'text-rose-500' },
+  { id: 'pragmatic', label: 'Daily Workhorse', icon: Sparkles, color: 'text-emerald-500' },
+];
 
+export default function LifestyleFilter({ selectedLifestyle, setSelectedLifestyle }: LifestyleFilterProps) {
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -35,7 +32,7 @@ export default function LifestyleFilter({
         {categories.map((cat) => {
           const IconComponent = cat.icon;
           const isActive = selectedLifestyle === cat.id;
-          
+
           return (
             <button
               key={cat.id}
@@ -48,7 +45,7 @@ export default function LifestyleFilter({
             >
               <IconComponent className={`h-4 w-4 shrink-0 transition-transform group-hover:scale-110 ${cat.color}`} />
               <span>{cat.label}</span>
-              
+
               {isActive && (
                 <motion.span
                   layoutId="activeIndicator"
