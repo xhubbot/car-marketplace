@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "home": "Avaleht",
+    "buy": "Osta",
+    "sell": "Müü",
+    "messages": "Sõnumid",
+    "profile": "Profiil",
+    "logout": "Välja",
+    "login": "Sisse",
+    "register": "Registreeri",
+    "postAd": "Kuuluta"
+  },
+  "home": {
+    "welcome": "Tere tulemast Autode Turule",
+    "description": "Leia oma unistuste auto või müü oma sõiduk lihtsalt."
+  }
+}

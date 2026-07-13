@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "home": "Home",
+    "buy": "Buy",
+    "sell": "Sell",
+    "messages": "Messages",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "postAd": "Post Ad"
+  },
+  "home": {
+    "welcome": "Welcome to Car Marketplace",
+    "description": "Find your dream car or sell your vehicle with ease."
+  }
+}

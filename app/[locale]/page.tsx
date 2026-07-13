@@ -1,6 +1,9 @@
-import Navbar from '../components/Navbar';
+import { getTranslations } from 'next-intl/server';
+import Navbar from '../../components/Navbar';
 
-export default function Home() {
+export default async function Home() {
+  const t = await getTranslations('home');
+
   return (
     <>
       <Navbar />
@@ -10,10 +13,10 @@ export default function Home() {
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-24">
           <div className="max-w-4xl mx-auto text-center px-6">
             <h1 className="text-6xl font-bold mb-6">
-              Find Your Dream Car
+              {t('welcome')}
             </h1>
             <p className="text-xl mb-10">
-              Buy and sell cars easily. Thousands of vehicles waiting for you.
+              {t('description')}
             </p>
             <button className="bg-white text-blue-700 px-10 py-4 rounded-full text-lg font-semibold hover:bg-gray-100">
               Browse Cars
