@@ -13,5 +13,85 @@
   "home": {
     "welcome": "Welcome to Car Marketplace",
     "description": "Find your dream car or sell your vehicle with ease."
+  },
+  "admin": {
+    "brand": "Admin Panel",
+    "nav": {
+      "dashboard": "Dashboard",
+      "listings":  "Listings",
+      "users":     "Users",
+      "analytics": "Analytics",
+      "settings":  "Settings",
+      "logout":    "Sign Out"
+    },
+    "topbar": {
+      "section": "Administration",
+      "badge":   "Restricted Access"
+    },
+    "page": {
+      "title":       "This is the Admin Page",
+      "description": "Full platform oversight — manage listings, users, and system settings."
+    },
+    "stats": {
+      "listings":   "Listings",
+      "pending":    "awaiting review",
+      "users":      "Users",
+      "registered": "total registered",
+      "dealers":    "Dealers",
+      "active":     "active accounts",
+      "disputes":   "Disputes",
+      "open":       "open cases"
+    },
+    "notice": {
+      "title": "Admin area",
+      "body":  "You have access to sensitive platform data. All actions are logged and audited."
+    },
+    "quick": {
+      "listings":      "Manage Listings",
+      "listingsDesc":  "Review, approve, or remove car listings submitted by users.",
+      "users":         "Manage Users",
+      "usersDesc":     "View user profiles, roles, and account status.",
+      "analytics":     "Analytics",
+      "analyticsDesc": "Platform-wide traffic, conversions, and revenue metrics."
+    }
+  },
+  "dealer": {
+    "brand": "Dealer Portal",
+    "nav": {
+      "overview":  "Overview",
+      "inventory": "Inventory",
+      "leads":     "Leads",
+      "reports":   "Reports"
+    },
+    "topbar": {
+      "dealerAccount": "Dealer Account"
+    },
+    "page": {
+      "title":       "This is the Dealer Page",
+      "description": "Manage your inventory, track leads, and grow your dealership on autod.pro.",
+      "addListing":  "Add Listing"
+    },
+    "metrics": {
+      "activeListing": "Active Listings",
+      "totalViews":    "Total Views",
+      "leads":         "Leads",
+      "sold":          "Sold",
+      "thisMonth":     "this month",
+      "last7days":     "last 7 days",
+      "newLeads":      "new this week"
+    },
+    "actions": {
+      "inventory":     "Inventory",
+      "inventoryDesc": "Browse and manage your full vehicle stock.",
+      "leads":         "Leads",
+      "leadsDesc":     "Track buyer enquiries and follow-up conversations.",
+      "reports":       "Reports",
+      "reportsDesc":   "View performance stats for your listings.",
+      "open":          "Open"
+    },
+    "info": {
+      "title": "Dealer portal",
+      "body":  "This is the dealer page. You can manage your listings, respond to leads, and view analytics for your showroom."
+    }
   }
 }

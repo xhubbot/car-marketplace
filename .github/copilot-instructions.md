@@ -1,3 +1,4 @@
+
 # RahaKaitse AI Coding Agent Instructions
 
 ## Project Overview

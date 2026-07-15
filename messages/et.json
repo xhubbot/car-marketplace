@@ -13,5 +13,85 @@
   "home": {
     "welcome": "Tere tulemast Autode Turule",
     "description": "Leia oma unistuste auto või müü oma sõiduk lihtsalt."
+  },
+  "admin": {
+    "brand": "Admini paneel",
+    "nav": {
+      "dashboard": "Töölaud",
+      "listings":  "Kuulutused",
+      "users":     "Kasutajad",
+      "analytics": "Analüütika",
+      "settings":  "Seaded",
+      "logout":    "Logi välja"
+    },
+    "topbar": {
+      "section": "Administreerimine",
+      "badge":   "Piiratud juurdepääs"
+    },
+    "page": {
+      "title":       "See on Admini leht",
+      "description": "Täielik platvormi ülevaade — halda kuulutusi, kasutajaid ja süsteemi seadeid."
+    },
+    "stats": {
+      "listings":   "Kuulutused",
+      "pending":    "ootab ülevaatust",
+      "users":      "Kasutajad",
+      "registered": "registreeritud kokku",
+      "dealers":    "Edasimüüjad",
+      "active":     "aktiivsed kontod",
+      "disputes":   "Vaidlused",
+      "open":       "avatud juhtumid"
+    },
+    "notice": {
+      "title": "Admini ala",
+      "body":  "Sul on juurdepääs tundlikele platvormi andmetele. Kõik toimingud logitakse ja auditeeritakse."
+    },
+    "quick": {
+      "listings":      "Halda kuulutusi",
+      "listingsDesc":  "Vaata üle, kinnita või eemalda kasutajate esitatud autoostukuulutusi.",
+      "users":         "Halda kasutajaid",
+      "usersDesc":     "Vaata kasutajaprofiilid, rollid ja konto olekud.",
+      "analytics":     "Analüütika",
+      "analyticsDesc": "Platvormiülene liiklus, konversioonid ja tulumõõdikud."
+    }
+  },
+  "dealer": {
+    "brand": "Edasimüüja portaal",
+    "nav": {
+      "overview":  "Ülevaade",
+      "inventory": "Laoseis",
+      "leads":     "Vihjed",
+      "reports":   "Aruanded"
+    },
+    "topbar": {
+      "dealerAccount": "Edasimüüja konto"
+    },
+    "page": {
+      "title":       "See on Edasimüüja leht",
+      "description": "Halda oma laoseisu, jälgi vihjeid ja kasva autod.pro platvormil.",
+      "addListing":  "Lisa kuulutus"
+    },
+    "metrics": {
+      "activeListing": "Aktiivsed kuulutused",
+      "totalViews":    "Vaatamisi kokku",
+      "leads":         "Vihjed",
+      "sold":          "Müüdud",
+      "thisMonth":     "sel kuul",
+      "last7days":     "viimased 7 päeva",
+      "newLeads":      "uued sel nädalal"
+    },
+    "actions": {
+      "inventory":     "Laoseis",
+      "inventoryDesc": "Vaata ja halda kogu oma sõidukiparki.",
+      "leads":         "Vihjed",
+      "leadsDesc":     "Jälgi ostjate päringuid ja järelkontakti vestlusi.",
+      "reports":       "Aruanded",
+      "reportsDesc":   "Vaata kuulutuste toimivuse statistikat.",
+      "open":          "Ava"
+    },
+    "info": {
+      "title": "Edasimüüja portaal",
+      "body":  "See on edasimüüja leht. Siin saad hallata oma kuulutusi, vastata vihjeedele ning vaadata oma autosalongi analüütikat."
+    }
   }
 }

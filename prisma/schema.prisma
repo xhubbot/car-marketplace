@@ -6,18 +6,483 @@ generator client {
 datasource db {
   provider = "mysql"
 }
- 
 
-model Car {
-  id          Int      @id @default(autoincrement())
-  make        String
-  model       String
-  year        Int
-  price       Float
-  mileage     Int
-  location    String
-  image       String?
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+// ─────────────────────────────────────────────
+// Enums
+// ─────────────────────────────────────────────
+
+enum ListingStatus {
+  draft
+  active
+  sold
+  expired
+}
+
+enum ColorFinish {
+  solid
+  metallic
+  pearl
+  matte
+}
+
+enum OrderStatus {
+  pending
+  paid
+  failed
+  cancelled
+}
+
+enum PaymentGateway {
+  montonio
+  everypay
+  maksekeskus
+  stripe
+}
+
+enum PaymentStatus {
+  initiated
+  authorized
+  completed
+  failed
+  refunded
+}
+
+// ─────────────────────────────────────────────
+// Unified translation helper
+// ─────────────────────────────────────────────
+
+model Translation {
+  id           Int    @id @default(autoincrement()) @db.UnsignedInt
+  category     String @db.VarChar(50)
+  refId        Int    @map("ref_id") @db.UnsignedInt
+  languageCode String @map("language_code") @db.Char(2)
+  name         String @db.VarChar(255)
+
+  @@unique([category, refId, languageCode], name: "unique_translation")
+  @@index([category, refId], name: "idx_lookup")
+  @@map("translations")
+}
+
+// ─────────────────────────────────────────────
+// Lookup / reference tables
+// ─────────────────────────────────────────────
+
+model FuelType {
+  id            Int      @id @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  isElectric    Boolean  @default(false) @map("is_electric")
+  isHybrid      Boolean  @default(false) @map("is_hybrid")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  listings CarListing[]
+
+  @@map("fuel_types")
+}
+
+model Transmission {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  listings CarListing[]
+
+  @@map("transmissions")
+}
+
+model DriveType {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  listings CarListing[]
+
+  @@map("drive_types")
+}
+
+model Color {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  hexCode       String?  @map("hex_code") @db.Char(7)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  listings CarListing[]
+
+  @@map("colors")
+}
+
+model EmissionStandard {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(20)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  listings CarListing[]
+
+  @@map("emission_standards")
+}
+
+model VehicleCategory {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  bodyTypes BodyType[]
+  listings  CarListing[]
+
+  @@map("vehicle_categories")
+}
+
+model BodyType {
+  id            Int      @id @db.UnsignedInt
+  categoryId    Int      @map("category_id") @db.UnsignedInt
+  technicalName String   @map("technical_name") @db.VarChar(50)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  category VehicleCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  listings CarListing[]
+
+  @@unique([categoryId, technicalName], name: "unique_category_tech_name")
+  @@map("body_types")
+}
+
+model Country {
+  id           Int      @id @db.UnsignedInt
+  iso2Code     String?  @map("iso2_code") @db.Char(2)
+  fallbackName String   @map("fallback_name") @db.VarChar(100)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  listings CarListing[]
+
+  @@map("countries")
+}
+
+model Location {
+  id           Int      @id @db.UnsignedInt
+  parentId     Int?     @map("parent_id") @db.UnsignedInt
+  fallbackName String   @map("fallback_name") @db.VarChar(100)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  parent   Location?    @relation("LocationParent", fields: [parentId], references: [id])
+  children Location[]   @relation("LocationParent")
+  listings CarListing[]
+
+  @@map("locations")
+}
+
+// ─────────────────────────────────────────────
+// Makes & models
+// ─────────────────────────────────────────────
+
+model CarMake {
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
+  name      String   @unique @db.VarChar(50)
+  slug      String   @unique @db.VarChar(50)
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  models      CarModel[]
+  carListings CarListing[]
+
+  @@map("car_makes")
+}
+
+model CarModel {
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
+  makeId    Int      @map("make_id") @db.UnsignedInt
+  name      String   @db.VarChar(50)
+  slug      String   @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  make     CarMake       @relation(fields: [makeId], references: [id], onDelete: Cascade)
+  periods  ModelPeriod[]
+  listings CarListing[]
+
+  @@unique([makeId, name], name: "unique_make_model")
+  @@map("car_models")
+}
+
+model ModelPeriod {
+  id       Int    @id @default(autoincrement()) @db.UnsignedInt
+  modelId  Int    @map("model_id") @db.UnsignedInt
+  name     String @db.VarChar(100)
+  yearFrom Int?   @map("year_from") @db.UnsignedSmallInt
+  yearTo   Int?   @map("year_to") @db.UnsignedSmallInt
+
+  model    CarModel     @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  listings CarListing[]
+
+  @@map("model_periods")
+}
+
+// ─────────────────────────────────────────────
+// Equipment features
+// ─────────────────────────────────────────────
+
+model FeatureCategory {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  sortOrder     Int      @default(0) @map("sort_order") @db.UnsignedTinyInt
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  features CarFeature[]
+
+  @@map("feature_categories")
+}
+
+model CarFeature {
+  id            Int      @id @db.UnsignedInt
+  categoryId    Int      @map("category_id") @db.UnsignedInt
+  technicalName String   @map("technical_name") @db.VarChar(100)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  category        FeatureCategory     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  listingFeatures CarListingFeature[]
+
+  @@map("car_features")
+}
+
+// ─────────────────────────────────────────────
+// Core listing
+// ─────────────────────────────────────────────
+
+model CarListing {
+  id     BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+  userId Int    @map("user_id") @db.UnsignedInt
+
+  // Identity (locked after activation)
+  makeId        Int     @map("make_id") @db.UnsignedInt
+  modelId       Int     @map("model_id") @db.UnsignedInt
+  modelPeriodId Int?    @map("model_period_id") @db.UnsignedInt
+  modelTrim     String? @map("model_trim") @db.VarChar(100)
+  categoryId    Int?    @map("category_id") @db.UnsignedInt
+  bodyTypeId    Int?    @map("body_type_id") @db.UnsignedInt
+
+  // Registration
+  vinCode String? @map("vin_code") @db.VarChar(17)
+  regNr   String? @map("reg_nr") @db.VarChar(20)
+
+  // Core specs
+  yearManufactured  Int  @map("year_manufactured") @db.UnsignedSmallInt
+  monthManufactured Int? @map("month_manufactured") @db.UnsignedTinyInt
+  mileage           Int  @db.UnsignedInt
+  fuelTypeId        Int  @map("fuel_type_id") @db.UnsignedInt
+  transmissionId    Int? @map("transmission_id") @db.UnsignedInt
+  driveTypeId       Int? @map("drive_type_id") @db.UnsignedInt
+
+  // Engine
+  engineDisplacementCc Int?    @map("engine_displacement_cc") @db.UnsignedSmallInt
+  enginePowerKw        Int?    @map("engine_power_kw") @db.UnsignedSmallInt
+  enginePowerHp        Int?    @map("engine_power_hp") @db.UnsignedSmallInt
+  engineInfo           String? @map("engine_info") @db.VarChar(100)
+  emissionStandardId   Int?    @map("emission_standard_id") @db.UnsignedInt
+  co2EmissionGkm       Int?    @map("co2_emission_gkm") @db.UnsignedSmallInt
+
+  // Consumption
+  fuelConsumptionCity    Decimal? @map("fuel_consumption_city") @db.Decimal(5, 2)
+  fuelConsumptionHighway Decimal? @map("fuel_consumption_highway") @db.Decimal(5, 2)
+  fuelConsumptionMixed   Decimal? @map("fuel_consumption_mixed") @db.Decimal(5, 2)
+  fuelTankCapacityL      Int?     @map("fuel_tank_capacity_l") @db.UnsignedSmallInt
+
+  // Body
+  doors Int? @db.UnsignedTinyInt
+  seats Int? @db.UnsignedTinyInt
+
+  // Dimensions (mm)
+  vehicleLengthMm Int? @map("vehicle_length_mm") @db.UnsignedInt
+  vehicleWidthMm  Int? @map("vehicle_width_mm") @db.UnsignedInt
+  vehicleHeightMm Int? @map("vehicle_height_mm") @db.UnsignedInt
+  wheelbaseMm     Int? @map("wheelbase_mm") @db.UnsignedInt
+
+  // Weight & towing (kg)
+  kerbWeightKg          Int? @map("kerb_weight_kg") @db.UnsignedInt
+  grossWeightKg         Int? @map("gross_weight_kg") @db.UnsignedInt
+  payloadKg             Int? @map("payload_kg") @db.UnsignedInt
+  towCapacityBrakedKg   Int? @map("tow_capacity_braked_kg") @db.UnsignedInt
+  towCapacityUnbrakedKg Int? @map("tow_capacity_unbraked_kg") @db.UnsignedInt
+
+  // Performance
+  acceleration0100 Decimal? @map("acceleration_0_100") @db.Decimal(4, 1)
+  maxSpeedKph      Int?     @map("max_speed_kph") @db.UnsignedSmallInt
+
+  // Color
+  colorId     Int?         @map("color_id") @db.UnsignedInt
+  colorFinish ColorFinish? @map("color_finish")
+
+  // Condition
+  inspectionValidUntil   DateTime? @map("inspection_valid_until") @db.Date
+  hasServiceBook         Boolean   @default(false) @map("has_service_book")
+  hasWarranty            Boolean   @default(false) @map("has_warranty")
+  warrantyDescription    String?   @map("warranty_description") @db.VarChar(255)
+  isCrashDamaged         Boolean   @default(false) @map("is_crash_damaged")
+  partsSoldSeparately    Boolean   @default(false) @map("parts_sold_separately")
+  partsInfo              String?   @map("parts_info") @db.Text
+  registeredAsCommercial Boolean   @default(false) @map("registered_as_commercial")
+
+  // Location & origin
+  locationId            Int? @map("location_id") @db.UnsignedInt
+  importedFromCountryId Int? @map("imported_from_country_id") @db.UnsignedInt
+
+  // Pricing
+  price               Decimal  @db.Decimal(10, 2)
+  discountPrice       Decimal? @map("discount_price") @db.Decimal(10, 2)
+  exportPrice         Decimal? @map("export_price") @db.Decimal(10, 2)
+  currency            String   @default("EUR") @db.Char(3)
+  priceIncludesVat    Boolean  @default(false) @map("price_includes_vat")
+  priceIncludesRegFee Boolean  @default(false) @map("price_includes_reg_fee")
+
+  // TCO estimates
+  estMonthlyLoan        Decimal @default(0.00) @map("est_monthly_loan") @db.Decimal(8, 2)
+  estMonthlyInsurance   Decimal @default(0.00) @map("est_monthly_insurance") @db.Decimal(8, 2)
+  estMonthlyMaintenance Decimal @default(0.00) @map("est_monthly_maintenance") @db.Decimal(8, 2)
+
+  // Meta
+  status     ListingStatus @default(draft)
+  viewsCount Int           @default(0) @map("views_count") @db.UnsignedInt
+  createdAt  DateTime      @default(now()) @map("created_at")
+  updatedAt  DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  make                CarMake           @relation(fields: [makeId], references: [id])
+  model               CarModel          @relation(fields: [modelId], references: [id])
+  modelPeriod         ModelPeriod?      @relation(fields: [modelPeriodId], references: [id])
+  category            VehicleCategory?  @relation(fields: [categoryId], references: [id])
+  bodyType            BodyType?         @relation(fields: [bodyTypeId], references: [id])
+  fuelType            FuelType          @relation(fields: [fuelTypeId], references: [id])
+  transmission        Transmission?     @relation(fields: [transmissionId], references: [id])
+  driveType           DriveType?        @relation(fields: [driveTypeId], references: [id])
+  emissionStandard    EmissionStandard? @relation(fields: [emissionStandardId], references: [id])
+  color               Color?            @relation(fields: [colorId], references: [id])
+  location            Location?         @relation(fields: [locationId], references: [id])
+  importedFromCountry Country?          @relation(fields: [importedFromCountryId], references: [id])
+
+  translations    CarListingTranslation[]
+  features        CarListingFeature[]
+  images          CarImage[]
+  premiumFeatures CarListingPremiumFeature[]
+  orderItems      FeatureOrderItem[]
+
+  @@index([status, price], name: "idx_status_price")
+  @@index([makeId, modelId, yearManufactured, price], name: "idx_search_filters")
+  @@index([fuelTypeId, transmissionId], name: "idx_fuel_trans")
+  @@index([bodyTypeId, categoryId], name: "idx_body")
+  @@index([locationId], name: "idx_location")
+  @@map("car_listings")
+}
+
+model CarListingTranslation {
+  listingId    BigInt  @map("listing_id") @db.UnsignedBigInt
+  languageCode String  @map("language_code") @db.Char(2)
+  title        String  @db.VarChar(150)
+  description  String? @db.Text
+
+  listing CarListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, languageCode])
+  @@map("car_listing_translations")
+}
+
+model CarListingFeature {
+  listingId BigInt  @map("listing_id") @db.UnsignedBigInt
+  featureId Int     @map("feature_id") @db.UnsignedInt
+  extraInfo String? @map("extra_info") @db.VarChar(255)
+
+  listing CarListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  feature CarFeature @relation(fields: [featureId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, featureId])
+  @@map("car_listing_features")
+}
+
+model CarImage {
+  id        BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  listingId BigInt   @map("listing_id") @db.UnsignedBigInt
+  imagePath String   @map("image_path") @db.VarChar(255)
+  isMain    Boolean  @default(false) @map("is_main")
+  sortOrder Int      @default(0) @map("sort_order") @db.UnsignedTinyInt
+  createdAt DateTime @default(now()) @map("created_at")
+
+  listing CarListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@index([listingId, sortOrder], name: "idx_listing_images")
+  @@map("car_images")
+}
+
+// ─────────────────────────────────────────────
+// Premium features & payments
+// ─────────────────────────────────────────────
+
+model PremiumFeature {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  technicalName String   @unique @map("technical_name") @db.VarChar(50)
+  pricePerDay   Decimal  @map("price_per_day") @db.Decimal(6, 2)
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  listingFeatures CarListingPremiumFeature[]
+  orderItems      FeatureOrderItem[]
+
+  @@map("premium_features")
+}
+
+model CarListingPremiumFeature {
+  id          BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  listingId   BigInt   @map("listing_id") @db.UnsignedBigInt
+  featureId   Int      @map("feature_id") @db.UnsignedInt
+  activatedAt DateTime @default(now()) @map("activated_at")
+  expiresAt   DateTime @map("expires_at")
+
+  listing CarListing     @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  feature PremiumFeature @relation(fields: [featureId], references: [id])
+
+  @@index([listingId], name: "idx_active_listing_features")
+  @@map("car_listing_premium_features")
+}
+
+model FeatureOrder {
+  id          BigInt      @id @default(autoincrement()) @db.UnsignedBigInt
+  userId      Int         @map("user_id") @db.UnsignedInt
+  totalAmount Decimal     @map("total_amount") @db.Decimal(10, 2)
+  currency    String      @default("EUR") @db.VarChar(3)
+  status      OrderStatus @default(pending)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  items        FeatureOrderItem[]
+  transactions PaymentTransaction[]
+
+  @@index([userId, status], name: "idx_user_orders")
+  @@map("feature_orders")
+}
+
+model FeatureOrderItem {
+  id            BigInt  @id @default(autoincrement()) @db.UnsignedBigInt
+  orderId       BigInt  @map("order_id") @db.UnsignedBigInt
+  listingId     BigInt  @map("listing_id") @db.UnsignedBigInt
+  featureId     Int     @map("feature_id") @db.UnsignedInt
+  daysPurchased Int     @map("days_purchased") @db.UnsignedInt
+  price         Decimal @db.Decimal(8, 2)
+
+  order   FeatureOrder   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  listing CarListing     @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  feature PremiumFeature @relation(fields: [featureId], references: [id])
+
+  @@map("feature_order_items")
+}
+
+model PaymentTransaction {
+  id                   BigInt         @id @default(autoincrement()) @db.UnsignedBigInt
+  orderId              BigInt         @map("order_id") @db.UnsignedBigInt
+  gateway              PaymentGateway
+  gatewayTransactionId String         @unique @map("gateway_transaction_id") @db.VarChar(255)
+  paymentMethod        String?        @map("payment_method") @db.VarChar(50)
+  amount               Decimal        @db.Decimal(10, 2)
+  currency             String         @default("EUR") @db.VarChar(3)
+  status               PaymentStatus  @default(initiated)
+  requestPayload       Json?          @map("request_payload")
+  callbackPayload      Json?          @map("callback_payload")
+  createdAt            DateTime       @default(now()) @map("created_at")
+  updatedAt            DateTime       @updatedAt @map("updated_at")
+
+  order FeatureOrder @relation(fields: [orderId], references: [id])
+
+  @@map("payment_transactions")
 }
