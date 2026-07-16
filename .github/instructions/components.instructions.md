@@ -1,6 +1,6 @@
 ---
 description: Rules for UI Components
-applyTo: src/components/**/*.tsx, src/app/[locale]/**/_components/**/*.tsx
+applyTo: components/**/*.tsx, app/[locale]/**/_components/**/*.tsx
 ---
 
 # Component Rules — UI Layer
@@ -16,20 +16,19 @@ Default to Server Components. Only add `"use client"` when you actually need:
 - React state (`useState`, `useReducer`)
 - React effects (`useEffect`)
 - Event handlers (onClick, onChange, etc.)
-- Context consumers with client-side state
-- Wagmi/wallet hooks
+- Context consumers with client-side state (e.g. `useCompare`, `useTheme`)
 
 ```typescript
 // ✅ Server Component — no directive needed, renders on server
-export function EscrowCard({ escrow }: { escrow: Escrow }) {
-  return <div>{escrow.amount}</div>;
+export function CarCard({ listing }: { listing: CarListing }) {
+  return <div>{listing.price}</div>;
 }
 
 // ✅ Client Component — needs event handler
 "use client";
-export function CancelButton({ escrowId }: { escrowId: string }) {
-  const { cancel, isCancelling } = useCancelEscrow(escrowId);
-  return <button onClick={cancel} disabled={isCancelling}>Cancel</button>;
+export function CompareButton({ listingId }: { listingId: string }) {
+  const { toggleCompare, compareDeckIds } = useCompare();
+  return <button onClick={() => toggleCompare(listingId)}>Compare</button>;
 }
 ```
 
@@ -41,34 +40,34 @@ Every component has an explicit props interface. No `any`, no untyped props, no 
 
 ```typescript
 // ✅ Explicit typed props
-interface EscrowCardProps {
-  escrow: Escrow;
+interface CarCardProps {
+  listing: CarListing;
   locale: string;
-  onCancel?: (id: string) => void;
+  onCompare?: (id: string) => void;
 }
 
-export function EscrowCard({ escrow, locale, onCancel }: EscrowCardProps) { ... }
+export function CarCard({ listing, locale, onCompare }: CarCardProps) { ... }
 
 // ❌ Untyped props
-export function EscrowCard(props: any) { ... }
+export function CarCard(props: any) { ... }
 ```
 
 ---
 
 ## 3. No Business Logic in Components
 
-Components do not: calculate fees, validate wallet addresses, query databases, call Prisma, or make fetch requests. All of that lives in hooks or services.
+Components do not: calculate TCO/truth scores, validate listing data, query databases, call Prisma, or make fetch requests. All of that lives in hooks or services.
 
 ```typescript
 // ❌ Business logic in component
-export function EscrowCard({ escrow }) {
-  const fee = escrow.amount * 0.02;  // ← business logic
-  const isExpired = Date.now() / 1000 > escrow.deadline;  // ← business logic
+export function CarCard({ listing }) {
+  const monthlyTco = calculateTotalMonthlyTCO(...);  // ← business logic
+  const isExpired = new Date() > listing.expiresAt;  // ← business logic
   // ...
 }
 
 // ✅ Pass pre-computed values from hook or page
-export function EscrowCard({ escrow, fee, isExpired }) { ... }
+export function CarCard({ listing, monthlyTco, isExpired }) { ... }
 ```
 
 ---
@@ -80,18 +79,18 @@ Components never call `fetch` or useQuery directly. They call a hook that handle
 ```typescript
 // ❌ Component fetches data
 "use client";
-export function EscrowList() {
+export function ListingList() {
   const [data, setData] = useState([]);
-  useEffect(() => { fetch("/api/escrow").then(...).then(setData) }, []);
+  useEffect(() => { fetch("/api/cars").then(...).then(setData) }, []);
   // ...
 }
 
 // ✅ Component consumes a hook
 "use client";
-export function EscrowList() {
-  const { escrows, isLoading } = useEscrowList();
+export function ListingList() {
+  const { listings, isLoading } = useListingList();
   if (isLoading) return <Spinner />;
-  return <ul>{escrows.map(e => <EscrowItem key={e.id} escrow={e} />)}</ul>;
+  return <ul>{listings.map(l => <CarCard key={l.id} listing={l} />)}</ul>;
 }
 ```
 
@@ -102,11 +101,11 @@ export function EscrowList() {
 If a component grows beyond ~100 lines or handles more than one visual concern, split it:
 
 ```
-EscrowDetailPage        ← orchestration only
-  EscrowHeader          ← title, status badge, actions
-  EscrowParties         ← buyer/seller addresses
-  EscrowTimeline        ← milestones/history
-  DisputeSection        ← dispute UI (conditionally rendered)
+CarDetailsView            ← orchestration only
+  CarDetailsPhotoSpecs    ← photo gallery + spec sheet
+  CarDetailsOwnershipSidebar ← TCO/truth-score breakdown (ownership view)
+  CarDetailsStandardSidebar  ← price/contact seller (standard view)
+  CarDetailsControls      ← compare/favorite/share actions
 ```
 
 ---
@@ -119,8 +118,8 @@ Always use `useTranslations` with a namespace. Never hardcode user-visible strin
 "use client";
 import { useTranslations } from "next-intl";
 
-export function EscrowStatus({ status }: { status: string }) {
-  const t = useTranslations("status.escrow");
+export function ListingStatusBadge({ status }: { status: string }) {
+  const t = useTranslations("status.listing");
   return <span>{t(status)}</span>;
 }
 ```
@@ -130,9 +129,9 @@ For Server Components, pass `locale` from `params` and use `getTranslations`:
 ```typescript
 import { getTranslations } from "next-intl/server";
 
-export async function EscrowCard({ escrow, locale }: EscrowCardProps) {
-  const t = await getTranslations({ locale, namespace: "escrow" });
-  return <div>{t("amount", { value: escrow.amount })}</div>;
+export async function CarCard({ listing, locale }: CarCardProps) {
+  const t = await getTranslations({ locale, namespace: "listing" });
+  return <div>{t("price", { value: listing.price })}</div>;
 }
 ```
 
@@ -140,14 +139,23 @@ export async function EscrowCard({ escrow, locale }: EscrowCardProps) {
 
 ## 7. Modals
 
-Use `react-modal`. Always set `Modal.setAppElement()` in the component or in a global setup file:
+Use Radix UI primitives (`radix-ui`, already a project dependency) for modals/dialogs rather than rolling custom overlay logic:
 
 ```typescript
-import Modal from "react-modal";
-Modal.setAppElement("#__next");
+"use client";
+import { Dialog } from "radix-ui";
 
-export function DeleteModal({ isOpen, onConfirm, onClose }) {
-  // ...
+export function DeleteListingModal({ open, onOpenChange, onConfirm }: DeleteListingModalProps) {
+  return (
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          {/* ... */}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
 }
 ```
 
@@ -159,14 +167,14 @@ Every component that depends on async data must handle loading and error states 
 
 ```typescript
 "use client";
-export function EscrowList() {
-  const { escrows, isLoading, error } = useEscrowList();
+export function ListingList() {
+  const { listings, isLoading, error } = useListingList();
 
-  if (isLoading) return <EscrowListSkeleton />;
+  if (isLoading) return <ListingListSkeleton />;
   if (error) return <ErrorMessage message={error} />;
-  if (!escrows.length) return <EmptyState />;
+  if (!listings.length) return <EmptyState />;
 
-  return <ul>{escrows.map(e => <EscrowItem key={e.id} escrow={e} />)}</ul>;
+  return <ul>{listings.map(l => <CarCard key={l.id} listing={l} />)}</ul>;
 }
 ```
 
@@ -181,10 +189,10 @@ export function EscrowList() {
 
 ```typescript
 // ✅ Accessible
-<button onClick={onCancel} aria-label={t("cancelEscrow")}>
-  <XIcon />
+<button onClick={onCompare} aria-label={t("addToCompare")}>
+  <PlusIcon />
 </button>
 
 // ❌ Inaccessible
-<div onClick={onCancel}><XIcon /></div>
+<div onClick={onCompare}><PlusIcon /></div>
 ```

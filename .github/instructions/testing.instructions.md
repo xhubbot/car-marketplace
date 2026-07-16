@@ -1,6 +1,6 @@
 ---
 description: Rules for Jest Unit Tests and Integration Tests
-applyTo: src/__tests__/**/*.ts, src/__tests__/**/*.tsx
+applyTo: __tests__/**/*.ts, __tests__/**/*.tsx
 ---
 
 # Testing Rules — Jest Unit & Integration Tests
@@ -11,11 +11,11 @@ All business logic must be unit-tested. Tests must run fast, be deterministic, a
 
 ## 1. Test Configuration
 
-- **Runner**: Jest (`apps/web/jest.config.ts`)
+- **Runner**: Jest (no `jest.config.ts` exists yet in this project — add one at the repository root when introducing the first test)
 - **Environment**: `node` (not `jsdom`) — use `jsdom` only when testing React components/hooks
-- **Test location**: `src/__tests__/**/*.test.ts` (or `.test.tsx` for React)
-- **Run**: `npm run test` from `apps/web/`
-- **Alias**: `@/` maps to `src/` via `moduleNameMapper`
+- **Test location**: `__tests__/**/*.test.ts` (or `.test.tsx` for React) at the repository root
+- **Run**: `npm run test` (add the script when Jest is configured) or `npx jest --watch`
+- **Alias**: `@/` maps to the repository root via `moduleNameMapper` (mirrors [tsconfig.json](tsconfig.json))
 
 ---
 
@@ -25,7 +25,7 @@ All business logic must be unit-tested. Tests must run fast, be deterministic, a
 |-------|-----------|----------|
 | Service classes | Unit | **Required** |
 | Repository methods | Unit (with mock db) | Required |
-| Utility functions (`src/utils/`) | Unit | Required |
+| Utility functions (`lib/`) | Unit | Required |
 | API route handlers | Integration (mock NextRequest) | Required |
 | Hooks with side effects | Unit (`renderHook`) | Required |
 | Pure UI components | Snapshot / render | Optional |
@@ -37,35 +37,35 @@ All business logic must be unit-tested. Tests must run fast, be deterministic, a
 Inject mock Prisma via constructor. Never use the real database.
 
 ```typescript
-import { EscrowService } from "@/services/EscrowService";
-import type { PrismaClient } from "@prisma/client";
+import { ListingService } from "@/services/ListingService";
+import type { PrismaClient } from "@/generated/prisma/client";
 
 const mockDb = {
-  escrow: {
+  carListing: {
     findUnique: jest.fn(),
     create: jest.fn(),
     update: jest.fn(),
   },
 } as unknown as PrismaClient;
 
-describe("EscrowService", () => {
-  let service: EscrowService;
+describe("ListingService", () => {
+  let service: ListingService;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    service = new EscrowService(mockDb);
+    service = new ListingService(mockDb);
   });
 
-  it("returns null when escrow not found", async () => {
-    (mockDb.escrow.findUnique as jest.Mock).mockResolvedValue(null);
-    const result = await service.getEscrowById("nonexistent");
+  it("returns null when listing not found", async () => {
+    (mockDb.carListing.findUnique as jest.Mock).mockResolvedValue(null);
+    const result = await service.getListingById(999);
     expect(result).toBeNull();
   });
 
-  it("throws when buyer and seller are the same wallet", async () => {
+  it("throws when price is not positive", async () => {
     await expect(
-      service.createEscrow({ buyerWallet: "0xabc", sellerWallet: "0xabc", amount: 100 })
-    ).rejects.toThrow("Buyer and seller cannot be the same wallet");
+      service.createListing({ makeId: 1, modelId: 1, price: 0, year: 2020 })
+    ).rejects.toThrow("Listing price must be positive");
   });
 });
 ```
@@ -78,38 +78,21 @@ Two approaches depending on what you need:
 
 **Option A — Constructor injection (preferred — follows DI pattern):**
 ```typescript
-const mockDb = { escrow: { findUnique: jest.fn() } } as unknown as PrismaClient;
-const service = new EscrowService(mockDb);
+const mockDb = { carListing: { findUnique: jest.fn() } } as unknown as PrismaClient;
+const service = new ListingService(mockDb);
 ```
 
 **Option B — Module mock (for legacy code or API routes):**
 ```typescript
 jest.mock("@/lib/prisma", () => ({
-  escrow: { findUnique: jest.fn(), create: jest.fn() },
+  carListing: { findUnique: jest.fn(), create: jest.fn() },
 }));
 import prisma from "@/lib/prisma";
 ```
 
 ---
 
-## 5. Mocking Wagmi Hooks
-
-```typescript
-jest.mock("wagmi", () => ({
-  useAccount: jest.fn(() => ({
-    address: "0xabc123",
-    isConnected: true,
-    isConnecting: false,
-    isReconnecting: false,
-  })),
-  useReadContract: jest.fn(() => ({ data: undefined, isLoading: false })),
-  useWriteContract: jest.fn(() => ({ writeContractAsync: jest.fn() })),
-}));
-```
-
----
-
-## 6. Mocking fetch
+## 5. Mocking fetch
 
 ```typescript
 const mockFetch = jest.spyOn(global, "fetch");
@@ -117,7 +100,7 @@ const mockFetch = jest.spyOn(global, "fetch");
 beforeEach(() => {
   mockFetch.mockResolvedValue({
     ok: true,
-    json: async () => ({ id: "1", status: "PENDING" }),
+    json: async () => ({ id: "1", status: "active" }),
   } as Response);
 });
 
@@ -131,22 +114,22 @@ afterEach(() => mockFetch.mockRestore());
 ```typescript
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEscrowList } from "@/hooks/useEscrowList";
+import { useListingList } from "@/hooks/useListingList";
 
 function wrapper({ children }: { children: React.ReactNode }) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }
 
-it("fetches escrow list", async () => {
+it("fetches listing list", async () => {
   jest.spyOn(global, "fetch").mockResolvedValueOnce({
     ok: true,
     json: async () => [{ id: "1" }],
   } as Response);
 
-  const { result } = renderHook(() => useEscrowList(), { wrapper });
+  const { result } = renderHook(() => useListingList(), { wrapper });
   await waitFor(() => expect(result.current.isLoading).toBe(false));
-  expect(result.current.escrows).toHaveLength(1);
+  expect(result.current.listings).toHaveLength(1);
 });
 ```
 
@@ -157,30 +140,29 @@ it("fetches escrow list", async () => {
 Mock `NextRequest` and assert on the response:
 
 ```typescript
-import { POST } from "@/app/api/escrow/route";
+import { POST } from "@/app/api/cars/route";
 import { NextRequest } from "next/server";
 
 jest.mock("@/lib/prisma", () => ({
-  escrow: { create: jest.fn().mockResolvedValue({ id: "1" }) },
+  carListing: { create: jest.fn().mockResolvedValue({ id: "1" }) },
 }));
 
-it("creates escrow and returns 201", async () => {
-  const req = new NextRequest("http://localhost/api/escrow", {
+it("creates listing and returns 201", async () => {
+  const req = new NextRequest("http://localhost/api/cars", {
     method: "POST",
-    headers: { "x-wallet-address": "0xabc" },
-    body: JSON.stringify({ amount: 100, sellerWallet: "0xdef" }),
+    body: JSON.stringify({ make: "Toyota", model: "Corolla", year: 2020, price: 15000 }),
   });
 
   const res = await POST(req);
   expect(res.status).toBe(201);
   const body = await res.json();
-  expect(body.id).toBe("1");
+  expect(body.success).toBe(true);
 });
 
-it("returns 401 when wallet header is missing", async () => {
-  const req = new NextRequest("http://localhost/api/escrow", { method: "POST" });
+it("returns 400 when required fields are missing", async () => {
+  const req = new NextRequest("http://localhost/api/cars", { method: "POST", body: "{}" });
   const res = await POST(req);
-  expect(res.status).toBe(401);
+  expect(res.status).toBe(400);
 });
 ```
 
@@ -189,20 +171,20 @@ it("returns 401 when wallet header is missing", async () => {
 ## 9. Test File Structure
 
 ```
-src/__tests__/
+__tests__/
   services/
-    EscrowService.test.ts
-    DisputeService.test.ts
+    ListingService.test.ts
+    TruthScoreService.test.ts
     UserRoleService.test.ts
   hooks/
+    useListingList.test.tsx
     useRequireAuth.test.tsx
-    useDeployEscrow.test.tsx
   api/
-    escrow.route.test.ts
-    disputes.route.test.ts
+    cars.route.test.ts
+    admin-listings.route.test.ts
   utils/
-    escrowStatus.test.ts
-    contractErrorHandler.test.ts
+    tco.test.ts
+    listingStatus.test.ts
 ```
 
 ---
@@ -211,19 +193,19 @@ src/__tests__/
 
 ```typescript
 // ❌ Testing implementation details
-expect(mockDb.escrow.findUnique).toHaveBeenCalledWith({ where: { id: "1" } });
+expect(mockDb.carListing.findUnique).toHaveBeenCalledWith({ where: { id: 1 } });
 
 // ✅ Test observable behaviour
-expect(result).toEqual({ id: "1", amount: 100 });
+expect(result).toEqual({ id: 1, price: 15000 });
 
 // ❌ Real network calls
-const result = await fetch("https://api.rahakaitse.ee/...");
+const result = await fetch("https://autod.pro/api/...");
 
 // ✅ Always mock external calls
 jest.spyOn(global, "fetch").mockResolvedValueOnce(...);
 
 // ❌ Sharing state between tests
-let service: EscrowService;  // defined outside describe
+let service: ListingService;  // defined outside describe
 // ✅ Always create fresh instances
-beforeEach(() => { service = new EscrowService(mockDb); });
+beforeEach(() => { service = new ListingService(mockDb); });
 ```

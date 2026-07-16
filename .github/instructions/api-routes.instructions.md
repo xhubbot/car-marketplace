@@ -1,6 +1,6 @@
 ---
 description: Rules for Next.js API Route Handlers (Thin Controllers)
-applyTo: src/app/api/**/*.ts
+applyTo: app/api/**/*.ts
 ---
 
 # API Route Rules — Thin Controllers
@@ -14,7 +14,7 @@ API routes are controllers, not services. They must be thin: parse input → aut
 An API route handler has exactly 4 responsibilities:
 
 1. **Parse & validate** input (headers, body, query params)
-2. **Authorize** the request (wallet header, role check)
+2. **Authorize** the request (session check, role check)
 3. **Call a service** with the validated input
 4. **Return an HTTP response**
 
@@ -23,58 +23,61 @@ Nothing else. No Prisma queries inline. No business logic. No conditional chains
 ```typescript
 // ✅ Correct — thin controller
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { EscrowService } from "@/services/EscrowService";
+import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { ListingService } from "@/services/ListingService";
 
 export async function POST(request: NextRequest) {
   // 1. Authorize
-  const wallet = request.headers.get("x-wallet-address")?.toLowerCase();
-  if (!wallet) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const session = await getServerSession();
+  if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   // 2. Parse & validate
   const body = await request.json();
-  if (!body.sellerWallet || !body.amount) {
+  if (!body.make || !body.price) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
   // 3. Call service
-  const service = new EscrowService(prisma);
-  const escrow = await service.createEscrow({ buyerWallet: wallet, ...body });
+  const service = new ListingService(prisma);
+  const listing = await service.createListing({ sellerId: session.user.id, ...body });
 
   // 4. Return response
-  return NextResponse.json(escrow, { status: 201 });
+  return NextResponse.json(listing, { status: 201 });
 }
 ```
 
 ---
 
-## 2. Authentication — Wallet Header
+## 2. Authentication — NextAuth Session
 
-All authenticated routes must check the `x-wallet-address` header. Always `.toLowerCase()` before use:
+All authenticated routes must check the NextAuth session via `getServerSession`:
 
 ```typescript
-const wallet = request.headers.get("x-wallet-address")?.toLowerCase();
-if (!wallet) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-```
+import { getServerSession } from "next-auth";
 
-For partner/e-commerce routes, check the `X-API-Key` header against `partner_api_keys` table via `PartnerService`.
+const session = await getServerSession();
+if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+```
 
 ---
 
 ## 3. Role Authorization
 
-Use `UserRoleService` — never inline role queries:
+Use a dedicated role/permission service — never inline role checks against `prisma.user` in the route:
 
 ```typescript
 // ✅ Delegate to service
 const roleService = new UserRoleService(prisma);
-const isAdmin = await roleService.isAdmin(wallet);
-if (!isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+const isDealer = await roleService.isDealer(session.user.id);
+if (!isDealer) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
 // ❌ Inline role query
-const user = await prisma.user.findFirst({ where: { wallet_address: wallet } });
-if (user?.user_type !== 1) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+const user = await prisma.user.findFirst({ where: { id: session.user.id } });
+if (user?.role !== "dealer") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 ```
+
+Routes under `app/[locale]/admin/**` and `app/[locale]/dealer/**` are role-gated sections (admin/dealer).
 
 ---
 
@@ -84,7 +87,7 @@ Wrap the service call in try/catch. Map domain errors to HTTP status codes at th
 
 ```typescript
 try {
-  const result = await service.resolveDispute(id, resolution);
+  const result = await service.publishListing(id);
   return NextResponse.json(result);
 } catch (error) {
   if (error instanceof Error) {
@@ -95,7 +98,7 @@ try {
       return NextResponse.json({ error: error.message }, { status: 422 });
     }
   }
-  console.error("[DISPUTE_RESOLVE]", error);
+  console.error("[LISTING_PUBLISH]", error);
   return NextResponse.json({ error: "Internal server error" }, { status: 500 });
 }
 ```
@@ -104,18 +107,19 @@ try {
 
 ## 5. Input Validation — Use Zod for Schemas
 
-Use Zod for parsing and validating request bodies. Keep schemas in `src/schemas/` or co-located with the route:
+Use Zod for parsing and validating request bodies. Keep schemas in `lib/schemas/` or co-located with the route:
 
 ```typescript
 import { z } from "zod";
 
-const CreateEscrowSchema = z.object({
-  sellerWallet: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
-  amount: z.number().positive(),
-  token: z.enum(["USDC", "EURC"]),
+const CreateListingSchema = z.object({
+  makeId: z.number().int().positive(),
+  modelId: z.number().int().positive(),
+  price: z.number().positive(),
+  year: z.number().int().min(1950),
 });
 
-const parsed = CreateEscrowSchema.safeParse(await request.json());
+const parsed = CreateListingSchema.safeParse(await request.json());
 if (!parsed.success) {
   return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
 }
@@ -129,11 +133,11 @@ Route handlers never call `prisma` directly — they instantiate a service, inje
 
 ```typescript
 // ❌ Direct Prisma in route
-const escrows = await prisma.escrow.findMany({ where: { buyer: wallet } });
+const listings = await prisma.carListing.findMany({ where: { sellerId } });
 
 // ✅ Via service
-const service = new EscrowService(prisma);
-const escrows = await service.getEscrowsForBuyer(wallet);
+const service = new ListingService(prisma);
+const listings = await service.getListingsForSeller(sellerId);
 ```
 
 ---
@@ -152,19 +156,18 @@ const escrows = await service.getEscrowsForBuyer(wallet);
 ## 8. File Structure Convention
 
 ```
-src/app/api/
-  escrow/
+app/api/
+  cars/
     route.ts              ← GET (list), POST (create)
     [id]/
       route.ts            ← GET (single), PATCH (update), DELETE
-      resolve/
+      publish/
         route.ts          ← POST (action)
-  disputes/
-    route.ts
-    [id]/
+  auth/
+    [...nextauth]/
       route.ts
   admin/
-    manage-role/
+    listings/
       route.ts
 ```
 

@@ -1,6 +1,6 @@
 ---
 description: Rules for React Custom Hooks (Logic Layer)
-applyTo: src/hooks/**/*.ts, src/features/**/hooks/*.ts
+applyTo: hooks/**/*.ts, features/**/hooks/*.ts
 ---
 
 # Hook Rules — Logic Orchestration Layer
@@ -15,12 +15,12 @@ Every hook does exactly one thing. Split by concern, not by feature:
 
 ```typescript
 // ✅ Focused hooks
-useEscrowData(id)       // fetches escrow from API
-useEscrowActions(id)    // mutation operations on an escrow
-useEscrowValidation()   // form validation logic
+useListingData(id)        // fetches a listing from the API
+useListingActions(id)     // mutation operations on a listing (publish, archive)
+useListingValidation()    // form validation logic
 
 // ❌ God hook — too many concerns
-useEscrow(id)  // fetches + mutates + validates + formats
+useListing(id)  // fetches + mutates + validates + formats
 ```
 
 ---
@@ -29,14 +29,14 @@ useEscrow(id)  // fetches + mutates + validates + formats
 
 - Internal state (`useState`, `useReducer`) is **never exposed** directly.
 - Only return what the component strictly needs — the public API.
-- Name returned functions as actions, not setters: `submitEscrow`, not `setEscrow`.
+- Name returned functions as actions, not setters: `submitListing`, not `setListing`.
 
 ```typescript
 // ✅ Clean encapsulated public API
-return { escrow, isLoading, error, submitEscrow, cancelEscrow };
+return { listing, isLoading, error, submitListing, publishListing };
 
 // ❌ Leaking internal state
-return { escrow, setEscrow, loading, setLoading, ... };
+return { listing, setListing, loading, setLoading, ... };
 ```
 
 ---
@@ -46,14 +46,14 @@ return { escrow, setEscrow, loading, setLoading, ... };
 Every hook must have an explicit return type interface defined above it:
 
 ```typescript
-interface UseEscrowResult {
-  escrow: Escrow | null;
+interface UseListingResult {
+  listing: CarListing | null;
   isLoading: boolean;
   error: string | null;
-  submitEscrow: (dto: CreateEscrowDto) => Promise<void>;
+  submitListing: (dto: CreateListingDto) => Promise<void>;
 }
 
-export function useEscrow(id: string): UseEscrowResult {
+export function useListing(id: string): UseListingResult {
   // ...
 }
 ```
@@ -69,7 +69,7 @@ If a hook returns more than 5 values, split it into sub-hooks. Use `useReducer` 
 return { data, isLoading, error, page, totalPages, setPage, search, setSearch, sort, setSort };
 
 // ✅ Split into two hooks
-const { data, isLoading, error } = useEscrowList(filters);
+const { data, isLoading, error } = useListingList(filters);
 const { page, totalPages, setPage, search, setSearch, sort, setSort } = useListPagination();
 ```
 
@@ -81,19 +81,19 @@ Hooks call services — they do not implement business rules. No calculation, va
 
 ```typescript
 // ✅ Hook delegates to service
-export function useCreateEscrow() {
+export function useCreateListing() {
   const mutate = useMutation({
-    mutationFn: (dto: CreateEscrowDto) => EscrowApiService.create(dto),
+    mutationFn: (dto: CreateListingDto) => ListingApiService.create(dto),
   });
-  return { createEscrow: mutate.mutate, isCreating: mutate.isPending };
+  return { createListing: mutate.mutate, isCreating: mutate.isPending };
 }
 
 // ❌ Hook implements business logic
-export function useCreateEscrow() {
+export function useCreateListing() {
   const create = async (dto) => {
-    if (!dto.amount || dto.amount <= 0) throw new Error("...");
-    const fee = dto.amount * 0.02;  // ← business logic here, wrong
-    await fetch("/api/escrow", { ... });
+    if (!dto.price || dto.price <= 0) throw new Error("...");
+    const monthlyTco = calculateTotalMonthlyTCO(...);  // ← business logic here, wrong
+    await fetch("/api/cars", { ... });
   };
 }
 ```
@@ -105,13 +105,13 @@ export function useCreateEscrow() {
 Always wrap returned functions in `useCallback` and derived data in `useMemo` to prevent unnecessary re-renders:
 
 ```typescript
-const submitEscrow = useCallback(async (dto: CreateEscrowDto) => {
+const submitListing = useCallback(async (dto: CreateListingDto) => {
   await mutate(dto);
 }, [mutate]);
 
-const sortedEscrows = useMemo(
-  () => escrows.sort((a, b) => b.createdAt - a.createdAt),
-  [escrows]
+const sortedListings = useMemo(
+  () => listings.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
+  [listings]
 );
 ```
 
@@ -124,9 +124,9 @@ Each `useEffect` handles exactly one side effect. Always return a cleanup functi
 ```typescript
 // ✅ Single concern, with cleanup
 useEffect(() => {
-  const sub = contractEvents.subscribe(onEvent);
-  return () => sub.unsubscribe();
-}, [contractEvents]);
+  const handle = window.setInterval(refetch, 30_000);
+  return () => window.clearInterval(handle);
+}, [refetch]);
 
 // ❌ Multiple concerns in one effect
 useEffect(() => {
@@ -138,50 +138,34 @@ useEffect(() => {
 
 ---
 
-## 8. Wagmi Auth Hook Pattern (Project-Specific)
+## 8. Testing Hooks
 
-Never redirect based on `isConnected` alone — Wagmi rehydrates from localStorage causing a false `false`:
-
-```typescript
-const { isConnected, isConnecting, isReconnecting } = useAccount();
-
-useEffect(() => {
-  if (!isConnecting && !isReconnecting && !isConnected) {
-    router.push("/");
-  }
-}, [isConnected, isConnecting, isReconnecting]);
-```
-
----
-
-## 9. Testing Hooks
-
-Test hooks with `renderHook` from `@testing-library/react`. Mock all external dependencies (fetch, wagmi, prisma) — never make real network calls in tests.
+Test hooks with `renderHook` from `@testing-library/react`. Mock all external dependencies (fetch, prisma) — never make real network calls in tests.
 
 ```typescript
 import { renderHook, waitFor } from "@testing-library/react";
-import { useEscrow } from "@/hooks/useEscrow";
+import { useListing } from "@/hooks/useListing";
 
 jest.spyOn(global, "fetch").mockResolvedValue({
   ok: true,
-  json: async () => ({ id: "1", amount: 100 }),
+  json: async () => ({ id: "1", price: 15000 }),
 } as Response);
 
-it("returns escrow data", async () => {
-  const { result } = renderHook(() => useEscrow("1"));
+it("returns listing data", async () => {
+  const { result } = renderHook(() => useListing("1"));
   await waitFor(() => expect(result.current.isLoading).toBe(false));
-  expect(result.current.escrow?.amount).toBe(100);
+  expect(result.current.listing?.price).toBe(15000);
 });
 ```
 
 ---
 
-## 10. Naming Convention
+## 9. Naming Convention
 
 | Pattern | Example |
 |---------|---------|
-| Data fetching | `useEscrowList`, `useUserRole` |
-| Mutations | `useCreateEscrow`, `useResolveDispute` |
-| UI/form state | `useEscrowForm`, `usePagination` |
-| Auth/guards | `useRequireAuth`, `useRequireAdmin` |
-| Blockchain | `useDeployEscrow`, `useTokenBalance` |
+| Data fetching | `useListingList`, `useCarDetails` |
+| Mutations | `useCreateListing`, `usePublishListing` |
+| UI/form state | `useListingForm`, `usePagination` |
+| Auth/guards | `useRequireAuth`, `useRequireDealer` |
+| Domain calculations | `useTruthScore`, `useMonthlyTco` |

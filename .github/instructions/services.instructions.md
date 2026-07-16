@@ -1,6 +1,6 @@
 ---
 description: Rules for Service Classes (Business Logic Layer)
-applyTo: src/services/**/*.ts, src/repositories/**/*.ts
+applyTo: services/**/*.ts, repositories/**/*.ts
 ---
 
 # Service Rules — Business Logic Layer
@@ -15,13 +15,13 @@ Define the public contract before writing the class. The interface is the API �
 
 ```typescript
 // ✅ Interface-first design
-export interface IEscrowService {
-  createEscrow(dto: CreateEscrowDto): Promise<Escrow>;
-  getEscrowById(id: string): Promise<Escrow | null>;
-  resolveDispute(escrowId: string, resolution: DisputeResolution): Promise<void>;
+export interface IListingService {
+  createListing(dto: CreateListingDto): Promise<CarListing>;
+  getListingById(id: number): Promise<CarListing | null>;
+  calculateTruthScore(listingId: number): Promise<TruthScoreBreakdown>;
 }
 
-export class EscrowService implements IEscrowService {
+export class ListingService implements IListingService {
   constructor(private readonly db: PrismaClient) {}
   // ...
 }
@@ -35,7 +35,7 @@ Dependencies (database, external APIs, mailer) must be passed via the constructo
 
 ```typescript
 // ✅ Correct — injectable
-export class EscrowService {
+export class ListingService {
   constructor(
     private readonly db: PrismaClient,
     private readonly mailer: IMailer,
@@ -43,15 +43,15 @@ export class EscrowService {
 }
 
 // ❌ Wrong — hardcoded, untestable
-export class EscrowService {
-  async getEscrow(id: string) {
-    return prisma.escrow.findUnique({ where: { id } }); // ← global singleton
+export class ListingService {
+  async getListing(id: number) {
+    return prisma.carListing.findUnique({ where: { id } }); // ← global singleton
   }
 }
 ```
 
-In API routes, construct with the singleton: `new EscrowService(prisma, mailer)`.
-In tests, inject mocks: `new EscrowService(mockPrisma, mockMailer)`.
+In API routes, construct with the singleton: `new ListingService(prisma, mailer)`.
+In tests, inject mocks: `new ListingService(mockPrisma, mockMailer)`.
 
 ---
 
@@ -63,7 +63,7 @@ No mutable instance state after construction. All data flows in through method p
 // ✅ Stateless
 class UserRoleService {
   constructor(private readonly db: PrismaClient) {}
-  async getRoleForWallet(wallet: string) { ... }
+  async getRoleForUser(userId: string) { ... }
 }
 
 // ❌ Stateful — unpredictable in tests and concurrent requests
@@ -81,14 +81,14 @@ One service owns one domain. Split when a service grows beyond its domain:
 
 | Service | Responsibility |
 |---------|----------------|
-| `EscrowService` | Escrow CRUD, state transitions |
-| `DisputeService` | Dispute creation, resolution, evidence |
-| `UserRoleService` | Role assignment, permission checks |
-| `PartnerService` | Partner registration, API key management |
-| `NotificationService` | Email dispatch, webhook delivery |
-| `GeminiService` | AI contract generation, chatbot |
+| `ListingService` | Listing CRUD, publish/archive lifecycle |
+| `TruthScoreService` | Truth score / TCO calculations for a listing |
+| `UserRoleService` | Role assignment, permission checks (buyer/seller/dealer/admin) |
+| `DealerService` | Dealer inventory, leads, reporting |
+| `NotificationService` | Email dispatch (nodemailer) |
+| `PaymentService` | Payment transaction lifecycle (Montonio/Everypay/Maksekeskus/Stripe) |
 
-Do **not** put dispute logic in `EscrowService` or email logic in `UserRoleService`.
+Do **not** put TCO calculation logic in `ListingService` or email logic in `UserRoleService`.
 
 ---
 
@@ -98,11 +98,11 @@ Services produce domain errors — never HTTP status codes or `NextResponse`. Th
 
 ```typescript
 // ✅ Domain error
-if (!escrow) throw new Error("Escrow not found");
-if (escrow.status !== "PENDING") throw new Error("Escrow cannot be cancelled in current state");
+if (!listing) throw new Error("Listing not found");
+if (listing.status !== "draft") throw new Error("Listing cannot be published in current state");
 
 // ❌ HTTP concern in service — wrong layer
-if (!escrow) return NextResponse.json({ error: "Not found" }, { status: 404 });
+if (!listing) return NextResponse.json({ error: "Not found" }, { status: 404 });
 ```
 
 ---
@@ -113,14 +113,14 @@ Input validation (business rules) lives in the service. Format/type validation (
 
 ```typescript
 // ✅ Business rule validated in service
-async createEscrow(dto: CreateEscrowDto) {
-  if (dto.buyerWallet === dto.sellerWallet) {
-    throw new Error("Buyer and seller cannot be the same wallet");
+async createListing(dto: CreateListingDto) {
+  if (dto.price <= 0) {
+    throw new Error("Listing price must be positive");
   }
-  if (dto.amount <= 0) {
-    throw new Error("Escrow amount must be positive");
+  if (dto.year < 1950 || dto.year > new Date().getFullYear() + 1) {
+    throw new Error("Invalid model year");
   }
-  return this.db.escrow.create({ data: dto });
+  return this.db.carListing.create({ data: dto });
 }
 ```
 
@@ -131,20 +131,20 @@ async createEscrow(dto: CreateEscrowDto) {
 For complex queries or when the data source may change, extract database access to a repository class. The service depends on the repository interface.
 
 ```typescript
-export interface IEscrowRepository {
-  findById(id: string): Promise<Escrow | null>;
-  findByWallet(wallet: string): Promise<Escrow[]>;
-  save(data: CreateEscrowInput): Promise<Escrow>;
+export interface IListingRepository {
+  findById(id: number): Promise<CarListing | null>;
+  findBySeller(sellerId: string): Promise<CarListing[]>;
+  save(data: CreateListingInput): Promise<CarListing>;
 }
 
-export class PrismaEscrowRepository implements IEscrowRepository {
+export class PrismaListingRepository implements IListingRepository {
   constructor(private readonly db: PrismaClient) {}
-  findById(id: string) { return this.db.escrow.findUnique({ where: { id } }); }
+  findById(id: number) { return this.db.carListing.findUnique({ where: { id } }); }
   // ...
 }
 
-export class EscrowService {
-  constructor(private readonly repo: IEscrowRepository) {}
+export class ListingService {
+  constructor(private readonly repo: IListingRepository) {}
 }
 ```
 

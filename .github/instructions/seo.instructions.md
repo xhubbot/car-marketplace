@@ -1,6 +1,6 @@
 ---
 description: Rules for SEO, Metadata, and Structured Data
-applyTo: src/app/**/*.tsx, src/app/**/*.ts
+applyTo: app/**/*.tsx, app/**/*.ts
 ---
 
 # SEO Rules — Metadata, Structured Data, i18n
@@ -18,13 +18,14 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
   return {
-    title: t("meta.title"),           // "RahaKaitse — Secure Escrow"
+    title: t("meta.title"),           // "autod.pro — Ownership-First Car Classifieds"
     description: t("meta.description"),
     openGraph: {
       title: t("meta.title"),
@@ -40,25 +41,26 @@ export async function generateMetadata({
 
 ## 2. Dynamic Pages Include Entity Data in Metadata
 
-For dynamic routes (e.g., `/escrow/[id]`), fetch the entity and include its data in metadata:
+For dynamic routes (e.g., `/details/[id]`), fetch the entity and include its data in metadata:
 
 ```typescript
 export async function generateMetadata({
-  params: { locale, id },
+  params,
 }: {
-  params: { locale: string; id: string };
+  params: Promise<{ locale: string; id: string }>;
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "escrow" });
-  const service = new EscrowService(prisma);
-  const escrow = await service.getEscrowById(id);
+  const { locale, id } = await params;
+  const t = await getTranslations({ locale, namespace: "listing" });
+  const service = new ListingService(prisma);
+  const listing = await service.getListingById(Number(id));
 
-  if (!escrow) {
+  if (!listing) {
     return { title: t("notFound") };
   }
 
   return {
-    title: `${t("escrowTitle")} #${escrow.id} — RahaKaitse`,
-    description: t("escrowDescription", { amount: escrow.amount }),
+    title: `${listing.year} ${listing.make} ${listing.model} — autod.pro`,
+    description: t("listingDescription", { price: listing.price }),
   };
 }
 ```
@@ -74,8 +76,8 @@ Namespace pattern for SEO keys:
 {
   "home": {
     "meta": {
-      "title": "RahaKaitse — Secure Blockchain Escrow",
-      "description": "Protect your transactions with smart contract escrow on Base blockchain."
+      "title": "autod.pro — Ownership-First Car Classifieds",
+      "description": "See the true cost of ownership before you buy — truth scores, TCO breakdowns, and lifestyle-matched listings."
     }
   }
 }
@@ -85,16 +87,16 @@ Namespace pattern for SEO keys:
 
 ## 4. Root Layout Exports Site-Wide Default Metadata
 
-Set sensible defaults in `apps/web/src/app/layout.tsx` or `apps/web/src/app/[locale]/layout.tsx`:
+Set sensible defaults in [app/[locale]/layout.tsx](app/%5Blocale%5D/layout.tsx):
 
 ```typescript
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rahakaitse.ee"),
+  metadataBase: new URL("https://autod.pro"),
   title: {
-    default: "RahaKaitse",
-    template: "%s — RahaKaitse",
+    default: "autod.pro",
+    template: "%s — autod.pro",
   },
-  description: "Blockchain escrow platform on Base network.",
+  description: "Ownership-first car classifieds — the true financial reality of car ownership.",
   robots: { index: true, follow: true },
 };
 ```
@@ -106,15 +108,16 @@ export const metadata: Metadata = {
 For pages available in multiple locales, set canonical and alternate language links:
 
 ```typescript
-export async function generateMetadata({ params: { locale } }) {
-  const canonicalUrl = `https://rahakaitse.ee/${locale}/`;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const canonicalUrl = `https://autod.pro/${locale}/`;
   return {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        en: "https://rahakaitse.ee/en/",
-        et: "https://rahakaitse.ee/et/",
-        ru: "https://rahakaitse.ee/ru/",
+        en: "https://autod.pro/en/",
+        et: "https://autod.pro/et/",
+        ru: "https://autod.pro/ru/",
       },
     },
   };
@@ -129,15 +132,19 @@ For articles, knowledge-base entries, and FAQ pages, include JSON-LD structured 
 
 ```tsx
 // In a Server Component
-export default async function ArticlePage({ params }) {
-  const article = await new ArticleService(prisma).getBySlug(params.slug);
+export default async function ListingDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const listing = await new ListingService(prisma).getListingById(Number(id));
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    datePublished: new Date(article.createdAt * 1000).toISOString(),
-    author: { "@type": "Organization", name: "RahaKaitse" },
+    "@type": "Vehicle",
+    name: `${listing.year} ${listing.make} ${listing.model}`,
+    offers: {
+      "@type": "Offer",
+      price: listing.price,
+      priceCurrency: "EUR",
+    },
   };
 
   return (
@@ -146,7 +153,7 @@ export default async function ArticlePage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ArticleContent article={article} />
+      <CarDetailsView listing={listing} />
     </>
   );
 }
@@ -185,11 +192,11 @@ return {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "RahaKaitse escrow platform",
+        alt: "autod.pro — ownership-first car classifieds",
       },
     ],
   },
 };
 ```
 
-Place the default OG image at `apps/web/public/og-image.png`.
+Place the default OG image at [public/og-image.png](public/og-image.png).
