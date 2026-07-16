@@ -209,6 +209,7 @@ export type CountryWhereInput = {
   fallbackName?: Prisma.StringFilter<"Country"> | string
   createdAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   listings?: Prisma.CarListingListRelationFilter
+  dealerLocations?: Prisma.DealerLocationListRelationFilter
 }
 
 export type CountryOrderByWithRelationInput = {
@@ -217,6 +218,7 @@ export type CountryOrderByWithRelationInput = {
   fallbackName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   listings?: Prisma.CarListingOrderByRelationAggregateInput
+  dealerLocations?: Prisma.DealerLocationOrderByRelationAggregateInput
   _relevance?: Prisma.CountryOrderByRelevanceInput
 }
 
@@ -229,6 +231,7 @@ export type CountryWhereUniqueInput = Prisma.AtLeast<{
   fallbackName?: Prisma.StringFilter<"Country"> | string
   createdAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   listings?: Prisma.CarListingListRelationFilter
+  dealerLocations?: Prisma.DealerLocationListRelationFilter
 }, "id">
 
 export type CountryOrderByWithAggregationInput = {
@@ -259,6 +262,7 @@ export type CountryCreateInput = {
   fallbackName: string
   createdAt?: Date | string
   listings?: Prisma.CarListingCreateNestedManyWithoutImportedFromCountryInput
+  dealerLocations?: Prisma.DealerLocationCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUncheckedCreateInput = {
@@ -267,6 +271,7 @@ export type CountryUncheckedCreateInput = {
   fallbackName: string
   createdAt?: Date | string
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutImportedFromCountryInput
+  dealerLocations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUpdateInput = {
@@ -275,6 +280,7 @@ export type CountryUpdateInput = {
   fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.CarListingUpdateManyWithoutImportedFromCountryNestedInput
+  dealerLocations?: Prisma.DealerLocationUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryUncheckedUpdateInput = {
@@ -283,6 +289,7 @@ export type CountryUncheckedUpdateInput = {
   fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutImportedFromCountryNestedInput
+  dealerLocations?: Prisma.DealerLocationUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryCreateManyInput = {
@@ -346,6 +353,22 @@ export type CountryNullableScalarRelationFilter = {
   isNot?: Prisma.CountryWhereInput | null
 }
 
+export type CountryCreateNestedOneWithoutDealerLocationsInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutDealerLocationsInput, Prisma.CountryUncheckedCreateWithoutDealerLocationsInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutDealerLocationsInput
+  connect?: Prisma.CountryWhereUniqueInput
+}
+
+export type CountryUpdateOneWithoutDealerLocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutDealerLocationsInput, Prisma.CountryUncheckedCreateWithoutDealerLocationsInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutDealerLocationsInput
+  upsert?: Prisma.CountryUpsertWithoutDealerLocationsInput
+  disconnect?: Prisma.CountryWhereInput | boolean
+  delete?: Prisma.CountryWhereInput | boolean
+  connect?: Prisma.CountryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutDealerLocationsInput, Prisma.CountryUpdateWithoutDealerLocationsInput>, Prisma.CountryUncheckedUpdateWithoutDealerLocationsInput>
+}
+
 export type CountryCreateNestedOneWithoutListingsInput = {
   create?: Prisma.XOR<Prisma.CountryCreateWithoutListingsInput, Prisma.CountryUncheckedCreateWithoutListingsInput>
   connectOrCreate?: Prisma.CountryCreateOrConnectWithoutListingsInput
@@ -362,11 +385,60 @@ export type CountryUpdateOneWithoutListingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutListingsInput, Prisma.CountryUpdateWithoutListingsInput>, Prisma.CountryUncheckedUpdateWithoutListingsInput>
 }
 
+export type CountryCreateWithoutDealerLocationsInput = {
+  id: number
+  iso2Code?: string | null
+  fallbackName: string
+  createdAt?: Date | string
+  listings?: Prisma.CarListingCreateNestedManyWithoutImportedFromCountryInput
+}
+
+export type CountryUncheckedCreateWithoutDealerLocationsInput = {
+  id: number
+  iso2Code?: string | null
+  fallbackName: string
+  createdAt?: Date | string
+  listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutImportedFromCountryInput
+}
+
+export type CountryCreateOrConnectWithoutDealerLocationsInput = {
+  where: Prisma.CountryWhereUniqueInput
+  create: Prisma.XOR<Prisma.CountryCreateWithoutDealerLocationsInput, Prisma.CountryUncheckedCreateWithoutDealerLocationsInput>
+}
+
+export type CountryUpsertWithoutDealerLocationsInput = {
+  update: Prisma.XOR<Prisma.CountryUpdateWithoutDealerLocationsInput, Prisma.CountryUncheckedUpdateWithoutDealerLocationsInput>
+  create: Prisma.XOR<Prisma.CountryCreateWithoutDealerLocationsInput, Prisma.CountryUncheckedCreateWithoutDealerLocationsInput>
+  where?: Prisma.CountryWhereInput
+}
+
+export type CountryUpdateToOneWithWhereWithoutDealerLocationsInput = {
+  where?: Prisma.CountryWhereInput
+  data: Prisma.XOR<Prisma.CountryUpdateWithoutDealerLocationsInput, Prisma.CountryUncheckedUpdateWithoutDealerLocationsInput>
+}
+
+export type CountryUpdateWithoutDealerLocationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  iso2Code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.CarListingUpdateManyWithoutImportedFromCountryNestedInput
+}
+
+export type CountryUncheckedUpdateWithoutDealerLocationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  iso2Code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.CarListingUncheckedUpdateManyWithoutImportedFromCountryNestedInput
+}
+
 export type CountryCreateWithoutListingsInput = {
   id: number
   iso2Code?: string | null
   fallbackName: string
   createdAt?: Date | string
+  dealerLocations?: Prisma.DealerLocationCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUncheckedCreateWithoutListingsInput = {
@@ -374,6 +446,7 @@ export type CountryUncheckedCreateWithoutListingsInput = {
   iso2Code?: string | null
   fallbackName: string
   createdAt?: Date | string
+  dealerLocations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutCountryInput
 }
 
 export type CountryCreateOrConnectWithoutListingsInput = {
@@ -397,6 +470,7 @@ export type CountryUpdateWithoutListingsInput = {
   iso2Code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dealerLocations?: Prisma.DealerLocationUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutListingsInput = {
@@ -404,6 +478,7 @@ export type CountryUncheckedUpdateWithoutListingsInput = {
   iso2Code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dealerLocations?: Prisma.DealerLocationUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 
@@ -413,10 +488,12 @@ export type CountryUncheckedUpdateWithoutListingsInput = {
 
 export type CountryCountOutputType = {
   listings: number
+  dealerLocations: number
 }
 
 export type CountryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   listings?: boolean | CountryCountOutputTypeCountListingsArgs
+  dealerLocations?: boolean | CountryCountOutputTypeCountDealerLocationsArgs
 }
 
 /**
@@ -436,6 +513,13 @@ export type CountryCountOutputTypeCountListingsArgs<ExtArgs extends runtime.Type
   where?: Prisma.CarListingWhereInput
 }
 
+/**
+ * CountryCountOutputType without action
+ */
+export type CountryCountOutputTypeCountDealerLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealerLocationWhereInput
+}
+
 
 export type CountrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -443,6 +527,7 @@ export type CountrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   fallbackName?: boolean
   createdAt?: boolean
   listings?: boolean | Prisma.Country$listingsArgs<ExtArgs>
+  dealerLocations?: boolean | Prisma.Country$dealerLocationsArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["country"]>
 
@@ -458,6 +543,7 @@ export type CountrySelectScalar = {
 export type CountryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "iso2Code" | "fallbackName" | "createdAt", ExtArgs["result"]["country"]>
 export type CountryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   listings?: boolean | Prisma.Country$listingsArgs<ExtArgs>
+  dealerLocations?: boolean | Prisma.Country$dealerLocationsArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -465,6 +551,7 @@ export type $CountryPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Country"
   objects: {
     listings: Prisma.$CarListingPayload<ExtArgs>[]
+    dealerLocations: Prisma.$DealerLocationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -812,6 +899,7 @@ readonly fields: CountryFieldRefs;
 export interface Prisma__CountryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   listings<T extends Prisma.Country$listingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$listingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dealerLocations<T extends Prisma.Country$dealerLocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$dealerLocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1214,6 +1302,30 @@ export type Country$listingsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.CarListingScalarFieldEnum | Prisma.CarListingScalarFieldEnum[]
+}
+
+/**
+ * Country.dealerLocations
+ */
+export type Country$dealerLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DealerLocation
+   */
+  select?: Prisma.DealerLocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DealerLocation
+   */
+  omit?: Prisma.DealerLocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealerLocationInclude<ExtArgs> | null
+  where?: Prisma.DealerLocationWhereInput
+  orderBy?: Prisma.DealerLocationOrderByWithRelationInput | Prisma.DealerLocationOrderByWithRelationInput[]
+  cursor?: Prisma.DealerLocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealerLocationScalarFieldEnum | Prisma.DealerLocationScalarFieldEnum[]
 }
 
 /**

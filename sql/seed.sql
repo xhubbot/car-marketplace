@@ -29,7 +29,7 @@ INSERT INTO vehicle_categories (id, technical_name) VALUES
 (13, 'watercraft')
 ON DUPLICATE KEY UPDATE technical_name=VALUES(technical_name);
 
-INSERT INTO translations (category, ref_id, language_code, name) VALUES
+INSERT IGNORE INTO translations (category, ref_id, language_code, name) VALUES
 ('vehicle_category', 7,  'et', 'Haagis'),                ('vehicle_category', 7,  'en', 'Trailer'),                   ('vehicle_category', 7,  'ru', 'Прицеп'),
 ('vehicle_category', 8,  'et', 'Haagissuvila'),           ('vehicle_category', 8,  'en', 'Caravan / Motorhome'),        ('vehicle_category', 8,  'ru', 'Автодом / Прицеп-дача'),
 ('vehicle_category', 9,  'et', 'Ehitustehnika'),          ('vehicle_category', 9,  'en', 'Construction Equipment'),     ('vehicle_category', 9,  'ru', 'Строительная техника'),
@@ -122,7 +122,7 @@ INSERT INTO body_types (id, category_id, technical_name) VALUES
 (53, 12, 'municipal_other')
 ON DUPLICATE KEY UPDATE category_id=VALUES(category_id), technical_name=VALUES(technical_name);
 
-INSERT INTO translations (category, ref_id, language_code, name) VALUES
+INSERT IGNORE INTO translations (category, ref_id, language_code, name) VALUES
 -- SUV body types
 ('body_type', 7,  'et', 'Universaal'), ('body_type', 7,  'en', 'SUV Wagon'),             ('body_type', 7,  'ru', 'Внедорожник универсал'),
 ('body_type', 8,  'et', 'Pikap'),      ('body_type', 8,  'en', 'SUV Pickup'),             ('body_type', 8,  'ru', 'Внедорожник пикап'),
@@ -3823,7 +3823,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- Feature category seed data
-INSERT INTO feature_categories (id, technical_name, sort_order) VALUES
+INSERT IGNORE INTO feature_categories (id, technical_name, sort_order) VALUES
 (1,  'safety_security',    1),
 (2,  'lights',             2),
 (3,  'tires_wheels',       3),
@@ -3835,7 +3835,7 @@ INSERT INTO feature_categories (id, technical_name, sort_order) VALUES
 (9,  'sport',              9),
 (10, 'other',             10);
 
-INSERT INTO translations (category, ref_id, language_code, name) VALUES
+INSERT IGNORE INTO translations (category, ref_id, language_code, name) VALUES
 ('feature_category', 1,  'et', 'Turva- ja ohutusvarustus'), ('feature_category', 1,  'en', 'Safety & Security'),        ('feature_category', 1,  'ru', 'Безопасность'),
 ('feature_category', 2,  'et', 'Tuled'),                    ('feature_category', 2,  'en', 'Lights'),                    ('feature_category', 2,  'ru', 'Фары и освещение'),
 ('feature_category', 3,  'et', 'Rehvid ja veljed'),         ('feature_category', 3,  'en', 'Tires & Wheels'),            ('feature_category', 3,  'ru', 'Шины и диски'),
@@ -3848,7 +3848,7 @@ INSERT INTO translations (category, ref_id, language_code, name) VALUES
 ('feature_category', 10, 'et', 'Muu varustus'),             ('feature_category', 10, 'en', 'Other Equipment'),           ('feature_category', 10, 'ru', 'Прочее оборудование');
 
 -- Car features seed data (auto24 lisad[] IDs with English technical names)
-INSERT INTO car_features (id, category_id, technical_name) VALUES
+INSERT IGNORE INTO car_features (id, category_id, technical_name) VALUES
 -- Safety & Security (cat 1)
 (4,   1, 'abs'),
 (6,   1, 'stability_control'),
@@ -4059,7 +4059,7 @@ INSERT INTO car_features (id, category_id, technical_name) VALUES
 (420, 10, 'registered_as_n1_van');
 
 -- Translations for car features (et/en/ru)
-INSERT INTO translations (category, ref_id, language_code, name) VALUES
+INSERT IGNORE INTO translations (category, ref_id, language_code, name) VALUES
 -- Safety & Security
 ('car_feature', 1,   'et', 'Roolivõimendi'),('car_feature', 1,   'en', 'Power Steering'),                       ('car_feature', 1,   'ru', 'Усилитель руля'),
 ('car_feature', 4,   'et', 'ABS pidurid'),  ('car_feature', 4,   'en', 'ABS Brakes'),                           ('car_feature', 4,   'ru', 'Тормоза ABS'),

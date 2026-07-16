@@ -29,6 +29,7 @@ export type AggregateCarListing = {
 export type CarListingAvgAggregateOutputType = {
   id: number | null
   userId: number | null
+  dealerId: number | null
   makeId: number | null
   modelId: number | null
   modelPeriodId: number | null
@@ -77,6 +78,7 @@ export type CarListingAvgAggregateOutputType = {
 export type CarListingSumAggregateOutputType = {
   id: bigint | null
   userId: number | null
+  dealerId: number | null
   makeId: number | null
   modelId: number | null
   modelPeriodId: number | null
@@ -125,6 +127,7 @@ export type CarListingSumAggregateOutputType = {
 export type CarListingMinAggregateOutputType = {
   id: bigint | null
   userId: number | null
+  dealerId: number | null
   makeId: number | null
   modelId: number | null
   modelPeriodId: number | null
@@ -192,6 +195,7 @@ export type CarListingMinAggregateOutputType = {
 export type CarListingMaxAggregateOutputType = {
   id: bigint | null
   userId: number | null
+  dealerId: number | null
   makeId: number | null
   modelId: number | null
   modelPeriodId: number | null
@@ -259,6 +263,7 @@ export type CarListingMaxAggregateOutputType = {
 export type CarListingCountAggregateOutputType = {
   id: number
   userId: number
+  dealerId: number
   makeId: number
   modelId: number
   modelPeriodId: number
@@ -328,6 +333,7 @@ export type CarListingCountAggregateOutputType = {
 export type CarListingAvgAggregateInputType = {
   id?: true
   userId?: true
+  dealerId?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -376,6 +382,7 @@ export type CarListingAvgAggregateInputType = {
 export type CarListingSumAggregateInputType = {
   id?: true
   userId?: true
+  dealerId?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -424,6 +431,7 @@ export type CarListingSumAggregateInputType = {
 export type CarListingMinAggregateInputType = {
   id?: true
   userId?: true
+  dealerId?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -491,6 +499,7 @@ export type CarListingMinAggregateInputType = {
 export type CarListingMaxAggregateInputType = {
   id?: true
   userId?: true
+  dealerId?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -558,6 +567,7 @@ export type CarListingMaxAggregateInputType = {
 export type CarListingCountAggregateInputType = {
   id?: true
   userId?: true
+  dealerId?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -712,6 +722,7 @@ export type CarListingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type CarListingGroupByOutputType = {
   id: bigint
   userId: number
+  dealerId: number | null
   makeId: number
   modelId: number
   modelPeriodId: number | null
@@ -802,6 +813,7 @@ export type CarListingWhereInput = {
   NOT?: Prisma.CarListingWhereInput | Prisma.CarListingWhereInput[]
   id?: Prisma.BigIntFilter<"CarListing"> | bigint | number
   userId?: Prisma.IntFilter<"CarListing"> | number
+  dealerId?: Prisma.IntNullableFilter<"CarListing"> | number | null
   makeId?: Prisma.IntFilter<"CarListing"> | number
   modelId?: Prisma.IntFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableFilter<"CarListing"> | number | null
@@ -876,6 +888,7 @@ export type CarListingWhereInput = {
   color?: Prisma.XOR<Prisma.ColorNullableScalarRelationFilter, Prisma.ColorWhereInput> | null
   location?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
   importedFromCountry?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
+  dealer?: Prisma.XOR<Prisma.DealerNullableScalarRelationFilter, Prisma.DealerWhereInput> | null
   translations?: Prisma.CarListingTranslationListRelationFilter
   features?: Prisma.CarListingFeatureListRelationFilter
   images?: Prisma.CarImageListRelationFilter
@@ -886,6 +899,7 @@ export type CarListingWhereInput = {
 export type CarListingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrderInput | Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -960,6 +974,7 @@ export type CarListingOrderByWithRelationInput = {
   color?: Prisma.ColorOrderByWithRelationInput
   location?: Prisma.LocationOrderByWithRelationInput
   importedFromCountry?: Prisma.CountryOrderByWithRelationInput
+  dealer?: Prisma.DealerOrderByWithRelationInput
   translations?: Prisma.CarListingTranslationOrderByRelationAggregateInput
   features?: Prisma.CarListingFeatureOrderByRelationAggregateInput
   images?: Prisma.CarImageOrderByRelationAggregateInput
@@ -974,6 +989,7 @@ export type CarListingWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CarListingWhereInput[]
   NOT?: Prisma.CarListingWhereInput | Prisma.CarListingWhereInput[]
   userId?: Prisma.IntFilter<"CarListing"> | number
+  dealerId?: Prisma.IntNullableFilter<"CarListing"> | number | null
   makeId?: Prisma.IntFilter<"CarListing"> | number
   modelId?: Prisma.IntFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableFilter<"CarListing"> | number | null
@@ -1048,6 +1064,7 @@ export type CarListingWhereUniqueInput = Prisma.AtLeast<{
   color?: Prisma.XOR<Prisma.ColorNullableScalarRelationFilter, Prisma.ColorWhereInput> | null
   location?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
   importedFromCountry?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
+  dealer?: Prisma.XOR<Prisma.DealerNullableScalarRelationFilter, Prisma.DealerWhereInput> | null
   translations?: Prisma.CarListingTranslationListRelationFilter
   features?: Prisma.CarListingFeatureListRelationFilter
   images?: Prisma.CarImageListRelationFilter
@@ -1058,6 +1075,7 @@ export type CarListingWhereUniqueInput = Prisma.AtLeast<{
 export type CarListingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrderInput | Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1133,6 +1151,7 @@ export type CarListingScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CarListingScalarWhereWithAggregatesInput | Prisma.CarListingScalarWhereWithAggregatesInput[]
   id?: Prisma.BigIntWithAggregatesFilter<"CarListing"> | bigint | number
   userId?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
+  dealerId?: Prisma.IntNullableWithAggregatesFilter<"CarListing"> | number | null
   makeId?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
   modelId?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableWithAggregatesFilter<"CarListing"> | number | null
@@ -1262,6 +1281,7 @@ export type CarListingCreateInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -1272,6 +1292,7 @@ export type CarListingCreateInput = {
 export type CarListingUncheckedCreateInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -1406,6 +1427,7 @@ export type CarListingUpdateInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -1416,6 +1438,7 @@ export type CarListingUpdateInput = {
 export type CarListingUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1488,6 +1511,7 @@ export type CarListingUncheckedUpdateInput = {
 export type CarListingCreateManyInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -1610,6 +1634,7 @@ export type CarListingUpdateManyMutationInput = {
 export type CarListingUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1693,6 +1718,7 @@ export type CarListingOrderByRelevanceInput = {
 export type CarListingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -1760,6 +1786,7 @@ export type CarListingCountOrderByAggregateInput = {
 export type CarListingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -1808,6 +1835,7 @@ export type CarListingAvgOrderByAggregateInput = {
 export type CarListingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -1875,6 +1903,7 @@ export type CarListingMaxOrderByAggregateInput = {
 export type CarListingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -1942,6 +1971,7 @@ export type CarListingMinOrderByAggregateInput = {
 export type CarListingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  dealerId?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -2496,6 +2526,48 @@ export type CarListingUncheckedUpdateManyWithoutModelPeriodNestedInput = {
   deleteMany?: Prisma.CarListingScalarWhereInput | Prisma.CarListingScalarWhereInput[]
 }
 
+export type CarListingCreateNestedManyWithoutDealerInput = {
+  create?: Prisma.XOR<Prisma.CarListingCreateWithoutDealerInput, Prisma.CarListingUncheckedCreateWithoutDealerInput> | Prisma.CarListingCreateWithoutDealerInput[] | Prisma.CarListingUncheckedCreateWithoutDealerInput[]
+  connectOrCreate?: Prisma.CarListingCreateOrConnectWithoutDealerInput | Prisma.CarListingCreateOrConnectWithoutDealerInput[]
+  createMany?: Prisma.CarListingCreateManyDealerInputEnvelope
+  connect?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+}
+
+export type CarListingUncheckedCreateNestedManyWithoutDealerInput = {
+  create?: Prisma.XOR<Prisma.CarListingCreateWithoutDealerInput, Prisma.CarListingUncheckedCreateWithoutDealerInput> | Prisma.CarListingCreateWithoutDealerInput[] | Prisma.CarListingUncheckedCreateWithoutDealerInput[]
+  connectOrCreate?: Prisma.CarListingCreateOrConnectWithoutDealerInput | Prisma.CarListingCreateOrConnectWithoutDealerInput[]
+  createMany?: Prisma.CarListingCreateManyDealerInputEnvelope
+  connect?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+}
+
+export type CarListingUpdateManyWithoutDealerNestedInput = {
+  create?: Prisma.XOR<Prisma.CarListingCreateWithoutDealerInput, Prisma.CarListingUncheckedCreateWithoutDealerInput> | Prisma.CarListingCreateWithoutDealerInput[] | Prisma.CarListingUncheckedCreateWithoutDealerInput[]
+  connectOrCreate?: Prisma.CarListingCreateOrConnectWithoutDealerInput | Prisma.CarListingCreateOrConnectWithoutDealerInput[]
+  upsert?: Prisma.CarListingUpsertWithWhereUniqueWithoutDealerInput | Prisma.CarListingUpsertWithWhereUniqueWithoutDealerInput[]
+  createMany?: Prisma.CarListingCreateManyDealerInputEnvelope
+  set?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  disconnect?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  delete?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  connect?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  update?: Prisma.CarListingUpdateWithWhereUniqueWithoutDealerInput | Prisma.CarListingUpdateWithWhereUniqueWithoutDealerInput[]
+  updateMany?: Prisma.CarListingUpdateManyWithWhereWithoutDealerInput | Prisma.CarListingUpdateManyWithWhereWithoutDealerInput[]
+  deleteMany?: Prisma.CarListingScalarWhereInput | Prisma.CarListingScalarWhereInput[]
+}
+
+export type CarListingUncheckedUpdateManyWithoutDealerNestedInput = {
+  create?: Prisma.XOR<Prisma.CarListingCreateWithoutDealerInput, Prisma.CarListingUncheckedCreateWithoutDealerInput> | Prisma.CarListingCreateWithoutDealerInput[] | Prisma.CarListingUncheckedCreateWithoutDealerInput[]
+  connectOrCreate?: Prisma.CarListingCreateOrConnectWithoutDealerInput | Prisma.CarListingCreateOrConnectWithoutDealerInput[]
+  upsert?: Prisma.CarListingUpsertWithWhereUniqueWithoutDealerInput | Prisma.CarListingUpsertWithWhereUniqueWithoutDealerInput[]
+  createMany?: Prisma.CarListingCreateManyDealerInputEnvelope
+  set?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  disconnect?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  delete?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  connect?: Prisma.CarListingWhereUniqueInput | Prisma.CarListingWhereUniqueInput[]
+  update?: Prisma.CarListingUpdateWithWhereUniqueWithoutDealerInput | Prisma.CarListingUpdateWithWhereUniqueWithoutDealerInput[]
+  updateMany?: Prisma.CarListingUpdateManyWithWhereWithoutDealerInput | Prisma.CarListingUpdateManyWithWhereWithoutDealerInput[]
+  deleteMany?: Prisma.CarListingScalarWhereInput | Prisma.CarListingScalarWhereInput[]
+}
+
 export type BigIntFieldUpdateOperationsInput = {
   set?: bigint | number
   increment?: bigint | number
@@ -2504,20 +2576,8 @@ export type BigIntFieldUpdateOperationsInput = {
   divide?: bigint | number
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type NullableEnumColorFinishFieldUpdateOperationsInput = {
   set?: $Enums.ColorFinish | null
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -2666,6 +2726,7 @@ export type CarListingCreateWithoutFuelTypeInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -2676,6 +2737,7 @@ export type CarListingCreateWithoutFuelTypeInput = {
 export type CarListingUncheckedCreateWithoutFuelTypeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -2776,6 +2838,7 @@ export type CarListingScalarWhereInput = {
   NOT?: Prisma.CarListingScalarWhereInput | Prisma.CarListingScalarWhereInput[]
   id?: Prisma.BigIntFilter<"CarListing"> | bigint | number
   userId?: Prisma.IntFilter<"CarListing"> | number
+  dealerId?: Prisma.IntNullableFilter<"CarListing"> | number | null
   makeId?: Prisma.IntFilter<"CarListing"> | number
   modelId?: Prisma.IntFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableFilter<"CarListing"> | number | null
@@ -2904,6 +2967,7 @@ export type CarListingCreateWithoutTransmissionInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -2914,6 +2978,7 @@ export type CarListingCreateWithoutTransmissionInput = {
 export type CarListingUncheckedCreateWithoutTransmissionInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3072,6 +3137,7 @@ export type CarListingCreateWithoutDriveTypeInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -3082,6 +3148,7 @@ export type CarListingCreateWithoutDriveTypeInput = {
 export type CarListingUncheckedCreateWithoutDriveTypeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3240,6 +3307,7 @@ export type CarListingCreateWithoutColorInput = {
   emissionStandard?: Prisma.EmissionStandardCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -3250,6 +3318,7 @@ export type CarListingCreateWithoutColorInput = {
 export type CarListingUncheckedCreateWithoutColorInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3408,6 +3477,7 @@ export type CarListingCreateWithoutEmissionStandardInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -3418,6 +3488,7 @@ export type CarListingCreateWithoutEmissionStandardInput = {
 export type CarListingUncheckedCreateWithoutEmissionStandardInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3576,6 +3647,7 @@ export type CarListingCreateWithoutCategoryInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -3586,6 +3658,7 @@ export type CarListingCreateWithoutCategoryInput = {
 export type CarListingUncheckedCreateWithoutCategoryInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3744,6 +3817,7 @@ export type CarListingCreateWithoutBodyTypeInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -3754,6 +3828,7 @@ export type CarListingCreateWithoutBodyTypeInput = {
 export type CarListingUncheckedCreateWithoutBodyTypeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3912,6 +3987,7 @@ export type CarListingCreateWithoutImportedFromCountryInput = {
   emissionStandard?: Prisma.EmissionStandardCreateNestedOneWithoutListingsInput
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -3922,6 +3998,7 @@ export type CarListingCreateWithoutImportedFromCountryInput = {
 export type CarListingUncheckedCreateWithoutImportedFromCountryInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -4080,6 +4157,7 @@ export type CarListingCreateWithoutLocationInput = {
   emissionStandard?: Prisma.EmissionStandardCreateNestedOneWithoutListingsInput
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -4090,6 +4168,7 @@ export type CarListingCreateWithoutLocationInput = {
 export type CarListingUncheckedCreateWithoutLocationInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -4248,6 +4327,7 @@ export type CarListingCreateWithoutMakeInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -4258,6 +4338,7 @@ export type CarListingCreateWithoutMakeInput = {
 export type CarListingUncheckedCreateWithoutMakeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   modelId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -4416,6 +4497,7 @@ export type CarListingCreateWithoutModelInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -4426,6 +4508,7 @@ export type CarListingCreateWithoutModelInput = {
 export type CarListingUncheckedCreateWithoutModelInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -4584,6 +4667,7 @@ export type CarListingCreateWithoutModelPeriodInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -4594,6 +4678,7 @@ export type CarListingCreateWithoutModelPeriodInput = {
 export type CarListingUncheckedCreateWithoutModelPeriodInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelTrim?: string | null
@@ -4688,6 +4773,176 @@ export type CarListingUpdateManyWithWhereWithoutModelPeriodInput = {
   data: Prisma.XOR<Prisma.CarListingUpdateManyMutationInput, Prisma.CarListingUncheckedUpdateManyWithoutModelPeriodInput>
 }
 
+export type CarListingCreateWithoutDealerInput = {
+  id?: bigint | number
+  userId: number
+  modelTrim?: string | null
+  vinCode?: string | null
+  regNr?: string | null
+  yearManufactured: number
+  monthManufactured?: number | null
+  mileage: number
+  engineDisplacementCc?: number | null
+  enginePowerKw?: number | null
+  enginePowerHp?: number | null
+  engineInfo?: string | null
+  co2EmissionGkm?: number | null
+  fuelConsumptionCity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: number | null
+  doors?: number | null
+  seats?: number | null
+  vehicleLengthMm?: number | null
+  vehicleWidthMm?: number | null
+  vehicleHeightMm?: number | null
+  wheelbaseMm?: number | null
+  kerbWeightKg?: number | null
+  grossWeightKg?: number | null
+  payloadKg?: number | null
+  towCapacityBrakedKg?: number | null
+  towCapacityUnbrakedKg?: number | null
+  acceleration0100?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: number | null
+  colorFinish?: $Enums.ColorFinish | null
+  inspectionValidUntil?: Date | string | null
+  hasServiceBook?: boolean
+  hasWarranty?: boolean
+  warrantyDescription?: string | null
+  isCrashDamaged?: boolean
+  partsSoldSeparately?: boolean
+  partsInfo?: string | null
+  registeredAsCommercial?: boolean
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string
+  priceIncludesVat?: boolean
+  priceIncludesRegFee?: boolean
+  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.ListingStatus
+  viewsCount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  make: Prisma.CarMakeCreateNestedOneWithoutCarListingsInput
+  model: Prisma.CarModelCreateNestedOneWithoutListingsInput
+  modelPeriod?: Prisma.ModelPeriodCreateNestedOneWithoutListingsInput
+  category?: Prisma.VehicleCategoryCreateNestedOneWithoutListingsInput
+  bodyType?: Prisma.BodyTypeCreateNestedOneWithoutListingsInput
+  fuelType: Prisma.FuelTypeCreateNestedOneWithoutListingsInput
+  transmission?: Prisma.TransmissionCreateNestedOneWithoutListingsInput
+  driveType?: Prisma.DriveTypeCreateNestedOneWithoutListingsInput
+  emissionStandard?: Prisma.EmissionStandardCreateNestedOneWithoutListingsInput
+  color?: Prisma.ColorCreateNestedOneWithoutListingsInput
+  location?: Prisma.LocationCreateNestedOneWithoutListingsInput
+  importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
+  features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
+  images?: Prisma.CarImageCreateNestedManyWithoutListingInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
+  orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+}
+
+export type CarListingUncheckedCreateWithoutDealerInput = {
+  id?: bigint | number
+  userId: number
+  makeId: number
+  modelId: number
+  modelPeriodId?: number | null
+  modelTrim?: string | null
+  categoryId?: number | null
+  bodyTypeId?: number | null
+  vinCode?: string | null
+  regNr?: string | null
+  yearManufactured: number
+  monthManufactured?: number | null
+  mileage: number
+  fuelTypeId: number
+  transmissionId?: number | null
+  driveTypeId?: number | null
+  engineDisplacementCc?: number | null
+  enginePowerKw?: number | null
+  enginePowerHp?: number | null
+  engineInfo?: string | null
+  emissionStandardId?: number | null
+  co2EmissionGkm?: number | null
+  fuelConsumptionCity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: number | null
+  doors?: number | null
+  seats?: number | null
+  vehicleLengthMm?: number | null
+  vehicleWidthMm?: number | null
+  vehicleHeightMm?: number | null
+  wheelbaseMm?: number | null
+  kerbWeightKg?: number | null
+  grossWeightKg?: number | null
+  payloadKg?: number | null
+  towCapacityBrakedKg?: number | null
+  towCapacityUnbrakedKg?: number | null
+  acceleration0100?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: number | null
+  colorId?: number | null
+  colorFinish?: $Enums.ColorFinish | null
+  inspectionValidUntil?: Date | string | null
+  hasServiceBook?: boolean
+  hasWarranty?: boolean
+  warrantyDescription?: string | null
+  isCrashDamaged?: boolean
+  partsSoldSeparately?: boolean
+  partsInfo?: string | null
+  registeredAsCommercial?: boolean
+  locationId?: number | null
+  importedFromCountryId?: number | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string
+  priceIncludesVat?: boolean
+  priceIncludesRegFee?: boolean
+  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.ListingStatus
+  viewsCount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.CarListingTranslationUncheckedCreateNestedManyWithoutListingInput
+  features?: Prisma.CarListingFeatureUncheckedCreateNestedManyWithoutListingInput
+  images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
+  orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+}
+
+export type CarListingCreateOrConnectWithoutDealerInput = {
+  where: Prisma.CarListingWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarListingCreateWithoutDealerInput, Prisma.CarListingUncheckedCreateWithoutDealerInput>
+}
+
+export type CarListingCreateManyDealerInputEnvelope = {
+  data: Prisma.CarListingCreateManyDealerInput | Prisma.CarListingCreateManyDealerInput[]
+  skipDuplicates?: boolean
+}
+
+export type CarListingUpsertWithWhereUniqueWithoutDealerInput = {
+  where: Prisma.CarListingWhereUniqueInput
+  update: Prisma.XOR<Prisma.CarListingUpdateWithoutDealerInput, Prisma.CarListingUncheckedUpdateWithoutDealerInput>
+  create: Prisma.XOR<Prisma.CarListingCreateWithoutDealerInput, Prisma.CarListingUncheckedCreateWithoutDealerInput>
+}
+
+export type CarListingUpdateWithWhereUniqueWithoutDealerInput = {
+  where: Prisma.CarListingWhereUniqueInput
+  data: Prisma.XOR<Prisma.CarListingUpdateWithoutDealerInput, Prisma.CarListingUncheckedUpdateWithoutDealerInput>
+}
+
+export type CarListingUpdateManyWithWhereWithoutDealerInput = {
+  where: Prisma.CarListingScalarWhereInput
+  data: Prisma.XOR<Prisma.CarListingUpdateManyMutationInput, Prisma.CarListingUncheckedUpdateManyWithoutDealerInput>
+}
+
 export type CarListingCreateWithoutTranslationsInput = {
   id?: bigint | number
   userId: number
@@ -4753,6 +5008,7 @@ export type CarListingCreateWithoutTranslationsInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
@@ -4762,6 +5018,7 @@ export type CarListingCreateWithoutTranslationsInput = {
 export type CarListingUncheckedCreateWithoutTranslationsInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -4911,6 +5168,7 @@ export type CarListingUpdateWithoutTranslationsInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
@@ -4920,6 +5178,7 @@ export type CarListingUpdateWithoutTranslationsInput = {
 export type CarListingUncheckedUpdateWithoutTranslationsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5053,6 +5312,7 @@ export type CarListingCreateWithoutFeaturesInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
@@ -5062,6 +5322,7 @@ export type CarListingCreateWithoutFeaturesInput = {
 export type CarListingUncheckedCreateWithoutFeaturesInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -5211,6 +5472,7 @@ export type CarListingUpdateWithoutFeaturesInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
@@ -5220,6 +5482,7 @@ export type CarListingUpdateWithoutFeaturesInput = {
 export type CarListingUncheckedUpdateWithoutFeaturesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5353,6 +5616,7 @@ export type CarListingCreateWithoutImagesInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
@@ -5362,6 +5626,7 @@ export type CarListingCreateWithoutImagesInput = {
 export type CarListingUncheckedCreateWithoutImagesInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -5511,6 +5776,7 @@ export type CarListingUpdateWithoutImagesInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
@@ -5520,6 +5786,7 @@ export type CarListingUpdateWithoutImagesInput = {
 export type CarListingUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5653,6 +5920,7 @@ export type CarListingCreateWithoutPremiumFeaturesInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -5662,6 +5930,7 @@ export type CarListingCreateWithoutPremiumFeaturesInput = {
 export type CarListingUncheckedCreateWithoutPremiumFeaturesInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -5811,6 +6080,7 @@ export type CarListingUpdateWithoutPremiumFeaturesInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -5820,6 +6090,7 @@ export type CarListingUpdateWithoutPremiumFeaturesInput = {
 export type CarListingUncheckedUpdateWithoutPremiumFeaturesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5953,6 +6224,7 @@ export type CarListingCreateWithoutOrderItemsInput = {
   color?: Prisma.ColorCreateNestedOneWithoutListingsInput
   location?: Prisma.LocationCreateNestedOneWithoutListingsInput
   importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
   translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
@@ -5962,6 +6234,7 @@ export type CarListingCreateWithoutOrderItemsInput = {
 export type CarListingUncheckedCreateWithoutOrderItemsInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6111,6 +6384,7 @@ export type CarListingUpdateWithoutOrderItemsInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -6120,6 +6394,7 @@ export type CarListingUpdateWithoutOrderItemsInput = {
 export type CarListingUncheckedUpdateWithoutOrderItemsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6191,6 +6466,7 @@ export type CarListingUncheckedUpdateWithoutOrderItemsInput = {
 export type CarListingCreateManyFuelTypeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6318,6 +6594,7 @@ export type CarListingUpdateWithoutFuelTypeInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -6328,6 +6605,7 @@ export type CarListingUpdateWithoutFuelTypeInput = {
 export type CarListingUncheckedUpdateWithoutFuelTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6399,6 +6677,7 @@ export type CarListingUncheckedUpdateWithoutFuelTypeInput = {
 export type CarListingUncheckedUpdateManyWithoutFuelTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6465,6 +6744,7 @@ export type CarListingUncheckedUpdateManyWithoutFuelTypeInput = {
 export type CarListingCreateManyTransmissionInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6592,6 +6872,7 @@ export type CarListingUpdateWithoutTransmissionInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -6602,6 +6883,7 @@ export type CarListingUpdateWithoutTransmissionInput = {
 export type CarListingUncheckedUpdateWithoutTransmissionInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6673,6 +6955,7 @@ export type CarListingUncheckedUpdateWithoutTransmissionInput = {
 export type CarListingUncheckedUpdateManyWithoutTransmissionInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6739,6 +7022,7 @@ export type CarListingUncheckedUpdateManyWithoutTransmissionInput = {
 export type CarListingCreateManyDriveTypeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6866,6 +7150,7 @@ export type CarListingUpdateWithoutDriveTypeInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -6876,6 +7161,7 @@ export type CarListingUpdateWithoutDriveTypeInput = {
 export type CarListingUncheckedUpdateWithoutDriveTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6947,6 +7233,7 @@ export type CarListingUncheckedUpdateWithoutDriveTypeInput = {
 export type CarListingUncheckedUpdateManyWithoutDriveTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7013,6 +7300,7 @@ export type CarListingUncheckedUpdateManyWithoutDriveTypeInput = {
 export type CarListingCreateManyColorInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7140,6 +7428,7 @@ export type CarListingUpdateWithoutColorInput = {
   emissionStandard?: Prisma.EmissionStandardUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -7150,6 +7439,7 @@ export type CarListingUpdateWithoutColorInput = {
 export type CarListingUncheckedUpdateWithoutColorInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7221,6 +7511,7 @@ export type CarListingUncheckedUpdateWithoutColorInput = {
 export type CarListingUncheckedUpdateManyWithoutColorInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7287,6 +7578,7 @@ export type CarListingUncheckedUpdateManyWithoutColorInput = {
 export type CarListingCreateManyEmissionStandardInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7414,6 +7706,7 @@ export type CarListingUpdateWithoutEmissionStandardInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -7424,6 +7717,7 @@ export type CarListingUpdateWithoutEmissionStandardInput = {
 export type CarListingUncheckedUpdateWithoutEmissionStandardInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7495,6 +7789,7 @@ export type CarListingUncheckedUpdateWithoutEmissionStandardInput = {
 export type CarListingUncheckedUpdateManyWithoutEmissionStandardInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7561,6 +7856,7 @@ export type CarListingUncheckedUpdateManyWithoutEmissionStandardInput = {
 export type CarListingCreateManyCategoryInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7688,6 +7984,7 @@ export type CarListingUpdateWithoutCategoryInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -7698,6 +7995,7 @@ export type CarListingUpdateWithoutCategoryInput = {
 export type CarListingUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7769,6 +8067,7 @@ export type CarListingUncheckedUpdateWithoutCategoryInput = {
 export type CarListingUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7835,6 +8134,7 @@ export type CarListingUncheckedUpdateManyWithoutCategoryInput = {
 export type CarListingCreateManyBodyTypeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7962,6 +8262,7 @@ export type CarListingUpdateWithoutBodyTypeInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -7972,6 +8273,7 @@ export type CarListingUpdateWithoutBodyTypeInput = {
 export type CarListingUncheckedUpdateWithoutBodyTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8043,6 +8345,7 @@ export type CarListingUncheckedUpdateWithoutBodyTypeInput = {
 export type CarListingUncheckedUpdateManyWithoutBodyTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8109,6 +8412,7 @@ export type CarListingUncheckedUpdateManyWithoutBodyTypeInput = {
 export type CarListingCreateManyImportedFromCountryInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -8236,6 +8540,7 @@ export type CarListingUpdateWithoutImportedFromCountryInput = {
   emissionStandard?: Prisma.EmissionStandardUpdateOneWithoutListingsNestedInput
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -8246,6 +8551,7 @@ export type CarListingUpdateWithoutImportedFromCountryInput = {
 export type CarListingUncheckedUpdateWithoutImportedFromCountryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8317,6 +8623,7 @@ export type CarListingUncheckedUpdateWithoutImportedFromCountryInput = {
 export type CarListingUncheckedUpdateManyWithoutImportedFromCountryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8383,6 +8690,7 @@ export type CarListingUncheckedUpdateManyWithoutImportedFromCountryInput = {
 export type CarListingCreateManyLocationInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -8510,6 +8818,7 @@ export type CarListingUpdateWithoutLocationInput = {
   emissionStandard?: Prisma.EmissionStandardUpdateOneWithoutListingsNestedInput
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -8520,6 +8829,7 @@ export type CarListingUpdateWithoutLocationInput = {
 export type CarListingUncheckedUpdateWithoutLocationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8591,6 +8901,7 @@ export type CarListingUncheckedUpdateWithoutLocationInput = {
 export type CarListingUncheckedUpdateManyWithoutLocationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8657,6 +8968,7 @@ export type CarListingUncheckedUpdateManyWithoutLocationInput = {
 export type CarListingCreateManyMakeInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   modelId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -8784,6 +9096,7 @@ export type CarListingUpdateWithoutMakeInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -8794,6 +9107,7 @@ export type CarListingUpdateWithoutMakeInput = {
 export type CarListingUncheckedUpdateWithoutMakeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8865,6 +9179,7 @@ export type CarListingUncheckedUpdateWithoutMakeInput = {
 export type CarListingUncheckedUpdateManyWithoutMakeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8931,6 +9246,7 @@ export type CarListingUncheckedUpdateManyWithoutMakeInput = {
 export type CarListingCreateManyModelInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -9058,6 +9374,7 @@ export type CarListingUpdateWithoutModelInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -9068,6 +9385,7 @@ export type CarListingUpdateWithoutModelInput = {
 export type CarListingUncheckedUpdateWithoutModelInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9139,6 +9457,7 @@ export type CarListingUncheckedUpdateWithoutModelInput = {
 export type CarListingUncheckedUpdateManyWithoutModelInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9205,6 +9524,7 @@ export type CarListingUncheckedUpdateManyWithoutModelInput = {
 export type CarListingCreateManyModelPeriodInput = {
   id?: bigint | number
   userId: number
+  dealerId?: number | null
   makeId: number
   modelId: number
   modelTrim?: string | null
@@ -9332,6 +9652,7 @@ export type CarListingUpdateWithoutModelPeriodInput = {
   color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
   location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
   importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
   translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
@@ -9342,6 +9663,7 @@ export type CarListingUpdateWithoutModelPeriodInput = {
 export type CarListingUncheckedUpdateWithoutModelPeriodInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9413,8 +9735,287 @@ export type CarListingUncheckedUpdateWithoutModelPeriodInput = {
 export type CarListingUncheckedUpdateManyWithoutModelPeriodInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bodyTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearManufactured?: Prisma.IntFieldUpdateOperationsInput | number
+  monthManufactured?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
+  fuelTypeId?: Prisma.IntFieldUpdateOperationsInput | number
+  transmissionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  driveTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineDisplacementCc?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerKw?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerHp?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emissionStandardId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  co2EmissionGkm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelConsumptionCity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleLengthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleWidthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleHeightMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wheelbaseMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  kerbWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grossWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payloadKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityBrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityUnbrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acceleration0100?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorFinish?: Prisma.NullableEnumColorFinishFieldUpdateOperationsInput | $Enums.ColorFinish | null
+  inspectionValidUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasServiceBook?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWarranty?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  warrantyDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isCrashDamaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsSoldSeparately?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registeredAsCommercial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importedFromCountryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CarListingCreateManyDealerInput = {
+  id?: bigint | number
+  userId: number
+  makeId: number
+  modelId: number
+  modelPeriodId?: number | null
+  modelTrim?: string | null
+  categoryId?: number | null
+  bodyTypeId?: number | null
+  vinCode?: string | null
+  regNr?: string | null
+  yearManufactured: number
+  monthManufactured?: number | null
+  mileage: number
+  fuelTypeId: number
+  transmissionId?: number | null
+  driveTypeId?: number | null
+  engineDisplacementCc?: number | null
+  enginePowerKw?: number | null
+  enginePowerHp?: number | null
+  engineInfo?: string | null
+  emissionStandardId?: number | null
+  co2EmissionGkm?: number | null
+  fuelConsumptionCity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: number | null
+  doors?: number | null
+  seats?: number | null
+  vehicleLengthMm?: number | null
+  vehicleWidthMm?: number | null
+  vehicleHeightMm?: number | null
+  wheelbaseMm?: number | null
+  kerbWeightKg?: number | null
+  grossWeightKg?: number | null
+  payloadKg?: number | null
+  towCapacityBrakedKg?: number | null
+  towCapacityUnbrakedKg?: number | null
+  acceleration0100?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: number | null
+  colorId?: number | null
+  colorFinish?: $Enums.ColorFinish | null
+  inspectionValidUntil?: Date | string | null
+  hasServiceBook?: boolean
+  hasWarranty?: boolean
+  warrantyDescription?: string | null
+  isCrashDamaged?: boolean
+  partsSoldSeparately?: boolean
+  partsInfo?: string | null
+  registeredAsCommercial?: boolean
+  locationId?: number | null
+  importedFromCountryId?: number | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string
+  priceIncludesVat?: boolean
+  priceIncludesRegFee?: boolean
+  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.ListingStatus
+  viewsCount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CarListingUpdateWithoutDealerInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearManufactured?: Prisma.IntFieldUpdateOperationsInput | number
+  monthManufactured?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
+  engineDisplacementCc?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerKw?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerHp?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  co2EmissionGkm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelConsumptionCity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleLengthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleWidthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleHeightMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wheelbaseMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  kerbWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grossWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payloadKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityBrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityUnbrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acceleration0100?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorFinish?: Prisma.NullableEnumColorFinishFieldUpdateOperationsInput | $Enums.ColorFinish | null
+  inspectionValidUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasServiceBook?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWarranty?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  warrantyDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isCrashDamaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsSoldSeparately?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registeredAsCommercial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  make?: Prisma.CarMakeUpdateOneRequiredWithoutCarListingsNestedInput
+  model?: Prisma.CarModelUpdateOneRequiredWithoutListingsNestedInput
+  modelPeriod?: Prisma.ModelPeriodUpdateOneWithoutListingsNestedInput
+  category?: Prisma.VehicleCategoryUpdateOneWithoutListingsNestedInput
+  bodyType?: Prisma.BodyTypeUpdateOneWithoutListingsNestedInput
+  fuelType?: Prisma.FuelTypeUpdateOneRequiredWithoutListingsNestedInput
+  transmission?: Prisma.TransmissionUpdateOneWithoutListingsNestedInput
+  driveType?: Prisma.DriveTypeUpdateOneWithoutListingsNestedInput
+  emissionStandard?: Prisma.EmissionStandardUpdateOneWithoutListingsNestedInput
+  color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
+  location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
+  importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
+  features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
+  images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
+  orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+}
+
+export type CarListingUncheckedUpdateWithoutDealerInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  makeId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bodyTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearManufactured?: Prisma.IntFieldUpdateOperationsInput | number
+  monthManufactured?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
+  fuelTypeId?: Prisma.IntFieldUpdateOperationsInput | number
+  transmissionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  driveTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineDisplacementCc?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerKw?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerHp?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emissionStandardId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  co2EmissionGkm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelConsumptionCity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleLengthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleWidthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleHeightMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wheelbaseMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  kerbWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grossWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payloadKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityBrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityUnbrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acceleration0100?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorFinish?: Prisma.NullableEnumColorFinishFieldUpdateOperationsInput | $Enums.ColorFinish | null
+  inspectionValidUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasServiceBook?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWarranty?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  warrantyDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isCrashDamaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsSoldSeparately?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registeredAsCommercial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importedFromCountryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.CarListingTranslationUncheckedUpdateManyWithoutListingNestedInput
+  features?: Prisma.CarListingFeatureUncheckedUpdateManyWithoutListingNestedInput
+  images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
+  orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+}
+
+export type CarListingUncheckedUpdateManyWithoutDealerInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  makeId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bodyTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9546,6 +10147,7 @@ export type CarListingCountOutputTypeCountOrderItemsArgs<ExtArgs extends runtime
 export type CarListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  dealerId?: boolean
   makeId?: boolean
   modelId?: boolean
   modelPeriodId?: boolean
@@ -9620,6 +10222,7 @@ export type CarListingSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   color?: boolean | Prisma.CarListing$colorArgs<ExtArgs>
   location?: boolean | Prisma.CarListing$locationArgs<ExtArgs>
   importedFromCountry?: boolean | Prisma.CarListing$importedFromCountryArgs<ExtArgs>
+  dealer?: boolean | Prisma.CarListing$dealerArgs<ExtArgs>
   translations?: boolean | Prisma.CarListing$translationsArgs<ExtArgs>
   features?: boolean | Prisma.CarListing$featuresArgs<ExtArgs>
   images?: boolean | Prisma.CarListing$imagesArgs<ExtArgs>
@@ -9633,6 +10236,7 @@ export type CarListingSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type CarListingSelectScalar = {
   id?: boolean
   userId?: boolean
+  dealerId?: boolean
   makeId?: boolean
   modelId?: boolean
   modelPeriodId?: boolean
@@ -9697,7 +10301,7 @@ export type CarListingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CarListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "makeId" | "modelId" | "modelPeriodId" | "modelTrim" | "categoryId" | "bodyTypeId" | "vinCode" | "regNr" | "yearManufactured" | "monthManufactured" | "mileage" | "fuelTypeId" | "transmissionId" | "driveTypeId" | "engineDisplacementCc" | "enginePowerKw" | "enginePowerHp" | "engineInfo" | "emissionStandardId" | "co2EmissionGkm" | "fuelConsumptionCity" | "fuelConsumptionHighway" | "fuelConsumptionMixed" | "fuelTankCapacityL" | "doors" | "seats" | "vehicleLengthMm" | "vehicleWidthMm" | "vehicleHeightMm" | "wheelbaseMm" | "kerbWeightKg" | "grossWeightKg" | "payloadKg" | "towCapacityBrakedKg" | "towCapacityUnbrakedKg" | "acceleration0100" | "maxSpeedKph" | "colorId" | "colorFinish" | "inspectionValidUntil" | "hasServiceBook" | "hasWarranty" | "warrantyDescription" | "isCrashDamaged" | "partsSoldSeparately" | "partsInfo" | "registeredAsCommercial" | "locationId" | "importedFromCountryId" | "price" | "discountPrice" | "exportPrice" | "currency" | "priceIncludesVat" | "priceIncludesRegFee" | "estMonthlyLoan" | "estMonthlyInsurance" | "estMonthlyMaintenance" | "status" | "viewsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["carListing"]>
+export type CarListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "dealerId" | "makeId" | "modelId" | "modelPeriodId" | "modelTrim" | "categoryId" | "bodyTypeId" | "vinCode" | "regNr" | "yearManufactured" | "monthManufactured" | "mileage" | "fuelTypeId" | "transmissionId" | "driveTypeId" | "engineDisplacementCc" | "enginePowerKw" | "enginePowerHp" | "engineInfo" | "emissionStandardId" | "co2EmissionGkm" | "fuelConsumptionCity" | "fuelConsumptionHighway" | "fuelConsumptionMixed" | "fuelTankCapacityL" | "doors" | "seats" | "vehicleLengthMm" | "vehicleWidthMm" | "vehicleHeightMm" | "wheelbaseMm" | "kerbWeightKg" | "grossWeightKg" | "payloadKg" | "towCapacityBrakedKg" | "towCapacityUnbrakedKg" | "acceleration0100" | "maxSpeedKph" | "colorId" | "colorFinish" | "inspectionValidUntil" | "hasServiceBook" | "hasWarranty" | "warrantyDescription" | "isCrashDamaged" | "partsSoldSeparately" | "partsInfo" | "registeredAsCommercial" | "locationId" | "importedFromCountryId" | "price" | "discountPrice" | "exportPrice" | "currency" | "priceIncludesVat" | "priceIncludesRegFee" | "estMonthlyLoan" | "estMonthlyInsurance" | "estMonthlyMaintenance" | "status" | "viewsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["carListing"]>
 export type CarListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   make?: boolean | Prisma.CarMakeDefaultArgs<ExtArgs>
   model?: boolean | Prisma.CarModelDefaultArgs<ExtArgs>
@@ -9711,6 +10315,7 @@ export type CarListingInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   color?: boolean | Prisma.CarListing$colorArgs<ExtArgs>
   location?: boolean | Prisma.CarListing$locationArgs<ExtArgs>
   importedFromCountry?: boolean | Prisma.CarListing$importedFromCountryArgs<ExtArgs>
+  dealer?: boolean | Prisma.CarListing$dealerArgs<ExtArgs>
   translations?: boolean | Prisma.CarListing$translationsArgs<ExtArgs>
   features?: boolean | Prisma.CarListing$featuresArgs<ExtArgs>
   images?: boolean | Prisma.CarListing$imagesArgs<ExtArgs>
@@ -9734,6 +10339,7 @@ export type $CarListingPayload<ExtArgs extends runtime.Types.Extensions.Internal
     color: Prisma.$ColorPayload<ExtArgs> | null
     location: Prisma.$LocationPayload<ExtArgs> | null
     importedFromCountry: Prisma.$CountryPayload<ExtArgs> | null
+    dealer: Prisma.$DealerPayload<ExtArgs> | null
     translations: Prisma.$CarListingTranslationPayload<ExtArgs>[]
     features: Prisma.$CarListingFeaturePayload<ExtArgs>[]
     images: Prisma.$CarImagePayload<ExtArgs>[]
@@ -9743,6 +10349,7 @@ export type $CarListingPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
     userId: number
+    dealerId: number | null
     makeId: number
     modelId: number
     modelPeriodId: number | null
@@ -10157,6 +10764,7 @@ export interface Prisma__CarListingClient<T, Null = never, ExtArgs extends runti
   color<T extends Prisma.CarListing$colorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$colorArgs<ExtArgs>>): Prisma.Prisma__ColorClient<runtime.Types.Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   location<T extends Prisma.CarListing$locationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$locationArgs<ExtArgs>>): Prisma.Prisma__LocationClient<runtime.Types.Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   importedFromCountry<T extends Prisma.CarListing$importedFromCountryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$importedFromCountryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  dealer<T extends Prisma.CarListing$dealerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$dealerArgs<ExtArgs>>): Prisma.Prisma__DealerClient<runtime.Types.Result.GetResult<Prisma.$DealerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   translations<T extends Prisma.CarListing$translationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   features<T extends Prisma.CarListing$featuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$featuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingFeaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   images<T extends Prisma.CarListing$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10193,6 +10801,7 @@ export interface Prisma__CarListingClient<T, Null = never, ExtArgs extends runti
 export interface CarListingFieldRefs {
   readonly id: Prisma.FieldRef<"CarListing", 'BigInt'>
   readonly userId: Prisma.FieldRef<"CarListing", 'Int'>
+  readonly dealerId: Prisma.FieldRef<"CarListing", 'Int'>
   readonly makeId: Prisma.FieldRef<"CarListing", 'Int'>
   readonly modelId: Prisma.FieldRef<"CarListing", 'Int'>
   readonly modelPeriodId: Prisma.FieldRef<"CarListing", 'Int'>
@@ -10771,6 +11380,25 @@ export type CarListing$importedFromCountryArgs<ExtArgs extends runtime.Types.Ext
    */
   include?: Prisma.CountryInclude<ExtArgs> | null
   where?: Prisma.CountryWhereInput
+}
+
+/**
+ * CarListing.dealer
+ */
+export type CarListing$dealerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Dealer
+   */
+  select?: Prisma.DealerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Dealer
+   */
+  omit?: Prisma.DealerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealerInclude<ExtArgs> | null
+  where?: Prisma.DealerWhereInput
 }
 
 /**

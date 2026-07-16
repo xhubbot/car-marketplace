@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -45,6 +45,12 @@ enum PaymentStatus {
   completed
   failed
   refunded
+}
+
+enum DealerStatus {
+  pending
+  active
+  suspended
 }
 
 // ─────────────────────────────────────────────
@@ -150,7 +156,8 @@ model Country {
   fallbackName String   @map("fallback_name") @db.VarChar(100)
   createdAt    DateTime @default(now()) @map("created_at")
 
-  listings CarListing[]
+  listings        CarListing[]
+  dealerLocations DealerLocation[]
 
   @@map("countries")
 }
@@ -161,9 +168,10 @@ model Location {
   fallbackName String   @map("fallback_name") @db.VarChar(100)
   createdAt    DateTime @default(now()) @map("created_at")
 
-  parent   Location?    @relation("LocationParent", fields: [parentId], references: [id])
-  children Location[]   @relation("LocationParent")
-  listings CarListing[]
+  parent          Location?        @relation("LocationParent", fields: [parentId], references: [id])
+  children        Location[]       @relation("LocationParent")
+  listings        CarListing[]
+  dealerLocations DealerLocation[]
 
   @@map("locations")
 }
@@ -241,12 +249,113 @@ model CarFeature {
 }
 
 // ─────────────────────────────────────────────
+// Dealer catalogue (company listings/showrooms)
+// ─────────────────────────────────────────────
+
+model Dealer {
+  id             Int          @id @default(autoincrement()) @db.UnsignedInt
+  userId         Int          @map("user_id") @db.UnsignedInt
+  companyName    String       @map("company_name") @db.VarChar(150)
+  slug           String       @unique @db.VarChar(150)
+  registryCode   String?      @map("registry_code") @db.VarChar(30)
+  vatNumber      String?      @map("vat_number") @db.VarChar(30)
+  logoPath       String?      @map("logo_path") @db.VarChar(255)
+  coverImagePath String?      @map("cover_image_path") @db.VarChar(255)
+  websiteUrl     String?      @map("website_url") @db.VarChar(255)
+  phone          String?      @db.VarChar(30)
+  email          String?      @db.VarChar(150)
+  status         DealerStatus @default(pending)
+  isVerified     Boolean      @default(false) @map("is_verified")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+
+  translations DealerTranslation[]
+  locations    DealerLocation[]
+  contacts     DealerContact[]
+  listings     CarListing[]
+
+  @@index([userId], name: "idx_dealer_user")
+  @@map("dealers")
+}
+
+model DealerTranslation {
+  dealerId     Int     @map("dealer_id") @db.UnsignedInt
+  languageCode String  @map("language_code") @db.Char(2)
+  description  String? @db.Text
+
+  dealer Dealer @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+
+  @@id([dealerId, languageCode])
+  @@map("dealer_translations")
+}
+
+model DealerLocation {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  dealerId    Int      @map("dealer_id") @db.UnsignedInt
+  name        String?  @db.VarChar(100)
+  countryId   Int?     @map("country_id") @db.UnsignedInt
+  locationId  Int?     @map("location_id") @db.UnsignedInt
+  addressLine String   @map("address_line") @db.VarChar(255)
+  postalCode  String?  @map("postal_code") @db.VarChar(20)
+  latitude    Decimal? @db.Decimal(9, 6)
+  longitude   Decimal? @db.Decimal(9, 6)
+  phone       String?  @db.VarChar(30)
+  email       String?  @db.VarChar(150)
+  isPrimary   Boolean  @default(false) @map("is_primary")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  dealer       Dealer              @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+  country      Country?            @relation(fields: [countryId], references: [id])
+  location     Location?           @relation(fields: [locationId], references: [id])
+  contacts     DealerContact[]
+  workingHours DealerWorkingHour[]
+
+  @@index([dealerId], name: "idx_dealer_locations")
+  @@index([locationId], name: "idx_dealer_location_lookup")
+  @@map("dealer_locations")
+}
+
+model DealerWorkingHour {
+  id         Int       @id @default(autoincrement()) @db.UnsignedInt
+  locationId Int       @map("location_id") @db.UnsignedInt
+  dayOfWeek  Int       @map("day_of_week") @db.UnsignedTinyInt // 0=Monday ... 6=Sunday
+  opensAt    DateTime? @map("opens_at") @db.Time(0)
+  closesAt   DateTime? @map("closes_at") @db.Time(0)
+  isClosed   Boolean   @default(false) @map("is_closed")
+
+  location DealerLocation @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@unique([locationId, dayOfWeek], name: "unique_location_day")
+  @@map("dealer_working_hours")
+}
+
+model DealerContact {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt
+  dealerId   Int      @map("dealer_id") @db.UnsignedInt
+  locationId Int?     @map("location_id") @db.UnsignedInt
+  fullName   String   @map("full_name") @db.VarChar(100)
+  position   String?  @db.VarChar(100)
+  phone      String?  @db.VarChar(30)
+  email      String?  @db.VarChar(150)
+  photoPath  String?  @map("photo_path") @db.VarChar(255)
+  sortOrder  Int      @default(0) @map("sort_order") @db.UnsignedTinyInt
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  dealer   Dealer          @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+  location DealerLocation? @relation(fields: [locationId], references: [id], onDelete: SetNull)
+
+  @@index([dealerId], name: "idx_dealer_contacts")
+  @@map("dealer_contacts")
+}
+
+// ─────────────────────────────────────────────
 // Core listing
 // ─────────────────────────────────────────────
 
 model CarListing {
-  id     BigInt @id @default(autoincrement()) @db.UnsignedBigInt
-  userId Int    @map("user_id") @db.UnsignedInt
+  id       BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+  userId   Int    @map("user_id") @db.UnsignedInt
+  dealerId Int?   @map("dealer_id") @db.UnsignedInt
 
   // Identity (locked after activation)
   makeId        Int     @map("make_id") @db.UnsignedInt
@@ -353,6 +462,7 @@ model CarListing {
   color               Color?            @relation(fields: [colorId], references: [id])
   location            Location?         @relation(fields: [locationId], references: [id])
   importedFromCountry Country?          @relation(fields: [importedFromCountryId], references: [id])
+  dealer              Dealer?           @relation(fields: [dealerId], references: [id], onDelete: SetNull)
 
   translations    CarListingTranslation[]
   features        CarListingFeature[]
@@ -365,6 +475,7 @@ model CarListing {
   @@index([fuelTypeId, transmissionId], name: "idx_fuel_trans")
   @@index([bodyTypeId, categoryId], name: "idx_body")
   @@index([locationId], name: "idx_location")
+  @@index([dealerId], name: "idx_dealer_listings")
   @@map("car_listings")
 }
 

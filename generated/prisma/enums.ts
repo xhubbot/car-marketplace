@@ -58,3 +58,12 @@ export const PaymentStatus = {
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const DealerStatus = {
+  pending: 'pending',
+  active: 'active',
+  suspended: 'suspended'
+} as const
+
+export type DealerStatus = (typeof DealerStatus)[keyof typeof DealerStatus]

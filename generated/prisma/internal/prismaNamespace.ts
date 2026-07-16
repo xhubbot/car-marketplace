@@ -399,6 +399,11 @@ export const ModelName = {
   ModelPeriod: 'ModelPeriod',
   FeatureCategory: 'FeatureCategory',
   CarFeature: 'CarFeature',
+  Dealer: 'Dealer',
+  DealerTranslation: 'DealerTranslation',
+  DealerLocation: 'DealerLocation',
+  DealerWorkingHour: 'DealerWorkingHour',
+  DealerContact: 'DealerContact',
   CarListing: 'CarListing',
   CarListingTranslation: 'CarListingTranslation',
   CarListingFeature: 'CarListingFeature',
@@ -423,7 +428,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction"
+    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1417,6 +1422,336 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Dealer: {
+      payload: Prisma.$DealerPayload<ExtArgs>
+      fields: Prisma.DealerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>
+        }
+        findMany: {
+          args: Prisma.DealerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>[]
+        }
+        create: {
+          args: Prisma.DealerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>
+        }
+        createMany: {
+          args: Prisma.DealerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>
+        }
+        update: {
+          args: Prisma.DealerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealer>
+        }
+        groupBy: {
+          args: Prisma.DealerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealerTranslation: {
+      payload: Prisma.$DealerTranslationPayload<ExtArgs>
+      fields: Prisma.DealerTranslationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerTranslationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerTranslationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerTranslationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerTranslationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>
+        }
+        findMany: {
+          args: Prisma.DealerTranslationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>[]
+        }
+        create: {
+          args: Prisma.DealerTranslationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>
+        }
+        createMany: {
+          args: Prisma.DealerTranslationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerTranslationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>
+        }
+        update: {
+          args: Prisma.DealerTranslationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerTranslationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerTranslationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerTranslationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerTranslationPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerTranslationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerTranslation>
+        }
+        groupBy: {
+          args: Prisma.DealerTranslationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerTranslationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerTranslationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerTranslationCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealerLocation: {
+      payload: Prisma.$DealerLocationPayload<ExtArgs>
+      fields: Prisma.DealerLocationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerLocationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerLocationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerLocationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerLocationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>
+        }
+        findMany: {
+          args: Prisma.DealerLocationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>[]
+        }
+        create: {
+          args: Prisma.DealerLocationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>
+        }
+        createMany: {
+          args: Prisma.DealerLocationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerLocationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>
+        }
+        update: {
+          args: Prisma.DealerLocationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerLocationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerLocationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerLocationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerLocationPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerLocationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerLocation>
+        }
+        groupBy: {
+          args: Prisma.DealerLocationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerLocationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerLocationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerLocationCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealerWorkingHour: {
+      payload: Prisma.$DealerWorkingHourPayload<ExtArgs>
+      fields: Prisma.DealerWorkingHourFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerWorkingHourFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerWorkingHourFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerWorkingHourFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerWorkingHourFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>
+        }
+        findMany: {
+          args: Prisma.DealerWorkingHourFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>[]
+        }
+        create: {
+          args: Prisma.DealerWorkingHourCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>
+        }
+        createMany: {
+          args: Prisma.DealerWorkingHourCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerWorkingHourDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>
+        }
+        update: {
+          args: Prisma.DealerWorkingHourUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerWorkingHourDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerWorkingHourUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerWorkingHourUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerWorkingHourPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerWorkingHourAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerWorkingHour>
+        }
+        groupBy: {
+          args: Prisma.DealerWorkingHourGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerWorkingHourGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerWorkingHourCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerWorkingHourCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealerContact: {
+      payload: Prisma.$DealerContactPayload<ExtArgs>
+      fields: Prisma.DealerContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>
+        }
+        findMany: {
+          args: Prisma.DealerContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>[]
+        }
+        create: {
+          args: Prisma.DealerContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>
+        }
+        createMany: {
+          args: Prisma.DealerContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>
+        }
+        update: {
+          args: Prisma.DealerContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerContactPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerContact>
+        }
+        groupBy: {
+          args: Prisma.DealerContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerContactCountAggregateOutputType> | number
+        }
+      }
+    }
     CarListing: {
       payload: Prisma.$CarListingPayload<ExtArgs>
       fields: Prisma.CarListingFieldRefs
@@ -2201,9 +2536,87 @@ export const CarFeatureScalarFieldEnum = {
 export type CarFeatureScalarFieldEnum = (typeof CarFeatureScalarFieldEnum)[keyof typeof CarFeatureScalarFieldEnum]
 
 
+export const DealerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  companyName: 'companyName',
+  slug: 'slug',
+  registryCode: 'registryCode',
+  vatNumber: 'vatNumber',
+  logoPath: 'logoPath',
+  coverImagePath: 'coverImagePath',
+  websiteUrl: 'websiteUrl',
+  phone: 'phone',
+  email: 'email',
+  status: 'status',
+  isVerified: 'isVerified',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealerScalarFieldEnum = (typeof DealerScalarFieldEnum)[keyof typeof DealerScalarFieldEnum]
+
+
+export const DealerTranslationScalarFieldEnum = {
+  dealerId: 'dealerId',
+  languageCode: 'languageCode',
+  description: 'description'
+} as const
+
+export type DealerTranslationScalarFieldEnum = (typeof DealerTranslationScalarFieldEnum)[keyof typeof DealerTranslationScalarFieldEnum]
+
+
+export const DealerLocationScalarFieldEnum = {
+  id: 'id',
+  dealerId: 'dealerId',
+  name: 'name',
+  countryId: 'countryId',
+  locationId: 'locationId',
+  addressLine: 'addressLine',
+  postalCode: 'postalCode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  phone: 'phone',
+  email: 'email',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt'
+} as const
+
+export type DealerLocationScalarFieldEnum = (typeof DealerLocationScalarFieldEnum)[keyof typeof DealerLocationScalarFieldEnum]
+
+
+export const DealerWorkingHourScalarFieldEnum = {
+  id: 'id',
+  locationId: 'locationId',
+  dayOfWeek: 'dayOfWeek',
+  opensAt: 'opensAt',
+  closesAt: 'closesAt',
+  isClosed: 'isClosed'
+} as const
+
+export type DealerWorkingHourScalarFieldEnum = (typeof DealerWorkingHourScalarFieldEnum)[keyof typeof DealerWorkingHourScalarFieldEnum]
+
+
+export const DealerContactScalarFieldEnum = {
+  id: 'id',
+  dealerId: 'dealerId',
+  locationId: 'locationId',
+  fullName: 'fullName',
+  position: 'position',
+  phone: 'phone',
+  email: 'email',
+  photoPath: 'photoPath',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type DealerContactScalarFieldEnum = (typeof DealerContactScalarFieldEnum)[keyof typeof DealerContactScalarFieldEnum]
+
+
 export const CarListingScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  dealerId: 'dealerId',
   makeId: 'makeId',
   modelId: 'modelId',
   modelPeriodId: 'modelPeriodId',
@@ -2502,6 +2915,51 @@ export const CarFeatureOrderByRelevanceFieldEnum = {
 export type CarFeatureOrderByRelevanceFieldEnum = (typeof CarFeatureOrderByRelevanceFieldEnum)[keyof typeof CarFeatureOrderByRelevanceFieldEnum]
 
 
+export const DealerOrderByRelevanceFieldEnum = {
+  companyName: 'companyName',
+  slug: 'slug',
+  registryCode: 'registryCode',
+  vatNumber: 'vatNumber',
+  logoPath: 'logoPath',
+  coverImagePath: 'coverImagePath',
+  websiteUrl: 'websiteUrl',
+  phone: 'phone',
+  email: 'email'
+} as const
+
+export type DealerOrderByRelevanceFieldEnum = (typeof DealerOrderByRelevanceFieldEnum)[keyof typeof DealerOrderByRelevanceFieldEnum]
+
+
+export const DealerTranslationOrderByRelevanceFieldEnum = {
+  languageCode: 'languageCode',
+  description: 'description'
+} as const
+
+export type DealerTranslationOrderByRelevanceFieldEnum = (typeof DealerTranslationOrderByRelevanceFieldEnum)[keyof typeof DealerTranslationOrderByRelevanceFieldEnum]
+
+
+export const DealerLocationOrderByRelevanceFieldEnum = {
+  name: 'name',
+  addressLine: 'addressLine',
+  postalCode: 'postalCode',
+  phone: 'phone',
+  email: 'email'
+} as const
+
+export type DealerLocationOrderByRelevanceFieldEnum = (typeof DealerLocationOrderByRelevanceFieldEnum)[keyof typeof DealerLocationOrderByRelevanceFieldEnum]
+
+
+export const DealerContactOrderByRelevanceFieldEnum = {
+  fullName: 'fullName',
+  position: 'position',
+  phone: 'phone',
+  email: 'email',
+  photoPath: 'photoPath'
+} as const
+
+export type DealerContactOrderByRelevanceFieldEnum = (typeof DealerContactOrderByRelevanceFieldEnum)[keyof typeof DealerContactOrderByRelevanceFieldEnum]
+
+
 export const CarListingOrderByRelevanceFieldEnum = {
   modelTrim: 'modelTrim',
   vinCode: 'vinCode',
@@ -2613,9 +3071,9 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
- * Reference to a field of type 'BigInt'
+ * Reference to a field of type 'DealerStatus'
  */
-export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+export type EnumDealerStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealerStatus'>
     
 
 
@@ -2623,6 +3081,13 @@ export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'Decimal'
  */
 export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
 
 
@@ -2806,6 +3271,11 @@ export type GlobalOmitConfig = {
   modelPeriod?: Prisma.ModelPeriodOmit
   featureCategory?: Prisma.FeatureCategoryOmit
   carFeature?: Prisma.CarFeatureOmit
+  dealer?: Prisma.DealerOmit
+  dealerTranslation?: Prisma.DealerTranslationOmit
+  dealerLocation?: Prisma.DealerLocationOmit
+  dealerWorkingHour?: Prisma.DealerWorkingHourOmit
+  dealerContact?: Prisma.DealerContactOmit
   carListing?: Prisma.CarListingOmit
   carListingTranslation?: Prisma.CarListingTranslationOmit
   carListingFeature?: Prisma.CarListingFeatureOmit

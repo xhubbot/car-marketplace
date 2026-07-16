@@ -215,6 +215,7 @@ export type LocationWhereInput = {
   parent?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
   children?: Prisma.LocationListRelationFilter
   listings?: Prisma.CarListingListRelationFilter
+  dealerLocations?: Prisma.DealerLocationListRelationFilter
 }
 
 export type LocationOrderByWithRelationInput = {
@@ -225,6 +226,7 @@ export type LocationOrderByWithRelationInput = {
   parent?: Prisma.LocationOrderByWithRelationInput
   children?: Prisma.LocationOrderByRelationAggregateInput
   listings?: Prisma.CarListingOrderByRelationAggregateInput
+  dealerLocations?: Prisma.DealerLocationOrderByRelationAggregateInput
   _relevance?: Prisma.LocationOrderByRelevanceInput
 }
 
@@ -239,6 +241,7 @@ export type LocationWhereUniqueInput = Prisma.AtLeast<{
   parent?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
   children?: Prisma.LocationListRelationFilter
   listings?: Prisma.CarListingListRelationFilter
+  dealerLocations?: Prisma.DealerLocationListRelationFilter
 }, "id">
 
 export type LocationOrderByWithAggregationInput = {
@@ -270,6 +273,7 @@ export type LocationCreateInput = {
   parent?: Prisma.LocationCreateNestedOneWithoutChildrenInput
   children?: Prisma.LocationCreateNestedManyWithoutParentInput
   listings?: Prisma.CarListingCreateNestedManyWithoutLocationInput
+  dealerLocations?: Prisma.DealerLocationCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateInput = {
@@ -279,6 +283,7 @@ export type LocationUncheckedCreateInput = {
   createdAt?: Date | string
   children?: Prisma.LocationUncheckedCreateNestedManyWithoutParentInput
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutLocationInput
+  dealerLocations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUpdateInput = {
@@ -288,6 +293,7 @@ export type LocationUpdateInput = {
   parent?: Prisma.LocationUpdateOneWithoutChildrenNestedInput
   children?: Prisma.LocationUpdateManyWithoutParentNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutLocationNestedInput
+  dealerLocations?: Prisma.DealerLocationUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateInput = {
@@ -297,6 +303,7 @@ export type LocationUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.LocationUncheckedUpdateManyWithoutParentNestedInput
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutLocationNestedInput
+  dealerLocations?: Prisma.DealerLocationUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyInput = {
@@ -437,6 +444,22 @@ export type LocationUncheckedUpdateManyWithoutParentNestedInput = {
   deleteMany?: Prisma.LocationScalarWhereInput | Prisma.LocationScalarWhereInput[]
 }
 
+export type LocationCreateNestedOneWithoutDealerLocationsInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutDealerLocationsInput, Prisma.LocationUncheckedCreateWithoutDealerLocationsInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutDealerLocationsInput
+  connect?: Prisma.LocationWhereUniqueInput
+}
+
+export type LocationUpdateOneWithoutDealerLocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutDealerLocationsInput, Prisma.LocationUncheckedCreateWithoutDealerLocationsInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutDealerLocationsInput
+  upsert?: Prisma.LocationUpsertWithoutDealerLocationsInput
+  disconnect?: Prisma.LocationWhereInput | boolean
+  delete?: Prisma.LocationWhereInput | boolean
+  connect?: Prisma.LocationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutDealerLocationsInput, Prisma.LocationUpdateWithoutDealerLocationsInput>, Prisma.LocationUncheckedUpdateWithoutDealerLocationsInput>
+}
+
 export type LocationCreateNestedOneWithoutListingsInput = {
   create?: Prisma.XOR<Prisma.LocationCreateWithoutListingsInput, Prisma.LocationUncheckedCreateWithoutListingsInput>
   connectOrCreate?: Prisma.LocationCreateOrConnectWithoutListingsInput
@@ -459,6 +482,7 @@ export type LocationCreateWithoutChildrenInput = {
   createdAt?: Date | string
   parent?: Prisma.LocationCreateNestedOneWithoutChildrenInput
   listings?: Prisma.CarListingCreateNestedManyWithoutLocationInput
+  dealerLocations?: Prisma.DealerLocationCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutChildrenInput = {
@@ -467,6 +491,7 @@ export type LocationUncheckedCreateWithoutChildrenInput = {
   fallbackName: string
   createdAt?: Date | string
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutLocationInput
+  dealerLocations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutChildrenInput = {
@@ -480,6 +505,7 @@ export type LocationCreateWithoutParentInput = {
   createdAt?: Date | string
   children?: Prisma.LocationCreateNestedManyWithoutParentInput
   listings?: Prisma.CarListingCreateNestedManyWithoutLocationInput
+  dealerLocations?: Prisma.DealerLocationCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutParentInput = {
@@ -488,6 +514,7 @@ export type LocationUncheckedCreateWithoutParentInput = {
   createdAt?: Date | string
   children?: Prisma.LocationUncheckedCreateNestedManyWithoutParentInput
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutLocationInput
+  dealerLocations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutParentInput = {
@@ -517,6 +544,7 @@ export type LocationUpdateWithoutChildrenInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.LocationUpdateOneWithoutChildrenNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutLocationNestedInput
+  dealerLocations?: Prisma.DealerLocationUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutChildrenInput = {
@@ -525,6 +553,7 @@ export type LocationUncheckedUpdateWithoutChildrenInput = {
   fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutLocationNestedInput
+  dealerLocations?: Prisma.DealerLocationUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUpsertWithWhereUniqueWithoutParentInput = {
@@ -553,12 +582,65 @@ export type LocationScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Location"> | Date | string
 }
 
+export type LocationCreateWithoutDealerLocationsInput = {
+  id: number
+  fallbackName: string
+  createdAt?: Date | string
+  parent?: Prisma.LocationCreateNestedOneWithoutChildrenInput
+  children?: Prisma.LocationCreateNestedManyWithoutParentInput
+  listings?: Prisma.CarListingCreateNestedManyWithoutLocationInput
+}
+
+export type LocationUncheckedCreateWithoutDealerLocationsInput = {
+  id: number
+  parentId?: number | null
+  fallbackName: string
+  createdAt?: Date | string
+  children?: Prisma.LocationUncheckedCreateNestedManyWithoutParentInput
+  listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutLocationInput
+}
+
+export type LocationCreateOrConnectWithoutDealerLocationsInput = {
+  where: Prisma.LocationWhereUniqueInput
+  create: Prisma.XOR<Prisma.LocationCreateWithoutDealerLocationsInput, Prisma.LocationUncheckedCreateWithoutDealerLocationsInput>
+}
+
+export type LocationUpsertWithoutDealerLocationsInput = {
+  update: Prisma.XOR<Prisma.LocationUpdateWithoutDealerLocationsInput, Prisma.LocationUncheckedUpdateWithoutDealerLocationsInput>
+  create: Prisma.XOR<Prisma.LocationCreateWithoutDealerLocationsInput, Prisma.LocationUncheckedCreateWithoutDealerLocationsInput>
+  where?: Prisma.LocationWhereInput
+}
+
+export type LocationUpdateToOneWithWhereWithoutDealerLocationsInput = {
+  where?: Prisma.LocationWhereInput
+  data: Prisma.XOR<Prisma.LocationUpdateWithoutDealerLocationsInput, Prisma.LocationUncheckedUpdateWithoutDealerLocationsInput>
+}
+
+export type LocationUpdateWithoutDealerLocationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.LocationUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.LocationUpdateManyWithoutParentNestedInput
+  listings?: Prisma.CarListingUpdateManyWithoutLocationNestedInput
+}
+
+export type LocationUncheckedUpdateWithoutDealerLocationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.LocationUncheckedUpdateManyWithoutParentNestedInput
+  listings?: Prisma.CarListingUncheckedUpdateManyWithoutLocationNestedInput
+}
+
 export type LocationCreateWithoutListingsInput = {
   id: number
   fallbackName: string
   createdAt?: Date | string
   parent?: Prisma.LocationCreateNestedOneWithoutChildrenInput
   children?: Prisma.LocationCreateNestedManyWithoutParentInput
+  dealerLocations?: Prisma.DealerLocationCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutListingsInput = {
@@ -567,6 +649,7 @@ export type LocationUncheckedCreateWithoutListingsInput = {
   fallbackName: string
   createdAt?: Date | string
   children?: Prisma.LocationUncheckedCreateNestedManyWithoutParentInput
+  dealerLocations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutListingsInput = {
@@ -591,6 +674,7 @@ export type LocationUpdateWithoutListingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.LocationUpdateOneWithoutChildrenNestedInput
   children?: Prisma.LocationUpdateManyWithoutParentNestedInput
+  dealerLocations?: Prisma.DealerLocationUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutListingsInput = {
@@ -599,6 +683,7 @@ export type LocationUncheckedUpdateWithoutListingsInput = {
   fallbackName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.LocationUncheckedUpdateManyWithoutParentNestedInput
+  dealerLocations?: Prisma.DealerLocationUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyParentInput = {
@@ -613,6 +698,7 @@ export type LocationUpdateWithoutParentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.LocationUpdateManyWithoutParentNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutLocationNestedInput
+  dealerLocations?: Prisma.DealerLocationUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutParentInput = {
@@ -621,6 +707,7 @@ export type LocationUncheckedUpdateWithoutParentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.LocationUncheckedUpdateManyWithoutParentNestedInput
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutLocationNestedInput
+  dealerLocations?: Prisma.DealerLocationUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateManyWithoutParentInput = {
@@ -637,11 +724,13 @@ export type LocationUncheckedUpdateManyWithoutParentInput = {
 export type LocationCountOutputType = {
   children: number
   listings: number
+  dealerLocations: number
 }
 
 export type LocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   children?: boolean | LocationCountOutputTypeCountChildrenArgs
   listings?: boolean | LocationCountOutputTypeCountListingsArgs
+  dealerLocations?: boolean | LocationCountOutputTypeCountDealerLocationsArgs
 }
 
 /**
@@ -668,6 +757,13 @@ export type LocationCountOutputTypeCountListingsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.CarListingWhereInput
 }
 
+/**
+ * LocationCountOutputType without action
+ */
+export type LocationCountOutputTypeCountDealerLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealerLocationWhereInput
+}
+
 
 export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -677,6 +773,7 @@ export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   parent?: boolean | Prisma.Location$parentArgs<ExtArgs>
   children?: boolean | Prisma.Location$childrenArgs<ExtArgs>
   listings?: boolean | Prisma.Location$listingsArgs<ExtArgs>
+  dealerLocations?: boolean | Prisma.Location$dealerLocationsArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["location"]>
 
@@ -694,6 +791,7 @@ export type LocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   parent?: boolean | Prisma.Location$parentArgs<ExtArgs>
   children?: boolean | Prisma.Location$childrenArgs<ExtArgs>
   listings?: boolean | Prisma.Location$listingsArgs<ExtArgs>
+  dealerLocations?: boolean | Prisma.Location$dealerLocationsArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -703,6 +801,7 @@ export type $LocationPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     parent: Prisma.$LocationPayload<ExtArgs> | null
     children: Prisma.$LocationPayload<ExtArgs>[]
     listings: Prisma.$CarListingPayload<ExtArgs>[]
+    dealerLocations: Prisma.$DealerLocationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1052,6 +1151,7 @@ export interface Prisma__LocationClient<T, Null = never, ExtArgs extends runtime
   parent<T extends Prisma.Location$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$parentArgs<ExtArgs>>): Prisma.Prisma__LocationClient<runtime.Types.Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   children<T extends Prisma.Location$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   listings<T extends Prisma.Location$listingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$listingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dealerLocations<T extends Prisma.Location$dealerLocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$dealerLocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1497,6 +1597,30 @@ export type Location$listingsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.CarListingScalarFieldEnum | Prisma.CarListingScalarFieldEnum[]
+}
+
+/**
+ * Location.dealerLocations
+ */
+export type Location$dealerLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DealerLocation
+   */
+  select?: Prisma.DealerLocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DealerLocation
+   */
+  omit?: Prisma.DealerLocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealerLocationInclude<ExtArgs> | null
+  where?: Prisma.DealerLocationWhereInput
+  orderBy?: Prisma.DealerLocationOrderByWithRelationInput | Prisma.DealerLocationOrderByWithRelationInput[]
+  cursor?: Prisma.DealerLocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealerLocationScalarFieldEnum | Prisma.DealerLocationScalarFieldEnum[]
 }
 
 /**
