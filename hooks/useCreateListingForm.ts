@@ -1,6 +1,11 @@
 import { useState, useCallback } from 'react'
 
+export type ListingType = 'sell' | 'buy' | 'rentWanted' | 'rentOffer'
+
 export interface CreateListingFormData {
+  // Listing intent
+  listingType: ListingType
+
   // Main info
   makeId: number | null
   modelId: number | null
@@ -45,6 +50,7 @@ interface UseCreateListingFormResult {
 }
 
 const INITIAL_STATE: CreateListingFormData = {
+  listingType: 'sell',
   makeId: null,
   modelId: null,
   modelTrim: '',
@@ -118,6 +124,9 @@ export function useCreateListingForm(): UseCreateListingFormResult {
     setIsSubmitting(true)
     try {
       const formDataObj = new FormData()
+
+      // Add listing intent
+      formDataObj.append('listingType', formData.listingType)
 
       // Add main info
       formDataObj.append('makeId', String(formData.makeId))

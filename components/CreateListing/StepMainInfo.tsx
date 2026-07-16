@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import Select from 'react-select'
-import { CreateListingFormData } from '@/hooks/useCreateListingForm'
+import { CreateListingFormData, ListingType } from '@/hooks/useCreateListingForm'
 import { useMakes } from '@/hooks/useMakes'
 import { useModels } from '@/hooks/useModels'
 import { useLookups, type LookupOption, type LocationGroup } from '@/hooks/useLookups'
@@ -34,6 +34,13 @@ const selectStyles = {
     paddingTop: '6px',
   }),
 }
+
+const LISTING_TYPE_OPTIONS: { value: ListingType; label: string }[] = [
+  { value: 'sell', label: 'Sell a Car' },
+  { value: 'buy', label: 'Looking to Buy' },
+  { value: 'rentWanted', label: 'I Want to Rent' },
+  { value: 'rentOffer', label: 'I Rent to Others' },
+]
 
 function findInGroups(groups: LocationGroup[], value: number | null): LookupOption | null {
   if (value === null) return null
@@ -76,6 +83,27 @@ export function StepMainInfo({ data, onUpdate }: StepMainInfoProps) {
 
   return (
     <div className="space-y-6">
+
+      {/* Listing Type */}
+      <div>
+        <label className="block text-sm font-medium mb-1">Listing Type *</label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {LISTING_TYPE_OPTIONS.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => onUpdate({ listingType: option.value })}
+              className={`px-3 py-2 rounded-lg border text-sm font-medium transition-colors ${
+                data.listingType === option.value
+                  ? 'border-blue-600 bg-blue-50 text-blue-700'
+                  : 'border-neutral-300 text-neutral-700 hover:border-blue-400'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Make & Model */}
       <div className="grid grid-cols-2 gap-4">

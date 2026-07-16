@@ -11,8 +11,6 @@ import CarCardStats from './CarCardStats';
 interface CarCardProps {
   car: CarListing;
   globalViewMode: ViewMode;
-  isSelectedForCompare: boolean;
-  toggleCompare: () => void;
   onSelect: () => void;
   monthlyMileage: number;
 }
@@ -20,8 +18,6 @@ interface CarCardProps {
 export default function CarCard({
   car,
   globalViewMode,
-  isSelectedForCompare,
-  toggleCompare,
   onSelect,
   monthlyMileage,
 }: CarCardProps) {
@@ -48,7 +44,7 @@ export default function CarCard({
       exit={{ opacity: 0, y: -15 }}
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs transition-all duration-300 hover:border-neutral-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700"
     >
-      <CarCardBadges car={car} isSelectedForCompare={isSelectedForCompare} toggleCompare={toggleCompare} />
+      <CarCardBadges car={car} />
       <CarCardImage car={car} onSelect={onSelect} />
 
       <div className="flex flex-1 flex-col p-5">

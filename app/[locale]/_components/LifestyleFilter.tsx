@@ -2,10 +2,14 @@
 
 import { motion } from 'motion/react';
 import { Compass, Sparkles, Zap, Map, Flame } from 'lucide-react';
+import type { ViewMode } from '@/lib/types';
+import NavbarViewModeToggle from '@/components/NavbarViewModeToggle';
 
 interface LifestyleFilterProps {
   selectedLifestyle: string;
   setSelectedLifestyle: (lifestyle: string) => void;
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
 }
 
 const categories = [
@@ -16,7 +20,12 @@ const categories = [
   { id: 'pragmatic', label: 'Daily Workhorse', icon: Sparkles, color: 'text-emerald-500' },
 ];
 
-export default function LifestyleFilter({ selectedLifestyle, setSelectedLifestyle }: LifestyleFilterProps) {
+export default function LifestyleFilter({
+  selectedLifestyle,
+  setSelectedLifestyle,
+  viewMode,
+  setViewMode,
+}: LifestyleFilterProps) {
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -27,6 +36,8 @@ export default function LifestyleFilter({ selectedLifestyle, setSelectedLifestyl
           Forget boring body categories. Choose what you actually intend to do with your machine.
         </p>
       </div>
+
+      <NavbarViewModeToggle viewMode={viewMode} setViewMode={setViewMode} />
 
       <div className="flex flex-wrap gap-2.5">
         {categories.map((cat) => {

@@ -18,6 +18,13 @@ enum ListingStatus {
   expired
 }
 
+enum ListingType {
+  sell
+  buy
+  rentWanted
+  rentOffer
+}
+
 enum ColorFinish {
   solid
   metallic
@@ -300,6 +307,7 @@ model DealerLocation {
   latitude    Decimal? @db.Decimal(9, 6)
   longitude   Decimal? @db.Decimal(9, 6)
   phone       String?  @db.VarChar(30)
+  fax         String?  @db.VarChar(30)
   email       String?  @db.VarChar(150)
   isPrimary   Boolean  @default(false) @map("is_primary")
   createdAt   DateTime @default(now()) @map("created_at")
@@ -322,6 +330,7 @@ model DealerWorkingHour {
   opensAt    DateTime? @map("opens_at") @db.Time(0)
   closesAt   DateTime? @map("closes_at") @db.Time(0)
   isClosed   Boolean   @default(false) @map("is_closed")
+  note       String?   @db.VarChar(255)
 
   location DealerLocation @relation(fields: [locationId], references: [id], onDelete: Cascade)
 
@@ -356,6 +365,9 @@ model CarListing {
   id       BigInt @id @default(autoincrement()) @db.UnsignedBigInt
   userId   Int    @map("user_id") @db.UnsignedInt
   dealerId Int?   @map("dealer_id") @db.UnsignedInt
+
+  // Listing intent
+  listingType ListingType @default(sell) @map("listing_type")
 
   // Identity (locked after activation)
   makeId        Int     @map("make_id") @db.UnsignedInt

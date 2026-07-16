@@ -17,6 +17,7 @@ export interface LookupsResponse {
   driveTypes: LookupOption[]
   colors: LookupOption[]
   locations: LocationGroup[]
+  countries: LookupOption[]
 }
 
 export async function GET(request: NextRequest) {
@@ -27,7 +28,7 @@ export async function GET(request: NextRequest) {
     const translations = await prisma.translation.findMany({
       where: {
         languageCode: locale,
-        category: { in: ['fuel_type', 'transmission', 'drive_type', 'color', 'location'] },
+        category: { in: ['fuel_type', 'transmission', 'drive_type', 'color', 'location', 'country'] },
       },
       select: { category: true, refId: true, name: true },
     })
@@ -102,6 +103,16 @@ export async function GET(request: NextRequest) {
         })),
     }))
 
+    // Countries
+    const countryRows = await prisma.country.findMany({
+      select: { id: true, fallbackName: true },
+      orderBy: { id: 'asc' },
+    })
+    const countries: LookupOption[] = countryRows.map(r => ({
+      value: r.id,
+      label: label('country', r.id, r.fallbackName),
+    }))
+
     // Also add top-level county as a selectable option (prepend to each group)
     const locationsWithCounty: LocationGroup[] = locations.map(group => {
       const county = counties.find(c => label('location', c.id, c.fallbackName) === group.label)
@@ -121,6 +132,7 @@ export async function GET(request: NextRequest) {
       driveTypes,
       colors,
       locations: locationsWithCounty,
+      countries,
     } satisfies LookupsResponse)
   } catch (error) {
     console.error('[GET /api/lookups]', error)

@@ -128,6 +128,7 @@ export type CarListingMinAggregateOutputType = {
   id: bigint | null
   userId: number | null
   dealerId: number | null
+  listingType: $Enums.ListingType | null
   makeId: number | null
   modelId: number | null
   modelPeriodId: number | null
@@ -196,6 +197,7 @@ export type CarListingMaxAggregateOutputType = {
   id: bigint | null
   userId: number | null
   dealerId: number | null
+  listingType: $Enums.ListingType | null
   makeId: number | null
   modelId: number | null
   modelPeriodId: number | null
@@ -264,6 +266,7 @@ export type CarListingCountAggregateOutputType = {
   id: number
   userId: number
   dealerId: number
+  listingType: number
   makeId: number
   modelId: number
   modelPeriodId: number
@@ -432,6 +435,7 @@ export type CarListingMinAggregateInputType = {
   id?: true
   userId?: true
   dealerId?: true
+  listingType?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -500,6 +504,7 @@ export type CarListingMaxAggregateInputType = {
   id?: true
   userId?: true
   dealerId?: true
+  listingType?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -568,6 +573,7 @@ export type CarListingCountAggregateInputType = {
   id?: true
   userId?: true
   dealerId?: true
+  listingType?: true
   makeId?: true
   modelId?: true
   modelPeriodId?: true
@@ -723,6 +729,7 @@ export type CarListingGroupByOutputType = {
   id: bigint
   userId: number
   dealerId: number | null
+  listingType: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId: number | null
@@ -814,6 +821,7 @@ export type CarListingWhereInput = {
   id?: Prisma.BigIntFilter<"CarListing"> | bigint | number
   userId?: Prisma.IntFilter<"CarListing"> | number
   dealerId?: Prisma.IntNullableFilter<"CarListing"> | number | null
+  listingType?: Prisma.EnumListingTypeFilter<"CarListing"> | $Enums.ListingType
   makeId?: Prisma.IntFilter<"CarListing"> | number
   modelId?: Prisma.IntFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableFilter<"CarListing"> | number | null
@@ -900,6 +908,7 @@ export type CarListingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   dealerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  listingType?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -990,6 +999,7 @@ export type CarListingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CarListingWhereInput | Prisma.CarListingWhereInput[]
   userId?: Prisma.IntFilter<"CarListing"> | number
   dealerId?: Prisma.IntNullableFilter<"CarListing"> | number | null
+  listingType?: Prisma.EnumListingTypeFilter<"CarListing"> | $Enums.ListingType
   makeId?: Prisma.IntFilter<"CarListing"> | number
   modelId?: Prisma.IntFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableFilter<"CarListing"> | number | null
@@ -1076,6 +1086,7 @@ export type CarListingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   dealerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  listingType?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1152,6 +1163,7 @@ export type CarListingScalarWhereWithAggregatesInput = {
   id?: Prisma.BigIntWithAggregatesFilter<"CarListing"> | bigint | number
   userId?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
   dealerId?: Prisma.IntNullableWithAggregatesFilter<"CarListing"> | number | null
+  listingType?: Prisma.EnumListingTypeWithAggregatesFilter<"CarListing"> | $Enums.ListingType
   makeId?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
   modelId?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableWithAggregatesFilter<"CarListing"> | number | null
@@ -1219,6 +1231,7 @@ export type CarListingScalarWhereWithAggregatesInput = {
 export type CarListingCreateInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -1293,6 +1306,7 @@ export type CarListingUncheckedCreateInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -1365,6 +1379,7 @@ export type CarListingUncheckedCreateInput = {
 export type CarListingUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1439,6 +1454,7 @@ export type CarListingUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1512,6 +1528,7 @@ export type CarListingCreateManyInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -1579,6 +1596,7 @@ export type CarListingCreateManyInput = {
 export type CarListingUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1635,6 +1653,7 @@ export type CarListingUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1719,6 +1738,7 @@ export type CarListingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
+  listingType?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -1836,6 +1856,7 @@ export type CarListingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
+  listingType?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -1904,6 +1925,7 @@ export type CarListingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
+  listingType?: Prisma.SortOrder
   makeId?: Prisma.SortOrder
   modelId?: Prisma.SortOrder
   modelPeriodId?: Prisma.SortOrder
@@ -2576,6 +2598,10 @@ export type BigIntFieldUpdateOperationsInput = {
   divide?: bigint | number
 }
 
+export type EnumListingTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ListingType
+}
+
 export type NullableEnumColorFinishFieldUpdateOperationsInput = {
   set?: $Enums.ColorFinish | null
 }
@@ -2665,6 +2691,7 @@ export type CarListingUpdateOneRequiredWithoutOrderItemsNestedInput = {
 export type CarListingCreateWithoutFuelTypeInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -2738,6 +2765,7 @@ export type CarListingUncheckedCreateWithoutFuelTypeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -2839,6 +2867,7 @@ export type CarListingScalarWhereInput = {
   id?: Prisma.BigIntFilter<"CarListing"> | bigint | number
   userId?: Prisma.IntFilter<"CarListing"> | number
   dealerId?: Prisma.IntNullableFilter<"CarListing"> | number | null
+  listingType?: Prisma.EnumListingTypeFilter<"CarListing"> | $Enums.ListingType
   makeId?: Prisma.IntFilter<"CarListing"> | number
   modelId?: Prisma.IntFilter<"CarListing"> | number
   modelPeriodId?: Prisma.IntNullableFilter<"CarListing"> | number | null
@@ -2906,6 +2935,7 @@ export type CarListingScalarWhereInput = {
 export type CarListingCreateWithoutTransmissionInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -2979,6 +3009,7 @@ export type CarListingUncheckedCreateWithoutTransmissionInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3076,6 +3107,7 @@ export type CarListingUpdateManyWithWhereWithoutTransmissionInput = {
 export type CarListingCreateWithoutDriveTypeInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -3149,6 +3181,7 @@ export type CarListingUncheckedCreateWithoutDriveTypeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3246,6 +3279,7 @@ export type CarListingUpdateManyWithWhereWithoutDriveTypeInput = {
 export type CarListingCreateWithoutColorInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -3319,6 +3353,7 @@ export type CarListingUncheckedCreateWithoutColorInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3416,6 +3451,7 @@ export type CarListingUpdateManyWithWhereWithoutColorInput = {
 export type CarListingCreateWithoutEmissionStandardInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -3489,6 +3525,7 @@ export type CarListingUncheckedCreateWithoutEmissionStandardInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3586,6 +3623,7 @@ export type CarListingUpdateManyWithWhereWithoutEmissionStandardInput = {
 export type CarListingCreateWithoutCategoryInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -3659,6 +3697,7 @@ export type CarListingUncheckedCreateWithoutCategoryInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3756,6 +3795,7 @@ export type CarListingUpdateManyWithWhereWithoutCategoryInput = {
 export type CarListingCreateWithoutBodyTypeInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -3829,6 +3869,7 @@ export type CarListingUncheckedCreateWithoutBodyTypeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -3926,6 +3967,7 @@ export type CarListingUpdateManyWithWhereWithoutBodyTypeInput = {
 export type CarListingCreateWithoutImportedFromCountryInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -3999,6 +4041,7 @@ export type CarListingUncheckedCreateWithoutImportedFromCountryInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -4096,6 +4139,7 @@ export type CarListingUpdateManyWithWhereWithoutImportedFromCountryInput = {
 export type CarListingCreateWithoutLocationInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -4169,6 +4213,7 @@ export type CarListingUncheckedCreateWithoutLocationInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -4266,6 +4311,7 @@ export type CarListingUpdateManyWithWhereWithoutLocationInput = {
 export type CarListingCreateWithoutMakeInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -4339,6 +4385,7 @@ export type CarListingUncheckedCreateWithoutMakeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   modelId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -4436,6 +4483,7 @@ export type CarListingUpdateManyWithWhereWithoutMakeInput = {
 export type CarListingCreateWithoutModelInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -4509,6 +4557,7 @@ export type CarListingUncheckedCreateWithoutModelInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -4606,6 +4655,7 @@ export type CarListingUpdateManyWithWhereWithoutModelInput = {
 export type CarListingCreateWithoutModelPeriodInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -4679,6 +4729,7 @@ export type CarListingUncheckedCreateWithoutModelPeriodInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelTrim?: string | null
@@ -4776,6 +4827,7 @@ export type CarListingUpdateManyWithWhereWithoutModelPeriodInput = {
 export type CarListingCreateWithoutDealerInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -4848,6 +4900,7 @@ export type CarListingCreateWithoutDealerInput = {
 export type CarListingUncheckedCreateWithoutDealerInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -4946,6 +4999,7 @@ export type CarListingUpdateManyWithWhereWithoutDealerInput = {
 export type CarListingCreateWithoutTranslationsInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -5019,6 +5073,7 @@ export type CarListingUncheckedCreateWithoutTranslationsInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -5106,6 +5161,7 @@ export type CarListingUpdateToOneWithWhereWithoutTranslationsInput = {
 export type CarListingUpdateWithoutTranslationsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5179,6 +5235,7 @@ export type CarListingUncheckedUpdateWithoutTranslationsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5250,6 +5307,7 @@ export type CarListingUncheckedUpdateWithoutTranslationsInput = {
 export type CarListingCreateWithoutFeaturesInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -5323,6 +5381,7 @@ export type CarListingUncheckedCreateWithoutFeaturesInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -5410,6 +5469,7 @@ export type CarListingUpdateToOneWithWhereWithoutFeaturesInput = {
 export type CarListingUpdateWithoutFeaturesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5483,6 +5543,7 @@ export type CarListingUncheckedUpdateWithoutFeaturesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5554,6 +5615,7 @@ export type CarListingUncheckedUpdateWithoutFeaturesInput = {
 export type CarListingCreateWithoutImagesInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -5627,6 +5689,7 @@ export type CarListingUncheckedCreateWithoutImagesInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -5714,6 +5777,7 @@ export type CarListingUpdateToOneWithWhereWithoutImagesInput = {
 export type CarListingUpdateWithoutImagesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5787,6 +5851,7 @@ export type CarListingUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5858,6 +5923,7 @@ export type CarListingUncheckedUpdateWithoutImagesInput = {
 export type CarListingCreateWithoutPremiumFeaturesInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -5931,6 +5997,7 @@ export type CarListingUncheckedCreateWithoutPremiumFeaturesInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6018,6 +6085,7 @@ export type CarListingUpdateToOneWithWhereWithoutPremiumFeaturesInput = {
 export type CarListingUpdateWithoutPremiumFeaturesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6091,6 +6159,7 @@ export type CarListingUncheckedUpdateWithoutPremiumFeaturesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6162,6 +6231,7 @@ export type CarListingUncheckedUpdateWithoutPremiumFeaturesInput = {
 export type CarListingCreateWithoutOrderItemsInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   modelTrim?: string | null
   vinCode?: string | null
   regNr?: string | null
@@ -6235,6 +6305,7 @@ export type CarListingUncheckedCreateWithoutOrderItemsInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6322,6 +6393,7 @@ export type CarListingUpdateToOneWithWhereWithoutOrderItemsInput = {
 export type CarListingUpdateWithoutOrderItemsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6395,6 +6467,7 @@ export type CarListingUncheckedUpdateWithoutOrderItemsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6467,6 +6540,7 @@ export type CarListingCreateManyFuelTypeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6533,6 +6607,7 @@ export type CarListingCreateManyFuelTypeInput = {
 export type CarListingUpdateWithoutFuelTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6606,6 +6681,7 @@ export type CarListingUncheckedUpdateWithoutFuelTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6678,6 +6754,7 @@ export type CarListingUncheckedUpdateManyWithoutFuelTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6745,6 +6822,7 @@ export type CarListingCreateManyTransmissionInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -6811,6 +6889,7 @@ export type CarListingCreateManyTransmissionInput = {
 export type CarListingUpdateWithoutTransmissionInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6884,6 +6963,7 @@ export type CarListingUncheckedUpdateWithoutTransmissionInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6956,6 +7036,7 @@ export type CarListingUncheckedUpdateManyWithoutTransmissionInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7023,6 +7104,7 @@ export type CarListingCreateManyDriveTypeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7089,6 +7171,7 @@ export type CarListingCreateManyDriveTypeInput = {
 export type CarListingUpdateWithoutDriveTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7162,6 +7245,7 @@ export type CarListingUncheckedUpdateWithoutDriveTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7234,6 +7318,7 @@ export type CarListingUncheckedUpdateManyWithoutDriveTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7301,6 +7386,7 @@ export type CarListingCreateManyColorInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7367,6 +7453,7 @@ export type CarListingCreateManyColorInput = {
 export type CarListingUpdateWithoutColorInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7440,6 +7527,7 @@ export type CarListingUncheckedUpdateWithoutColorInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7512,6 +7600,7 @@ export type CarListingUncheckedUpdateManyWithoutColorInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7579,6 +7668,7 @@ export type CarListingCreateManyEmissionStandardInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7645,6 +7735,7 @@ export type CarListingCreateManyEmissionStandardInput = {
 export type CarListingUpdateWithoutEmissionStandardInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7718,6 +7809,7 @@ export type CarListingUncheckedUpdateWithoutEmissionStandardInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7790,6 +7882,7 @@ export type CarListingUncheckedUpdateManyWithoutEmissionStandardInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7857,6 +7950,7 @@ export type CarListingCreateManyCategoryInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -7923,6 +8017,7 @@ export type CarListingCreateManyCategoryInput = {
 export type CarListingUpdateWithoutCategoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7996,6 +8091,7 @@ export type CarListingUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8068,6 +8164,7 @@ export type CarListingUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8135,6 +8232,7 @@ export type CarListingCreateManyBodyTypeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -8201,6 +8299,7 @@ export type CarListingCreateManyBodyTypeInput = {
 export type CarListingUpdateWithoutBodyTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8274,6 +8373,7 @@ export type CarListingUncheckedUpdateWithoutBodyTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8346,6 +8446,7 @@ export type CarListingUncheckedUpdateManyWithoutBodyTypeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8413,6 +8514,7 @@ export type CarListingCreateManyImportedFromCountryInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -8479,6 +8581,7 @@ export type CarListingCreateManyImportedFromCountryInput = {
 export type CarListingUpdateWithoutImportedFromCountryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8552,6 +8655,7 @@ export type CarListingUncheckedUpdateWithoutImportedFromCountryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8624,6 +8728,7 @@ export type CarListingUncheckedUpdateManyWithoutImportedFromCountryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8691,6 +8796,7 @@ export type CarListingCreateManyLocationInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -8757,6 +8863,7 @@ export type CarListingCreateManyLocationInput = {
 export type CarListingUpdateWithoutLocationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8830,6 +8937,7 @@ export type CarListingUncheckedUpdateWithoutLocationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8902,6 +9010,7 @@ export type CarListingUncheckedUpdateManyWithoutLocationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8969,6 +9078,7 @@ export type CarListingCreateManyMakeInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   modelId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -9035,6 +9145,7 @@ export type CarListingCreateManyMakeInput = {
 export type CarListingUpdateWithoutMakeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9108,6 +9219,7 @@ export type CarListingUncheckedUpdateWithoutMakeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9180,6 +9292,7 @@ export type CarListingUncheckedUpdateManyWithoutMakeInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9247,6 +9360,7 @@ export type CarListingCreateManyModelInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelPeriodId?: number | null
   modelTrim?: string | null
@@ -9313,6 +9427,7 @@ export type CarListingCreateManyModelInput = {
 export type CarListingUpdateWithoutModelInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9386,6 +9501,7 @@ export type CarListingUncheckedUpdateWithoutModelInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9458,6 +9574,7 @@ export type CarListingUncheckedUpdateManyWithoutModelInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9525,6 +9642,7 @@ export type CarListingCreateManyModelPeriodInput = {
   id?: bigint | number
   userId: number
   dealerId?: number | null
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelTrim?: string | null
@@ -9591,6 +9709,7 @@ export type CarListingCreateManyModelPeriodInput = {
 export type CarListingUpdateWithoutModelPeriodInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9664,6 +9783,7 @@ export type CarListingUncheckedUpdateWithoutModelPeriodInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9736,6 +9856,7 @@ export type CarListingUncheckedUpdateManyWithoutModelPeriodInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9802,6 +9923,7 @@ export type CarListingUncheckedUpdateManyWithoutModelPeriodInput = {
 export type CarListingCreateManyDealerInput = {
   id?: bigint | number
   userId: number
+  listingType?: $Enums.ListingType
   makeId: number
   modelId: number
   modelPeriodId?: number | null
@@ -9869,6 +9991,7 @@ export type CarListingCreateManyDealerInput = {
 export type CarListingUpdateWithoutDealerInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9941,6 +10064,7 @@ export type CarListingUpdateWithoutDealerInput = {
 export type CarListingUncheckedUpdateWithoutDealerInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10013,6 +10137,7 @@ export type CarListingUncheckedUpdateWithoutDealerInput = {
 export type CarListingUncheckedUpdateManyWithoutDealerInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
   makeId?: Prisma.IntFieldUpdateOperationsInput | number
   modelId?: Prisma.IntFieldUpdateOperationsInput | number
   modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10148,6 +10273,7 @@ export type CarListingSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   userId?: boolean
   dealerId?: boolean
+  listingType?: boolean
   makeId?: boolean
   modelId?: boolean
   modelPeriodId?: boolean
@@ -10237,6 +10363,7 @@ export type CarListingSelectScalar = {
   id?: boolean
   userId?: boolean
   dealerId?: boolean
+  listingType?: boolean
   makeId?: boolean
   modelId?: boolean
   modelPeriodId?: boolean
@@ -10301,7 +10428,7 @@ export type CarListingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CarListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "dealerId" | "makeId" | "modelId" | "modelPeriodId" | "modelTrim" | "categoryId" | "bodyTypeId" | "vinCode" | "regNr" | "yearManufactured" | "monthManufactured" | "mileage" | "fuelTypeId" | "transmissionId" | "driveTypeId" | "engineDisplacementCc" | "enginePowerKw" | "enginePowerHp" | "engineInfo" | "emissionStandardId" | "co2EmissionGkm" | "fuelConsumptionCity" | "fuelConsumptionHighway" | "fuelConsumptionMixed" | "fuelTankCapacityL" | "doors" | "seats" | "vehicleLengthMm" | "vehicleWidthMm" | "vehicleHeightMm" | "wheelbaseMm" | "kerbWeightKg" | "grossWeightKg" | "payloadKg" | "towCapacityBrakedKg" | "towCapacityUnbrakedKg" | "acceleration0100" | "maxSpeedKph" | "colorId" | "colorFinish" | "inspectionValidUntil" | "hasServiceBook" | "hasWarranty" | "warrantyDescription" | "isCrashDamaged" | "partsSoldSeparately" | "partsInfo" | "registeredAsCommercial" | "locationId" | "importedFromCountryId" | "price" | "discountPrice" | "exportPrice" | "currency" | "priceIncludesVat" | "priceIncludesRegFee" | "estMonthlyLoan" | "estMonthlyInsurance" | "estMonthlyMaintenance" | "status" | "viewsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["carListing"]>
+export type CarListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "dealerId" | "listingType" | "makeId" | "modelId" | "modelPeriodId" | "modelTrim" | "categoryId" | "bodyTypeId" | "vinCode" | "regNr" | "yearManufactured" | "monthManufactured" | "mileage" | "fuelTypeId" | "transmissionId" | "driveTypeId" | "engineDisplacementCc" | "enginePowerKw" | "enginePowerHp" | "engineInfo" | "emissionStandardId" | "co2EmissionGkm" | "fuelConsumptionCity" | "fuelConsumptionHighway" | "fuelConsumptionMixed" | "fuelTankCapacityL" | "doors" | "seats" | "vehicleLengthMm" | "vehicleWidthMm" | "vehicleHeightMm" | "wheelbaseMm" | "kerbWeightKg" | "grossWeightKg" | "payloadKg" | "towCapacityBrakedKg" | "towCapacityUnbrakedKg" | "acceleration0100" | "maxSpeedKph" | "colorId" | "colorFinish" | "inspectionValidUntil" | "hasServiceBook" | "hasWarranty" | "warrantyDescription" | "isCrashDamaged" | "partsSoldSeparately" | "partsInfo" | "registeredAsCommercial" | "locationId" | "importedFromCountryId" | "price" | "discountPrice" | "exportPrice" | "currency" | "priceIncludesVat" | "priceIncludesRegFee" | "estMonthlyLoan" | "estMonthlyInsurance" | "estMonthlyMaintenance" | "status" | "viewsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["carListing"]>
 export type CarListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   make?: boolean | Prisma.CarMakeDefaultArgs<ExtArgs>
   model?: boolean | Prisma.CarModelDefaultArgs<ExtArgs>
@@ -10350,6 +10477,7 @@ export type $CarListingPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: bigint
     userId: number
     dealerId: number | null
+    listingType: $Enums.ListingType
     makeId: number
     modelId: number
     modelPeriodId: number | null
@@ -10802,6 +10930,7 @@ export interface CarListingFieldRefs {
   readonly id: Prisma.FieldRef<"CarListing", 'BigInt'>
   readonly userId: Prisma.FieldRef<"CarListing", 'Int'>
   readonly dealerId: Prisma.FieldRef<"CarListing", 'Int'>
+  readonly listingType: Prisma.FieldRef<"CarListing", 'ListingType'>
   readonly makeId: Prisma.FieldRef<"CarListing", 'Int'>
   readonly modelId: Prisma.FieldRef<"CarListing", 'Int'>
   readonly modelPeriodId: Prisma.FieldRef<"CarListing", 'Int'>

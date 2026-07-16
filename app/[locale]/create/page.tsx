@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar'
 import { CreateListingWizard } from '@/components/CreateListing/CreateListingWizard'
 
 export const metadata = {
@@ -6,5 +7,10 @@ export const metadata = {
 }
 
 export default function CreateListingPage() {
-  return <CreateListingWizard />
+  return (
+    <>
+      <Navbar />
+      <CreateListingWizard />
+    </>
+  )
 }

@@ -9,6 +9,7 @@ interface UseLookupsResult {
   driveTypes: LookupOption[]
   colors: LookupOption[]
   locations: LocationGroup[]
+  countries: LookupOption[]
   isLoading: boolean
   error: string | null
 }
@@ -19,6 +20,7 @@ const EMPTY: LookupsResponse = {
   driveTypes: [],
   colors: [],
   locations: [],
+  countries: [],
 }
 
 export function useLookups(locale = 'en'): UseLookupsResult {

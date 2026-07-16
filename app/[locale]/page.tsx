@@ -8,7 +8,6 @@ import type { ViewMode } from '@/lib/types';
 import Navbar from '@/components/Navbar';
 import CarCard from './_components/CarCard';
 import LifestyleFilter from './_components/LifestyleFilter';
-import { useCompare } from './_context/CompareContext';
 import { Sparkles, Sliders, Info, ShieldCheck, BarChart2 } from 'lucide-react';
 
 export default function Home() {
@@ -19,8 +18,7 @@ export default function Home() {
   const [viewMode, setViewMode] = useState<ViewMode>('standard');
   const [selectedLifestyle, setSelectedLifestyle] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-
-  const { compareDeckIds, toggleCompare, monthlyMileage, setMonthlyMileage } = useCompare();
+  const [monthlyMileage, setMonthlyMileage] = useState<number>(1500);
 
   const filteredCars = useMemo(() => {
     return CAR_LISTINGS.filter((car) => {
@@ -65,7 +63,12 @@ export default function Home() {
 
             {/* Left Sidebar */}
             <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24">
-              <LifestyleFilter selectedLifestyle={selectedLifestyle} setSelectedLifestyle={setSelectedLifestyle} />
+              <LifestyleFilter
+                selectedLifestyle={selectedLifestyle}
+                setSelectedLifestyle={setSelectedLifestyle}
+                viewMode={viewMode}
+                setViewMode={setViewMode}
+              />
 
               {/* Mileage Tuner */}
               <div className="rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900/60 space-y-4 shadow-xs">
@@ -146,8 +149,6 @@ export default function Home() {
                       key={car.id}
                       car={car}
                       globalViewMode={viewMode}
-                      isSelectedForCompare={compareDeckIds.includes(car.id)}
-                      toggleCompare={() => toggleCompare(car.id)}
                       onSelect={() => router.push(`/${locale}/details/${car.id}`)}
                       monthlyMileage={monthlyMileage}
                     />

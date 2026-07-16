@@ -257,6 +257,13 @@ export type BigIntFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBigIntFilter<$PrismaModel> | bigint | number
 }
 
+export type EnumListingTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ListingType | Prisma.EnumListingTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ListingType[]
+  notIn?: $Enums.ListingType[]
+  not?: Prisma.NestedEnumListingTypeFilter<$PrismaModel> | $Enums.ListingType
+}
+
 export type EnumColorFinishNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.ColorFinish | Prisma.EnumColorFinishFieldRefInput<$PrismaModel> | null
   in?: $Enums.ColorFinish[] | null
@@ -296,6 +303,16 @@ export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
   _min?: Prisma.NestedBigIntFilter<$PrismaModel>
   _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type EnumListingTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ListingType | Prisma.EnumListingTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ListingType[]
+  notIn?: $Enums.ListingType[]
+  not?: Prisma.NestedEnumListingTypeWithAggregatesFilter<$PrismaModel> | $Enums.ListingType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumListingTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumListingTypeFilter<$PrismaModel>
 }
 
 export type EnumColorFinishNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -696,6 +713,13 @@ export type NestedBigIntFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBigIntFilter<$PrismaModel> | bigint | number
 }
 
+export type NestedEnumListingTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ListingType | Prisma.EnumListingTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ListingType[]
+  notIn?: $Enums.ListingType[]
+  not?: Prisma.NestedEnumListingTypeFilter<$PrismaModel> | $Enums.ListingType
+}
+
 export type NestedEnumColorFinishNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.ColorFinish | Prisma.EnumColorFinishFieldRefInput<$PrismaModel> | null
   in?: $Enums.ColorFinish[] | null
@@ -735,6 +759,16 @@ export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
   _min?: Prisma.NestedBigIntFilter<$PrismaModel>
   _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type NestedEnumListingTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ListingType | Prisma.EnumListingTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ListingType[]
+  notIn?: $Enums.ListingType[]
+  not?: Prisma.NestedEnumListingTypeWithAggregatesFilter<$PrismaModel> | $Enums.ListingType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumListingTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumListingTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumColorFinishNullableWithAggregatesFilter<$PrismaModel = never> = {

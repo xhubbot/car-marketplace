@@ -19,6 +19,16 @@ export const ListingStatus = {
 export type ListingStatus = (typeof ListingStatus)[keyof typeof ListingStatus]
 
 
+export const ListingType = {
+  sell: 'sell',
+  buy: 'buy',
+  rentWanted: 'rentWanted',
+  rentOffer: 'rentOffer'
+} as const
+
+export type ListingType = (typeof ListingType)[keyof typeof ListingType]
+
+
 export const ColorFinish = {
   solid: 'solid',
   metallic: 'metallic',

@@ -2577,6 +2577,7 @@ export const DealerLocationScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   phone: 'phone',
+  fax: 'fax',
   email: 'email',
   isPrimary: 'isPrimary',
   createdAt: 'createdAt'
@@ -2591,7 +2592,8 @@ export const DealerWorkingHourScalarFieldEnum = {
   dayOfWeek: 'dayOfWeek',
   opensAt: 'opensAt',
   closesAt: 'closesAt',
-  isClosed: 'isClosed'
+  isClosed: 'isClosed',
+  note: 'note'
 } as const
 
 export type DealerWorkingHourScalarFieldEnum = (typeof DealerWorkingHourScalarFieldEnum)[keyof typeof DealerWorkingHourScalarFieldEnum]
@@ -2617,6 +2619,7 @@ export const CarListingScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   dealerId: 'dealerId',
+  listingType: 'listingType',
   makeId: 'makeId',
   modelId: 'modelId',
   modelPeriodId: 'modelPeriodId',
@@ -2943,10 +2946,18 @@ export const DealerLocationOrderByRelevanceFieldEnum = {
   addressLine: 'addressLine',
   postalCode: 'postalCode',
   phone: 'phone',
+  fax: 'fax',
   email: 'email'
 } as const
 
 export type DealerLocationOrderByRelevanceFieldEnum = (typeof DealerLocationOrderByRelevanceFieldEnum)[keyof typeof DealerLocationOrderByRelevanceFieldEnum]
+
+
+export const DealerWorkingHourOrderByRelevanceFieldEnum = {
+  note: 'note'
+} as const
+
+export type DealerWorkingHourOrderByRelevanceFieldEnum = (typeof DealerWorkingHourOrderByRelevanceFieldEnum)[keyof typeof DealerWorkingHourOrderByRelevanceFieldEnum]
 
 
 export const DealerContactOrderByRelevanceFieldEnum = {
@@ -3088,6 +3099,13 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'BigInt'
  */
 export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'ListingType'
+ */
+export type EnumListingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ListingType'>
     
 
 

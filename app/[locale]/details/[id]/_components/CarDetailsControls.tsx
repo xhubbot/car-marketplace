@@ -2,24 +2,18 @@
 
 import { ArrowLeft, DollarSign, Sparkles } from 'lucide-react';
 import type { ViewMode } from '@/lib/types';
-import { useCompare } from '@/app/[locale]/_context/CompareContext';
 
 interface CarDetailsControlsProps {
-  carId: string;
   detailViewMode: ViewMode;
   setDetailViewMode: (mode: ViewMode) => void;
   onBack: () => void;
 }
 
 export default function CarDetailsControls({
-  carId,
   detailViewMode,
   setDetailViewMode,
   onBack,
 }: CarDetailsControlsProps) {
-  const { compareDeckIds, toggleCompare } = useCompare();
-  const isSaved = compareDeckIds.includes(carId);
-
   return (
     <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
       <button
@@ -55,17 +49,6 @@ export default function CarDetailsControls({
           Ownership Reality TCO
         </button>
       </div>
-
-      <button
-        onClick={() => toggleCompare(carId)}
-        className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
-          isSaved
-            ? 'bg-emerald-500 text-white'
-            : 'border border-neutral-200 bg-white text-neutral-800 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200'
-        }`}
-      >
-        {isSaved ? 'Saved in Compare' : 'Add to Compare Deck'}
-      </button>
     </div>
   );
 }

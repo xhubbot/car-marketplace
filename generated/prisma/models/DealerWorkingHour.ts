@@ -45,6 +45,7 @@ export type DealerWorkingHourMinAggregateOutputType = {
   opensAt: Date | null
   closesAt: Date | null
   isClosed: boolean | null
+  note: string | null
 }
 
 export type DealerWorkingHourMaxAggregateOutputType = {
@@ -54,6 +55,7 @@ export type DealerWorkingHourMaxAggregateOutputType = {
   opensAt: Date | null
   closesAt: Date | null
   isClosed: boolean | null
+  note: string | null
 }
 
 export type DealerWorkingHourCountAggregateOutputType = {
@@ -63,6 +65,7 @@ export type DealerWorkingHourCountAggregateOutputType = {
   opensAt: number
   closesAt: number
   isClosed: number
+  note: number
   _all: number
 }
 
@@ -86,6 +89,7 @@ export type DealerWorkingHourMinAggregateInputType = {
   opensAt?: true
   closesAt?: true
   isClosed?: true
+  note?: true
 }
 
 export type DealerWorkingHourMaxAggregateInputType = {
@@ -95,6 +99,7 @@ export type DealerWorkingHourMaxAggregateInputType = {
   opensAt?: true
   closesAt?: true
   isClosed?: true
+  note?: true
 }
 
 export type DealerWorkingHourCountAggregateInputType = {
@@ -104,6 +109,7 @@ export type DealerWorkingHourCountAggregateInputType = {
   opensAt?: true
   closesAt?: true
   isClosed?: true
+  note?: true
   _all?: true
 }
 
@@ -200,6 +206,7 @@ export type DealerWorkingHourGroupByOutputType = {
   opensAt: Date | null
   closesAt: Date | null
   isClosed: boolean
+  note: string | null
   _count: DealerWorkingHourCountAggregateOutputType | null
   _avg: DealerWorkingHourAvgAggregateOutputType | null
   _sum: DealerWorkingHourSumAggregateOutputType | null
@@ -232,6 +239,7 @@ export type DealerWorkingHourWhereInput = {
   opensAt?: Prisma.DateTimeNullableFilter<"DealerWorkingHour"> | Date | string | null
   closesAt?: Prisma.DateTimeNullableFilter<"DealerWorkingHour"> | Date | string | null
   isClosed?: Prisma.BoolFilter<"DealerWorkingHour"> | boolean
+  note?: Prisma.StringNullableFilter<"DealerWorkingHour"> | string | null
   location?: Prisma.XOR<Prisma.DealerLocationScalarRelationFilter, Prisma.DealerLocationWhereInput>
 }
 
@@ -242,7 +250,9 @@ export type DealerWorkingHourOrderByWithRelationInput = {
   opensAt?: Prisma.SortOrderInput | Prisma.SortOrder
   closesAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isClosed?: Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
   location?: Prisma.DealerLocationOrderByWithRelationInput
+  _relevance?: Prisma.DealerWorkingHourOrderByRelevanceInput
 }
 
 export type DealerWorkingHourWhereUniqueInput = Prisma.AtLeast<{
@@ -256,6 +266,7 @@ export type DealerWorkingHourWhereUniqueInput = Prisma.AtLeast<{
   opensAt?: Prisma.DateTimeNullableFilter<"DealerWorkingHour"> | Date | string | null
   closesAt?: Prisma.DateTimeNullableFilter<"DealerWorkingHour"> | Date | string | null
   isClosed?: Prisma.BoolFilter<"DealerWorkingHour"> | boolean
+  note?: Prisma.StringNullableFilter<"DealerWorkingHour"> | string | null
   location?: Prisma.XOR<Prisma.DealerLocationScalarRelationFilter, Prisma.DealerLocationWhereInput>
 }, "id" | "unique_location_day">
 
@@ -266,6 +277,7 @@ export type DealerWorkingHourOrderByWithAggregationInput = {
   opensAt?: Prisma.SortOrderInput | Prisma.SortOrder
   closesAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isClosed?: Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DealerWorkingHourCountOrderByAggregateInput
   _avg?: Prisma.DealerWorkingHourAvgOrderByAggregateInput
   _max?: Prisma.DealerWorkingHourMaxOrderByAggregateInput
@@ -283,6 +295,7 @@ export type DealerWorkingHourScalarWhereWithAggregatesInput = {
   opensAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DealerWorkingHour"> | Date | string | null
   closesAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DealerWorkingHour"> | Date | string | null
   isClosed?: Prisma.BoolWithAggregatesFilter<"DealerWorkingHour"> | boolean
+  note?: Prisma.StringNullableWithAggregatesFilter<"DealerWorkingHour"> | string | null
 }
 
 export type DealerWorkingHourCreateInput = {
@@ -290,6 +303,7 @@ export type DealerWorkingHourCreateInput = {
   opensAt?: Date | string | null
   closesAt?: Date | string | null
   isClosed?: boolean
+  note?: string | null
   location: Prisma.DealerLocationCreateNestedOneWithoutWorkingHoursInput
 }
 
@@ -300,6 +314,7 @@ export type DealerWorkingHourUncheckedCreateInput = {
   opensAt?: Date | string | null
   closesAt?: Date | string | null
   isClosed?: boolean
+  note?: string | null
 }
 
 export type DealerWorkingHourUpdateInput = {
@@ -307,6 +322,7 @@ export type DealerWorkingHourUpdateInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.DealerLocationUpdateOneRequiredWithoutWorkingHoursNestedInput
 }
 
@@ -317,6 +333,7 @@ export type DealerWorkingHourUncheckedUpdateInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DealerWorkingHourCreateManyInput = {
@@ -326,6 +343,7 @@ export type DealerWorkingHourCreateManyInput = {
   opensAt?: Date | string | null
   closesAt?: Date | string | null
   isClosed?: boolean
+  note?: string | null
 }
 
 export type DealerWorkingHourUpdateManyMutationInput = {
@@ -333,6 +351,7 @@ export type DealerWorkingHourUpdateManyMutationInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DealerWorkingHourUncheckedUpdateManyInput = {
@@ -342,6 +361,7 @@ export type DealerWorkingHourUncheckedUpdateManyInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DealerWorkingHourListRelationFilter = {
@@ -352,6 +372,12 @@ export type DealerWorkingHourListRelationFilter = {
 
 export type DealerWorkingHourOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type DealerWorkingHourOrderByRelevanceInput = {
+  fields: Prisma.DealerWorkingHourOrderByRelevanceFieldEnum | Prisma.DealerWorkingHourOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type DealerWorkingHourUnique_location_dayCompoundUniqueInput = {
@@ -366,6 +392,7 @@ export type DealerWorkingHourCountOrderByAggregateInput = {
   opensAt?: Prisma.SortOrder
   closesAt?: Prisma.SortOrder
   isClosed?: Prisma.SortOrder
+  note?: Prisma.SortOrder
 }
 
 export type DealerWorkingHourAvgOrderByAggregateInput = {
@@ -381,6 +408,7 @@ export type DealerWorkingHourMaxOrderByAggregateInput = {
   opensAt?: Prisma.SortOrder
   closesAt?: Prisma.SortOrder
   isClosed?: Prisma.SortOrder
+  note?: Prisma.SortOrder
 }
 
 export type DealerWorkingHourMinOrderByAggregateInput = {
@@ -390,6 +418,7 @@ export type DealerWorkingHourMinOrderByAggregateInput = {
   opensAt?: Prisma.SortOrder
   closesAt?: Prisma.SortOrder
   isClosed?: Prisma.SortOrder
+  note?: Prisma.SortOrder
 }
 
 export type DealerWorkingHourSumOrderByAggregateInput = {
@@ -449,6 +478,7 @@ export type DealerWorkingHourCreateWithoutLocationInput = {
   opensAt?: Date | string | null
   closesAt?: Date | string | null
   isClosed?: boolean
+  note?: string | null
 }
 
 export type DealerWorkingHourUncheckedCreateWithoutLocationInput = {
@@ -457,6 +487,7 @@ export type DealerWorkingHourUncheckedCreateWithoutLocationInput = {
   opensAt?: Date | string | null
   closesAt?: Date | string | null
   isClosed?: boolean
+  note?: string | null
 }
 
 export type DealerWorkingHourCreateOrConnectWithoutLocationInput = {
@@ -495,6 +526,7 @@ export type DealerWorkingHourScalarWhereInput = {
   opensAt?: Prisma.DateTimeNullableFilter<"DealerWorkingHour"> | Date | string | null
   closesAt?: Prisma.DateTimeNullableFilter<"DealerWorkingHour"> | Date | string | null
   isClosed?: Prisma.BoolFilter<"DealerWorkingHour"> | boolean
+  note?: Prisma.StringNullableFilter<"DealerWorkingHour"> | string | null
 }
 
 export type DealerWorkingHourCreateManyLocationInput = {
@@ -503,6 +535,7 @@ export type DealerWorkingHourCreateManyLocationInput = {
   opensAt?: Date | string | null
   closesAt?: Date | string | null
   isClosed?: boolean
+  note?: string | null
 }
 
 export type DealerWorkingHourUpdateWithoutLocationInput = {
@@ -510,6 +543,7 @@ export type DealerWorkingHourUpdateWithoutLocationInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DealerWorkingHourUncheckedUpdateWithoutLocationInput = {
@@ -518,6 +552,7 @@ export type DealerWorkingHourUncheckedUpdateWithoutLocationInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DealerWorkingHourUncheckedUpdateManyWithoutLocationInput = {
@@ -526,6 +561,7 @@ export type DealerWorkingHourUncheckedUpdateManyWithoutLocationInput = {
   opensAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closesAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isClosed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -537,6 +573,7 @@ export type DealerWorkingHourSelect<ExtArgs extends runtime.Types.Extensions.Int
   opensAt?: boolean
   closesAt?: boolean
   isClosed?: boolean
+  note?: boolean
   location?: boolean | Prisma.DealerLocationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dealerWorkingHour"]>
 
@@ -549,9 +586,10 @@ export type DealerWorkingHourSelectScalar = {
   opensAt?: boolean
   closesAt?: boolean
   isClosed?: boolean
+  note?: boolean
 }
 
-export type DealerWorkingHourOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "locationId" | "dayOfWeek" | "opensAt" | "closesAt" | "isClosed", ExtArgs["result"]["dealerWorkingHour"]>
+export type DealerWorkingHourOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "locationId" | "dayOfWeek" | "opensAt" | "closesAt" | "isClosed" | "note", ExtArgs["result"]["dealerWorkingHour"]>
 export type DealerWorkingHourInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   location?: boolean | Prisma.DealerLocationDefaultArgs<ExtArgs>
 }
@@ -568,6 +606,7 @@ export type $DealerWorkingHourPayload<ExtArgs extends runtime.Types.Extensions.I
     opensAt: Date | null
     closesAt: Date | null
     isClosed: boolean
+    note: string | null
   }, ExtArgs["result"]["dealerWorkingHour"]>
   composites: {}
 }
@@ -944,6 +983,7 @@ export interface DealerWorkingHourFieldRefs {
   readonly opensAt: Prisma.FieldRef<"DealerWorkingHour", 'DateTime'>
   readonly closesAt: Prisma.FieldRef<"DealerWorkingHour", 'DateTime'>
   readonly isClosed: Prisma.FieldRef<"DealerWorkingHour", 'Boolean'>
+  readonly note: Prisma.FieldRef<"DealerWorkingHour", 'String'>
 }
     
 
