@@ -25,7 +25,7 @@ export default function Footer() {
           <Link href={`/${locale}/dealer/register`} className="hover:text-neutral-900 dark:hover:text-white">
             Dealers
           </Link>
-          <Link href={`/${locale}/create`} className="hover:text-neutral-900 dark:hover:text-white">
+          <Link href={`/${locale}/classified/create`} className="hover:text-neutral-900 dark:hover:text-white">
             Sell Car
           </Link>
         </nav>

@@ -74,6 +74,8 @@ export const ModelName = {
   DealerCategory: 'DealerCategory',
   DealerCategoryLink: 'DealerCategoryLink',
   DealerMakeLink: 'DealerMakeLink',
+  FuelPriceAssumption: 'FuelPriceAssumption',
+  FinanceAssumption: 'FinanceAssumption',
   CarListing: 'CarListing',
   CarListingTranslation: 'CarListingTranslation',
   CarListingFeature: 'CarListingFeature',
@@ -349,6 +351,32 @@ export const DealerMakeLinkScalarFieldEnum = {
 } as const
 
 export type DealerMakeLinkScalarFieldEnum = (typeof DealerMakeLinkScalarFieldEnum)[keyof typeof DealerMakeLinkScalarFieldEnum]
+
+
+export const FuelPriceAssumptionScalarFieldEnum = {
+  id: 'id',
+  fuelTypeId: 'fuelTypeId',
+  pricePerUnit: 'pricePerUnit',
+  currency: 'currency',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FuelPriceAssumptionScalarFieldEnum = (typeof FuelPriceAssumptionScalarFieldEnum)[keyof typeof FuelPriceAssumptionScalarFieldEnum]
+
+
+export const FinanceAssumptionScalarFieldEnum = {
+  id: 'id',
+  loanTermMonths: 'loanTermMonths',
+  annualInterestPct: 'annualInterestPct',
+  downPaymentPct: 'downPaymentPct',
+  insuranceAnnualPctOfPrice: 'insuranceAnnualPctOfPrice',
+  maintenanceBaseMonthly: 'maintenanceBaseMonthly',
+  maintenancePerAgeYearMonthly: 'maintenancePerAgeYearMonthly',
+  defaultMonthlyMileageKm: 'defaultMonthlyMileageKm',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinanceAssumptionScalarFieldEnum = (typeof FinanceAssumptionScalarFieldEnum)[keyof typeof FinanceAssumptionScalarFieldEnum]
 
 
 export const CarListingScalarFieldEnum = {
@@ -706,6 +734,13 @@ export const DealerCategoryOrderByRelevanceFieldEnum = {
 } as const
 
 export type DealerCategoryOrderByRelevanceFieldEnum = (typeof DealerCategoryOrderByRelevanceFieldEnum)[keyof typeof DealerCategoryOrderByRelevanceFieldEnum]
+
+
+export const FuelPriceAssumptionOrderByRelevanceFieldEnum = {
+  currency: 'currency'
+} as const
+
+export type FuelPriceAssumptionOrderByRelevanceFieldEnum = (typeof FuelPriceAssumptionOrderByRelevanceFieldEnum)[keyof typeof FuelPriceAssumptionOrderByRelevanceFieldEnum]
 
 
 export const CarListingOrderByRelevanceFieldEnum = {

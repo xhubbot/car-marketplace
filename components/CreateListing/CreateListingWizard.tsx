@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { useCreateListingForm } from '@/hooks/useCreateListingForm'
 import { StepMainInfo } from './StepMainInfo'
 import { StepImages } from './StepImages'
@@ -14,6 +14,8 @@ const STEP_TITLES: Record<1 | 2 | 3, string> = {
 
 export function CreateListingWizard() {
   const router = useRouter()
+  const params = useParams()
+  const locale = params.locale as string
   const {
     formData,
     currentStep,
@@ -49,7 +51,9 @@ export function CreateListingWizard() {
 
     const result = await submitListing()
     if (result.success) {
-      router.push(`/listings/${result.listingId}`)
+      // No real listing detail page exists yet (only the mock-data one at
+      // classified/details/[id]) — land on search, where the new listing shows up.
+      router.push(`/${locale}/classified/search`)
     } else {
       alert(result.error || 'Failed to create listing')
     }

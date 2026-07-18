@@ -100,7 +100,8 @@ model FuelType {
   isHybrid      Boolean  @default(false) @map("is_hybrid")
   createdAt     DateTime @default(now()) @map("created_at")
 
-  listings CarListing[]
+  listings        CarListing[]
+  priceAssumption FuelPriceAssumption?
 
   @@map("fuel_types")
 }
@@ -406,6 +407,40 @@ model DealerMakeLink {
   @@id([dealerId, makeId])
   @@index([makeId], name: "idx_dealer_make_links_make")
   @@map("dealer_make_links")
+}
+
+// ─────────────────────────────────────────────
+// Ownership-cost assumptions (admin-tunable). Used to derive
+// CarListing.est_monthly_* on create/update, and to price fuel cost
+// live in ownership-cost search (fuel cost depends on the buyer's
+// chosen monthly mileage, so it can't be precomputed per listing).
+// ─────────────────────────────────────────────
+
+model FuelPriceAssumption {
+  id           Int      @id @default(autoincrement()) @db.UnsignedInt
+  fuelTypeId   Int      @unique @map("fuel_type_id") @db.UnsignedInt
+  pricePerUnit Decimal  @map("price_per_unit") @db.Decimal(6, 3) // EUR per liter, or per kWh when fuelType.isElectric
+  currency     String   @default("EUR") @db.Char(3)
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  fuelType FuelType @relation(fields: [fuelTypeId], references: [id], onDelete: Cascade)
+
+  @@map("fuel_price_assumptions")
+}
+
+// Singleton (id=1) row of global finance/maintenance assumptions.
+model FinanceAssumption {
+  id                            Int      @id @default(autoincrement()) @db.UnsignedInt
+  loanTermMonths                Int      @default(60) @map("loan_term_months") @db.UnsignedSmallInt
+  annualInterestPct             Decimal  @default(7.50) @map("annual_interest_pct") @db.Decimal(5, 2)
+  downPaymentPct                Decimal  @default(10.00) @map("down_payment_pct") @db.Decimal(5, 2)
+  insuranceAnnualPctOfPrice     Decimal  @default(4.50) @map("insurance_annual_pct_of_price") @db.Decimal(5, 2)
+  maintenanceBaseMonthly        Decimal  @default(30.00) @map("maintenance_base_monthly") @db.Decimal(6, 2)
+  maintenancePerAgeYearMonthly  Decimal  @default(8.00) @map("maintenance_per_age_year_monthly") @db.Decimal(6, 2)
+  defaultMonthlyMileageKm       Int      @default(1500) @map("default_monthly_mileage_km") @db.UnsignedSmallInt
+  updatedAt                     DateTime @updatedAt @map("updated_at")
+
+  @@map("finance_assumptions")
 }
 
 // ─────────────────────────────────────────────

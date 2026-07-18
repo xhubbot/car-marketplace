@@ -149,7 +149,7 @@ export default function Home() {
                       key={car.id}
                       car={car}
                       globalViewMode={viewMode}
-                      onSelect={() => router.push(`/${locale}/details/${car.id}`)}
+                      onSelect={() => router.push(`/${locale}/classified/details/${car.id}`)}
                       monthlyMileage={monthlyMileage}
                     />
                   ))}

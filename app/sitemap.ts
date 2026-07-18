@@ -6,13 +6,13 @@ export const revalidate = 86400; // Revalidate once per day
 const BASE_URL = "https://autod.pro";
 const LOCALES = ["en", "et", "ru"];
 
-// Public, working pages only — excludes /details/[id] (still on mock data,
-// not the real CarListing table), /sell (now just a redirect to /create),
-// and /admin, /dealer/admin (private dashboards that shouldn't be indexed).
+// Public, working pages only — excludes /classified/details/[id] (still on
+// mock data, not the real CarListing table), and /admin, /dealer/admin
+// (private dashboards that shouldn't be indexed).
 const STATIC_PAGES = [
   { path: "", priority: 1.0, changeFrequency: "weekly" as const },
-  { path: "/browse", priority: 0.8, changeFrequency: "daily" as const },
-  { path: "/create", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/classified/search", priority: 0.8, changeFrequency: "daily" as const },
+  { path: "/classified/create", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/dealer/search", priority: 0.8, changeFrequency: "daily" as const },
   { path: "/dealer/register", priority: 0.5, changeFrequency: "monthly" as const },
 ];

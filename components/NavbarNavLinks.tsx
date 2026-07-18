@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useParams } from 'next/navigation';
-import { Home, ChevronDown } from 'lucide-react';
+import { Home, ChevronDown, Search } from 'lucide-react';
 
 export default function NavbarNavLinks() {
   const pathname = usePathname();
@@ -10,10 +10,12 @@ export default function NavbarNavLinks() {
   const locale = params.locale as string;
 
   const homeHref = `/${locale}`;
+  const classifiedSearchHref = `/${locale}/classified/search`;
   const dealersSearchHref = `/${locale}/dealer/search`;
   const dealersRegisterHref = `/${locale}/dealer/register`;
 
   const isHomeActive = pathname === homeHref;
+  const isSearchActive = pathname?.startsWith(classifiedSearchHref);
   const isDealersActive = pathname?.startsWith(`/${locale}/dealer`);
 
   return (
@@ -28,6 +30,18 @@ export default function NavbarNavLinks() {
       >
         <Home className="h-3.5 w-3.5" />
         Home
+      </Link>
+
+      <Link
+        href={classifiedSearchHref}
+        className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 ${
+          isSearchActive
+            ? 'bg-white text-neutral-900 shadow-sm dark:bg-neutral-800 dark:text-white'
+            : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+        }`}
+      >
+        <Search className="h-3.5 w-3.5" />
+        Search
       </Link>
 
       {/* Dealers — clicking the pill itself goes straight to the search page; hovering reveals the submenu */}

@@ -407,6 +407,8 @@ export const ModelName = {
   DealerCategory: 'DealerCategory',
   DealerCategoryLink: 'DealerCategoryLink',
   DealerMakeLink: 'DealerMakeLink',
+  FuelPriceAssumption: 'FuelPriceAssumption',
+  FinanceAssumption: 'FinanceAssumption',
   CarListing: 'CarListing',
   CarListingTranslation: 'CarListingTranslation',
   CarListingFeature: 'CarListingFeature',
@@ -431,7 +433,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "dealerCategory" | "dealerCategoryLink" | "dealerMakeLink" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction"
+    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "dealerCategory" | "dealerCategoryLink" | "dealerMakeLink" | "fuelPriceAssumption" | "financeAssumption" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1953,6 +1955,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FuelPriceAssumption: {
+      payload: Prisma.$FuelPriceAssumptionPayload<ExtArgs>
+      fields: Prisma.FuelPriceAssumptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FuelPriceAssumptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FuelPriceAssumptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>
+        }
+        findFirst: {
+          args: Prisma.FuelPriceAssumptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FuelPriceAssumptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>
+        }
+        findMany: {
+          args: Prisma.FuelPriceAssumptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>[]
+        }
+        create: {
+          args: Prisma.FuelPriceAssumptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>
+        }
+        createMany: {
+          args: Prisma.FuelPriceAssumptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FuelPriceAssumptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>
+        }
+        update: {
+          args: Prisma.FuelPriceAssumptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FuelPriceAssumptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FuelPriceAssumptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FuelPriceAssumptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelPriceAssumptionPayload>
+        }
+        aggregate: {
+          args: Prisma.FuelPriceAssumptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFuelPriceAssumption>
+        }
+        groupBy: {
+          args: Prisma.FuelPriceAssumptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FuelPriceAssumptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FuelPriceAssumptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FuelPriceAssumptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    FinanceAssumption: {
+      payload: Prisma.$FinanceAssumptionPayload<ExtArgs>
+      fields: Prisma.FinanceAssumptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FinanceAssumptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FinanceAssumptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>
+        }
+        findFirst: {
+          args: Prisma.FinanceAssumptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FinanceAssumptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>
+        }
+        findMany: {
+          args: Prisma.FinanceAssumptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>[]
+        }
+        create: {
+          args: Prisma.FinanceAssumptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>
+        }
+        createMany: {
+          args: Prisma.FinanceAssumptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FinanceAssumptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>
+        }
+        update: {
+          args: Prisma.FinanceAssumptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FinanceAssumptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FinanceAssumptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FinanceAssumptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceAssumptionPayload>
+        }
+        aggregate: {
+          args: Prisma.FinanceAssumptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFinanceAssumption>
+        }
+        groupBy: {
+          args: Prisma.FinanceAssumptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinanceAssumptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FinanceAssumptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinanceAssumptionCountAggregateOutputType> | number
+        }
+      }
+    }
     CarListing: {
       payload: Prisma.$CarListingPayload<ExtArgs>
       fields: Prisma.CarListingFieldRefs
@@ -2836,6 +2970,32 @@ export const DealerMakeLinkScalarFieldEnum = {
 export type DealerMakeLinkScalarFieldEnum = (typeof DealerMakeLinkScalarFieldEnum)[keyof typeof DealerMakeLinkScalarFieldEnum]
 
 
+export const FuelPriceAssumptionScalarFieldEnum = {
+  id: 'id',
+  fuelTypeId: 'fuelTypeId',
+  pricePerUnit: 'pricePerUnit',
+  currency: 'currency',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FuelPriceAssumptionScalarFieldEnum = (typeof FuelPriceAssumptionScalarFieldEnum)[keyof typeof FuelPriceAssumptionScalarFieldEnum]
+
+
+export const FinanceAssumptionScalarFieldEnum = {
+  id: 'id',
+  loanTermMonths: 'loanTermMonths',
+  annualInterestPct: 'annualInterestPct',
+  downPaymentPct: 'downPaymentPct',
+  insuranceAnnualPctOfPrice: 'insuranceAnnualPctOfPrice',
+  maintenanceBaseMonthly: 'maintenanceBaseMonthly',
+  maintenancePerAgeYearMonthly: 'maintenancePerAgeYearMonthly',
+  defaultMonthlyMileageKm: 'defaultMonthlyMileageKm',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinanceAssumptionScalarFieldEnum = (typeof FinanceAssumptionScalarFieldEnum)[keyof typeof FinanceAssumptionScalarFieldEnum]
+
+
 export const CarListingScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -3193,6 +3353,13 @@ export const DealerCategoryOrderByRelevanceFieldEnum = {
 export type DealerCategoryOrderByRelevanceFieldEnum = (typeof DealerCategoryOrderByRelevanceFieldEnum)[keyof typeof DealerCategoryOrderByRelevanceFieldEnum]
 
 
+export const FuelPriceAssumptionOrderByRelevanceFieldEnum = {
+  currency: 'currency'
+} as const
+
+export type FuelPriceAssumptionOrderByRelevanceFieldEnum = (typeof FuelPriceAssumptionOrderByRelevanceFieldEnum)[keyof typeof FuelPriceAssumptionOrderByRelevanceFieldEnum]
+
+
 export const CarListingOrderByRelevanceFieldEnum = {
   modelTrim: 'modelTrim',
   vinCode: 'vinCode',
@@ -3526,6 +3693,8 @@ export type GlobalOmitConfig = {
   dealerCategory?: Prisma.DealerCategoryOmit
   dealerCategoryLink?: Prisma.DealerCategoryLinkOmit
   dealerMakeLink?: Prisma.DealerMakeLinkOmit
+  fuelPriceAssumption?: Prisma.FuelPriceAssumptionOmit
+  financeAssumption?: Prisma.FinanceAssumptionOmit
   carListing?: Prisma.CarListingOmit
   carListingTranslation?: Prisma.CarListingTranslationOmit
   carListingFeature?: Prisma.CarListingFeatureOmit

@@ -16,6 +16,8 @@ async function main() {
   console.log('🌱 Seeding lookup tables...')
 
   await seedFuelTypes()
+  await seedFuelPriceAssumptions()
+  await seedFinanceAssumption()
   await seedTransmissions()
   await seedDriveTypes()
   await seedColors()
@@ -114,6 +116,47 @@ async function seedFuelTypes() {
     ],
   })
   console.log('  ✓ fuel_types')
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Fuel price assumptions — EUR per liter (per kWh for electric). Editable later
+// via an admin screen; these are just sane defaults for the TCO search formula.
+// ─────────────────────────────────────────────────────────────────────────────
+async function seedFuelPriceAssumptions() {
+  await prisma.fuelPriceAssumption.createMany({
+    skipDuplicates: true,
+    data: [
+      { fuelTypeId: 1,  pricePerUnit: 1.65 },  // petrol
+      { fuelTypeId: 2,  pricePerUnit: 1.55 },  // diesel
+      { fuelTypeId: 3,  pricePerUnit: 0.18 },  // electric (EUR/kWh)
+      { fuelTypeId: 4,  pricePerUnit: 1.65 },  // hybrid_petrol
+      { fuelTypeId: 5,  pricePerUnit: 1.55 },  // hybrid_diesel
+      { fuelTypeId: 6,  pricePerUnit: 1.65 },  // phev_petrol
+      { fuelTypeId: 7,  pricePerUnit: 1.55 },  // phev_diesel
+      { fuelTypeId: 8,  pricePerUnit: 0.75 },  // lpg
+      { fuelTypeId: 9,  pricePerUnit: 1.20 },  // cng
+      { fuelTypeId: 10, pricePerUnit: 0.75 },  // lpg_petrol
+      { fuelTypeId: 11, pricePerUnit: 1.20 },  // cng_petrol
+      { fuelTypeId: 12, pricePerUnit: 1.10 },  // ethanol
+      { fuelTypeId: 13, pricePerUnit: 12.00 }, // hydrogen (EUR/kg)
+      { fuelTypeId: 14, pricePerUnit: 1.65 },  // mild_hybrid_petrol
+      { fuelTypeId: 15, pricePerUnit: 1.55 },  // mild_hybrid_diesel
+      { fuelTypeId: 16, pricePerUnit: 1.65 },  // other
+    ],
+  })
+  console.log('  ✓ fuel_price_assumptions')
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Finance assumption — singleton row (id=1) driving loan/insurance/maintenance
+// estimates and the default mileage used by the ownership-cost search.
+// ─────────────────────────────────────────────────────────────────────────────
+async function seedFinanceAssumption() {
+  await prisma.financeAssumption.createMany({
+    skipDuplicates: true,
+    data: [{ id: 1 }], // every other field uses its schema default
+  })
+  console.log('  ✓ finance_assumptions')
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -16,7 +16,7 @@ export default function NavbarActions() {
     <div className="flex items-center gap-2">
       {/* Sell Car trigger */}
       <Link
-        href={`/${locale}/create`}
+        href={`/${locale}/classified/create`}
         className="flex h-9 items-center gap-1 rounded-full bg-emerald-500 px-3.5 text-xs font-bold text-white shadow-sm hover:bg-emerald-600 transition-colors"
       >
         <Plus className="h-3.5 w-3.5" />
