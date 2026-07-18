@@ -77,3 +77,19 @@ export const DealerStatus = {
 } as const
 
 export type DealerStatus = (typeof DealerStatus)[keyof typeof DealerStatus]
+
+
+export const DealerContactType = {
+  phone: 'phone',
+  email: 'email',
+  website: 'website',
+  facebook: 'facebook',
+  instagram: 'instagram',
+  whatsapp: 'whatsapp',
+  telegram: 'telegram',
+  linkedin: 'linkedin',
+  youtube: 'youtube',
+  other: 'other'
+} as const
+
+export type DealerContactType = (typeof DealerContactType)[keyof typeof DealerContactType]

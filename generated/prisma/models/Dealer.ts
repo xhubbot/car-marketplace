@@ -45,7 +45,6 @@ export type DealerMinAggregateOutputType = {
   vatNumber: string | null
   logoPath: string | null
   coverImagePath: string | null
-  websiteUrl: string | null
   phone: string | null
   email: string | null
   status: $Enums.DealerStatus | null
@@ -63,7 +62,6 @@ export type DealerMaxAggregateOutputType = {
   vatNumber: string | null
   logoPath: string | null
   coverImagePath: string | null
-  websiteUrl: string | null
   phone: string | null
   email: string | null
   status: $Enums.DealerStatus | null
@@ -81,7 +79,6 @@ export type DealerCountAggregateOutputType = {
   vatNumber: number
   logoPath: number
   coverImagePath: number
-  websiteUrl: number
   phone: number
   email: number
   status: number
@@ -111,7 +108,6 @@ export type DealerMinAggregateInputType = {
   vatNumber?: true
   logoPath?: true
   coverImagePath?: true
-  websiteUrl?: true
   phone?: true
   email?: true
   status?: true
@@ -129,7 +125,6 @@ export type DealerMaxAggregateInputType = {
   vatNumber?: true
   logoPath?: true
   coverImagePath?: true
-  websiteUrl?: true
   phone?: true
   email?: true
   status?: true
@@ -147,7 +142,6 @@ export type DealerCountAggregateInputType = {
   vatNumber?: true
   logoPath?: true
   coverImagePath?: true
-  websiteUrl?: true
   phone?: true
   email?: true
   status?: true
@@ -252,7 +246,6 @@ export type DealerGroupByOutputType = {
   vatNumber: string | null
   logoPath: string | null
   coverImagePath: string | null
-  websiteUrl: string | null
   phone: string | null
   email: string | null
   status: $Enums.DealerStatus
@@ -293,7 +286,6 @@ export type DealerWhereInput = {
   vatNumber?: Prisma.StringNullableFilter<"Dealer"> | string | null
   logoPath?: Prisma.StringNullableFilter<"Dealer"> | string | null
   coverImagePath?: Prisma.StringNullableFilter<"Dealer"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"Dealer"> | string | null
   phone?: Prisma.StringNullableFilter<"Dealer"> | string | null
   email?: Prisma.StringNullableFilter<"Dealer"> | string | null
   status?: Prisma.EnumDealerStatusFilter<"Dealer"> | $Enums.DealerStatus
@@ -303,6 +295,8 @@ export type DealerWhereInput = {
   translations?: Prisma.DealerTranslationListRelationFilter
   locations?: Prisma.DealerLocationListRelationFilter
   contacts?: Prisma.DealerContactListRelationFilter
+  categories?: Prisma.DealerCategoryLinkListRelationFilter
+  makes?: Prisma.DealerMakeLinkListRelationFilter
   listings?: Prisma.CarListingListRelationFilter
 }
 
@@ -315,7 +309,6 @@ export type DealerOrderByWithRelationInput = {
   vatNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   logoPath?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImagePath?: Prisma.SortOrderInput | Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -325,6 +318,8 @@ export type DealerOrderByWithRelationInput = {
   translations?: Prisma.DealerTranslationOrderByRelationAggregateInput
   locations?: Prisma.DealerLocationOrderByRelationAggregateInput
   contacts?: Prisma.DealerContactOrderByRelationAggregateInput
+  categories?: Prisma.DealerCategoryLinkOrderByRelationAggregateInput
+  makes?: Prisma.DealerMakeLinkOrderByRelationAggregateInput
   listings?: Prisma.CarListingOrderByRelationAggregateInput
   _relevance?: Prisma.DealerOrderByRelevanceInput
 }
@@ -341,7 +336,6 @@ export type DealerWhereUniqueInput = Prisma.AtLeast<{
   vatNumber?: Prisma.StringNullableFilter<"Dealer"> | string | null
   logoPath?: Prisma.StringNullableFilter<"Dealer"> | string | null
   coverImagePath?: Prisma.StringNullableFilter<"Dealer"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"Dealer"> | string | null
   phone?: Prisma.StringNullableFilter<"Dealer"> | string | null
   email?: Prisma.StringNullableFilter<"Dealer"> | string | null
   status?: Prisma.EnumDealerStatusFilter<"Dealer"> | $Enums.DealerStatus
@@ -351,6 +345,8 @@ export type DealerWhereUniqueInput = Prisma.AtLeast<{
   translations?: Prisma.DealerTranslationListRelationFilter
   locations?: Prisma.DealerLocationListRelationFilter
   contacts?: Prisma.DealerContactListRelationFilter
+  categories?: Prisma.DealerCategoryLinkListRelationFilter
+  makes?: Prisma.DealerMakeLinkListRelationFilter
   listings?: Prisma.CarListingListRelationFilter
 }, "id" | "slug">
 
@@ -363,7 +359,6 @@ export type DealerOrderByWithAggregationInput = {
   vatNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   logoPath?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImagePath?: Prisma.SortOrderInput | Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -389,7 +384,6 @@ export type DealerScalarWhereWithAggregatesInput = {
   vatNumber?: Prisma.StringNullableWithAggregatesFilter<"Dealer"> | string | null
   logoPath?: Prisma.StringNullableWithAggregatesFilter<"Dealer"> | string | null
   coverImagePath?: Prisma.StringNullableWithAggregatesFilter<"Dealer"> | string | null
-  websiteUrl?: Prisma.StringNullableWithAggregatesFilter<"Dealer"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Dealer"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Dealer"> | string | null
   status?: Prisma.EnumDealerStatusWithAggregatesFilter<"Dealer"> | $Enums.DealerStatus
@@ -406,7 +400,6 @@ export type DealerCreateInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -416,6 +409,8 @@ export type DealerCreateInput = {
   translations?: Prisma.DealerTranslationCreateNestedManyWithoutDealerInput
   locations?: Prisma.DealerLocationCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingCreateNestedManyWithoutDealerInput
 }
 
@@ -428,7 +423,6 @@ export type DealerUncheckedCreateInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -438,6 +432,8 @@ export type DealerUncheckedCreateInput = {
   translations?: Prisma.DealerTranslationUncheckedCreateNestedManyWithoutDealerInput
   locations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkUncheckedCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutDealerInput
 }
 
@@ -449,7 +445,6 @@ export type DealerUpdateInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -459,6 +454,8 @@ export type DealerUpdateInput = {
   translations?: Prisma.DealerTranslationUpdateManyWithoutDealerNestedInput
   locations?: Prisma.DealerLocationUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutDealerNestedInput
 }
 
@@ -471,7 +468,6 @@ export type DealerUncheckedUpdateInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -481,6 +477,8 @@ export type DealerUncheckedUpdateInput = {
   translations?: Prisma.DealerTranslationUncheckedUpdateManyWithoutDealerNestedInput
   locations?: Prisma.DealerLocationUncheckedUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUncheckedUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutDealerNestedInput
 }
 
@@ -493,7 +491,6 @@ export type DealerCreateManyInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -510,7 +507,6 @@ export type DealerUpdateManyMutationInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -528,7 +524,6 @@ export type DealerUncheckedUpdateManyInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -552,7 +547,6 @@ export type DealerCountOrderByAggregateInput = {
   vatNumber?: Prisma.SortOrder
   logoPath?: Prisma.SortOrder
   coverImagePath?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -575,7 +569,6 @@ export type DealerMaxOrderByAggregateInput = {
   vatNumber?: Prisma.SortOrder
   logoPath?: Prisma.SortOrder
   coverImagePath?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -593,7 +586,6 @@ export type DealerMinOrderByAggregateInput = {
   vatNumber?: Prisma.SortOrder
   logoPath?: Prisma.SortOrder
   coverImagePath?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -663,6 +655,34 @@ export type DealerUpdateOneRequiredWithoutContactsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DealerUpdateToOneWithWhereWithoutContactsInput, Prisma.DealerUpdateWithoutContactsInput>, Prisma.DealerUncheckedUpdateWithoutContactsInput>
 }
 
+export type DealerCreateNestedOneWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.DealerCreateWithoutCategoriesInput, Prisma.DealerUncheckedCreateWithoutCategoriesInput>
+  connectOrCreate?: Prisma.DealerCreateOrConnectWithoutCategoriesInput
+  connect?: Prisma.DealerWhereUniqueInput
+}
+
+export type DealerUpdateOneRequiredWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.DealerCreateWithoutCategoriesInput, Prisma.DealerUncheckedCreateWithoutCategoriesInput>
+  connectOrCreate?: Prisma.DealerCreateOrConnectWithoutCategoriesInput
+  upsert?: Prisma.DealerUpsertWithoutCategoriesInput
+  connect?: Prisma.DealerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DealerUpdateToOneWithWhereWithoutCategoriesInput, Prisma.DealerUpdateWithoutCategoriesInput>, Prisma.DealerUncheckedUpdateWithoutCategoriesInput>
+}
+
+export type DealerCreateNestedOneWithoutMakesInput = {
+  create?: Prisma.XOR<Prisma.DealerCreateWithoutMakesInput, Prisma.DealerUncheckedCreateWithoutMakesInput>
+  connectOrCreate?: Prisma.DealerCreateOrConnectWithoutMakesInput
+  connect?: Prisma.DealerWhereUniqueInput
+}
+
+export type DealerUpdateOneRequiredWithoutMakesNestedInput = {
+  create?: Prisma.XOR<Prisma.DealerCreateWithoutMakesInput, Prisma.DealerUncheckedCreateWithoutMakesInput>
+  connectOrCreate?: Prisma.DealerCreateOrConnectWithoutMakesInput
+  upsert?: Prisma.DealerUpsertWithoutMakesInput
+  connect?: Prisma.DealerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DealerUpdateToOneWithWhereWithoutMakesInput, Prisma.DealerUpdateWithoutMakesInput>, Prisma.DealerUncheckedUpdateWithoutMakesInput>
+}
+
 export type DealerCreateNestedOneWithoutListingsInput = {
   create?: Prisma.XOR<Prisma.DealerCreateWithoutListingsInput, Prisma.DealerUncheckedCreateWithoutListingsInput>
   connectOrCreate?: Prisma.DealerCreateOrConnectWithoutListingsInput
@@ -687,7 +707,6 @@ export type DealerCreateWithoutTranslationsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -696,6 +715,8 @@ export type DealerCreateWithoutTranslationsInput = {
   updatedAt?: Date | string
   locations?: Prisma.DealerLocationCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingCreateNestedManyWithoutDealerInput
 }
 
@@ -708,7 +729,6 @@ export type DealerUncheckedCreateWithoutTranslationsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -717,6 +737,8 @@ export type DealerUncheckedCreateWithoutTranslationsInput = {
   updatedAt?: Date | string
   locations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkUncheckedCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutDealerInput
 }
 
@@ -744,7 +766,6 @@ export type DealerUpdateWithoutTranslationsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -753,6 +774,8 @@ export type DealerUpdateWithoutTranslationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locations?: Prisma.DealerLocationUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutDealerNestedInput
 }
 
@@ -765,7 +788,6 @@ export type DealerUncheckedUpdateWithoutTranslationsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -774,6 +796,8 @@ export type DealerUncheckedUpdateWithoutTranslationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locations?: Prisma.DealerLocationUncheckedUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUncheckedUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutDealerNestedInput
 }
 
@@ -785,7 +809,6 @@ export type DealerCreateWithoutLocationsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -794,6 +817,8 @@ export type DealerCreateWithoutLocationsInput = {
   updatedAt?: Date | string
   translations?: Prisma.DealerTranslationCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingCreateNestedManyWithoutDealerInput
 }
 
@@ -806,7 +831,6 @@ export type DealerUncheckedCreateWithoutLocationsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -815,6 +839,8 @@ export type DealerUncheckedCreateWithoutLocationsInput = {
   updatedAt?: Date | string
   translations?: Prisma.DealerTranslationUncheckedCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkUncheckedCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutDealerInput
 }
 
@@ -842,7 +868,6 @@ export type DealerUpdateWithoutLocationsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -851,6 +876,8 @@ export type DealerUpdateWithoutLocationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   translations?: Prisma.DealerTranslationUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutDealerNestedInput
 }
 
@@ -863,7 +890,6 @@ export type DealerUncheckedUpdateWithoutLocationsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -872,6 +898,8 @@ export type DealerUncheckedUpdateWithoutLocationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   translations?: Prisma.DealerTranslationUncheckedUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUncheckedUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutDealerNestedInput
 }
 
@@ -883,7 +911,6 @@ export type DealerCreateWithoutContactsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -892,6 +919,8 @@ export type DealerCreateWithoutContactsInput = {
   updatedAt?: Date | string
   translations?: Prisma.DealerTranslationCreateNestedManyWithoutDealerInput
   locations?: Prisma.DealerLocationCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingCreateNestedManyWithoutDealerInput
 }
 
@@ -904,7 +933,6 @@ export type DealerUncheckedCreateWithoutContactsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -913,6 +941,8 @@ export type DealerUncheckedCreateWithoutContactsInput = {
   updatedAt?: Date | string
   translations?: Prisma.DealerTranslationUncheckedCreateNestedManyWithoutDealerInput
   locations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkUncheckedCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutDealerInput
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutDealerInput
 }
 
@@ -940,7 +970,6 @@ export type DealerUpdateWithoutContactsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -949,6 +978,8 @@ export type DealerUpdateWithoutContactsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   translations?: Prisma.DealerTranslationUpdateManyWithoutDealerNestedInput
   locations?: Prisma.DealerLocationUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUpdateManyWithoutDealerNestedInput
 }
 
@@ -961,7 +992,6 @@ export type DealerUncheckedUpdateWithoutContactsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -970,6 +1000,212 @@ export type DealerUncheckedUpdateWithoutContactsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   translations?: Prisma.DealerTranslationUncheckedUpdateManyWithoutDealerNestedInput
   locations?: Prisma.DealerLocationUncheckedUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUncheckedUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutDealerNestedInput
+  listings?: Prisma.CarListingUncheckedUpdateManyWithoutDealerNestedInput
+}
+
+export type DealerCreateWithoutCategoriesInput = {
+  userId: number
+  companyName: string
+  slug: string
+  registryCode?: string | null
+  vatNumber?: string | null
+  logoPath?: string | null
+  coverImagePath?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: $Enums.DealerStatus
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.DealerTranslationCreateNestedManyWithoutDealerInput
+  locations?: Prisma.DealerLocationCreateNestedManyWithoutDealerInput
+  contacts?: Prisma.DealerContactCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkCreateNestedManyWithoutDealerInput
+  listings?: Prisma.CarListingCreateNestedManyWithoutDealerInput
+}
+
+export type DealerUncheckedCreateWithoutCategoriesInput = {
+  id?: number
+  userId: number
+  companyName: string
+  slug: string
+  registryCode?: string | null
+  vatNumber?: string | null
+  logoPath?: string | null
+  coverImagePath?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: $Enums.DealerStatus
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.DealerTranslationUncheckedCreateNestedManyWithoutDealerInput
+  locations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutDealerInput
+  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutDealerInput
+  listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutDealerInput
+}
+
+export type DealerCreateOrConnectWithoutCategoriesInput = {
+  where: Prisma.DealerWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealerCreateWithoutCategoriesInput, Prisma.DealerUncheckedCreateWithoutCategoriesInput>
+}
+
+export type DealerUpsertWithoutCategoriesInput = {
+  update: Prisma.XOR<Prisma.DealerUpdateWithoutCategoriesInput, Prisma.DealerUncheckedUpdateWithoutCategoriesInput>
+  create: Prisma.XOR<Prisma.DealerCreateWithoutCategoriesInput, Prisma.DealerUncheckedCreateWithoutCategoriesInput>
+  where?: Prisma.DealerWhereInput
+}
+
+export type DealerUpdateToOneWithWhereWithoutCategoriesInput = {
+  where?: Prisma.DealerWhereInput
+  data: Prisma.XOR<Prisma.DealerUpdateWithoutCategoriesInput, Prisma.DealerUncheckedUpdateWithoutCategoriesInput>
+}
+
+export type DealerUpdateWithoutCategoriesInput = {
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  registryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.DealerTranslationUpdateManyWithoutDealerNestedInput
+  locations?: Prisma.DealerLocationUpdateManyWithoutDealerNestedInput
+  contacts?: Prisma.DealerContactUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUpdateManyWithoutDealerNestedInput
+  listings?: Prisma.CarListingUpdateManyWithoutDealerNestedInput
+}
+
+export type DealerUncheckedUpdateWithoutCategoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  registryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.DealerTranslationUncheckedUpdateManyWithoutDealerNestedInput
+  locations?: Prisma.DealerLocationUncheckedUpdateManyWithoutDealerNestedInput
+  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutDealerNestedInput
+  listings?: Prisma.CarListingUncheckedUpdateManyWithoutDealerNestedInput
+}
+
+export type DealerCreateWithoutMakesInput = {
+  userId: number
+  companyName: string
+  slug: string
+  registryCode?: string | null
+  vatNumber?: string | null
+  logoPath?: string | null
+  coverImagePath?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: $Enums.DealerStatus
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.DealerTranslationCreateNestedManyWithoutDealerInput
+  locations?: Prisma.DealerLocationCreateNestedManyWithoutDealerInput
+  contacts?: Prisma.DealerContactCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkCreateNestedManyWithoutDealerInput
+  listings?: Prisma.CarListingCreateNestedManyWithoutDealerInput
+}
+
+export type DealerUncheckedCreateWithoutMakesInput = {
+  id?: number
+  userId: number
+  companyName: string
+  slug: string
+  registryCode?: string | null
+  vatNumber?: string | null
+  logoPath?: string | null
+  coverImagePath?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: $Enums.DealerStatus
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.DealerTranslationUncheckedCreateNestedManyWithoutDealerInput
+  locations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutDealerInput
+  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkUncheckedCreateNestedManyWithoutDealerInput
+  listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutDealerInput
+}
+
+export type DealerCreateOrConnectWithoutMakesInput = {
+  where: Prisma.DealerWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealerCreateWithoutMakesInput, Prisma.DealerUncheckedCreateWithoutMakesInput>
+}
+
+export type DealerUpsertWithoutMakesInput = {
+  update: Prisma.XOR<Prisma.DealerUpdateWithoutMakesInput, Prisma.DealerUncheckedUpdateWithoutMakesInput>
+  create: Prisma.XOR<Prisma.DealerCreateWithoutMakesInput, Prisma.DealerUncheckedCreateWithoutMakesInput>
+  where?: Prisma.DealerWhereInput
+}
+
+export type DealerUpdateToOneWithWhereWithoutMakesInput = {
+  where?: Prisma.DealerWhereInput
+  data: Prisma.XOR<Prisma.DealerUpdateWithoutMakesInput, Prisma.DealerUncheckedUpdateWithoutMakesInput>
+}
+
+export type DealerUpdateWithoutMakesInput = {
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  registryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.DealerTranslationUpdateManyWithoutDealerNestedInput
+  locations?: Prisma.DealerLocationUpdateManyWithoutDealerNestedInput
+  contacts?: Prisma.DealerContactUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUpdateManyWithoutDealerNestedInput
+  listings?: Prisma.CarListingUpdateManyWithoutDealerNestedInput
+}
+
+export type DealerUncheckedUpdateWithoutMakesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  registryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.DealerTranslationUncheckedUpdateManyWithoutDealerNestedInput
+  locations?: Prisma.DealerLocationUncheckedUpdateManyWithoutDealerNestedInput
+  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUncheckedUpdateManyWithoutDealerNestedInput
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutDealerNestedInput
 }
 
@@ -981,7 +1217,6 @@ export type DealerCreateWithoutListingsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -991,6 +1226,8 @@ export type DealerCreateWithoutListingsInput = {
   translations?: Prisma.DealerTranslationCreateNestedManyWithoutDealerInput
   locations?: Prisma.DealerLocationCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkCreateNestedManyWithoutDealerInput
 }
 
 export type DealerUncheckedCreateWithoutListingsInput = {
@@ -1002,7 +1239,6 @@ export type DealerUncheckedCreateWithoutListingsInput = {
   vatNumber?: string | null
   logoPath?: string | null
   coverImagePath?: string | null
-  websiteUrl?: string | null
   phone?: string | null
   email?: string | null
   status?: $Enums.DealerStatus
@@ -1012,6 +1248,8 @@ export type DealerUncheckedCreateWithoutListingsInput = {
   translations?: Prisma.DealerTranslationUncheckedCreateNestedManyWithoutDealerInput
   locations?: Prisma.DealerLocationUncheckedCreateNestedManyWithoutDealerInput
   contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutDealerInput
+  categories?: Prisma.DealerCategoryLinkUncheckedCreateNestedManyWithoutDealerInput
+  makes?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutDealerInput
 }
 
 export type DealerCreateOrConnectWithoutListingsInput = {
@@ -1038,7 +1276,6 @@ export type DealerUpdateWithoutListingsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -1048,6 +1285,8 @@ export type DealerUpdateWithoutListingsInput = {
   translations?: Prisma.DealerTranslationUpdateManyWithoutDealerNestedInput
   locations?: Prisma.DealerLocationUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUpdateManyWithoutDealerNestedInput
 }
 
 export type DealerUncheckedUpdateWithoutListingsInput = {
@@ -1059,7 +1298,6 @@ export type DealerUncheckedUpdateWithoutListingsInput = {
   vatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumDealerStatusFieldUpdateOperationsInput | $Enums.DealerStatus
@@ -1069,6 +1307,8 @@ export type DealerUncheckedUpdateWithoutListingsInput = {
   translations?: Prisma.DealerTranslationUncheckedUpdateManyWithoutDealerNestedInput
   locations?: Prisma.DealerLocationUncheckedUpdateManyWithoutDealerNestedInput
   contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutDealerNestedInput
+  categories?: Prisma.DealerCategoryLinkUncheckedUpdateManyWithoutDealerNestedInput
+  makes?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutDealerNestedInput
 }
 
 
@@ -1080,6 +1320,8 @@ export type DealerCountOutputType = {
   translations: number
   locations: number
   contacts: number
+  categories: number
+  makes: number
   listings: number
 }
 
@@ -1087,6 +1329,8 @@ export type DealerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   translations?: boolean | DealerCountOutputTypeCountTranslationsArgs
   locations?: boolean | DealerCountOutputTypeCountLocationsArgs
   contacts?: boolean | DealerCountOutputTypeCountContactsArgs
+  categories?: boolean | DealerCountOutputTypeCountCategoriesArgs
+  makes?: boolean | DealerCountOutputTypeCountMakesArgs
   listings?: boolean | DealerCountOutputTypeCountListingsArgs
 }
 
@@ -1124,6 +1368,20 @@ export type DealerCountOutputTypeCountContactsArgs<ExtArgs extends runtime.Types
 /**
  * DealerCountOutputType without action
  */
+export type DealerCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealerCategoryLinkWhereInput
+}
+
+/**
+ * DealerCountOutputType without action
+ */
+export type DealerCountOutputTypeCountMakesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealerMakeLinkWhereInput
+}
+
+/**
+ * DealerCountOutputType without action
+ */
 export type DealerCountOutputTypeCountListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CarListingWhereInput
 }
@@ -1138,7 +1396,6 @@ export type DealerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   vatNumber?: boolean
   logoPath?: boolean
   coverImagePath?: boolean
-  websiteUrl?: boolean
   phone?: boolean
   email?: boolean
   status?: boolean
@@ -1148,6 +1405,8 @@ export type DealerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   translations?: boolean | Prisma.Dealer$translationsArgs<ExtArgs>
   locations?: boolean | Prisma.Dealer$locationsArgs<ExtArgs>
   contacts?: boolean | Prisma.Dealer$contactsArgs<ExtArgs>
+  categories?: boolean | Prisma.Dealer$categoriesArgs<ExtArgs>
+  makes?: boolean | Prisma.Dealer$makesArgs<ExtArgs>
   listings?: boolean | Prisma.Dealer$listingsArgs<ExtArgs>
   _count?: boolean | Prisma.DealerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dealer"]>
@@ -1163,7 +1422,6 @@ export type DealerSelectScalar = {
   vatNumber?: boolean
   logoPath?: boolean
   coverImagePath?: boolean
-  websiteUrl?: boolean
   phone?: boolean
   email?: boolean
   status?: boolean
@@ -1172,11 +1430,13 @@ export type DealerSelectScalar = {
   updatedAt?: boolean
 }
 
-export type DealerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "companyName" | "slug" | "registryCode" | "vatNumber" | "logoPath" | "coverImagePath" | "websiteUrl" | "phone" | "email" | "status" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["dealer"]>
+export type DealerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "companyName" | "slug" | "registryCode" | "vatNumber" | "logoPath" | "coverImagePath" | "phone" | "email" | "status" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["dealer"]>
 export type DealerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   translations?: boolean | Prisma.Dealer$translationsArgs<ExtArgs>
   locations?: boolean | Prisma.Dealer$locationsArgs<ExtArgs>
   contacts?: boolean | Prisma.Dealer$contactsArgs<ExtArgs>
+  categories?: boolean | Prisma.Dealer$categoriesArgs<ExtArgs>
+  makes?: boolean | Prisma.Dealer$makesArgs<ExtArgs>
   listings?: boolean | Prisma.Dealer$listingsArgs<ExtArgs>
   _count?: boolean | Prisma.DealerCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1187,6 +1447,8 @@ export type $DealerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     translations: Prisma.$DealerTranslationPayload<ExtArgs>[]
     locations: Prisma.$DealerLocationPayload<ExtArgs>[]
     contacts: Prisma.$DealerContactPayload<ExtArgs>[]
+    categories: Prisma.$DealerCategoryLinkPayload<ExtArgs>[]
+    makes: Prisma.$DealerMakeLinkPayload<ExtArgs>[]
     listings: Prisma.$CarListingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1198,7 +1460,6 @@ export type $DealerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     vatNumber: string | null
     logoPath: string | null
     coverImagePath: string | null
-    websiteUrl: string | null
     phone: string | null
     email: string | null
     status: $Enums.DealerStatus
@@ -1548,6 +1809,8 @@ export interface Prisma__DealerClient<T, Null = never, ExtArgs extends runtime.T
   translations<T extends Prisma.Dealer$translationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dealer$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locations<T extends Prisma.Dealer$locationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dealer$locationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contacts<T extends Prisma.Dealer$contactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dealer$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  categories<T extends Prisma.Dealer$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dealer$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerCategoryLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  makes<T extends Prisma.Dealer$makesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dealer$makesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerMakeLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   listings<T extends Prisma.Dealer$listingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dealer$listingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1586,7 +1849,6 @@ export interface DealerFieldRefs {
   readonly vatNumber: Prisma.FieldRef<"Dealer", 'String'>
   readonly logoPath: Prisma.FieldRef<"Dealer", 'String'>
   readonly coverImagePath: Prisma.FieldRef<"Dealer", 'String'>
-  readonly websiteUrl: Prisma.FieldRef<"Dealer", 'String'>
   readonly phone: Prisma.FieldRef<"Dealer", 'String'>
   readonly email: Prisma.FieldRef<"Dealer", 'String'>
   readonly status: Prisma.FieldRef<"Dealer", 'DealerStatus'>
@@ -2010,6 +2272,54 @@ export type Dealer$contactsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.DealerContactScalarFieldEnum | Prisma.DealerContactScalarFieldEnum[]
+}
+
+/**
+ * Dealer.categories
+ */
+export type Dealer$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DealerCategoryLink
+   */
+  select?: Prisma.DealerCategoryLinkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DealerCategoryLink
+   */
+  omit?: Prisma.DealerCategoryLinkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealerCategoryLinkInclude<ExtArgs> | null
+  where?: Prisma.DealerCategoryLinkWhereInput
+  orderBy?: Prisma.DealerCategoryLinkOrderByWithRelationInput | Prisma.DealerCategoryLinkOrderByWithRelationInput[]
+  cursor?: Prisma.DealerCategoryLinkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealerCategoryLinkScalarFieldEnum | Prisma.DealerCategoryLinkScalarFieldEnum[]
+}
+
+/**
+ * Dealer.makes
+ */
+export type Dealer$makesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DealerMakeLink
+   */
+  select?: Prisma.DealerMakeLinkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DealerMakeLink
+   */
+  omit?: Prisma.DealerMakeLinkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealerMakeLinkInclude<ExtArgs> | null
+  where?: Prisma.DealerMakeLinkWhereInput
+  orderBy?: Prisma.DealerMakeLinkOrderByWithRelationInput | Prisma.DealerMakeLinkOrderByWithRelationInput[]
+  cursor?: Prisma.DealerMakeLinkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealerMakeLinkScalarFieldEnum | Prisma.DealerMakeLinkScalarFieldEnum[]
 }
 
 /**

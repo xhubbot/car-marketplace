@@ -60,6 +60,19 @@ enum DealerStatus {
   suspended
 }
 
+enum DealerContactType {
+  phone
+  email
+  website
+  facebook
+  instagram
+  whatsapp
+  telegram
+  linkedin
+  youtube
+  other
+}
+
 // ─────────────────────────────────────────────
 // Unified translation helper
 // ─────────────────────────────────────────────
@@ -196,6 +209,7 @@ model CarMake {
 
   models      CarModel[]
   carListings CarListing[]
+  dealers     DealerMakeLink[]
 
   @@map("car_makes")
 }
@@ -268,7 +282,6 @@ model Dealer {
   vatNumber      String?      @map("vat_number") @db.VarChar(30)
   logoPath       String?      @map("logo_path") @db.VarChar(255)
   coverImagePath String?      @map("cover_image_path") @db.VarChar(255)
-  websiteUrl     String?      @map("website_url") @db.VarChar(255)
   phone          String?      @db.VarChar(30)
   email          String?      @db.VarChar(150)
   status         DealerStatus @default(pending)
@@ -279,6 +292,8 @@ model Dealer {
   translations DealerTranslation[]
   locations    DealerLocation[]
   contacts     DealerContact[]
+  categories   DealerCategoryLink[]
+  makes        DealerMakeLink[]
   listings     CarListing[]
 
   @@index([userId], name: "idx_dealer_user")
@@ -307,7 +322,6 @@ model DealerLocation {
   latitude    Decimal? @db.Decimal(9, 6)
   longitude   Decimal? @db.Decimal(9, 6)
   phone       String?  @db.VarChar(30)
-  fax         String?  @db.VarChar(30)
   email       String?  @db.VarChar(150)
   isPrimary   Boolean  @default(false) @map("is_primary")
   createdAt   DateTime @default(now()) @map("created_at")
@@ -315,7 +329,6 @@ model DealerLocation {
   dealer       Dealer              @relation(fields: [dealerId], references: [id], onDelete: Cascade)
   country      Country?            @relation(fields: [countryId], references: [id])
   location     Location?           @relation(fields: [locationId], references: [id])
-  contacts     DealerContact[]
   workingHours DealerWorkingHour[]
 
   @@index([dealerId], name: "idx_dealer_locations")
@@ -339,22 +352,60 @@ model DealerWorkingHour {
 }
 
 model DealerContact {
-  id         Int      @id @default(autoincrement()) @db.UnsignedInt
-  dealerId   Int      @map("dealer_id") @db.UnsignedInt
-  locationId Int?     @map("location_id") @db.UnsignedInt
-  fullName   String   @map("full_name") @db.VarChar(100)
-  position   String?  @db.VarChar(100)
-  phone      String?  @db.VarChar(30)
-  email      String?  @db.VarChar(150)
-  photoPath  String?  @map("photo_path") @db.VarChar(255)
-  sortOrder  Int      @default(0) @map("sort_order") @db.UnsignedTinyInt
-  createdAt  DateTime @default(now()) @map("created_at")
+  id        Int               @id @default(autoincrement()) @db.UnsignedInt
+  dealerId  Int               @map("dealer_id") @db.UnsignedInt
+  type      DealerContactType
+  value     String            @db.VarChar(255)
+  sortOrder Int               @default(0) @map("sort_order") @db.UnsignedTinyInt
+  createdAt DateTime          @default(now()) @map("created_at")
 
-  dealer   Dealer          @relation(fields: [dealerId], references: [id], onDelete: Cascade)
-  location DealerLocation? @relation(fields: [locationId], references: [id], onDelete: SetNull)
+  dealer Dealer @relation(fields: [dealerId], references: [id], onDelete: Cascade)
 
   @@index([dealerId], name: "idx_dealer_contacts")
   @@map("dealer_contacts")
+}
+
+// Business-activity tree ("Tegevusalad"). Translated names live in Translation
+// (category: "dealer_category", refId: this id). Ids are stable/explicit (not
+// autoincrement), mirroring Location, so seed data can be re-run idempotently.
+model DealerCategory {
+  id           Int      @id @db.UnsignedInt
+  parentId     Int?     @map("parent_id") @db.UnsignedInt
+  fallbackName String   @map("fallback_name") @db.VarChar(150)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  parent   DealerCategory?      @relation("DealerCategoryParent", fields: [parentId], references: [id])
+  children DealerCategory[]     @relation("DealerCategoryParent")
+  dealers  DealerCategoryLink[]
+
+  @@index([parentId], name: "idx_dealer_category_parent")
+  @@map("dealer_categories")
+}
+
+model DealerCategoryLink {
+  dealerId   Int @map("dealer_id") @db.UnsignedInt
+  categoryId Int @map("category_id") @db.UnsignedInt
+
+  dealer   Dealer         @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+  category DealerCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([dealerId, categoryId])
+  @@index([categoryId], name: "idx_dealer_category_links_category")
+  @@map("dealer_category_links")
+}
+
+// Car makes a dealer sells — flat, no per-language translation (CarMake.name
+// is already a plain shared lookup, unlike DealerCategory).
+model DealerMakeLink {
+  dealerId Int @map("dealer_id") @db.UnsignedInt
+  makeId   Int @map("make_id") @db.UnsignedInt
+
+  dealer Dealer  @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+  make   CarMake @relation(fields: [makeId], references: [id], onDelete: Cascade)
+
+  @@id([dealerId, makeId])
+  @@index([makeId], name: "idx_dealer_make_links_make")
+  @@map("dealer_make_links")
 }
 
 // ─────────────────────────────────────────────

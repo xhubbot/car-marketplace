@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { mkdir, writeFile } from 'node:fs/promises'
-import path from 'node:path'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
+import { dealerUploadDir, ImageValidationError, processAndSaveImage } from '@/lib/image-upload'
+import type { DealerContactType } from '@/generated/prisma/client'
 
-const ALLOWED_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+const VALID_CONTACT_TYPES: DealerContactType[] = [
+  'phone', 'email', 'website', 'facebook', 'instagram', 'whatsapp', 'telegram', 'linkedin', 'youtube', 'other',
+]
 
 interface WorkingHourInput {
   fromDay: number
@@ -15,6 +17,11 @@ interface WorkingHourInput {
   toHour: number | null
   toMin: number | null
   note: string
+}
+
+interface ContactInput {
+  type: DealerContactType
+  value: string
 }
 
 function toIntOrNull(value: FormDataEntryValue | null): number | null {
@@ -38,15 +45,6 @@ function timeOf(hour: number | null, min: number | null): Date | null {
   return new Date(Date.UTC(1970, 0, 1, hour, min ?? 0, 0))
 }
 
-async function saveImage(file: File, dir: string, baseName: string): Promise<string> {
-  const rawExt = path.extname(file.name).toLowerCase()
-  const ext = ALLOWED_IMAGE_EXTENSIONS.includes(rawExt) ? rawExt : '.jpg'
-  const filename = `${baseName}${ext}`
-  const buffer = Buffer.from(await file.arrayBuffer())
-  await writeFile(path.join(dir, filename), buffer)
-  return filename
-}
-
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
@@ -60,17 +58,16 @@ export async function POST(request: NextRequest) {
     const companyName = (formData.get('companyName') as string) || ''
     const registryCode = (formData.get('registryCode') as string) || ''
     const vatNumber = (formData.get('vatNumber') as string) || ''
-    const homepage = (formData.get('homepage') as string) || ''
     const address = (formData.get('address') as string) || ''
     const locationId = toIntOrNull(formData.get('locationId'))
     const countryId = toIntOrNull(formData.get('countryId'))
     const postcode = (formData.get('postcode') as string) || ''
-    const phone = (formData.get('phone') as string) || ''
-    const fax = (formData.get('fax') as string) || ''
-    const email = (formData.get('email') as string) || ''
     const logo = formData.get('logo') as File | null
     const coverImage = formData.get('coverImage') as File | null
     const workingHoursJson = (formData.get('workingHours') as string) || '[]'
+    const contactsJson = (formData.get('contacts') as string) || '[]'
+    const categoryIdsJson = (formData.get('categoryIds') as string) || '[]'
+    const makeIdsJson = (formData.get('makeIds') as string) || '[]'
 
     if (!companyName.trim() || !address.trim()) {
       return NextResponse.json({ message: 'Company name and address are required' }, { status: 400 })
@@ -90,6 +87,39 @@ export async function POST(request: NextRequest) {
       // ignore malformed input, treat as no working hours
     }
 
+    let contacts: ContactInput[] = []
+    try {
+      const parsed = JSON.parse(contactsJson)
+      if (Array.isArray(parsed)) {
+        contacts = parsed.filter(
+          (row): row is ContactInput =>
+            row && VALID_CONTACT_TYPES.includes(row.type) && typeof row.value === 'string' && row.value.trim() !== ''
+        )
+      }
+    } catch {
+      // ignore malformed input, treat as no contacts
+    }
+
+    let categoryIds: number[] = []
+    try {
+      const parsed = JSON.parse(categoryIdsJson)
+      if (Array.isArray(parsed)) {
+        categoryIds = [...new Set(parsed.filter((id): id is number => Number.isInteger(id) && id > 0))]
+      }
+    } catch {
+      // ignore malformed input, treat as no categories
+    }
+
+    let makeIds: number[] = []
+    try {
+      const parsed = JSON.parse(makeIdsJson)
+      if (Array.isArray(parsed)) {
+        makeIds = [...new Set(parsed.filter((id): id is number => Number.isInteger(id) && id > 0))]
+      }
+    } catch {
+      // ignore malformed input, treat as no makes
+    }
+
     // Generate a unique slug from the company name
     const baseSlug = slugify(companyName)
     let slug = baseSlug
@@ -106,23 +136,21 @@ export async function POST(request: NextRequest) {
         slug,
         registryCode: registryCode ? registryCode.slice(0, 30) : null,
         vatNumber: vatNumber ? vatNumber.slice(0, 30) : null,
-        websiteUrl: homepage ? homepage.slice(0, 255) : null,
       },
     })
 
-    // Save logo / cover image to disk and record their paths
+    // Save logo / cover image to disk (uploads/users/<userId>/dealer/) and record their paths
     if (logo || coverImage) {
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'dealers', dealer.id.toString())
-      await mkdir(uploadDir, { recursive: true })
+      const uploadDir = dealerUploadDir(userId)
 
       const updateData: { logoPath?: string; coverImagePath?: string } = {}
       if (logo) {
-        const filename = await saveImage(logo, uploadDir, 'logo')
-        updateData.logoPath = `/uploads/dealers/${dealer.id}/${filename}`
+        const filename = await processAndSaveImage(logo, uploadDir, 'logo', { maxDimension: 600 })
+        updateData.logoPath = `/uploads/users/${userId}/dealer/${filename}`
       }
       if (coverImage) {
-        const filename = await saveImage(coverImage, uploadDir, 'cover')
-        updateData.coverImagePath = `/uploads/dealers/${dealer.id}/${filename}`
+        const filename = await processAndSaveImage(coverImage, uploadDir, 'cover', { maxDimension: 1920 })
+        updateData.coverImagePath = `/uploads/users/${userId}/dealer/${filename}`
       }
       await prisma.dealer.update({ where: { id: dealer.id }, data: updateData })
     }
@@ -134,12 +162,44 @@ export async function POST(request: NextRequest) {
         locationId,
         countryId,
         postalCode: postcode ? postcode.slice(0, 20) : null,
-        phone: phone ? phone.slice(0, 30) : null,
-        fax: fax ? fax.slice(0, 30) : null,
-        email: email ? email.slice(0, 150) : null,
         isPrimary: true,
       },
     })
+
+    if (contacts.length > 0) {
+      await prisma.dealerContact.createMany({
+        data: contacts.map((c, i) => ({
+          dealerId: dealer.id,
+          type: c.type,
+          value: c.value.trim().slice(0, 255),
+          sortOrder: i,
+        })),
+      })
+    }
+
+    if (categoryIds.length > 0) {
+      const validCategories = await prisma.dealerCategory.findMany({
+        where: { id: { in: categoryIds } },
+        select: { id: true },
+      })
+      if (validCategories.length > 0) {
+        await prisma.dealerCategoryLink.createMany({
+          data: validCategories.map(c => ({ dealerId: dealer.id, categoryId: c.id })),
+        })
+      }
+    }
+
+    if (makeIds.length > 0) {
+      const validMakes = await prisma.carMake.findMany({
+        where: { id: { in: makeIds } },
+        select: { id: true },
+      })
+      if (validMakes.length > 0) {
+        await prisma.dealerMakeLink.createMany({
+          data: validMakes.map(m => ({ dealerId: dealer.id, makeId: m.id })),
+        })
+      }
+    }
 
     // Expand each from/to day range into individual per-day rows.
     // Later rows win if two ranges both cover the same day (matches the unique index on [locationId, dayOfWeek]).
@@ -166,6 +226,9 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     )
   } catch (error) {
+    if (error instanceof ImageValidationError) {
+      return NextResponse.json({ message: error.message }, { status: 400 })
+    }
     console.error('Dealer register error:', error)
     return NextResponse.json(
       { message: error instanceof Error ? error.message : 'Internal server error' },

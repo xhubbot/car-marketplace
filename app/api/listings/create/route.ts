@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { mkdir, writeFile } from 'node:fs/promises'
-import path from 'node:path'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import type { ListingType } from '@/generated/prisma/client'
+import { classifiedUploadDir, ImageValidationError, processAndSaveImage } from '@/lib/image-upload'
 
 const VALID_LISTING_TYPES: ListingType[] = ['sell', 'buy', 'rentWanted', 'rentOffer']
-const ALLOWED_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
 
 function toIntOrNull(value: FormDataEntryValue | null): number | null {
   if (!value) return null
@@ -108,20 +106,15 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Store images on local disk (public/uploads/listings/<id>/) and record them
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'listings', listing.id.toString())
-    await mkdir(uploadDir, { recursive: true })
+    // Store images on local disk (uploads/users/<userId>/classifieds/<listingId>/) and record them
+    const uploadDir = classifiedUploadDir(userId, listing.id)
 
     const imageRecords = await Promise.all(
       images.map(async (file, i) => {
-        const rawExt = path.extname(file.name).toLowerCase()
-        const ext = ALLOWED_IMAGE_EXTENSIONS.includes(rawExt) ? rawExt : '.jpg'
-        const filename = `${i}${ext}`
-        const buffer = Buffer.from(await file.arrayBuffer())
-        await writeFile(path.join(uploadDir, filename), buffer)
+        const filename = await processAndSaveImage(file, uploadDir, i.toString())
         return {
           listingId: listing.id,
-          imagePath: `/uploads/listings/${listing.id}/${filename}`,
+          imagePath: `/uploads/users/${userId}/classifieds/${listing.id}/${filename}`,
           isMain: i === 0,
           sortOrder: i,
         }
@@ -135,6 +128,9 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     )
   } catch (error) {
+    if (error instanceof ImageValidationError) {
+      return NextResponse.json({ message: error.message }, { status: 400 })
+    }
     console.error('Create listing error:', error)
     return NextResponse.json(
       { message: error instanceof Error ? error.message : 'Internal server error' },

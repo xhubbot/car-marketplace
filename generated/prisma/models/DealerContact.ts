@@ -29,26 +29,20 @@ export type AggregateDealerContact = {
 export type DealerContactAvgAggregateOutputType = {
   id: number | null
   dealerId: number | null
-  locationId: number | null
   sortOrder: number | null
 }
 
 export type DealerContactSumAggregateOutputType = {
   id: number | null
   dealerId: number | null
-  locationId: number | null
   sortOrder: number | null
 }
 
 export type DealerContactMinAggregateOutputType = {
   id: number | null
   dealerId: number | null
-  locationId: number | null
-  fullName: string | null
-  position: string | null
-  phone: string | null
-  email: string | null
-  photoPath: string | null
+  type: $Enums.DealerContactType | null
+  value: string | null
   sortOrder: number | null
   createdAt: Date | null
 }
@@ -56,12 +50,8 @@ export type DealerContactMinAggregateOutputType = {
 export type DealerContactMaxAggregateOutputType = {
   id: number | null
   dealerId: number | null
-  locationId: number | null
-  fullName: string | null
-  position: string | null
-  phone: string | null
-  email: string | null
-  photoPath: string | null
+  type: $Enums.DealerContactType | null
+  value: string | null
   sortOrder: number | null
   createdAt: Date | null
 }
@@ -69,12 +59,8 @@ export type DealerContactMaxAggregateOutputType = {
 export type DealerContactCountAggregateOutputType = {
   id: number
   dealerId: number
-  locationId: number
-  fullName: number
-  position: number
-  phone: number
-  email: number
-  photoPath: number
+  type: number
+  value: number
   sortOrder: number
   createdAt: number
   _all: number
@@ -84,26 +70,20 @@ export type DealerContactCountAggregateOutputType = {
 export type DealerContactAvgAggregateInputType = {
   id?: true
   dealerId?: true
-  locationId?: true
   sortOrder?: true
 }
 
 export type DealerContactSumAggregateInputType = {
   id?: true
   dealerId?: true
-  locationId?: true
   sortOrder?: true
 }
 
 export type DealerContactMinAggregateInputType = {
   id?: true
   dealerId?: true
-  locationId?: true
-  fullName?: true
-  position?: true
-  phone?: true
-  email?: true
-  photoPath?: true
+  type?: true
+  value?: true
   sortOrder?: true
   createdAt?: true
 }
@@ -111,12 +91,8 @@ export type DealerContactMinAggregateInputType = {
 export type DealerContactMaxAggregateInputType = {
   id?: true
   dealerId?: true
-  locationId?: true
-  fullName?: true
-  position?: true
-  phone?: true
-  email?: true
-  photoPath?: true
+  type?: true
+  value?: true
   sortOrder?: true
   createdAt?: true
 }
@@ -124,12 +100,8 @@ export type DealerContactMaxAggregateInputType = {
 export type DealerContactCountAggregateInputType = {
   id?: true
   dealerId?: true
-  locationId?: true
-  fullName?: true
-  position?: true
-  phone?: true
-  email?: true
-  photoPath?: true
+  type?: true
+  value?: true
   sortOrder?: true
   createdAt?: true
   _all?: true
@@ -224,12 +196,8 @@ export type DealerContactGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type DealerContactGroupByOutputType = {
   id: number
   dealerId: number
-  locationId: number | null
-  fullName: string
-  position: string | null
-  phone: string | null
-  email: string | null
-  photoPath: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder: number
   createdAt: Date
   _count: DealerContactCountAggregateOutputType | null
@@ -260,31 +228,21 @@ export type DealerContactWhereInput = {
   NOT?: Prisma.DealerContactWhereInput | Prisma.DealerContactWhereInput[]
   id?: Prisma.IntFilter<"DealerContact"> | number
   dealerId?: Prisma.IntFilter<"DealerContact"> | number
-  locationId?: Prisma.IntNullableFilter<"DealerContact"> | number | null
-  fullName?: Prisma.StringFilter<"DealerContact"> | string
-  position?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  phone?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  email?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  photoPath?: Prisma.StringNullableFilter<"DealerContact"> | string | null
+  type?: Prisma.EnumDealerContactTypeFilter<"DealerContact"> | $Enums.DealerContactType
+  value?: Prisma.StringFilter<"DealerContact"> | string
   sortOrder?: Prisma.IntFilter<"DealerContact"> | number
   createdAt?: Prisma.DateTimeFilter<"DealerContact"> | Date | string
   dealer?: Prisma.XOR<Prisma.DealerScalarRelationFilter, Prisma.DealerWhereInput>
-  location?: Prisma.XOR<Prisma.DealerLocationNullableScalarRelationFilter, Prisma.DealerLocationWhereInput> | null
 }
 
 export type DealerContactOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrderInput | Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  position?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
-  photoPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
+  value?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   dealer?: Prisma.DealerOrderByWithRelationInput
-  location?: Prisma.DealerLocationOrderByWithRelationInput
   _relevance?: Prisma.DealerContactOrderByRelevanceInput
 }
 
@@ -294,27 +252,18 @@ export type DealerContactWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.DealerContactWhereInput[]
   NOT?: Prisma.DealerContactWhereInput | Prisma.DealerContactWhereInput[]
   dealerId?: Prisma.IntFilter<"DealerContact"> | number
-  locationId?: Prisma.IntNullableFilter<"DealerContact"> | number | null
-  fullName?: Prisma.StringFilter<"DealerContact"> | string
-  position?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  phone?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  email?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  photoPath?: Prisma.StringNullableFilter<"DealerContact"> | string | null
+  type?: Prisma.EnumDealerContactTypeFilter<"DealerContact"> | $Enums.DealerContactType
+  value?: Prisma.StringFilter<"DealerContact"> | string
   sortOrder?: Prisma.IntFilter<"DealerContact"> | number
   createdAt?: Prisma.DateTimeFilter<"DealerContact"> | Date | string
   dealer?: Prisma.XOR<Prisma.DealerScalarRelationFilter, Prisma.DealerWhereInput>
-  location?: Prisma.XOR<Prisma.DealerLocationNullableScalarRelationFilter, Prisma.DealerLocationWhereInput> | null
 }, "id">
 
 export type DealerContactOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrderInput | Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  position?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
-  photoPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
+  value?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.DealerContactCountOrderByAggregateInput
@@ -330,62 +279,42 @@ export type DealerContactScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DealerContactScalarWhereWithAggregatesInput | Prisma.DealerContactScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"DealerContact"> | number
   dealerId?: Prisma.IntWithAggregatesFilter<"DealerContact"> | number
-  locationId?: Prisma.IntNullableWithAggregatesFilter<"DealerContact"> | number | null
-  fullName?: Prisma.StringWithAggregatesFilter<"DealerContact"> | string
-  position?: Prisma.StringNullableWithAggregatesFilter<"DealerContact"> | string | null
-  phone?: Prisma.StringNullableWithAggregatesFilter<"DealerContact"> | string | null
-  email?: Prisma.StringNullableWithAggregatesFilter<"DealerContact"> | string | null
-  photoPath?: Prisma.StringNullableWithAggregatesFilter<"DealerContact"> | string | null
+  type?: Prisma.EnumDealerContactTypeWithAggregatesFilter<"DealerContact"> | $Enums.DealerContactType
+  value?: Prisma.StringWithAggregatesFilter<"DealerContact"> | string
   sortOrder?: Prisma.IntWithAggregatesFilter<"DealerContact"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DealerContact"> | Date | string
 }
 
 export type DealerContactCreateInput = {
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder?: number
   createdAt?: Date | string
   dealer: Prisma.DealerCreateNestedOneWithoutContactsInput
-  location?: Prisma.DealerLocationCreateNestedOneWithoutContactsInput
 }
 
 export type DealerContactUncheckedCreateInput = {
   id?: number
   dealerId: number
-  locationId?: number | null
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type DealerContactUpdateInput = {
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dealer?: Prisma.DealerUpdateOneRequiredWithoutContactsNestedInput
-  location?: Prisma.DealerLocationUpdateOneWithoutContactsNestedInput
 }
 
 export type DealerContactUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.IntFieldUpdateOperationsInput | number
-  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -393,22 +322,15 @@ export type DealerContactUncheckedUpdateInput = {
 export type DealerContactCreateManyInput = {
   id?: number
   dealerId: number
-  locationId?: number | null
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type DealerContactUpdateManyMutationInput = {
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -416,12 +338,8 @@ export type DealerContactUpdateManyMutationInput = {
 export type DealerContactUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   dealerId?: Prisma.IntFieldUpdateOperationsInput | number
-  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -445,12 +363,8 @@ export type DealerContactOrderByRelevanceInput = {
 export type DealerContactCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  position?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  photoPath?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  value?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -458,19 +372,14 @@ export type DealerContactCountOrderByAggregateInput = {
 export type DealerContactAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
 }
 
 export type DealerContactMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  position?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  photoPath?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  value?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -478,12 +387,8 @@ export type DealerContactMaxOrderByAggregateInput = {
 export type DealerContactMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  position?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  photoPath?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  value?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -491,7 +396,6 @@ export type DealerContactMinOrderByAggregateInput = {
 export type DealerContactSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dealerId?: Prisma.SortOrder
-  locationId?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
 }
 
@@ -537,67 +441,21 @@ export type DealerContactUncheckedUpdateManyWithoutDealerNestedInput = {
   deleteMany?: Prisma.DealerContactScalarWhereInput | Prisma.DealerContactScalarWhereInput[]
 }
 
-export type DealerContactCreateNestedManyWithoutLocationInput = {
-  create?: Prisma.XOR<Prisma.DealerContactCreateWithoutLocationInput, Prisma.DealerContactUncheckedCreateWithoutLocationInput> | Prisma.DealerContactCreateWithoutLocationInput[] | Prisma.DealerContactUncheckedCreateWithoutLocationInput[]
-  connectOrCreate?: Prisma.DealerContactCreateOrConnectWithoutLocationInput | Prisma.DealerContactCreateOrConnectWithoutLocationInput[]
-  createMany?: Prisma.DealerContactCreateManyLocationInputEnvelope
-  connect?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-}
-
-export type DealerContactUncheckedCreateNestedManyWithoutLocationInput = {
-  create?: Prisma.XOR<Prisma.DealerContactCreateWithoutLocationInput, Prisma.DealerContactUncheckedCreateWithoutLocationInput> | Prisma.DealerContactCreateWithoutLocationInput[] | Prisma.DealerContactUncheckedCreateWithoutLocationInput[]
-  connectOrCreate?: Prisma.DealerContactCreateOrConnectWithoutLocationInput | Prisma.DealerContactCreateOrConnectWithoutLocationInput[]
-  createMany?: Prisma.DealerContactCreateManyLocationInputEnvelope
-  connect?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-}
-
-export type DealerContactUpdateManyWithoutLocationNestedInput = {
-  create?: Prisma.XOR<Prisma.DealerContactCreateWithoutLocationInput, Prisma.DealerContactUncheckedCreateWithoutLocationInput> | Prisma.DealerContactCreateWithoutLocationInput[] | Prisma.DealerContactUncheckedCreateWithoutLocationInput[]
-  connectOrCreate?: Prisma.DealerContactCreateOrConnectWithoutLocationInput | Prisma.DealerContactCreateOrConnectWithoutLocationInput[]
-  upsert?: Prisma.DealerContactUpsertWithWhereUniqueWithoutLocationInput | Prisma.DealerContactUpsertWithWhereUniqueWithoutLocationInput[]
-  createMany?: Prisma.DealerContactCreateManyLocationInputEnvelope
-  set?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  disconnect?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  delete?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  connect?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  update?: Prisma.DealerContactUpdateWithWhereUniqueWithoutLocationInput | Prisma.DealerContactUpdateWithWhereUniqueWithoutLocationInput[]
-  updateMany?: Prisma.DealerContactUpdateManyWithWhereWithoutLocationInput | Prisma.DealerContactUpdateManyWithWhereWithoutLocationInput[]
-  deleteMany?: Prisma.DealerContactScalarWhereInput | Prisma.DealerContactScalarWhereInput[]
-}
-
-export type DealerContactUncheckedUpdateManyWithoutLocationNestedInput = {
-  create?: Prisma.XOR<Prisma.DealerContactCreateWithoutLocationInput, Prisma.DealerContactUncheckedCreateWithoutLocationInput> | Prisma.DealerContactCreateWithoutLocationInput[] | Prisma.DealerContactUncheckedCreateWithoutLocationInput[]
-  connectOrCreate?: Prisma.DealerContactCreateOrConnectWithoutLocationInput | Prisma.DealerContactCreateOrConnectWithoutLocationInput[]
-  upsert?: Prisma.DealerContactUpsertWithWhereUniqueWithoutLocationInput | Prisma.DealerContactUpsertWithWhereUniqueWithoutLocationInput[]
-  createMany?: Prisma.DealerContactCreateManyLocationInputEnvelope
-  set?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  disconnect?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  delete?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  connect?: Prisma.DealerContactWhereUniqueInput | Prisma.DealerContactWhereUniqueInput[]
-  update?: Prisma.DealerContactUpdateWithWhereUniqueWithoutLocationInput | Prisma.DealerContactUpdateWithWhereUniqueWithoutLocationInput[]
-  updateMany?: Prisma.DealerContactUpdateManyWithWhereWithoutLocationInput | Prisma.DealerContactUpdateManyWithWhereWithoutLocationInput[]
-  deleteMany?: Prisma.DealerContactScalarWhereInput | Prisma.DealerContactScalarWhereInput[]
+export type EnumDealerContactTypeFieldUpdateOperationsInput = {
+  set?: $Enums.DealerContactType
 }
 
 export type DealerContactCreateWithoutDealerInput = {
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder?: number
   createdAt?: Date | string
-  location?: Prisma.DealerLocationCreateNestedOneWithoutContactsInput
 }
 
 export type DealerContactUncheckedCreateWithoutDealerInput = {
   id?: number
-  locationId?: number | null
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -634,155 +492,39 @@ export type DealerContactScalarWhereInput = {
   NOT?: Prisma.DealerContactScalarWhereInput | Prisma.DealerContactScalarWhereInput[]
   id?: Prisma.IntFilter<"DealerContact"> | number
   dealerId?: Prisma.IntFilter<"DealerContact"> | number
-  locationId?: Prisma.IntNullableFilter<"DealerContact"> | number | null
-  fullName?: Prisma.StringFilter<"DealerContact"> | string
-  position?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  phone?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  email?: Prisma.StringNullableFilter<"DealerContact"> | string | null
-  photoPath?: Prisma.StringNullableFilter<"DealerContact"> | string | null
+  type?: Prisma.EnumDealerContactTypeFilter<"DealerContact"> | $Enums.DealerContactType
+  value?: Prisma.StringFilter<"DealerContact"> | string
   sortOrder?: Prisma.IntFilter<"DealerContact"> | number
   createdAt?: Prisma.DateTimeFilter<"DealerContact"> | Date | string
 }
 
-export type DealerContactCreateWithoutLocationInput = {
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
-  sortOrder?: number
-  createdAt?: Date | string
-  dealer: Prisma.DealerCreateNestedOneWithoutContactsInput
-}
-
-export type DealerContactUncheckedCreateWithoutLocationInput = {
-  id?: number
-  dealerId: number
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
-  sortOrder?: number
-  createdAt?: Date | string
-}
-
-export type DealerContactCreateOrConnectWithoutLocationInput = {
-  where: Prisma.DealerContactWhereUniqueInput
-  create: Prisma.XOR<Prisma.DealerContactCreateWithoutLocationInput, Prisma.DealerContactUncheckedCreateWithoutLocationInput>
-}
-
-export type DealerContactCreateManyLocationInputEnvelope = {
-  data: Prisma.DealerContactCreateManyLocationInput | Prisma.DealerContactCreateManyLocationInput[]
-  skipDuplicates?: boolean
-}
-
-export type DealerContactUpsertWithWhereUniqueWithoutLocationInput = {
-  where: Prisma.DealerContactWhereUniqueInput
-  update: Prisma.XOR<Prisma.DealerContactUpdateWithoutLocationInput, Prisma.DealerContactUncheckedUpdateWithoutLocationInput>
-  create: Prisma.XOR<Prisma.DealerContactCreateWithoutLocationInput, Prisma.DealerContactUncheckedCreateWithoutLocationInput>
-}
-
-export type DealerContactUpdateWithWhereUniqueWithoutLocationInput = {
-  where: Prisma.DealerContactWhereUniqueInput
-  data: Prisma.XOR<Prisma.DealerContactUpdateWithoutLocationInput, Prisma.DealerContactUncheckedUpdateWithoutLocationInput>
-}
-
-export type DealerContactUpdateManyWithWhereWithoutLocationInput = {
-  where: Prisma.DealerContactScalarWhereInput
-  data: Prisma.XOR<Prisma.DealerContactUpdateManyMutationInput, Prisma.DealerContactUncheckedUpdateManyWithoutLocationInput>
-}
-
 export type DealerContactCreateManyDealerInput = {
   id?: number
-  locationId?: number | null
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
+  type: $Enums.DealerContactType
+  value: string
   sortOrder?: number
   createdAt?: Date | string
 }
 
 export type DealerContactUpdateWithoutDealerInput = {
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  location?: Prisma.DealerLocationUpdateOneWithoutContactsNestedInput
 }
 
 export type DealerContactUncheckedUpdateWithoutDealerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DealerContactUncheckedUpdateManyWithoutDealerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type DealerContactCreateManyLocationInput = {
-  id?: number
-  dealerId: number
-  fullName: string
-  position?: string | null
-  phone?: string | null
-  email?: string | null
-  photoPath?: string | null
-  sortOrder?: number
-  createdAt?: Date | string
-}
-
-export type DealerContactUpdateWithoutLocationInput = {
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dealer?: Prisma.DealerUpdateOneRequiredWithoutContactsNestedInput
-}
-
-export type DealerContactUncheckedUpdateWithoutLocationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  dealerId?: Prisma.IntFieldUpdateOperationsInput | number
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type DealerContactUncheckedUpdateManyWithoutLocationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  dealerId?: Prisma.IntFieldUpdateOperationsInput | number
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDealerContactTypeFieldUpdateOperationsInput | $Enums.DealerContactType
+  value?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -792,16 +534,11 @@ export type DealerContactUncheckedUpdateManyWithoutLocationInput = {
 export type DealerContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   dealerId?: boolean
-  locationId?: boolean
-  fullName?: boolean
-  position?: boolean
-  phone?: boolean
-  email?: boolean
-  photoPath?: boolean
+  type?: boolean
+  value?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   dealer?: boolean | Prisma.DealerDefaultArgs<ExtArgs>
-  location?: boolean | Prisma.DealerContact$locationArgs<ExtArgs>
 }, ExtArgs["result"]["dealerContact"]>
 
 
@@ -809,37 +546,27 @@ export type DealerContactSelect<ExtArgs extends runtime.Types.Extensions.Interna
 export type DealerContactSelectScalar = {
   id?: boolean
   dealerId?: boolean
-  locationId?: boolean
-  fullName?: boolean
-  position?: boolean
-  phone?: boolean
-  email?: boolean
-  photoPath?: boolean
+  type?: boolean
+  value?: boolean
   sortOrder?: boolean
   createdAt?: boolean
 }
 
-export type DealerContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dealerId" | "locationId" | "fullName" | "position" | "phone" | "email" | "photoPath" | "sortOrder" | "createdAt", ExtArgs["result"]["dealerContact"]>
+export type DealerContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dealerId" | "type" | "value" | "sortOrder" | "createdAt", ExtArgs["result"]["dealerContact"]>
 export type DealerContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dealer?: boolean | Prisma.DealerDefaultArgs<ExtArgs>
-  location?: boolean | Prisma.DealerContact$locationArgs<ExtArgs>
 }
 
 export type $DealerContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DealerContact"
   objects: {
     dealer: Prisma.$DealerPayload<ExtArgs>
-    location: Prisma.$DealerLocationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     dealerId: number
-    locationId: number | null
-    fullName: string
-    position: string | null
-    phone: string | null
-    email: string | null
-    photoPath: string | null
+    type: $Enums.DealerContactType
+    value: string
     sortOrder: number
     createdAt: Date
   }, ExtArgs["result"]["dealerContact"]>
@@ -1183,7 +910,6 @@ readonly fields: DealerContactFieldRefs;
 export interface Prisma__DealerContactClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   dealer<T extends Prisma.DealerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerDefaultArgs<ExtArgs>>): Prisma.Prisma__DealerClient<runtime.Types.Result.GetResult<Prisma.$DealerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  location<T extends Prisma.DealerContact$locationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerContact$locationArgs<ExtArgs>>): Prisma.Prisma__DealerLocationClient<runtime.Types.Result.GetResult<Prisma.$DealerLocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1215,12 +941,8 @@ export interface Prisma__DealerContactClient<T, Null = never, ExtArgs extends ru
 export interface DealerContactFieldRefs {
   readonly id: Prisma.FieldRef<"DealerContact", 'Int'>
   readonly dealerId: Prisma.FieldRef<"DealerContact", 'Int'>
-  readonly locationId: Prisma.FieldRef<"DealerContact", 'Int'>
-  readonly fullName: Prisma.FieldRef<"DealerContact", 'String'>
-  readonly position: Prisma.FieldRef<"DealerContact", 'String'>
-  readonly phone: Prisma.FieldRef<"DealerContact", 'String'>
-  readonly email: Prisma.FieldRef<"DealerContact", 'String'>
-  readonly photoPath: Prisma.FieldRef<"DealerContact", 'String'>
+  readonly type: Prisma.FieldRef<"DealerContact", 'DealerContactType'>
+  readonly value: Prisma.FieldRef<"DealerContact", 'String'>
   readonly sortOrder: Prisma.FieldRef<"DealerContact", 'Int'>
   readonly createdAt: Prisma.FieldRef<"DealerContact", 'DateTime'>
 }
@@ -1568,25 +1290,6 @@ export type DealerContactDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many DealerContacts to delete.
    */
   limit?: number
-}
-
-/**
- * DealerContact.location
- */
-export type DealerContact$locationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the DealerLocation
-   */
-  select?: Prisma.DealerLocationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the DealerLocation
-   */
-  omit?: Prisma.DealerLocationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DealerLocationInclude<ExtArgs> | null
-  where?: Prisma.DealerLocationWhereInput
 }
 
 /**

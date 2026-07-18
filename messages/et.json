@@ -18,80 +18,201 @@
     "brand": "Admini paneel",
     "nav": {
       "dashboard": "Töölaud",
-      "listings":  "Kuulutused",
-      "users":     "Kasutajad",
+      "listings": "Kuulutused",
+      "users": "Kasutajad",
       "analytics": "Analüütika",
-      "settings":  "Seaded",
-      "logout":    "Logi välja"
+      "settings": "Seaded",
+      "logout": "Logi välja"
     },
     "topbar": {
       "section": "Administreerimine",
-      "badge":   "Piiratud juurdepääs"
+      "badge": "Piiratud juurdepääs"
     },
     "page": {
-      "title":       "See on Admini leht",
+      "title": "See on Admini leht",
       "description": "Täielik platvormi ülevaade — halda kuulutusi, kasutajaid ja süsteemi seadeid."
     },
     "stats": {
-      "listings":   "Kuulutused",
-      "pending":    "ootab ülevaatust",
-      "users":      "Kasutajad",
+      "listings": "Kuulutused",
+      "pending": "ootab ülevaatust",
+      "users": "Kasutajad",
       "registered": "registreeritud kokku",
-      "dealers":    "Edasimüüjad",
-      "active":     "aktiivsed kontod",
-      "disputes":   "Vaidlused",
-      "open":       "avatud juhtumid"
+      "dealers": "Edasimüüjad",
+      "active": "aktiivsed kontod",
+      "disputes": "Vaidlused",
+      "open": "avatud juhtumid"
     },
     "notice": {
       "title": "Admini ala",
-      "body":  "Sul on juurdepääs tundlikele platvormi andmetele. Kõik toimingud logitakse ja auditeeritakse."
+      "body": "Sul on juurdepääs tundlikele platvormi andmetele. Kõik toimingud logitakse ja auditeeritakse."
     },
     "quick": {
-      "listings":      "Halda kuulutusi",
-      "listingsDesc":  "Vaata üle, kinnita või eemalda kasutajate esitatud autoostukuulutusi.",
-      "users":         "Halda kasutajaid",
-      "usersDesc":     "Vaata kasutajaprofiilid, rollid ja konto olekud.",
-      "analytics":     "Analüütika",
+      "listings": "Halda kuulutusi",
+      "listingsDesc": "Vaata üle, kinnita või eemalda kasutajate esitatud autoostukuulutusi.",
+      "users": "Halda kasutajaid",
+      "usersDesc": "Vaata kasutajaprofiilid, rollid ja konto olekud.",
+      "analytics": "Analüütika",
       "analyticsDesc": "Platvormiülene liiklus, konversioonid ja tulumõõdikud."
     }
   },
   "dealer": {
-    "brand": "Edasimüüja portaal",
-    "nav": {
-      "overview":  "Ülevaade",
-      "inventory": "Laoseis",
-      "leads":     "Vihjed",
-      "reports":   "Aruanded"
+    "admin": {
+      "brand": "Edasimüüja portaal",
+      "nav": {
+        "overview": "Ülevaade",
+        "inventory": "Laoseis",
+        "leads": "Vihjed",
+        "reports": "Aruanded"
+      },
+      "topbar": {
+        "dealerAccount": "Edasimüüja konto"
+      },
+      "page": {
+        "title": "See on Edasimüüja leht",
+        "description": "Halda oma laoseisu, jälgi vihjeid ja kasva autod.pro platvormil.",
+        "addListing": "Lisa kuulutus"
+      },
+      "metrics": {
+        "activeListing": "Aktiivsed kuulutused",
+        "totalViews": "Vaatamisi kokku",
+        "leads": "Vihjed",
+        "sold": "Müüdud",
+        "thisMonth": "sel kuul",
+        "last7days": "viimased 7 päeva",
+        "newLeads": "uued sel nädalal"
+      },
+      "actions": {
+        "inventory": "Laoseis",
+        "inventoryDesc": "Vaata ja halda kogu oma sõidukiparki.",
+        "leads": "Vihjed",
+        "leadsDesc": "Jälgi ostjate päringuid ja järelkontakti vestlusi.",
+        "reports": "Aruanded",
+        "reportsDesc": "Vaata kuulutuste toimivuse statistikat.",
+        "open": "Ava"
+      },
+      "info": {
+        "title": "Edasimüüja portaal",
+        "body": "See on edasimüüja leht. Siin saad hallata oma kuulutusi, vastata vihjeedele ning vaadata oma autosalongi analüütikat."
+      }
     },
-    "topbar": {
-      "dealerAccount": "Edasimüüja konto"
+    "days": {
+      "monday": "Esmaspäev",
+      "tuesday": "Teisipäev",
+      "wednesday": "Kolmapäev",
+      "thursday": "Neljapäev",
+      "friday": "Reede",
+      "saturday": "Laupäev",
+      "sunday": "Pühapäev"
     },
-    "page": {
-      "title":       "See on Edasimüüja leht",
-      "description": "Halda oma laoseisu, jälgi vihjeid ja kasva autod.pro platvormil.",
-      "addListing":  "Lisa kuulutus"
+    "contactTypes": {
+      "phone": "Telefon",
+      "email": "E-post",
+      "website": "Veebileht",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "other": "Muu"
     },
-    "metrics": {
-      "activeListing": "Aktiivsed kuulutused",
-      "totalViews":    "Vaatamisi kokku",
-      "leads":         "Vihjed",
-      "sold":          "Müüdud",
-      "thisMonth":     "sel kuul",
-      "last7days":     "viimased 7 päeva",
-      "newLeads":      "uued sel nädalal"
+    "register": {
+      "title": "Registreeri oma edasimüüjaettevõte",
+      "subtitle": "Räägi meile oma ettevõttest, et ostjad sind leiaksid ja usaldaksid.",
+      "companyInfo": {
+        "heading": "Ettevõtte info",
+        "companyName": "Ettevõtte nimi *",
+        "registryCode": "Registrikood",
+        "vatNumber": "KMKR number"
+      },
+      "addressContact": {
+        "heading": "Aadress ja kontakt",
+        "address": "Aadress *",
+        "cityCounty": "Linn / Maakond",
+        "selectLocation": "Vali asukoht…",
+        "country": "Riik",
+        "selectCountry": "Vali riik…",
+        "postcode": "Postiindeks"
+      },
+      "contacts": {
+        "heading": "Kontaktid",
+        "remove": "Eemalda",
+        "addContact": "+ Lisa kontakt"
+      },
+      "categories": {
+        "heading": "Tegevusalad",
+        "description": "Vali kõik valdkonnad, kus su ettevõte tegutseb — otsi või vali nimekirjast.",
+        "placeholder": "Otsi tegevusalasid…",
+        "noOptions": "Tegevusalasid ei leitud"
+      },
+      "makes": {
+        "heading": "Müüdavad margid",
+        "description": "Vali kõik automargid, mida su esindus müüb — otsi või vali nimekirjast.",
+        "placeholder": "Otsi marke…",
+        "noOptions": "Marke ei leitud"
+      },
+      "images": {
+        "heading": "Pildid",
+        "logo": "Ettevõtte logo",
+        "logoPreviewAlt": "Logo eelvaade",
+        "cover": "Ettevõtte hoone foto",
+        "coverPreviewAlt": "Hoone eelvaade"
+      },
+      "workingHours": {
+        "heading": "Lahtiolekuajad",
+        "day": "Päev",
+        "to": "kuni",
+        "hourPlaceholder": "TT",
+        "minutePlaceholder": "MM",
+        "notePlaceholder": "Lisainfo",
+        "remove": "Eemalda",
+        "addRow": "+ Lisa uus rida"
+      },
+      "submit": "Registreeri edasimüüja",
+      "submitting": "Saadan…",
+      "errorFallback": "Edasimüüja registreerimine ebaõnnestus"
     },
-    "actions": {
-      "inventory":     "Laoseis",
-      "inventoryDesc": "Vaata ja halda kogu oma sõidukiparki.",
-      "leads":         "Vihjed",
-      "leadsDesc":     "Jälgi ostjate päringuid ja järelkontakti vestlusi.",
-      "reports":       "Aruanded",
-      "reportsDesc":   "Vaata kuulutuste toimivuse statistikat.",
-      "open":          "Ava"
+    "search": {
+      "title": "Edasimüüjad",
+      "subtitle": "Otsi ja filtreeri registreeritud edasimüüjaid.",
+      "filters": {
+        "name": "Ettevõtte nimi",
+        "namePlaceholder": "Otsi nime järgi…",
+        "registryCode": "Registrikood",
+        "registryCodePlaceholder": "Otsi registrikoodi järgi…",
+        "vatNumber": "Maksukohustuslase number",
+        "vatNumberPlaceholder": "Otsi maksunumbri järgi…",
+        "category": "Tegevusala",
+        "categoryPlaceholder": "Kõik tegevusalad…",
+        "make": "Mark",
+        "makePlaceholder": "Kõik margid…",
+        "noCategoriesFound": "Tegevusalasid ei leitud",
+        "noMakesFound": "Marke ei leitud",
+        "clear": "Tühjenda filtrid"
+      },
+      "searching": "Otsin…",
+      "resultsFound": "{count, plural, one {# edasimüüja leitud} other {# edasimüüjat leitud}}",
+      "noResults": "Otsingule vastavaid edasimüüjaid ei leitud.",
+      "registryCodeLabel": "Registrikood: {code}",
+      "taxNumberLabel": "Maksunumber: {number}",
+      "moreCount": "+{count} veel",
+      "pagination": {
+        "previous": "← Eelmine",
+        "next": "Järgmine →",
+        "pageOf": "Lehekülg {page}/{total}"
+      }
     },
-    "info": {
-      "title": "Edasimüüja portaal",
-      "body":  "See on edasimüüja leht. Siin saad hallata oma kuulutusi, vastata vihjeedele ning vaadata oma autosalongi analüütikat."
+    "detail": {
+      "address": "Aadress",
+      "contacts": "Kontaktid",
+      "workingHours": "Lahtiolekuajad",
+      "categories": "Tegevusalad",
+      "makes": "Müüdavad margid",
+      "listings": "Kuulutused",
+      "noListings": "Sellel edasimüüjal pole hetkel aktiivseid kuulutusi.",
+      "registryCodeLabel": "Registrikood: {code}",
+      "taxNumberLabel": "Maksunumber: {number}",
+      "closed": "Suletud"
     }
   }
 }

@@ -404,6 +404,9 @@ export const ModelName = {
   DealerLocation: 'DealerLocation',
   DealerWorkingHour: 'DealerWorkingHour',
   DealerContact: 'DealerContact',
+  DealerCategory: 'DealerCategory',
+  DealerCategoryLink: 'DealerCategoryLink',
+  DealerMakeLink: 'DealerMakeLink',
   CarListing: 'CarListing',
   CarListingTranslation: 'CarListingTranslation',
   CarListingFeature: 'CarListingFeature',
@@ -428,7 +431,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction"
+    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "dealerCategory" | "dealerCategoryLink" | "dealerMakeLink" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1752,6 +1755,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DealerCategory: {
+      payload: Prisma.$DealerCategoryPayload<ExtArgs>
+      fields: Prisma.DealerCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.DealerCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.DealerCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.DealerCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>
+        }
+        update: {
+          args: Prisma.DealerCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerCategory>
+        }
+        groupBy: {
+          args: Prisma.DealerCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealerCategoryLink: {
+      payload: Prisma.$DealerCategoryLinkPayload<ExtArgs>
+      fields: Prisma.DealerCategoryLinkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerCategoryLinkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerCategoryLinkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerCategoryLinkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerCategoryLinkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>
+        }
+        findMany: {
+          args: Prisma.DealerCategoryLinkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>[]
+        }
+        create: {
+          args: Prisma.DealerCategoryLinkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>
+        }
+        createMany: {
+          args: Prisma.DealerCategoryLinkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerCategoryLinkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>
+        }
+        update: {
+          args: Prisma.DealerCategoryLinkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerCategoryLinkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerCategoryLinkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerCategoryLinkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerCategoryLinkPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerCategoryLinkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerCategoryLink>
+        }
+        groupBy: {
+          args: Prisma.DealerCategoryLinkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerCategoryLinkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerCategoryLinkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerCategoryLinkCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealerMakeLink: {
+      payload: Prisma.$DealerMakeLinkPayload<ExtArgs>
+      fields: Prisma.DealerMakeLinkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealerMakeLinkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealerMakeLinkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>
+        }
+        findFirst: {
+          args: Prisma.DealerMakeLinkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealerMakeLinkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>
+        }
+        findMany: {
+          args: Prisma.DealerMakeLinkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>[]
+        }
+        create: {
+          args: Prisma.DealerMakeLinkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>
+        }
+        createMany: {
+          args: Prisma.DealerMakeLinkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DealerMakeLinkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>
+        }
+        update: {
+          args: Prisma.DealerMakeLinkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealerMakeLinkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealerMakeLinkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DealerMakeLinkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealerMakeLinkPayload>
+        }
+        aggregate: {
+          args: Prisma.DealerMakeLinkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealerMakeLink>
+        }
+        groupBy: {
+          args: Prisma.DealerMakeLinkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerMakeLinkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealerMakeLinkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealerMakeLinkCountAggregateOutputType> | number
+        }
+      }
+    }
     CarListing: {
       payload: Prisma.$CarListingPayload<ExtArgs>
       fields: Prisma.CarListingFieldRefs
@@ -2545,7 +2746,6 @@ export const DealerScalarFieldEnum = {
   vatNumber: 'vatNumber',
   logoPath: 'logoPath',
   coverImagePath: 'coverImagePath',
-  websiteUrl: 'websiteUrl',
   phone: 'phone',
   email: 'email',
   status: 'status',
@@ -2577,7 +2777,6 @@ export const DealerLocationScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   phone: 'phone',
-  fax: 'fax',
   email: 'email',
   isPrimary: 'isPrimary',
   createdAt: 'createdAt'
@@ -2602,17 +2801,39 @@ export type DealerWorkingHourScalarFieldEnum = (typeof DealerWorkingHourScalarFi
 export const DealerContactScalarFieldEnum = {
   id: 'id',
   dealerId: 'dealerId',
-  locationId: 'locationId',
-  fullName: 'fullName',
-  position: 'position',
-  phone: 'phone',
-  email: 'email',
-  photoPath: 'photoPath',
+  type: 'type',
+  value: 'value',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt'
 } as const
 
 export type DealerContactScalarFieldEnum = (typeof DealerContactScalarFieldEnum)[keyof typeof DealerContactScalarFieldEnum]
+
+
+export const DealerCategoryScalarFieldEnum = {
+  id: 'id',
+  parentId: 'parentId',
+  fallbackName: 'fallbackName',
+  createdAt: 'createdAt'
+} as const
+
+export type DealerCategoryScalarFieldEnum = (typeof DealerCategoryScalarFieldEnum)[keyof typeof DealerCategoryScalarFieldEnum]
+
+
+export const DealerCategoryLinkScalarFieldEnum = {
+  dealerId: 'dealerId',
+  categoryId: 'categoryId'
+} as const
+
+export type DealerCategoryLinkScalarFieldEnum = (typeof DealerCategoryLinkScalarFieldEnum)[keyof typeof DealerCategoryLinkScalarFieldEnum]
+
+
+export const DealerMakeLinkScalarFieldEnum = {
+  dealerId: 'dealerId',
+  makeId: 'makeId'
+} as const
+
+export type DealerMakeLinkScalarFieldEnum = (typeof DealerMakeLinkScalarFieldEnum)[keyof typeof DealerMakeLinkScalarFieldEnum]
 
 
 export const CarListingScalarFieldEnum = {
@@ -2925,7 +3146,6 @@ export const DealerOrderByRelevanceFieldEnum = {
   vatNumber: 'vatNumber',
   logoPath: 'logoPath',
   coverImagePath: 'coverImagePath',
-  websiteUrl: 'websiteUrl',
   phone: 'phone',
   email: 'email'
 } as const
@@ -2946,7 +3166,6 @@ export const DealerLocationOrderByRelevanceFieldEnum = {
   addressLine: 'addressLine',
   postalCode: 'postalCode',
   phone: 'phone',
-  fax: 'fax',
   email: 'email'
 } as const
 
@@ -2961,14 +3180,17 @@ export type DealerWorkingHourOrderByRelevanceFieldEnum = (typeof DealerWorkingHo
 
 
 export const DealerContactOrderByRelevanceFieldEnum = {
-  fullName: 'fullName',
-  position: 'position',
-  phone: 'phone',
-  email: 'email',
-  photoPath: 'photoPath'
+  value: 'value'
 } as const
 
 export type DealerContactOrderByRelevanceFieldEnum = (typeof DealerContactOrderByRelevanceFieldEnum)[keyof typeof DealerContactOrderByRelevanceFieldEnum]
+
+
+export const DealerCategoryOrderByRelevanceFieldEnum = {
+  fallbackName: 'fallbackName'
+} as const
+
+export type DealerCategoryOrderByRelevanceFieldEnum = (typeof DealerCategoryOrderByRelevanceFieldEnum)[keyof typeof DealerCategoryOrderByRelevanceFieldEnum]
 
 
 export const CarListingOrderByRelevanceFieldEnum = {
@@ -3092,6 +3314,13 @@ export type EnumDealerStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'Decimal'
  */
 export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'DealerContactType'
+ */
+export type EnumDealerContactTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealerContactType'>
     
 
 
@@ -3294,6 +3523,9 @@ export type GlobalOmitConfig = {
   dealerLocation?: Prisma.DealerLocationOmit
   dealerWorkingHour?: Prisma.DealerWorkingHourOmit
   dealerContact?: Prisma.DealerContactOmit
+  dealerCategory?: Prisma.DealerCategoryOmit
+  dealerCategoryLink?: Prisma.DealerCategoryLinkOmit
+  dealerMakeLink?: Prisma.DealerMakeLinkOmit
   carListing?: Prisma.CarListingOmit
   carListingTranslation?: Prisma.CarListingTranslationOmit
   carListingFeature?: Prisma.CarListingFeatureOmit

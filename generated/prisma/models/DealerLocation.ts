@@ -55,7 +55,6 @@ export type DealerLocationMinAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   phone: string | null
-  fax: string | null
   email: string | null
   isPrimary: boolean | null
   createdAt: Date | null
@@ -72,7 +71,6 @@ export type DealerLocationMaxAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   phone: string | null
-  fax: string | null
   email: string | null
   isPrimary: boolean | null
   createdAt: Date | null
@@ -89,7 +87,6 @@ export type DealerLocationCountAggregateOutputType = {
   latitude: number
   longitude: number
   phone: number
-  fax: number
   email: number
   isPrimary: number
   createdAt: number
@@ -126,7 +123,6 @@ export type DealerLocationMinAggregateInputType = {
   latitude?: true
   longitude?: true
   phone?: true
-  fax?: true
   email?: true
   isPrimary?: true
   createdAt?: true
@@ -143,7 +139,6 @@ export type DealerLocationMaxAggregateInputType = {
   latitude?: true
   longitude?: true
   phone?: true
-  fax?: true
   email?: true
   isPrimary?: true
   createdAt?: true
@@ -160,7 +155,6 @@ export type DealerLocationCountAggregateInputType = {
   latitude?: true
   longitude?: true
   phone?: true
-  fax?: true
   email?: true
   isPrimary?: true
   createdAt?: true
@@ -264,7 +258,6 @@ export type DealerLocationGroupByOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   phone: string | null
-  fax: string | null
   email: string | null
   isPrimary: boolean
   createdAt: Date
@@ -304,14 +297,12 @@ export type DealerLocationWhereInput = {
   latitude?: Prisma.DecimalNullableFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
-  fax?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
   email?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
   isPrimary?: Prisma.BoolFilter<"DealerLocation"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DealerLocation"> | Date | string
   dealer?: Prisma.XOR<Prisma.DealerScalarRelationFilter, Prisma.DealerWhereInput>
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
   location?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
-  contacts?: Prisma.DealerContactListRelationFilter
   workingHours?: Prisma.DealerWorkingHourListRelationFilter
 }
 
@@ -326,14 +317,12 @@ export type DealerLocationOrderByWithRelationInput = {
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  fax?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   dealer?: Prisma.DealerOrderByWithRelationInput
   country?: Prisma.CountryOrderByWithRelationInput
   location?: Prisma.LocationOrderByWithRelationInput
-  contacts?: Prisma.DealerContactOrderByRelationAggregateInput
   workingHours?: Prisma.DealerWorkingHourOrderByRelationAggregateInput
   _relevance?: Prisma.DealerLocationOrderByRelevanceInput
 }
@@ -352,14 +341,12 @@ export type DealerLocationWhereUniqueInput = Prisma.AtLeast<{
   latitude?: Prisma.DecimalNullableFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
-  fax?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
   email?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
   isPrimary?: Prisma.BoolFilter<"DealerLocation"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DealerLocation"> | Date | string
   dealer?: Prisma.XOR<Prisma.DealerScalarRelationFilter, Prisma.DealerWhereInput>
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
   location?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
-  contacts?: Prisma.DealerContactListRelationFilter
   workingHours?: Prisma.DealerWorkingHourListRelationFilter
 }, "id">
 
@@ -374,7 +361,6 @@ export type DealerLocationOrderByWithAggregationInput = {
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  fax?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -399,7 +385,6 @@ export type DealerLocationScalarWhereWithAggregatesInput = {
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableWithAggregatesFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"DealerLocation"> | string | null
-  fax?: Prisma.StringNullableWithAggregatesFilter<"DealerLocation"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"DealerLocation"> | string | null
   isPrimary?: Prisma.BoolWithAggregatesFilter<"DealerLocation"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DealerLocation"> | Date | string
@@ -412,14 +397,12 @@ export type DealerLocationCreateInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
   dealer: Prisma.DealerCreateNestedOneWithoutLocationsInput
   country?: Prisma.CountryCreateNestedOneWithoutDealerLocationsInput
   location?: Prisma.LocationCreateNestedOneWithoutDealerLocationsInput
-  contacts?: Prisma.DealerContactCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourCreateNestedManyWithoutLocationInput
 }
 
@@ -434,11 +417,9 @@ export type DealerLocationUncheckedCreateInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourUncheckedCreateNestedManyWithoutLocationInput
 }
 
@@ -449,14 +430,12 @@ export type DealerLocationUpdateInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dealer?: Prisma.DealerUpdateOneRequiredWithoutLocationsNestedInput
   country?: Prisma.CountryUpdateOneWithoutDealerLocationsNestedInput
   location?: Prisma.LocationUpdateOneWithoutDealerLocationsNestedInput
-  contacts?: Prisma.DealerContactUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUpdateManyWithoutLocationNestedInput
 }
 
@@ -471,11 +450,9 @@ export type DealerLocationUncheckedUpdateInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUncheckedUpdateManyWithoutLocationNestedInput
 }
 
@@ -490,7 +467,6 @@ export type DealerLocationCreateManyInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
@@ -503,7 +479,6 @@ export type DealerLocationUpdateManyMutationInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -520,7 +495,6 @@ export type DealerLocationUncheckedUpdateManyInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -553,7 +527,6 @@ export type DealerLocationCountOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  fax?: Prisma.SortOrder
   email?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -579,7 +552,6 @@ export type DealerLocationMaxOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  fax?: Prisma.SortOrder
   email?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -596,7 +568,6 @@ export type DealerLocationMinOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  fax?: Prisma.SortOrder
   email?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -614,11 +585,6 @@ export type DealerLocationSumOrderByAggregateInput = {
 export type DealerLocationScalarRelationFilter = {
   is?: Prisma.DealerLocationWhereInput
   isNot?: Prisma.DealerLocationWhereInput
-}
-
-export type DealerLocationNullableScalarRelationFilter = {
-  is?: Prisma.DealerLocationWhereInput | null
-  isNot?: Prisma.DealerLocationWhereInput | null
 }
 
 export type DealerLocationCreateNestedManyWithoutCountryInput = {
@@ -769,22 +735,6 @@ export type DealerLocationUpdateOneRequiredWithoutWorkingHoursNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DealerLocationUpdateToOneWithWhereWithoutWorkingHoursInput, Prisma.DealerLocationUpdateWithoutWorkingHoursInput>, Prisma.DealerLocationUncheckedUpdateWithoutWorkingHoursInput>
 }
 
-export type DealerLocationCreateNestedOneWithoutContactsInput = {
-  create?: Prisma.XOR<Prisma.DealerLocationCreateWithoutContactsInput, Prisma.DealerLocationUncheckedCreateWithoutContactsInput>
-  connectOrCreate?: Prisma.DealerLocationCreateOrConnectWithoutContactsInput
-  connect?: Prisma.DealerLocationWhereUniqueInput
-}
-
-export type DealerLocationUpdateOneWithoutContactsNestedInput = {
-  create?: Prisma.XOR<Prisma.DealerLocationCreateWithoutContactsInput, Prisma.DealerLocationUncheckedCreateWithoutContactsInput>
-  connectOrCreate?: Prisma.DealerLocationCreateOrConnectWithoutContactsInput
-  upsert?: Prisma.DealerLocationUpsertWithoutContactsInput
-  disconnect?: Prisma.DealerLocationWhereInput | boolean
-  delete?: Prisma.DealerLocationWhereInput | boolean
-  connect?: Prisma.DealerLocationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DealerLocationUpdateToOneWithWhereWithoutContactsInput, Prisma.DealerLocationUpdateWithoutContactsInput>, Prisma.DealerLocationUncheckedUpdateWithoutContactsInput>
-}
-
 export type DealerLocationCreateWithoutCountryInput = {
   name?: string | null
   addressLine: string
@@ -792,13 +742,11 @@ export type DealerLocationCreateWithoutCountryInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
   dealer: Prisma.DealerCreateNestedOneWithoutLocationsInput
   location?: Prisma.LocationCreateNestedOneWithoutDealerLocationsInput
-  contacts?: Prisma.DealerContactCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourCreateNestedManyWithoutLocationInput
 }
 
@@ -812,11 +760,9 @@ export type DealerLocationUncheckedCreateWithoutCountryInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourUncheckedCreateNestedManyWithoutLocationInput
 }
 
@@ -860,7 +806,6 @@ export type DealerLocationScalarWhereInput = {
   latitude?: Prisma.DecimalNullableFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"DealerLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
-  fax?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
   email?: Prisma.StringNullableFilter<"DealerLocation"> | string | null
   isPrimary?: Prisma.BoolFilter<"DealerLocation"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DealerLocation"> | Date | string
@@ -873,13 +818,11 @@ export type DealerLocationCreateWithoutLocationInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
   dealer: Prisma.DealerCreateNestedOneWithoutLocationsInput
   country?: Prisma.CountryCreateNestedOneWithoutDealerLocationsInput
-  contacts?: Prisma.DealerContactCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourCreateNestedManyWithoutLocationInput
 }
 
@@ -893,11 +836,9 @@ export type DealerLocationUncheckedCreateWithoutLocationInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourUncheckedCreateNestedManyWithoutLocationInput
 }
 
@@ -934,13 +875,11 @@ export type DealerLocationCreateWithoutDealerInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutDealerLocationsInput
   location?: Prisma.LocationCreateNestedOneWithoutDealerLocationsInput
-  contacts?: Prisma.DealerContactCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourCreateNestedManyWithoutLocationInput
 }
 
@@ -954,11 +893,9 @@ export type DealerLocationUncheckedCreateWithoutDealerInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutLocationInput
   workingHours?: Prisma.DealerWorkingHourUncheckedCreateNestedManyWithoutLocationInput
 }
 
@@ -995,14 +932,12 @@ export type DealerLocationCreateWithoutWorkingHoursInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
   dealer: Prisma.DealerCreateNestedOneWithoutLocationsInput
   country?: Prisma.CountryCreateNestedOneWithoutDealerLocationsInput
   location?: Prisma.LocationCreateNestedOneWithoutDealerLocationsInput
-  contacts?: Prisma.DealerContactCreateNestedManyWithoutLocationInput
 }
 
 export type DealerLocationUncheckedCreateWithoutWorkingHoursInput = {
@@ -1016,11 +951,9 @@ export type DealerLocationUncheckedCreateWithoutWorkingHoursInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  contacts?: Prisma.DealerContactUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type DealerLocationCreateOrConnectWithoutWorkingHoursInput = {
@@ -1046,14 +979,12 @@ export type DealerLocationUpdateWithoutWorkingHoursInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dealer?: Prisma.DealerUpdateOneRequiredWithoutLocationsNestedInput
   country?: Prisma.CountryUpdateOneWithoutDealerLocationsNestedInput
   location?: Prisma.LocationUpdateOneWithoutDealerLocationsNestedInput
-  contacts?: Prisma.DealerContactUpdateManyWithoutLocationNestedInput
 }
 
 export type DealerLocationUncheckedUpdateWithoutWorkingHoursInput = {
@@ -1067,97 +998,9 @@ export type DealerLocationUncheckedUpdateWithoutWorkingHoursInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutLocationNestedInput
-}
-
-export type DealerLocationCreateWithoutContactsInput = {
-  name?: string | null
-  addressLine: string
-  postalCode?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  phone?: string | null
-  fax?: string | null
-  email?: string | null
-  isPrimary?: boolean
-  createdAt?: Date | string
-  dealer: Prisma.DealerCreateNestedOneWithoutLocationsInput
-  country?: Prisma.CountryCreateNestedOneWithoutDealerLocationsInput
-  location?: Prisma.LocationCreateNestedOneWithoutDealerLocationsInput
-  workingHours?: Prisma.DealerWorkingHourCreateNestedManyWithoutLocationInput
-}
-
-export type DealerLocationUncheckedCreateWithoutContactsInput = {
-  id?: number
-  dealerId: number
-  name?: string | null
-  countryId?: number | null
-  locationId?: number | null
-  addressLine: string
-  postalCode?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  phone?: string | null
-  fax?: string | null
-  email?: string | null
-  isPrimary?: boolean
-  createdAt?: Date | string
-  workingHours?: Prisma.DealerWorkingHourUncheckedCreateNestedManyWithoutLocationInput
-}
-
-export type DealerLocationCreateOrConnectWithoutContactsInput = {
-  where: Prisma.DealerLocationWhereUniqueInput
-  create: Prisma.XOR<Prisma.DealerLocationCreateWithoutContactsInput, Prisma.DealerLocationUncheckedCreateWithoutContactsInput>
-}
-
-export type DealerLocationUpsertWithoutContactsInput = {
-  update: Prisma.XOR<Prisma.DealerLocationUpdateWithoutContactsInput, Prisma.DealerLocationUncheckedUpdateWithoutContactsInput>
-  create: Prisma.XOR<Prisma.DealerLocationCreateWithoutContactsInput, Prisma.DealerLocationUncheckedCreateWithoutContactsInput>
-  where?: Prisma.DealerLocationWhereInput
-}
-
-export type DealerLocationUpdateToOneWithWhereWithoutContactsInput = {
-  where?: Prisma.DealerLocationWhereInput
-  data: Prisma.XOR<Prisma.DealerLocationUpdateWithoutContactsInput, Prisma.DealerLocationUncheckedUpdateWithoutContactsInput>
-}
-
-export type DealerLocationUpdateWithoutContactsInput = {
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  addressLine?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dealer?: Prisma.DealerUpdateOneRequiredWithoutLocationsNestedInput
-  country?: Prisma.CountryUpdateOneWithoutDealerLocationsNestedInput
-  location?: Prisma.LocationUpdateOneWithoutDealerLocationsNestedInput
-  workingHours?: Prisma.DealerWorkingHourUpdateManyWithoutLocationNestedInput
-}
-
-export type DealerLocationUncheckedUpdateWithoutContactsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  dealerId?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  addressLine?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workingHours?: Prisma.DealerWorkingHourUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type DealerLocationCreateManyCountryInput = {
@@ -1170,7 +1013,6 @@ export type DealerLocationCreateManyCountryInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
@@ -1183,13 +1025,11 @@ export type DealerLocationUpdateWithoutCountryInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dealer?: Prisma.DealerUpdateOneRequiredWithoutLocationsNestedInput
   location?: Prisma.LocationUpdateOneWithoutDealerLocationsNestedInput
-  contacts?: Prisma.DealerContactUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUpdateManyWithoutLocationNestedInput
 }
 
@@ -1203,11 +1043,9 @@ export type DealerLocationUncheckedUpdateWithoutCountryInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUncheckedUpdateManyWithoutLocationNestedInput
 }
 
@@ -1221,7 +1059,6 @@ export type DealerLocationUncheckedUpdateManyWithoutCountryInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1237,7 +1074,6 @@ export type DealerLocationCreateManyLocationInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
@@ -1250,13 +1086,11 @@ export type DealerLocationUpdateWithoutLocationInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dealer?: Prisma.DealerUpdateOneRequiredWithoutLocationsNestedInput
   country?: Prisma.CountryUpdateOneWithoutDealerLocationsNestedInput
-  contacts?: Prisma.DealerContactUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUpdateManyWithoutLocationNestedInput
 }
 
@@ -1270,11 +1104,9 @@ export type DealerLocationUncheckedUpdateWithoutLocationInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUncheckedUpdateManyWithoutLocationNestedInput
 }
 
@@ -1288,7 +1120,6 @@ export type DealerLocationUncheckedUpdateManyWithoutLocationInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1304,7 +1135,6 @@ export type DealerLocationCreateManyDealerInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: string | null
-  fax?: string | null
   email?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
@@ -1317,13 +1147,11 @@ export type DealerLocationUpdateWithoutDealerInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutDealerLocationsNestedInput
   location?: Prisma.LocationUpdateOneWithoutDealerLocationsNestedInput
-  contacts?: Prisma.DealerContactUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUpdateManyWithoutLocationNestedInput
 }
 
@@ -1337,11 +1165,9 @@ export type DealerLocationUncheckedUpdateWithoutDealerInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  contacts?: Prisma.DealerContactUncheckedUpdateManyWithoutLocationNestedInput
   workingHours?: Prisma.DealerWorkingHourUncheckedUpdateManyWithoutLocationNestedInput
 }
 
@@ -1355,7 +1181,6 @@ export type DealerLocationUncheckedUpdateManyWithoutDealerInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1367,12 +1192,10 @@ export type DealerLocationUncheckedUpdateManyWithoutDealerInput = {
  */
 
 export type DealerLocationCountOutputType = {
-  contacts: number
   workingHours: number
 }
 
 export type DealerLocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  contacts?: boolean | DealerLocationCountOutputTypeCountContactsArgs
   workingHours?: boolean | DealerLocationCountOutputTypeCountWorkingHoursArgs
 }
 
@@ -1384,13 +1207,6 @@ export type DealerLocationCountOutputTypeDefaultArgs<ExtArgs extends runtime.Typ
    * Select specific fields to fetch from the DealerLocationCountOutputType
    */
   select?: Prisma.DealerLocationCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * DealerLocationCountOutputType without action
- */
-export type DealerLocationCountOutputTypeCountContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DealerContactWhereInput
 }
 
 /**
@@ -1412,14 +1228,12 @@ export type DealerLocationSelect<ExtArgs extends runtime.Types.Extensions.Intern
   latitude?: boolean
   longitude?: boolean
   phone?: boolean
-  fax?: boolean
   email?: boolean
   isPrimary?: boolean
   createdAt?: boolean
   dealer?: boolean | Prisma.DealerDefaultArgs<ExtArgs>
   country?: boolean | Prisma.DealerLocation$countryArgs<ExtArgs>
   location?: boolean | Prisma.DealerLocation$locationArgs<ExtArgs>
-  contacts?: boolean | Prisma.DealerLocation$contactsArgs<ExtArgs>
   workingHours?: boolean | Prisma.DealerLocation$workingHoursArgs<ExtArgs>
   _count?: boolean | Prisma.DealerLocationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dealerLocation"]>
@@ -1437,18 +1251,16 @@ export type DealerLocationSelectScalar = {
   latitude?: boolean
   longitude?: boolean
   phone?: boolean
-  fax?: boolean
   email?: boolean
   isPrimary?: boolean
   createdAt?: boolean
 }
 
-export type DealerLocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dealerId" | "name" | "countryId" | "locationId" | "addressLine" | "postalCode" | "latitude" | "longitude" | "phone" | "fax" | "email" | "isPrimary" | "createdAt", ExtArgs["result"]["dealerLocation"]>
+export type DealerLocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dealerId" | "name" | "countryId" | "locationId" | "addressLine" | "postalCode" | "latitude" | "longitude" | "phone" | "email" | "isPrimary" | "createdAt", ExtArgs["result"]["dealerLocation"]>
 export type DealerLocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dealer?: boolean | Prisma.DealerDefaultArgs<ExtArgs>
   country?: boolean | Prisma.DealerLocation$countryArgs<ExtArgs>
   location?: boolean | Prisma.DealerLocation$locationArgs<ExtArgs>
-  contacts?: boolean | Prisma.DealerLocation$contactsArgs<ExtArgs>
   workingHours?: boolean | Prisma.DealerLocation$workingHoursArgs<ExtArgs>
   _count?: boolean | Prisma.DealerLocationCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1459,7 +1271,6 @@ export type $DealerLocationPayload<ExtArgs extends runtime.Types.Extensions.Inte
     dealer: Prisma.$DealerPayload<ExtArgs>
     country: Prisma.$CountryPayload<ExtArgs> | null
     location: Prisma.$LocationPayload<ExtArgs> | null
-    contacts: Prisma.$DealerContactPayload<ExtArgs>[]
     workingHours: Prisma.$DealerWorkingHourPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1473,7 +1284,6 @@ export type $DealerLocationPayload<ExtArgs extends runtime.Types.Extensions.Inte
     latitude: runtime.Decimal | null
     longitude: runtime.Decimal | null
     phone: string | null
-    fax: string | null
     email: string | null
     isPrimary: boolean
     createdAt: Date
@@ -1820,7 +1630,6 @@ export interface Prisma__DealerLocationClient<T, Null = never, ExtArgs extends r
   dealer<T extends Prisma.DealerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerDefaultArgs<ExtArgs>>): Prisma.Prisma__DealerClient<runtime.Types.Result.GetResult<Prisma.$DealerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   country<T extends Prisma.DealerLocation$countryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerLocation$countryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   location<T extends Prisma.DealerLocation$locationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerLocation$locationArgs<ExtArgs>>): Prisma.Prisma__LocationClient<runtime.Types.Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  contacts<T extends Prisma.DealerLocation$contactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerLocation$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workingHours<T extends Prisma.DealerLocation$workingHoursArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DealerLocation$workingHoursArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerWorkingHourPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1861,7 +1670,6 @@ export interface DealerLocationFieldRefs {
   readonly latitude: Prisma.FieldRef<"DealerLocation", 'Decimal'>
   readonly longitude: Prisma.FieldRef<"DealerLocation", 'Decimal'>
   readonly phone: Prisma.FieldRef<"DealerLocation", 'String'>
-  readonly fax: Prisma.FieldRef<"DealerLocation", 'String'>
   readonly email: Prisma.FieldRef<"DealerLocation", 'String'>
   readonly isPrimary: Prisma.FieldRef<"DealerLocation", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"DealerLocation", 'DateTime'>
@@ -2248,30 +2056,6 @@ export type DealerLocation$locationArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.LocationInclude<ExtArgs> | null
   where?: Prisma.LocationWhereInput
-}
-
-/**
- * DealerLocation.contacts
- */
-export type DealerLocation$contactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the DealerContact
-   */
-  select?: Prisma.DealerContactSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the DealerContact
-   */
-  omit?: Prisma.DealerContactOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DealerContactInclude<ExtArgs> | null
-  where?: Prisma.DealerContactWhereInput
-  orderBy?: Prisma.DealerContactOrderByWithRelationInput | Prisma.DealerContactOrderByWithRelationInput[]
-  cursor?: Prisma.DealerContactWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DealerContactScalarFieldEnum | Prisma.DealerContactScalarFieldEnum[]
 }
 
 /**

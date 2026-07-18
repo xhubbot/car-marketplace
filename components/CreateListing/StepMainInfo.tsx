@@ -1,10 +1,51 @@
 ﻿'use client'
 
+import { useState } from 'react'
 import Select from 'react-select'
+import { decodeVin } from 'chassi'
 import { CreateListingFormData, ListingType } from '@/hooks/useCreateListingForm'
 import { useMakes } from '@/hooks/useMakes'
 import { useModels } from '@/hooks/useModels'
 import { useLookups, type LookupOption, type LocationGroup } from '@/hooks/useLookups'
+
+interface NhtsaVinDecodeResponse {
+  success: boolean
+  message?: string
+  // False when NHTSA itself flags the VIN as having unrecognized/bad positions (its
+  // Error Code is something other than clean or a check-digit mismatch) — in that case
+  // model/year/trim/specs are unset server-side because NHTSA had to guess and can be
+  // outright wrong (e.g. a real Volvo S60 coming back as a 1981 Volvo "740 Series").
+  // `make` is still safe to use since it only depends on the WMI (positions 1-3).
+  reliable?: boolean
+  make?: string | null
+  model?: string | null
+  modelYear?: number | null
+  trim?: string | null
+  doors?: number | null
+  engineKw?: number | null
+  engineHp?: number | null
+  fuelTypeId?: number | null
+  transmissionId?: number | null
+  driveTypeId?: number | null
+}
+
+// Resolves a decoded model name to this make's model id by querying the same
+// endpoint the Model <Select> uses, independent of that select's own load state
+// (avoids racing the reactive models list, which may still reflect a stale make).
+async function resolveModelId(makeId: number, modelName: string): Promise<number | null> {
+  try {
+    const res = await fetch(`/api/models?makeId=${makeId}`)
+    if (!res.ok) return null
+    const list: Array<{ id: number; name: string }> = await res.json()
+    const normalized = modelName.toLowerCase()
+    const exact = list.find(m => m.name.toLowerCase() === normalized)
+    if (exact) return exact.id
+    const partial = list.find(m => m.name.toLowerCase().includes(normalized) || normalized.includes(m.name.toLowerCase()))
+    return partial?.id ?? null
+  } catch {
+    return null
+  }
+}
 
 interface StepMainInfoProps {
   data: CreateListingFormData
@@ -81,8 +122,181 @@ export function StepMainInfo({ data, onUpdate }: StepMainInfoProps) {
     onUpdate({ [name]: parsedValue })
   }
 
+  // VIN decoding — chassi runs offline first for an instant make/year guess, then NHTSA
+  // vPIC is queried and takes priority whenever it returns data: it covers far more
+  // manufacturers/models and is the only source here for fuel type, transmission,
+  // drive type, doors and engine power. Everything is resolved before a single onUpdate
+  // call, rather than trickled in via reactive effects, so there's no race against the
+  // Model <Select>'s own (independent) models fetch.
+  const [vinDecodeState, setVinDecodeState] = useState<{ status: 'idle' | 'loading' | 'success' | 'error'; message: string }>({
+    status: 'idle',
+    message: '',
+  })
+
+  const matchMakeByName = (name: string | null | undefined): LookupOption | undefined => {
+    if (!name) return undefined
+    const normalized = name.toLowerCase()
+    return (
+      makes.find(m => m.label.toLowerCase() === normalized) ??
+      makes.find(m => m.label.toLowerCase().includes(normalized) || normalized.includes(m.label.toLowerCase()))
+    )
+  }
+
+  const handleDecodeVin = async () => {
+    const vin = data.vinCode.trim().toUpperCase()
+    if (vin.length !== 17) {
+      setVinDecodeState({ status: 'error', message: 'VIN must be exactly 17 characters' })
+      return
+    }
+
+    setVinDecodeState({ status: 'loading', message: 'Decoding VIN…' })
+
+    // 1) Offline pass via chassi — instant, but only covers a small set of WMIs for model inference
+    const chassiResult = decodeVin(vin)
+    let make = matchMakeByName(chassiResult.manufacturer)
+    let modelName = chassiResult.model ?? null
+    let year = chassiResult.year ?? null
+
+    // 2) NHTSA vPIC — broader coverage; overrides chassi's guess whenever it has data
+    let nhtsa: NhtsaVinDecodeResponse | null = null
+    let nhtsaFailed = false
+    try {
+      const res = await fetch(`/api/vin-decode?vin=${encodeURIComponent(vin)}`)
+      const json = (await res.json()) as NhtsaVinDecodeResponse
+      if (res.ok && json.success) {
+        nhtsa = json
+      } else {
+        nhtsaFailed = true
+      }
+    } catch {
+      nhtsaFailed = true
+    }
+
+    if (nhtsa) {
+      // Make comes from the WMI alone (positions 1-3), which decodes fine even when the
+      // rest of the VIN doesn't — safe to use regardless of `reliable`.
+      make = matchMakeByName(nhtsa.make) ?? make
+      // Model/year come from the VDS/year-code, which is exactly what `reliable: false`
+      // warns about — only trust NHTSA's version when it says the decode was clean.
+      if (nhtsa.reliable) {
+        modelName = nhtsa.model ?? modelName
+        year = nhtsa.modelYear ?? year
+      }
+    }
+
+    const updates: Partial<CreateListingFormData> = {}
+    const filled: string[] = []
+
+    if (year) updates.yearManufactured = year
+    if (make) {
+      updates.makeId = make.value
+      updates.modelId = modelName ? await resolveModelId(make.value, modelName) : null
+      if (updates.modelId) filled.push('model')
+    }
+    if (nhtsa?.trim && !data.modelTrim) {
+      updates.modelTrim = nhtsa.trim
+      filled.push('trim')
+    }
+    if (nhtsa?.fuelTypeId) {
+      updates.fuelTypeId = nhtsa.fuelTypeId
+      filled.push('fuel type')
+    }
+    if (nhtsa?.transmissionId) {
+      updates.transmissionId = nhtsa.transmissionId
+      filled.push('transmission')
+    }
+    if (nhtsa?.driveTypeId) {
+      updates.driveTypeId = nhtsa.driveTypeId
+      filled.push('drive type')
+    }
+    if (nhtsa?.doors) {
+      updates.doors = nhtsa.doors
+      filled.push('doors')
+    }
+    if (nhtsa?.engineKw) {
+      updates.enginePowerKw = nhtsa.engineKw
+      updates.enginePowerHp = nhtsa.engineHp ?? null
+      filled.push('engine power')
+    }
+
+    if (Object.keys(updates).length > 0) onUpdate(updates)
+
+    const parts: string[] = []
+    if (make) parts.push(make.label)
+    else if (nhtsa?.make ?? chassiResult.manufacturer) parts.push(`${nhtsa?.make ?? chassiResult.manufacturer} (not in make list)`)
+    if (modelName) parts.push(modelName)
+    if (year) parts.push(String(year))
+
+    const caveat = nhtsaFailed
+      ? ' — NHTSA lookup failed, some fields may be incomplete'
+      : nhtsa && !nhtsa.reliable
+        ? ' — NHTSA flagged this VIN as low-confidence, used offline data only for model/year'
+        : ''
+
+    setVinDecodeState({
+      status: parts.length ? 'success' : 'error',
+      message: parts.length
+        ? `Decoded: ${parts.join(' · ')}${filled.length ? ` (also filled ${filled.join(', ')})` : ''}${caveat}`
+        : 'Could not decode this VIN — fill the fields in manually',
+    })
+  }
+
   return (
     <div className="space-y-6">
+
+      {/* VIN & Reg */}
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium mb-1">VIN Code</label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              name="vinCode"
+              value={data.vinCode ?? ''}
+              onChange={(e) => {
+                handleInputChange(e)
+                setVinDecodeState({ status: 'idle', message: '' })
+              }}
+              placeholder="17-char VIN"
+              maxLength={17}
+              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase"
+            />
+            <button
+              type="button"
+              onClick={handleDecodeVin}
+              disabled={data.vinCode.trim().length !== 17 || vinDecodeState.status === 'loading'}
+              className="shrink-0 px-3 py-2 rounded-lg border border-blue-600 text-blue-700 text-sm font-medium hover:bg-blue-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            >
+              {vinDecodeState.status === 'loading' ? 'Decoding…' : 'Decode'}
+            </button>
+          </div>
+          {vinDecodeState.status !== 'idle' && (
+            <p
+              className={`mt-1 text-xs ${
+                vinDecodeState.status === 'success'
+                  ? 'text-green-700'
+                  : vinDecodeState.status === 'loading'
+                    ? 'text-neutral-500'
+                    : 'text-amber-700'
+              }`}
+            >
+              {vinDecodeState.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">Registration Number</label>
+          <input
+            type="text"
+            name="regNr"
+            value={data.regNr ?? ''}
+            onChange={handleInputChange}
+            placeholder="e.g. ABC123"
+            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
 
       {/* Listing Type */}
       <div>
@@ -145,7 +359,7 @@ export function StepMainInfo({ data, onUpdate }: StepMainInfoProps) {
         <input
           type="text"
           name="modelTrim"
-          value={data.modelTrim}
+          value={data.modelTrim ?? ''}
           onChange={handleInputChange}
           placeholder="e.g. Sport, Luxury"
           className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -307,7 +521,7 @@ export function StepMainInfo({ data, onUpdate }: StepMainInfoProps) {
           <input
             type="number"
             name="price"
-            value={data.price}
+            value={data.price ?? ''}
             onChange={handleInputChange}
             placeholder="0.00"
             min="0"
@@ -331,34 +545,6 @@ export function StepMainInfo({ data, onUpdate }: StepMainInfoProps) {
           isClearable
           styles={selectStyles}
         />
-      </div>
-
-      {/* VIN & Reg */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">VIN Code</label>
-          <input
-            type="text"
-            name="vinCode"
-            value={data.vinCode}
-            onChange={handleInputChange}
-            placeholder="17-char VIN"
-            maxLength={17}
-            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Registration Number</label>
-          <input
-            type="text"
-            name="regNr"
-            value={data.regNr}
-            onChange={handleInputChange}
-            placeholder="e.g. ABC123"
-            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
       </div>
 
     </div>

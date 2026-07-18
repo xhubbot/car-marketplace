@@ -1,19 +1,29 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import Select from 'react-select'
 import { useLookups, type LookupOption, type LocationGroup } from '@/hooks/useLookups'
-import { useDealerRegisterForm } from '@/hooks/useDealerRegisterForm'
+import { useMakes } from '@/hooks/useMakes'
+import { useDealerRegisterForm, type DealerContactType } from '@/hooks/useDealerRegisterForm'
 
-const DAY_OPTIONS = [
-  { value: 0, label: 'Monday' },
-  { value: 1, label: 'Tuesday' },
-  { value: 2, label: 'Wednesday' },
-  { value: 3, label: 'Thursday' },
-  { value: 4, label: 'Friday' },
-  { value: 5, label: 'Saturday' },
-  { value: 6, label: 'Sunday' },
+const DAY_KEYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as const
+const CONTACT_TYPE_VALUES: DealerContactType[] = [
+  'phone', 'email', 'website', 'facebook', 'instagram', 'whatsapp', 'telegram', 'linkedin', 'youtube', 'other',
 ]
+
+const CONTACT_VALUE_PLACEHOLDER: Record<DealerContactType, string> = {
+  phone: '+372 xxx xxxx',
+  email: 'info@example.com',
+  website: 'https://example.com',
+  facebook: 'https://facebook.com/…',
+  instagram: 'https://instagram.com/…',
+  whatsapp: '+372 xxx xxxx',
+  telegram: '@username',
+  linkedin: 'https://linkedin.com/company/…',
+  youtube: 'https://youtube.com/@…',
+  other: '',
+}
 
 const selectStyles = {
   control: (base: object, state: { isFocused: boolean }) => ({
@@ -48,9 +58,22 @@ function findInGroups(groups: LocationGroup[], value: number | null): LookupOpti
   return null
 }
 
+function findManyInGroups(groups: LocationGroup[], values: number[]): LookupOption[] {
+  const all = groups.flatMap(g => g.options)
+  return values
+    .map(v => all.find(o => o.value === v))
+    .filter((o): o is LookupOption => o !== undefined)
+}
+
 export function DealerRegisterForm() {
   const router = useRouter()
-  const { locations, countries, isLoading: lookupsLoading } = useLookups()
+  const params = useParams()
+  const locale = params.locale as string
+  const t = useTranslations('dealer.register')
+  const tDays = useTranslations('dealer.days')
+  const tContact = useTranslations('dealer.contactTypes')
+  const { locations, countries, dealerCategories, isLoading: lookupsLoading } = useLookups(locale)
+  const { makes, isLoading: makesLoading } = useMakes()
   const {
     formData,
     isSubmitting,
@@ -60,11 +83,16 @@ export function DealerRegisterForm() {
     addWorkingHourRow,
     updateWorkingHourRow,
     removeWorkingHourRow,
+    addContactRow,
+    updateContactRow,
+    removeContactRow,
     submitDealer,
   } = useDealerRegisterForm()
 
   const selectedLocation = findInGroups(locations, formData.locationId)
   const selectedCountry = countries.find(c => c.value === formData.countryId) ?? null
+  const selectedCategories = findManyInGroups(dealerCategories, formData.categoryIds)
+  const selectedMakes = makes.filter(m => formData.makeIds.includes(m.value))
 
   const isValid = formData.companyName.trim() !== '' && formData.address.trim() !== ''
 
@@ -77,25 +105,25 @@ export function DealerRegisterForm() {
     if (!isValid) return
     const result = await submitDealer()
     if (result.success) {
-      router.push('/dealer')
+      router.push('/dealer/admin')
     } else {
-      alert(result.error || 'Failed to register dealer')
+      alert(result.error || t('errorFallback'))
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-3xl mx-auto py-8 px-4 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Register Your Dealership</h1>
-        <p className="text-neutral-600">Tell us about your company so buyers can find and trust you.</p>
+        <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
+        <p className="text-neutral-600">{t('subtitle')}</p>
       </div>
 
       {/* Company info */}
       <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
-        <h2 className="text-lg font-bold">Company Information</h2>
+        <h2 className="text-lg font-bold">{t('companyInfo.heading')}</h2>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Company Name *</label>
+          <label className="block text-sm font-medium mb-1">{t('companyInfo.companyName')}</label>
           <input
             type="text"
             name="companyName"
@@ -108,7 +136,7 @@ export function DealerRegisterForm() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Registry Code</label>
+            <label className="block text-sm font-medium mb-1">{t('companyInfo.registryCode')}</label>
             <input
               type="text"
               name="registryCode"
@@ -118,7 +146,7 @@ export function DealerRegisterForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">VAT Number</label>
+            <label className="block text-sm font-medium mb-1">{t('companyInfo.vatNumber')}</label>
             <input
               type="text"
               name="vatNumber"
@@ -128,26 +156,14 @@ export function DealerRegisterForm() {
             />
           </div>
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Homepage</label>
-          <input
-            type="text"
-            name="homepage"
-            value={formData.homepage}
-            onChange={handleInputChange}
-            placeholder="http://www.example.com"
-            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
       </div>
 
       {/* Address & contact */}
       <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
-        <h2 className="text-lg font-bold">Address & Contact</h2>
+        <h2 className="text-lg font-bold">{t('addressContact.heading')}</h2>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Address *</label>
+          <label className="block text-sm font-medium mb-1">{t('addressContact.address')}</label>
           <input
             type="text"
             name="address"
@@ -160,27 +176,27 @@ export function DealerRegisterForm() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">City / County</label>
+            <label className="block text-sm font-medium mb-1">{t('addressContact.cityCounty')}</label>
             <Select
               instanceId="location-select"
               options={locations}
               value={selectedLocation}
               onChange={(option) => update({ locationId: option?.value ?? null })}
               isLoading={lookupsLoading}
-              placeholder="Select location…"
+              placeholder={t('addressContact.selectLocation')}
               isClearable
               styles={selectStyles}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Country</label>
+            <label className="block text-sm font-medium mb-1">{t('addressContact.country')}</label>
             <Select
               instanceId="country-select"
               options={countries}
               value={selectedCountry}
               onChange={(option) => update({ countryId: option?.value ?? null })}
               isLoading={lookupsLoading}
-              placeholder="Select country…"
+              placeholder={t('addressContact.selectCountry')}
               isClearable
               styles={selectStyles}
             />
@@ -188,7 +204,7 @@ export function DealerRegisterForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Postcode</label>
+          <label className="block text-sm font-medium mb-1">{t('addressContact.postcode')}</label>
           <input
             type="text"
             name="postcode"
@@ -198,75 +214,118 @@ export function DealerRegisterForm() {
           />
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Phone</label>
+      </div>
+
+      {/* Contacts */}
+      <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
+        <h2 className="text-lg font-bold">{t('contacts.heading')}</h2>
+
+        {formData.contacts.map((row, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <select
+              value={row.type}
+              onChange={(e) => updateContactRow(index, { type: e.target.value as DealerContactType })}
+              className="px-2 py-2 border border-neutral-300 rounded-lg text-sm w-36 shrink-0"
+            >
+              {CONTACT_TYPE_VALUES.map(v => <option key={v} value={v}>{tContact(v)}</option>)}
+            </select>
             <input
               type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="+372 xxx xxxx"
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={row.value}
+              onChange={(e) => updateContactRow(index, { value: e.target.value })}
+              placeholder={CONTACT_VALUE_PLACEHOLDER[row.type]}
+              className="flex-1 px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            {formData.contacts.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removeContactRow(index)}
+                className="shrink-0 text-xs text-red-600 hover:text-red-800 font-medium"
+              >
+                {t('contacts.remove')}
+              </button>
+            )}
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Fax</label>
-            <input
-              type="text"
-              name="fax"
-              value={formData.fax}
-              onChange={handleInputChange}
-              placeholder="+372 xxx xxxx"
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
+        ))}
+
+        <button
+          type="button"
+          onClick={addContactRow}
+          className="text-sm font-semibold text-blue-600 hover:text-blue-800"
+        >
+          {t('contacts.addContact')}
+        </button>
+      </div>
+
+      {/* Business categories */}
+      <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
+        <h2 className="text-lg font-bold">{t('categories.heading')}</h2>
+        <p className="text-sm text-neutral-500">{t('categories.description')}</p>
+        <Select
+          instanceId="categories-select"
+          options={dealerCategories}
+          value={selectedCategories}
+          onChange={(options) => update({ categoryIds: options.map(o => o.value) })}
+          isLoading={lookupsLoading}
+          isMulti
+          isClearable
+          placeholder={t('categories.placeholder')}
+          styles={selectStyles}
+          noOptionsMessage={() => t('categories.noOptions')}
+        />
+      </div>
+
+      {/* Makes sold */}
+      <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
+        <h2 className="text-lg font-bold">{t('makes.heading')}</h2>
+        <p className="text-sm text-neutral-500">{t('makes.description')}</p>
+        <Select
+          instanceId="makes-select"
+          options={makes}
+          value={selectedMakes}
+          onChange={(options) => update({ makeIds: options.map(o => o.value) })}
+          isLoading={makesLoading}
+          isMulti
+          isClearable
+          placeholder={t('makes.placeholder')}
+          styles={selectStyles}
+          noOptionsMessage={() => t('makes.noOptions')}
+        />
       </div>
 
       {/* Images */}
       <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
-        <h2 className="text-lg font-bold">Images</h2>
+        <h2 className="text-lg font-bold">{t('images.heading')}</h2>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Company Logo</label>
+            <label className="block text-sm font-medium mb-1">{t('images.logo')}</label>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setLogo(e.target.files?.[0] ?? null)}
-              className="w-full text-sm"
+              className="text-sm text-neutral-500 cursor-pointer file:cursor-pointer file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:transition-colors"
             />
             {formData.logo && (
               <img
                 src={URL.createObjectURL(formData.logo)}
-                alt="Logo preview"
+                alt={t('images.logoPreviewAlt')}
                 className="mt-2 h-20 w-20 object-cover rounded-lg border border-neutral-200"
               />
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Company Building Photo</label>
+            <label className="block text-sm font-medium mb-1">{t('images.cover')}</label>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setCoverImage(e.target.files?.[0] ?? null)}
-              className="w-full text-sm"
+              className="text-sm text-neutral-500 cursor-pointer file:cursor-pointer file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:transition-colors"
             />
             {formData.coverImage && (
               <img
                 src={URL.createObjectURL(formData.coverImage)}
-                alt="Building preview"
+                alt={t('images.coverPreviewAlt')}
                 className="mt-2 h-20 w-32 object-cover rounded-lg border border-neutral-200"
               />
             )}
@@ -276,7 +335,7 @@ export function DealerRegisterForm() {
 
       {/* Working hours */}
       <div className="bg-white rounded-lg shadow-sm p-6 space-y-4">
-        <h2 className="text-lg font-bold">Working Hours</h2>
+        <h2 className="text-lg font-bold">{t('workingHours.heading')}</h2>
 
         {formData.workingHours.map((row, index) => (
           <div key={index} className="border border-neutral-200 rounded-lg p-4 space-y-3">
@@ -286,17 +345,17 @@ export function DealerRegisterForm() {
                 onChange={(e) => updateWorkingHourRow(index, { fromDay: e.target.value ? Number(e.target.value) : null })}
                 className="px-2 py-1.5 border border-neutral-300 rounded-lg text-sm"
               >
-                <option value="">Day</option>
-                {DAY_OPTIONS.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
+                <option value="">{t('workingHours.day')}</option>
+                {DAY_KEYS.map((key, value) => <option key={key} value={value}>{tDays(key)}</option>)}
               </select>
-              <span className="text-sm text-neutral-500">to</span>
+              <span className="text-sm text-neutral-500">{t('workingHours.to')}</span>
               <select
                 value={row.toDay ?? ''}
                 onChange={(e) => updateWorkingHourRow(index, { toDay: e.target.value ? Number(e.target.value) : null })}
                 className="px-2 py-1.5 border border-neutral-300 rounded-lg text-sm"
               >
-                <option value="">Day</option>
-                {DAY_OPTIONS.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
+                <option value="">{t('workingHours.day')}</option>
+                {DAY_KEYS.map((key, value) => <option key={key} value={value}>{tDays(key)}</option>)}
               </select>
 
               {formData.workingHours.length > 1 && (
@@ -305,7 +364,7 @@ export function DealerRegisterForm() {
                   onClick={() => removeWorkingHourRow(index)}
                   className="ml-auto text-xs text-red-600 hover:text-red-800 font-medium"
                 >
-                  Remove
+                  {t('workingHours.remove')}
                 </button>
               )}
             </div>
@@ -316,7 +375,7 @@ export function DealerRegisterForm() {
                 onChange={(e) => updateWorkingHourRow(index, { fromHour: e.target.value ? Number(e.target.value) : null })}
                 className="px-2 py-1.5 border border-neutral-300 rounded-lg text-sm"
               >
-                <option value="">HH</option>
+                <option value="">{t('workingHours.hourPlaceholder')}</option>
                 {Array.from({ length: 24 }, (_, i) => i).map(h => <option key={h} value={h}>{String(h).padStart(2, '0')}</option>)}
               </select>
               <select
@@ -324,16 +383,16 @@ export function DealerRegisterForm() {
                 onChange={(e) => updateWorkingHourRow(index, { fromMin: e.target.value ? Number(e.target.value) : null })}
                 className="px-2 py-1.5 border border-neutral-300 rounded-lg text-sm"
               >
-                <option value="">MM</option>
+                <option value="">{t('workingHours.minutePlaceholder')}</option>
                 {[0, 15, 30, 45].map(m => <option key={m} value={m}>{String(m).padStart(2, '0')}</option>)}
               </select>
-              <span className="text-sm text-neutral-500">to</span>
+              <span className="text-sm text-neutral-500">{t('workingHours.to')}</span>
               <select
                 value={row.toHour ?? ''}
                 onChange={(e) => updateWorkingHourRow(index, { toHour: e.target.value ? Number(e.target.value) : null })}
                 className="px-2 py-1.5 border border-neutral-300 rounded-lg text-sm"
               >
-                <option value="">HH</option>
+                <option value="">{t('workingHours.hourPlaceholder')}</option>
                 {Array.from({ length: 24 }, (_, i) => i).map(h => <option key={h} value={h}>{String(h).padStart(2, '0')}</option>)}
               </select>
               <select
@@ -341,7 +400,7 @@ export function DealerRegisterForm() {
                 onChange={(e) => updateWorkingHourRow(index, { toMin: e.target.value ? Number(e.target.value) : null })}
                 className="px-2 py-1.5 border border-neutral-300 rounded-lg text-sm"
               >
-                <option value="">MM</option>
+                <option value="">{t('workingHours.minutePlaceholder')}</option>
                 {[0, 15, 30, 45].map(m => <option key={m} value={m}>{String(m).padStart(2, '0')}</option>)}
               </select>
 
@@ -349,7 +408,7 @@ export function DealerRegisterForm() {
                 type="text"
                 value={row.note}
                 onChange={(e) => updateWorkingHourRow(index, { note: e.target.value })}
-                placeholder="Additional info"
+                placeholder={t('workingHours.notePlaceholder')}
                 className="flex-1 min-w-40 px-3 py-1.5 border border-neutral-300 rounded-lg text-sm"
               />
             </div>
@@ -361,7 +420,7 @@ export function DealerRegisterForm() {
           onClick={addWorkingHourRow}
           className="text-sm font-semibold text-blue-600 hover:text-blue-800"
         >
-          + Add another row
+          {t('workingHours.addRow')}
         </button>
       </div>
 
@@ -370,7 +429,7 @@ export function DealerRegisterForm() {
         disabled={isSubmitting || !isValid}
         className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition"
       >
-        {isSubmitting ? 'Submitting…' : 'Register Dealership'}
+        {isSubmitting ? t('submitting') : t('submit')}
       </button>
     </form>
   )

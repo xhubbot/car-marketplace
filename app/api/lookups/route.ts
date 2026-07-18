@@ -18,17 +18,60 @@ export interface LookupsResponse {
   colors: LookupOption[]
   locations: LocationGroup[]
   countries: LookupOption[]
+  dealerCategories: LocationGroup[]
+}
+
+interface TreeRow {
+  id: number
+  parentId: number | null
+  fallbackName: string
+}
+
+// Flattens an N-level category tree into grouped, indented options: each
+// top-level category becomes a group (plus a selectable "(all)" option for
+// the top-level itself), with every descendant listed under it regardless of
+// depth, prefixed with "— " per nesting level below the first.
+function buildCategoryGroups(rows: TreeRow[], labelFor: (id: number, fallback: string) => string): LocationGroup[] {
+  const byParent = new Map<number | null, TreeRow[]>()
+  for (const row of rows) {
+    const key = row.parentId
+    if (!byParent.has(key)) byParent.set(key, [])
+    byParent.get(key)!.push(row)
+  }
+
+  function flattenDescendants(parentId: number, depth: number): LookupOption[] {
+    const children = byParent.get(parentId) ?? []
+    const result: LookupOption[] = []
+    for (const child of children) {
+      const prefix = depth > 0 ? '— '.repeat(depth) : ''
+      result.push({ value: child.id, label: `${prefix}${labelFor(child.id, child.fallbackName)}` })
+      result.push(...flattenDescendants(child.id, depth + 1))
+    }
+    return result
+  }
+
+  const topLevel = byParent.get(null) ?? []
+  return topLevel.map(top => {
+    const topLabel = labelFor(top.id, top.fallbackName)
+    return {
+      label: topLabel,
+      options: [
+        { value: top.id, label: `${topLabel} (all)` },
+        ...flattenDescendants(top.id, 0),
+      ],
+    }
+  })
 }
 
 export async function GET(request: NextRequest) {
   const locale = (request.nextUrl.searchParams.get('locale') ?? 'en') as string
 
   try {
-    // Fetch all translations for the 5 categories in one query
+    // Fetch all translations for the lookup categories in one query
     const translations = await prisma.translation.findMany({
       where: {
         languageCode: locale,
-        category: { in: ['fuel_type', 'transmission', 'drive_type', 'color', 'location', 'country'] },
+        category: { in: ['fuel_type', 'transmission', 'drive_type', 'color', 'location', 'country', 'dealer_category'] },
       },
       select: { category: true, refId: true, name: true },
     })
@@ -113,6 +156,13 @@ export async function GET(request: NextRequest) {
       label: label('country', r.id, r.fallbackName),
     }))
 
+    // Dealer business-activity tree ("Tegevusalad") — grouped by top-level category
+    const categoryRows = await prisma.dealerCategory.findMany({
+      select: { id: true, parentId: true, fallbackName: true },
+      orderBy: { id: 'asc' },
+    })
+    const dealerCategories = buildCategoryGroups(categoryRows, (id, fallback) => label('dealer_category', id, fallback))
+
     // Also add top-level county as a selectable option (prepend to each group)
     const locationsWithCounty: LocationGroup[] = locations.map(group => {
       const county = counties.find(c => label('location', c.id, c.fallbackName) === group.label)
@@ -133,6 +183,7 @@ export async function GET(request: NextRequest) {
       colors,
       locations: locationsWithCounty,
       countries,
+      dealerCategories,
     } satisfies LookupsResponse)
   } catch (error) {
     console.error('[GET /api/lookups]', error)

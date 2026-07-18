@@ -10,6 +10,7 @@ interface UseLookupsResult {
   colors: LookupOption[]
   locations: LocationGroup[]
   countries: LookupOption[]
+  dealerCategories: LocationGroup[]
   isLoading: boolean
   error: string | null
 }
@@ -21,6 +22,7 @@ const EMPTY: LookupsResponse = {
   colors: [],
   locations: [],
   countries: [],
+  dealerCategories: [],
 }
 
 export function useLookups(locale = 'en'): UseLookupsResult {

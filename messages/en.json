@@ -18,80 +18,201 @@
     "brand": "Admin Panel",
     "nav": {
       "dashboard": "Dashboard",
-      "listings":  "Listings",
-      "users":     "Users",
+      "listings": "Listings",
+      "users": "Users",
       "analytics": "Analytics",
-      "settings":  "Settings",
-      "logout":    "Sign Out"
+      "settings": "Settings",
+      "logout": "Sign Out"
     },
     "topbar": {
       "section": "Administration",
-      "badge":   "Restricted Access"
+      "badge": "Restricted Access"
     },
     "page": {
-      "title":       "This is the Admin Page",
+      "title": "This is the Admin Page",
       "description": "Full platform oversight — manage listings, users, and system settings."
     },
     "stats": {
-      "listings":   "Listings",
-      "pending":    "awaiting review",
-      "users":      "Users",
+      "listings": "Listings",
+      "pending": "awaiting review",
+      "users": "Users",
       "registered": "total registered",
-      "dealers":    "Dealers",
-      "active":     "active accounts",
-      "disputes":   "Disputes",
-      "open":       "open cases"
+      "dealers": "Dealers",
+      "active": "active accounts",
+      "disputes": "Disputes",
+      "open": "open cases"
     },
     "notice": {
       "title": "Admin area",
-      "body":  "You have access to sensitive platform data. All actions are logged and audited."
+      "body": "You have access to sensitive platform data. All actions are logged and audited."
     },
     "quick": {
-      "listings":      "Manage Listings",
-      "listingsDesc":  "Review, approve, or remove car listings submitted by users.",
-      "users":         "Manage Users",
-      "usersDesc":     "View user profiles, roles, and account status.",
-      "analytics":     "Analytics",
+      "listings": "Manage Listings",
+      "listingsDesc": "Review, approve, or remove car listings submitted by users.",
+      "users": "Manage Users",
+      "usersDesc": "View user profiles, roles, and account status.",
+      "analytics": "Analytics",
       "analyticsDesc": "Platform-wide traffic, conversions, and revenue metrics."
     }
   },
   "dealer": {
-    "brand": "Dealer Portal",
-    "nav": {
-      "overview":  "Overview",
-      "inventory": "Inventory",
-      "leads":     "Leads",
-      "reports":   "Reports"
+    "admin": {
+      "brand": "Dealer Portal",
+      "nav": {
+        "overview": "Overview",
+        "inventory": "Inventory",
+        "leads": "Leads",
+        "reports": "Reports"
+      },
+      "topbar": {
+        "dealerAccount": "Dealer Account"
+      },
+      "page": {
+        "title": "This is the Dealer Page",
+        "description": "Manage your inventory, track leads, and grow your dealership on autod.pro.",
+        "addListing": "Add Listing"
+      },
+      "metrics": {
+        "activeListing": "Active Listings",
+        "totalViews": "Total Views",
+        "leads": "Leads",
+        "sold": "Sold",
+        "thisMonth": "this month",
+        "last7days": "last 7 days",
+        "newLeads": "new this week"
+      },
+      "actions": {
+        "inventory": "Inventory",
+        "inventoryDesc": "Browse and manage your full vehicle stock.",
+        "leads": "Leads",
+        "leadsDesc": "Track buyer enquiries and follow-up conversations.",
+        "reports": "Reports",
+        "reportsDesc": "View performance stats for your listings.",
+        "open": "Open"
+      },
+      "info": {
+        "title": "Dealer portal",
+        "body": "This is the dealer page. You can manage your listings, respond to leads, and view analytics for your showroom."
+      }
     },
-    "topbar": {
-      "dealerAccount": "Dealer Account"
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
     },
-    "page": {
-      "title":       "This is the Dealer Page",
-      "description": "Manage your inventory, track leads, and grow your dealership on autod.pro.",
-      "addListing":  "Add Listing"
+    "contactTypes": {
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "other": "Other"
     },
-    "metrics": {
-      "activeListing": "Active Listings",
-      "totalViews":    "Total Views",
-      "leads":         "Leads",
-      "sold":          "Sold",
-      "thisMonth":     "this month",
-      "last7days":     "last 7 days",
-      "newLeads":      "new this week"
+    "register": {
+      "title": "Register Your Dealership",
+      "subtitle": "Tell us about your company so buyers can find and trust you.",
+      "companyInfo": {
+        "heading": "Company Information",
+        "companyName": "Company Name *",
+        "registryCode": "Registry Code",
+        "vatNumber": "VAT Number"
+      },
+      "addressContact": {
+        "heading": "Address & Contact",
+        "address": "Address *",
+        "cityCounty": "City / County",
+        "selectLocation": "Select location…",
+        "country": "Country",
+        "selectCountry": "Select country…",
+        "postcode": "Postcode"
+      },
+      "contacts": {
+        "heading": "Contacts",
+        "remove": "Remove",
+        "addContact": "+ Add contact"
+      },
+      "categories": {
+        "heading": "Business Categories",
+        "description": "Select every area your business is active in — search or pick from the list.",
+        "placeholder": "Search business categories…",
+        "noOptions": "No categories found"
+      },
+      "makes": {
+        "heading": "Makes Sold",
+        "description": "Select every car make your dealership sells — search or pick from the list.",
+        "placeholder": "Search makes…",
+        "noOptions": "No makes found"
+      },
+      "images": {
+        "heading": "Images",
+        "logo": "Company Logo",
+        "logoPreviewAlt": "Logo preview",
+        "cover": "Company Building Photo",
+        "coverPreviewAlt": "Building preview"
+      },
+      "workingHours": {
+        "heading": "Working Hours",
+        "day": "Day",
+        "to": "to",
+        "hourPlaceholder": "HH",
+        "minutePlaceholder": "MM",
+        "notePlaceholder": "Additional info",
+        "remove": "Remove",
+        "addRow": "+ Add another row"
+      },
+      "submit": "Register Dealership",
+      "submitting": "Submitting…",
+      "errorFallback": "Failed to register dealer"
     },
-    "actions": {
-      "inventory":     "Inventory",
-      "inventoryDesc": "Browse and manage your full vehicle stock.",
-      "leads":         "Leads",
-      "leadsDesc":     "Track buyer enquiries and follow-up conversations.",
-      "reports":       "Reports",
-      "reportsDesc":   "View performance stats for your listings.",
-      "open":          "Open"
+    "search": {
+      "title": "Dealers",
+      "subtitle": "Search and filter registered dealerships.",
+      "filters": {
+        "name": "Dealer Name",
+        "namePlaceholder": "Search by name…",
+        "registryCode": "Registry Code",
+        "registryCodePlaceholder": "Search by registry code…",
+        "vatNumber": "Tax Number",
+        "vatNumberPlaceholder": "Search by tax number…",
+        "category": "Business Category",
+        "categoryPlaceholder": "Any category…",
+        "make": "Make",
+        "makePlaceholder": "Any make…",
+        "noCategoriesFound": "No categories found",
+        "noMakesFound": "No makes found",
+        "clear": "Clear filters"
+      },
+      "searching": "Searching…",
+      "resultsFound": "{count, plural, one {# dealer found} other {# dealers found}}",
+      "noResults": "No dealers match your search.",
+      "registryCodeLabel": "Registry code: {code}",
+      "taxNumberLabel": "Tax number: {number}",
+      "moreCount": "+{count} more",
+      "pagination": {
+        "previous": "← Previous",
+        "next": "Next →",
+        "pageOf": "Page {page} of {total}"
+      }
     },
-    "info": {
-      "title": "Dealer portal",
-      "body":  "This is the dealer page. You can manage your listings, respond to leads, and view analytics for your showroom."
+    "detail": {
+      "address": "Address",
+      "contacts": "Contacts",
+      "workingHours": "Working Hours",
+      "categories": "Business Categories",
+      "makes": "Makes Sold",
+      "listings": "Listings",
+      "noListings": "This dealer has no active listings right now.",
+      "registryCodeLabel": "Registry code: {code}",
+      "taxNumberLabel": "Tax number: {number}",
+      "closed": "Closed"
     }
   }
 }

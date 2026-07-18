@@ -9,13 +9,13 @@ interface DealerLayoutProps {
 }
 
 function DealerHeader({ locale }: { locale: string }) {
-  const t = useTranslations('dealer');
+  const t = useTranslations('dealer.admin');
 
   const navItems = [
-    { label: t('nav.overview'),   href: `/${locale}/dealer` },
-    { label: t('nav.inventory'),  href: `/${locale}/dealer/inventory` },
-    { label: t('nav.leads'),      href: `/${locale}/dealer/leads` },
-    { label: t('nav.reports'),    href: `/${locale}/dealer/reports` },
+    { label: t('nav.overview'),   href: `/${locale}/dealer/admin` },
+    { label: t('nav.inventory'),  href: `/${locale}/dealer/admin/inventory` },
+    { label: t('nav.leads'),      href: `/${locale}/dealer/admin/leads` },
+    { label: t('nav.reports'),    href: `/${locale}/dealer/admin/reports` },
   ];
 
   return (

@@ -71,6 +71,9 @@ export const ModelName = {
   DealerLocation: 'DealerLocation',
   DealerWorkingHour: 'DealerWorkingHour',
   DealerContact: 'DealerContact',
+  DealerCategory: 'DealerCategory',
+  DealerCategoryLink: 'DealerCategoryLink',
+  DealerMakeLink: 'DealerMakeLink',
   CarListing: 'CarListing',
   CarListingTranslation: 'CarListingTranslation',
   CarListingFeature: 'CarListingFeature',
@@ -258,7 +261,6 @@ export const DealerScalarFieldEnum = {
   vatNumber: 'vatNumber',
   logoPath: 'logoPath',
   coverImagePath: 'coverImagePath',
-  websiteUrl: 'websiteUrl',
   phone: 'phone',
   email: 'email',
   status: 'status',
@@ -290,7 +292,6 @@ export const DealerLocationScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   phone: 'phone',
-  fax: 'fax',
   email: 'email',
   isPrimary: 'isPrimary',
   createdAt: 'createdAt'
@@ -315,17 +316,39 @@ export type DealerWorkingHourScalarFieldEnum = (typeof DealerWorkingHourScalarFi
 export const DealerContactScalarFieldEnum = {
   id: 'id',
   dealerId: 'dealerId',
-  locationId: 'locationId',
-  fullName: 'fullName',
-  position: 'position',
-  phone: 'phone',
-  email: 'email',
-  photoPath: 'photoPath',
+  type: 'type',
+  value: 'value',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt'
 } as const
 
 export type DealerContactScalarFieldEnum = (typeof DealerContactScalarFieldEnum)[keyof typeof DealerContactScalarFieldEnum]
+
+
+export const DealerCategoryScalarFieldEnum = {
+  id: 'id',
+  parentId: 'parentId',
+  fallbackName: 'fallbackName',
+  createdAt: 'createdAt'
+} as const
+
+export type DealerCategoryScalarFieldEnum = (typeof DealerCategoryScalarFieldEnum)[keyof typeof DealerCategoryScalarFieldEnum]
+
+
+export const DealerCategoryLinkScalarFieldEnum = {
+  dealerId: 'dealerId',
+  categoryId: 'categoryId'
+} as const
+
+export type DealerCategoryLinkScalarFieldEnum = (typeof DealerCategoryLinkScalarFieldEnum)[keyof typeof DealerCategoryLinkScalarFieldEnum]
+
+
+export const DealerMakeLinkScalarFieldEnum = {
+  dealerId: 'dealerId',
+  makeId: 'makeId'
+} as const
+
+export type DealerMakeLinkScalarFieldEnum = (typeof DealerMakeLinkScalarFieldEnum)[keyof typeof DealerMakeLinkScalarFieldEnum]
 
 
 export const CarListingScalarFieldEnum = {
@@ -638,7 +661,6 @@ export const DealerOrderByRelevanceFieldEnum = {
   vatNumber: 'vatNumber',
   logoPath: 'logoPath',
   coverImagePath: 'coverImagePath',
-  websiteUrl: 'websiteUrl',
   phone: 'phone',
   email: 'email'
 } as const
@@ -659,7 +681,6 @@ export const DealerLocationOrderByRelevanceFieldEnum = {
   addressLine: 'addressLine',
   postalCode: 'postalCode',
   phone: 'phone',
-  fax: 'fax',
   email: 'email'
 } as const
 
@@ -674,14 +695,17 @@ export type DealerWorkingHourOrderByRelevanceFieldEnum = (typeof DealerWorkingHo
 
 
 export const DealerContactOrderByRelevanceFieldEnum = {
-  fullName: 'fullName',
-  position: 'position',
-  phone: 'phone',
-  email: 'email',
-  photoPath: 'photoPath'
+  value: 'value'
 } as const
 
 export type DealerContactOrderByRelevanceFieldEnum = (typeof DealerContactOrderByRelevanceFieldEnum)[keyof typeof DealerContactOrderByRelevanceFieldEnum]
+
+
+export const DealerCategoryOrderByRelevanceFieldEnum = {
+  fallbackName: 'fallbackName'
+} as const
+
+export type DealerCategoryOrderByRelevanceFieldEnum = (typeof DealerCategoryOrderByRelevanceFieldEnum)[keyof typeof DealerCategoryOrderByRelevanceFieldEnum]
 
 
 export const CarListingOrderByRelevanceFieldEnum = {

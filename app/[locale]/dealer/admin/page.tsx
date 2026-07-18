@@ -12,7 +12,7 @@ function MetricCard({ label, value, trend }: { label: string; value: string; tre
 }
 
 export default function DealerPage() {
-  const t = useTranslations('dealer');
+  const t = useTranslations('dealer.admin');
 
   return (
     <div className="space-y-8 max-w-5xl">

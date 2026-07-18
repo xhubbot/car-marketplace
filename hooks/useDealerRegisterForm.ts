@@ -10,21 +10,34 @@ export interface WorkingHourRow {
   note: string
 }
 
+export type DealerContactType =
+  | 'phone'
+  | 'email'
+  | 'website'
+  | 'facebook'
+  | 'instagram'
+  | 'whatsapp'
+  | 'telegram'
+  | 'linkedin'
+  | 'youtube'
+  | 'other'
+
+export interface ContactRow {
+  type: DealerContactType
+  value: string
+}
+
 export interface DealerRegisterFormData {
   // Company
   companyName: string
   registryCode: string
   vatNumber: string
-  homepage: string
 
   // Contact / address
   address: string
   locationId: number | null
   countryId: number | null
   postcode: string
-  phone: string
-  fax: string
-  email: string
 
   // Images
   logo: File | null
@@ -32,6 +45,15 @@ export interface DealerRegisterFormData {
 
   // Working hours
   workingHours: WorkingHourRow[]
+
+  // Contacts (phone, email, website, socials, …)
+  contacts: ContactRow[]
+
+  // Business categories ("Tegevusalad")
+  categoryIds: number[]
+
+  // Car makes sold at this dealership
+  makeIds: number[]
 }
 
 interface UseDealerRegisterFormResult {
@@ -43,6 +65,9 @@ interface UseDealerRegisterFormResult {
   addWorkingHourRow: () => void
   updateWorkingHourRow: (index: number, row: Partial<WorkingHourRow>) => void
   removeWorkingHourRow: (index: number) => void
+  addContactRow: () => void
+  updateContactRow: (index: number, row: Partial<ContactRow>) => void
+  removeContactRow: (index: number) => void
   submitDealer: () => Promise<{ success: boolean; dealerId?: number; error?: string }>
 }
 
@@ -56,21 +81,25 @@ const EMPTY_ROW: WorkingHourRow = {
   note: '',
 }
 
+const EMPTY_CONTACT: ContactRow = {
+  type: 'phone',
+  value: '',
+}
+
 const INITIAL_STATE: DealerRegisterFormData = {
   companyName: '',
   registryCode: '',
   vatNumber: '',
-  homepage: '',
   address: '',
   locationId: null,
   countryId: null,
   postcode: '',
-  phone: '',
-  fax: '',
-  email: '',
   logo: null,
   coverImage: null,
   workingHours: [{ ...EMPTY_ROW }],
+  contacts: [{ ...EMPTY_CONTACT }],
+  categoryIds: [],
+  makeIds: [],
 }
 
 export function useDealerRegisterForm(): UseDealerRegisterFormResult {
@@ -107,6 +136,24 @@ export function useDealerRegisterForm(): UseDealerRegisterFormResult {
     }))
   }, [])
 
+  const addContactRow = useCallback(() => {
+    setFormData(prev => ({ ...prev, contacts: [...prev.contacts, { ...EMPTY_CONTACT }] }))
+  }, [])
+
+  const updateContactRow = useCallback((index: number, row: Partial<ContactRow>) => {
+    setFormData(prev => ({
+      ...prev,
+      contacts: prev.contacts.map((c, i) => (i === index ? { ...c, ...row } : c)),
+    }))
+  }, [])
+
+  const removeContactRow = useCallback((index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      contacts: prev.contacts.filter((_, i) => i !== index),
+    }))
+  }, [])
+
   const submitDealer = useCallback(async () => {
     setIsSubmitting(true)
     try {
@@ -114,14 +161,10 @@ export function useDealerRegisterForm(): UseDealerRegisterFormResult {
       body.append('companyName', formData.companyName)
       if (formData.registryCode) body.append('registryCode', formData.registryCode)
       if (formData.vatNumber) body.append('vatNumber', formData.vatNumber)
-      if (formData.homepage) body.append('homepage', formData.homepage)
       body.append('address', formData.address)
       if (formData.locationId) body.append('locationId', String(formData.locationId))
       if (formData.countryId) body.append('countryId', String(formData.countryId))
       if (formData.postcode) body.append('postcode', formData.postcode)
-      if (formData.phone) body.append('phone', formData.phone)
-      if (formData.fax) body.append('fax', formData.fax)
-      if (formData.email) body.append('email', formData.email)
       if (formData.logo) body.append('logo', formData.logo)
       if (formData.coverImage) body.append('coverImage', formData.coverImage)
 
@@ -129,6 +172,12 @@ export function useDealerRegisterForm(): UseDealerRegisterFormResult {
         row => row.fromDay !== null && row.toDay !== null
       )
       body.append('workingHours', JSON.stringify(workingHours))
+
+      const contacts = formData.contacts.filter(row => row.value.trim() !== '')
+      body.append('contacts', JSON.stringify(contacts))
+
+      body.append('categoryIds', JSON.stringify(formData.categoryIds))
+      body.append('makeIds', JSON.stringify(formData.makeIds))
 
       const response = await fetch('/api/dealer/register', {
         method: 'POST',
@@ -158,6 +207,9 @@ export function useDealerRegisterForm(): UseDealerRegisterFormResult {
     addWorkingHourRow,
     updateWorkingHourRow,
     removeWorkingHourRow,
+    addContactRow,
+    updateContactRow,
+    removeContactRow,
     submitDealer,
   }
 }

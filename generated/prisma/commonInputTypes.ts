@@ -246,6 +246,23 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+export type EnumDealerContactTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealerContactType | Prisma.EnumDealerContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealerContactType[]
+  notIn?: $Enums.DealerContactType[]
+  not?: Prisma.NestedEnumDealerContactTypeFilter<$PrismaModel> | $Enums.DealerContactType
+}
+
+export type EnumDealerContactTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealerContactType | Prisma.EnumDealerContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealerContactType[]
+  notIn?: $Enums.DealerContactType[]
+  not?: Prisma.NestedEnumDealerContactTypeWithAggregatesFilter<$PrismaModel> | $Enums.DealerContactType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealerContactTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealerContactTypeFilter<$PrismaModel>
+}
+
 export type BigIntFilter<$PrismaModel = never> = {
   equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
   in?: bigint[] | number[]
@@ -700,6 +717,23 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumDealerContactTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealerContactType | Prisma.EnumDealerContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealerContactType[]
+  notIn?: $Enums.DealerContactType[]
+  not?: Prisma.NestedEnumDealerContactTypeFilter<$PrismaModel> | $Enums.DealerContactType
+}
+
+export type NestedEnumDealerContactTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealerContactType | Prisma.EnumDealerContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealerContactType[]
+  notIn?: $Enums.DealerContactType[]
+  not?: Prisma.NestedEnumDealerContactTypeWithAggregatesFilter<$PrismaModel> | $Enums.DealerContactType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealerContactTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealerContactTypeFilter<$PrismaModel>
 }
 
 export type NestedBigIntFilter<$PrismaModel = never> = {

@@ -22,7 +22,7 @@ export default function Footer() {
           <Link href={`/${locale}`} className="hover:text-neutral-900 dark:hover:text-white">
             Home
           </Link>
-          <Link href={`/${locale}/dealer-register`} className="hover:text-neutral-900 dark:hover:text-white">
+          <Link href={`/${locale}/dealer/register`} className="hover:text-neutral-900 dark:hover:text-white">
             Dealers
           </Link>
           <Link href={`/${locale}/create`} className="hover:text-neutral-900 dark:hover:text-white">

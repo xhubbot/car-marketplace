@@ -142,6 +142,21 @@ export type DealerWorkingHour = Prisma.DealerWorkingHourModel
  */
 export type DealerContact = Prisma.DealerContactModel
 /**
+ * Model DealerCategory
+ * 
+ */
+export type DealerCategory = Prisma.DealerCategoryModel
+/**
+ * Model DealerCategoryLink
+ * 
+ */
+export type DealerCategoryLink = Prisma.DealerCategoryLinkModel
+/**
+ * Model DealerMakeLink
+ * 
+ */
+export type DealerMakeLink = Prisma.DealerMakeLinkModel
+/**
  * Model CarListing
  * 
  */
