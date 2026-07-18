@@ -1,49 +1,91 @@
-import Navbar from '@/components/Navbar';
-import prisma from '@/lib/prisma';
+import Link from 'next/link'
+import { Building2 } from 'lucide-react'
+import Navbar from '@/components/Navbar'
+import prisma from '@/lib/prisma'
 
-export default async function Browse() {
-  const cars = await prisma.car.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
+interface BrowsePageProps {
+  params: Promise<{ locale: string }>
+}
+
+const INTL_LOCALE: Record<string, string> = { en: 'en-US', et: 'et-EE', ru: 'ru-RU' }
+
+function formatPrice(price: unknown, currency: string, locale: string): string {
+  const amount = Number(price)
+  return new Intl.NumberFormat(INTL_LOCALE[locale] ?? locale, { style: 'currency', currency, maximumFractionDigits: 0 }).format(amount)
+}
+
+export default async function Browse({ params }: BrowsePageProps) {
+  const { locale } = await params
+
+  const listings = await prisma.carListing.findMany({
+    where: { status: 'active' },
+    orderBy: { createdAt: 'desc' },
+    take: 60,
+    select: {
+      id: true,
+      modelTrim: true,
+      yearManufactured: true,
+      mileage: true,
+      price: true,
+      currency: true,
+      make: { select: { name: true } },
+      model: { select: { name: true } },
+      fuelType: { select: { technicalName: true } },
+      images: { orderBy: { sortOrder: 'asc' }, take: 1, select: { imagePath: true } },
+    },
+  })
 
   return (
     <>
       <Navbar />
-      <div className="pt-20 max-w-7xl mx-auto px-6">
+      <div className="pt-20 max-w-7xl mx-auto px-6 pb-12">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Browse Cars</h1>
-          <p className="text-gray-600">{cars.length} cars available</p>
+          <p className="text-gray-600">{listings.length} cars available</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cars.map((car) => (
-            <div key={car.id} className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition">
-              {car.image && (
-                <img 
-                  src={car.image} 
-                  alt={`${car.make} ${car.model}`}
-                  className="w-full h-48 object-cover"
-                />
-              )}
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold">{car.make} {car.model}</h3>
-                <p className="text-3xl font-bold text-blue-600 mt-2">
-                  ${car.price.toLocaleString()}
-                </p>
-                
-                <div className="mt-4 text-sm text-gray-600 space-y-1">
-                  <p>{car.year} • {car.mileage.toLocaleString()} miles</p>
-                  <p>{car.location}</p>
+        {listings.length === 0 ? (
+          <div className="p-8 text-center text-neutral-500 bg-white rounded-lg shadow-sm">
+            No active listings right now.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {listings.map((listing) => (
+              <Link
+                key={listing.id.toString()}
+                href={`/${locale}/details/${listing.id}`}
+                className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
+              >
+                {listing.images[0] ? (
+                  <img
+                    src={listing.images[0].imagePath}
+                    alt={`${listing.make.name} ${listing.model.name}`}
+                    className="w-full h-48 object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-48 bg-neutral-100 flex items-center justify-center">
+                    <Building2 className="h-10 w-10 text-neutral-300" />
+                  </div>
+                )}
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold">
+                    {listing.make.name} {listing.model.name}{listing.modelTrim ? ` ${listing.modelTrim}` : ''}
+                  </h3>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">
+                    {formatPrice(listing.price, listing.currency, locale)}
+                  </p>
+
+                  <div className="mt-4 text-sm text-gray-600 space-y-1">
+                    <p>
+                      {listing.yearManufactured} · {listing.mileage.toLocaleString(INTL_LOCALE[locale] ?? locale)} km · {listing.fuelType.technicalName}
+                    </p>
+                  </div>
                 </div>
-
-                <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700">
-                  View Details
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </>
-  );
+  )
 }
