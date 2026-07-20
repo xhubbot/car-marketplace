@@ -660,3 +660,34 @@ model PaymentTransaction {
 
   @@map("payment_transactions")
 }
+
+// ─────────────────────────────────────────────
+// Login & verification
+// ─────────────────────────────────────────────
+
+model User {
+  id                  String    @id @default(cuid())
+  name                String?
+  email               String    @unique
+  password            String // will be hashed with bcrypt
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  failedLoginAttempts Int       @default(0)
+  lockUntil           DateTime?
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { User, LogOut, ChevronDown } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 interface NavbarUserMenuProps {
   variant?: 'default' | 'merged';
@@ -14,6 +15,7 @@ export default function NavbarUserMenu({ variant = 'default' }: NavbarUserMenuPr
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('nav');
+  const { openAuthModal } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -37,7 +39,14 @@ export default function NavbarUserMenu({ variant = 'default' }: NavbarUserMenuPr
         : 'flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-neutral-950 rounded-full hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-neutral-200 transition-colors';
 
     return (
-      <button onClick={() => signIn()} className={btnClass} aria-label={t('login')}>
+      <button
+        onClick={() => {
+          console.log("Button clicked - trying to open modal");
+          openAuthModal('login');
+        }}
+        className={btnClass}
+        aria-label={t('login')}
+      >
         <User className="w-4 h-4" />
         <span className="whitespace-nowrap">{t('login')}</span>
       </button>

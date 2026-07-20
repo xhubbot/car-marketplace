@@ -11,7 +11,7 @@ export default function NavbarActions() {
   const { darkMode, toggleDarkMode } = useTheme();
   const params = useParams();
   const locale = params.locale as string;
-
+  
   return (
     <div className="flex items-center gap-2">
       {/* Sell Car trigger */}

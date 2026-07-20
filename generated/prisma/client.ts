@@ -201,3 +201,18 @@ export type FeatureOrderItem = Prisma.FeatureOrderItemModel
  * 
  */
 export type PaymentTransaction = Prisma.PaymentTransactionModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model VerificationCode
+ * 
+ */
+export type VerificationCode = Prisma.VerificationCodeModel
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
