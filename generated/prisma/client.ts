@@ -216,3 +216,8 @@ export type VerificationCode = Prisma.VerificationCodeModel
  * 
  */
 export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model UserLoginHistory
+ * 
+ */
+export type UserLoginHistory = Prisma.UserLoginHistoryModel

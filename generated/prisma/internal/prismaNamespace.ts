@@ -418,7 +418,8 @@ export const ModelName = {
   PaymentTransaction: 'PaymentTransaction',
   User: 'User',
   VerificationCode: 'VerificationCode',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  UserLoginHistory: 'UserLoginHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "dealerCategory" | "dealerCategoryLink" | "dealerMakeLink" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction" | "user" | "verificationCode" | "passwordResetToken"
+    modelProps: "translation" | "fuelType" | "transmission" | "driveType" | "color" | "emissionStandard" | "vehicleCategory" | "bodyType" | "country" | "location" | "carMake" | "carModel" | "modelPeriod" | "featureCategory" | "carFeature" | "dealer" | "dealerTranslation" | "dealerLocation" | "dealerWorkingHour" | "dealerContact" | "dealerCategory" | "dealerCategoryLink" | "dealerMakeLink" | "carListing" | "carListingTranslation" | "carListingFeature" | "carImage" | "premiumFeature" | "carListingPremiumFeature" | "featureOrder" | "featureOrderItem" | "paymentTransaction" | "user" | "verificationCode" | "passwordResetToken" | "userLoginHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2748,6 +2749,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserLoginHistory: {
+      payload: Prisma.$UserLoginHistoryPayload<ExtArgs>
+      fields: Prisma.UserLoginHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserLoginHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserLoginHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.UserLoginHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserLoginHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.UserLoginHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.UserLoginHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.UserLoginHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.UserLoginHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>
+        }
+        update: {
+          args: Prisma.UserLoginHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserLoginHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserLoginHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.UserLoginHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLoginHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.UserLoginHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserLoginHistory>
+        }
+        groupBy: {
+          args: Prisma.UserLoginHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserLoginHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserLoginHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserLoginHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3207,7 +3274,6 @@ export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalar
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
   password: 'password',
   createdAt: 'createdAt',
@@ -3239,6 +3305,20 @@ export const PasswordResetTokenScalarFieldEnum = {
 } as const
 
 export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const UserLoginHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  userAgent: 'userAgent',
+  trusted: 'trusted',
+  createdAt: 'createdAt'
+} as const
+
+export type UserLoginHistoryScalarFieldEnum = (typeof UserLoginHistoryScalarFieldEnum)[keyof typeof UserLoginHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3508,7 +3588,6 @@ export type PaymentTransactionOrderByRelevanceFieldEnum = (typeof PaymentTransac
 
 export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
   password: 'password'
 } as const
@@ -3532,6 +3611,16 @@ export const PasswordResetTokenOrderByRelevanceFieldEnum = {
 } as const
 
 export type PasswordResetTokenOrderByRelevanceFieldEnum = (typeof PasswordResetTokenOrderByRelevanceFieldEnum)[keyof typeof PasswordResetTokenOrderByRelevanceFieldEnum]
+
+
+export const UserLoginHistoryOrderByRelevanceFieldEnum = {
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  userAgent: 'userAgent'
+} as const
+
+export type UserLoginHistoryOrderByRelevanceFieldEnum = (typeof UserLoginHistoryOrderByRelevanceFieldEnum)[keyof typeof UserLoginHistoryOrderByRelevanceFieldEnum]
 
 
 
@@ -3803,6 +3892,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   verificationCode?: Prisma.VerificationCodeOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit
+  userLoginHistory?: Prisma.UserLoginHistoryOmit
 }
 
 /* Types for Logging */

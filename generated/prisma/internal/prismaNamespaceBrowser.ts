@@ -85,7 +85,8 @@ export const ModelName = {
   PaymentTransaction: 'PaymentTransaction',
   User: 'User',
   VerificationCode: 'VerificationCode',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  UserLoginHistory: 'UserLoginHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -524,7 +525,6 @@ export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalar
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
   password: 'password',
   createdAt: 'createdAt',
@@ -556,6 +556,20 @@ export const PasswordResetTokenScalarFieldEnum = {
 } as const
 
 export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const UserLoginHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  userAgent: 'userAgent',
+  trusted: 'trusted',
+  createdAt: 'createdAt'
+} as const
+
+export type UserLoginHistoryScalarFieldEnum = (typeof UserLoginHistoryScalarFieldEnum)[keyof typeof UserLoginHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -825,7 +839,6 @@ export type PaymentTransactionOrderByRelevanceFieldEnum = (typeof PaymentTransac
 
 export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
   password: 'password'
 } as const
@@ -849,4 +862,14 @@ export const PasswordResetTokenOrderByRelevanceFieldEnum = {
 } as const
 
 export type PasswordResetTokenOrderByRelevanceFieldEnum = (typeof PasswordResetTokenOrderByRelevanceFieldEnum)[keyof typeof PasswordResetTokenOrderByRelevanceFieldEnum]
+
+
+export const UserLoginHistoryOrderByRelevanceFieldEnum = {
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  userAgent: 'userAgent'
+} as const
+
+export type UserLoginHistoryOrderByRelevanceFieldEnum = (typeof UserLoginHistoryOrderByRelevanceFieldEnum)[keyof typeof UserLoginHistoryOrderByRelevanceFieldEnum]
 

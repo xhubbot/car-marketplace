@@ -667,27 +667,47 @@ model PaymentTransaction {
 
 model User {
   id                  String    @id @default(cuid())
-  name                String?
   email               String    @unique
   password            String // will be hashed with bcrypt
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
-  failedLoginAttempts Int       @default(0)
-  lockUntil           DateTime?
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+  failedLoginAttempts Int       @default(0) @map("failed_login_attempts")
+  lockUntil           DateTime? @map("lock_until")
+
+  @@map("users")
 }
 
 model VerificationCode {
   id        String   @id @default(cuid())
   email     String
   code      String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("verification_codes")
 }
 
 model PasswordResetToken {
   id        String   @id @default(cuid())
   email     String
   token     String   @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("password_reset_tokens")
+}
+
+model UserLoginHistory {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  ipAddress String   @map("ip_address")
+  country   String?
+  city      String?
+  userAgent String?  @map("user_agent") @db.Text
+  trusted   Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId], name: "idx_user_login_history_user")
+  @@index([ipAddress], name: "idx_user_login_history_ip")
+  @@map("user_login_history")
 }
