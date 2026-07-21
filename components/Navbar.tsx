@@ -1,7 +1,7 @@
 'use client';
 
 import { DollarSign, Sparkles } from 'lucide-react';
-import type { ViewMode } from '@/lib/types';
+import type { ViewMode } from '@/lib/viewMode';
 import NavbarLogo from './NavbarLogo';
 import NavbarNavLinks from './NavbarNavLinks';
 import NavbarSearch from './NavbarSearch';

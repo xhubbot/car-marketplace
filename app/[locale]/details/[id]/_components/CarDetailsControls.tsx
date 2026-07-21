@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowLeft, DollarSign, Sparkles } from 'lucide-react';
-import type { ViewMode } from '@/lib/types';
+import type { ViewMode } from '@/lib/viewMode';
 
 interface CarDetailsControlsProps {
   detailViewMode: ViewMode;

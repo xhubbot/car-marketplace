@@ -217,6 +217,7 @@ export type FuelTypeWhereInput = {
   isHybrid?: Prisma.BoolFilter<"FuelType"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FuelType"> | Date | string
   listings?: Prisma.CarListingListRelationFilter
+  priceAssumption?: Prisma.XOR<Prisma.FuelPriceAssumptionNullableScalarRelationFilter, Prisma.FuelPriceAssumptionWhereInput> | null
 }
 
 export type FuelTypeOrderByWithRelationInput = {
@@ -226,6 +227,7 @@ export type FuelTypeOrderByWithRelationInput = {
   isHybrid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   listings?: Prisma.CarListingOrderByRelationAggregateInput
+  priceAssumption?: Prisma.FuelPriceAssumptionOrderByWithRelationInput
   _relevance?: Prisma.FuelTypeOrderByRelevanceInput
 }
 
@@ -239,6 +241,7 @@ export type FuelTypeWhereUniqueInput = Prisma.AtLeast<{
   isHybrid?: Prisma.BoolFilter<"FuelType"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FuelType"> | Date | string
   listings?: Prisma.CarListingListRelationFilter
+  priceAssumption?: Prisma.XOR<Prisma.FuelPriceAssumptionNullableScalarRelationFilter, Prisma.FuelPriceAssumptionWhereInput> | null
 }, "id" | "technicalName">
 
 export type FuelTypeOrderByWithAggregationInput = {
@@ -272,6 +275,7 @@ export type FuelTypeCreateInput = {
   isHybrid?: boolean
   createdAt?: Date | string
   listings?: Prisma.CarListingCreateNestedManyWithoutFuelTypeInput
+  priceAssumption?: Prisma.FuelPriceAssumptionCreateNestedOneWithoutFuelTypeInput
 }
 
 export type FuelTypeUncheckedCreateInput = {
@@ -281,6 +285,7 @@ export type FuelTypeUncheckedCreateInput = {
   isHybrid?: boolean
   createdAt?: Date | string
   listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutFuelTypeInput
+  priceAssumption?: Prisma.FuelPriceAssumptionUncheckedCreateNestedOneWithoutFuelTypeInput
 }
 
 export type FuelTypeUpdateInput = {
@@ -290,6 +295,7 @@ export type FuelTypeUpdateInput = {
   isHybrid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.CarListingUpdateManyWithoutFuelTypeNestedInput
+  priceAssumption?: Prisma.FuelPriceAssumptionUpdateOneWithoutFuelTypeNestedInput
 }
 
 export type FuelTypeUncheckedUpdateInput = {
@@ -299,6 +305,7 @@ export type FuelTypeUncheckedUpdateInput = {
   isHybrid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   listings?: Prisma.CarListingUncheckedUpdateManyWithoutFuelTypeNestedInput
+  priceAssumption?: Prisma.FuelPriceAssumptionUncheckedUpdateOneWithoutFuelTypeNestedInput
 }
 
 export type FuelTypeCreateManyInput = {
@@ -376,6 +383,20 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type FuelTypeCreateNestedOneWithoutPriceAssumptionInput = {
+  create?: Prisma.XOR<Prisma.FuelTypeCreateWithoutPriceAssumptionInput, Prisma.FuelTypeUncheckedCreateWithoutPriceAssumptionInput>
+  connectOrCreate?: Prisma.FuelTypeCreateOrConnectWithoutPriceAssumptionInput
+  connect?: Prisma.FuelTypeWhereUniqueInput
+}
+
+export type FuelTypeUpdateOneRequiredWithoutPriceAssumptionNestedInput = {
+  create?: Prisma.XOR<Prisma.FuelTypeCreateWithoutPriceAssumptionInput, Prisma.FuelTypeUncheckedCreateWithoutPriceAssumptionInput>
+  connectOrCreate?: Prisma.FuelTypeCreateOrConnectWithoutPriceAssumptionInput
+  upsert?: Prisma.FuelTypeUpsertWithoutPriceAssumptionInput
+  connect?: Prisma.FuelTypeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FuelTypeUpdateToOneWithWhereWithoutPriceAssumptionInput, Prisma.FuelTypeUpdateWithoutPriceAssumptionInput>, Prisma.FuelTypeUncheckedUpdateWithoutPriceAssumptionInput>
+}
+
 export type FuelTypeCreateNestedOneWithoutListingsInput = {
   create?: Prisma.XOR<Prisma.FuelTypeCreateWithoutListingsInput, Prisma.FuelTypeUncheckedCreateWithoutListingsInput>
   connectOrCreate?: Prisma.FuelTypeCreateOrConnectWithoutListingsInput
@@ -390,12 +411,65 @@ export type FuelTypeUpdateOneRequiredWithoutListingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FuelTypeUpdateToOneWithWhereWithoutListingsInput, Prisma.FuelTypeUpdateWithoutListingsInput>, Prisma.FuelTypeUncheckedUpdateWithoutListingsInput>
 }
 
+export type FuelTypeCreateWithoutPriceAssumptionInput = {
+  id: number
+  technicalName: string
+  isElectric?: boolean
+  isHybrid?: boolean
+  createdAt?: Date | string
+  listings?: Prisma.CarListingCreateNestedManyWithoutFuelTypeInput
+}
+
+export type FuelTypeUncheckedCreateWithoutPriceAssumptionInput = {
+  id: number
+  technicalName: string
+  isElectric?: boolean
+  isHybrid?: boolean
+  createdAt?: Date | string
+  listings?: Prisma.CarListingUncheckedCreateNestedManyWithoutFuelTypeInput
+}
+
+export type FuelTypeCreateOrConnectWithoutPriceAssumptionInput = {
+  where: Prisma.FuelTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.FuelTypeCreateWithoutPriceAssumptionInput, Prisma.FuelTypeUncheckedCreateWithoutPriceAssumptionInput>
+}
+
+export type FuelTypeUpsertWithoutPriceAssumptionInput = {
+  update: Prisma.XOR<Prisma.FuelTypeUpdateWithoutPriceAssumptionInput, Prisma.FuelTypeUncheckedUpdateWithoutPriceAssumptionInput>
+  create: Prisma.XOR<Prisma.FuelTypeCreateWithoutPriceAssumptionInput, Prisma.FuelTypeUncheckedCreateWithoutPriceAssumptionInput>
+  where?: Prisma.FuelTypeWhereInput
+}
+
+export type FuelTypeUpdateToOneWithWhereWithoutPriceAssumptionInput = {
+  where?: Prisma.FuelTypeWhereInput
+  data: Prisma.XOR<Prisma.FuelTypeUpdateWithoutPriceAssumptionInput, Prisma.FuelTypeUncheckedUpdateWithoutPriceAssumptionInput>
+}
+
+export type FuelTypeUpdateWithoutPriceAssumptionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  technicalName?: Prisma.StringFieldUpdateOperationsInput | string
+  isElectric?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHybrid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.CarListingUpdateManyWithoutFuelTypeNestedInput
+}
+
+export type FuelTypeUncheckedUpdateWithoutPriceAssumptionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  technicalName?: Prisma.StringFieldUpdateOperationsInput | string
+  isElectric?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHybrid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listings?: Prisma.CarListingUncheckedUpdateManyWithoutFuelTypeNestedInput
+}
+
 export type FuelTypeCreateWithoutListingsInput = {
   id: number
   technicalName: string
   isElectric?: boolean
   isHybrid?: boolean
   createdAt?: Date | string
+  priceAssumption?: Prisma.FuelPriceAssumptionCreateNestedOneWithoutFuelTypeInput
 }
 
 export type FuelTypeUncheckedCreateWithoutListingsInput = {
@@ -404,6 +478,7 @@ export type FuelTypeUncheckedCreateWithoutListingsInput = {
   isElectric?: boolean
   isHybrid?: boolean
   createdAt?: Date | string
+  priceAssumption?: Prisma.FuelPriceAssumptionUncheckedCreateNestedOneWithoutFuelTypeInput
 }
 
 export type FuelTypeCreateOrConnectWithoutListingsInput = {
@@ -428,6 +503,7 @@ export type FuelTypeUpdateWithoutListingsInput = {
   isElectric?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isHybrid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  priceAssumption?: Prisma.FuelPriceAssumptionUpdateOneWithoutFuelTypeNestedInput
 }
 
 export type FuelTypeUncheckedUpdateWithoutListingsInput = {
@@ -436,6 +512,7 @@ export type FuelTypeUncheckedUpdateWithoutListingsInput = {
   isElectric?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isHybrid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  priceAssumption?: Prisma.FuelPriceAssumptionUncheckedUpdateOneWithoutFuelTypeNestedInput
 }
 
 
@@ -476,6 +553,7 @@ export type FuelTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   isHybrid?: boolean
   createdAt?: boolean
   listings?: boolean | Prisma.FuelType$listingsArgs<ExtArgs>
+  priceAssumption?: boolean | Prisma.FuelType$priceAssumptionArgs<ExtArgs>
   _count?: boolean | Prisma.FuelTypeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fuelType"]>
 
@@ -492,6 +570,7 @@ export type FuelTypeSelectScalar = {
 export type FuelTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "technicalName" | "isElectric" | "isHybrid" | "createdAt", ExtArgs["result"]["fuelType"]>
 export type FuelTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   listings?: boolean | Prisma.FuelType$listingsArgs<ExtArgs>
+  priceAssumption?: boolean | Prisma.FuelType$priceAssumptionArgs<ExtArgs>
   _count?: boolean | Prisma.FuelTypeCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -499,6 +578,7 @@ export type $FuelTypePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "FuelType"
   objects: {
     listings: Prisma.$CarListingPayload<ExtArgs>[]
+    priceAssumption: Prisma.$FuelPriceAssumptionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -847,6 +927,7 @@ readonly fields: FuelTypeFieldRefs;
 export interface Prisma__FuelTypeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   listings<T extends Prisma.FuelType$listingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FuelType$listingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  priceAssumption<T extends Prisma.FuelType$priceAssumptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FuelType$priceAssumptionArgs<ExtArgs>>): Prisma.Prisma__FuelPriceAssumptionClient<runtime.Types.Result.GetResult<Prisma.$FuelPriceAssumptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1250,6 +1331,25 @@ export type FuelType$listingsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.CarListingScalarFieldEnum | Prisma.CarListingScalarFieldEnum[]
+}
+
+/**
+ * FuelType.priceAssumption
+ */
+export type FuelType$priceAssumptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FuelPriceAssumption
+   */
+  select?: Prisma.FuelPriceAssumptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FuelPriceAssumption
+   */
+  omit?: Prisma.FuelPriceAssumptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuelPriceAssumptionInclude<ExtArgs> | null
+  where?: Prisma.FuelPriceAssumptionWhereInput
 }
 
 /**

@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
-import type { CarListing, ViewMode } from '@/lib/types';
+import type { ViewMode } from '@/lib/viewMode';
+import type { RealListing } from '@/lib/listing';
 import Navbar from '@/components/Navbar';
 import CarDetailsControls from './CarDetailsControls';
 import CarDetailsPhotoSpecs from './CarDetailsPhotoSpecs';
@@ -11,7 +12,7 @@ import CarDetailsStandardSidebar from './CarDetailsStandardSidebar';
 import CarDetailsOwnershipSidebar from './CarDetailsOwnershipSidebar';
 
 interface CarDetailsViewProps {
-  car: CarListing;
+  car: RealListing;
 }
 
 export default function CarDetailsView({ car }: CarDetailsViewProps) {

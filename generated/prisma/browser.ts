@@ -133,6 +133,36 @@ export type DealerCategoryLink = Prisma.DealerCategoryLinkModel
  */
 export type DealerMakeLink = Prisma.DealerMakeLinkModel
 /**
+ * Model FuelPriceAssumption
+ * 
+ */
+export type FuelPriceAssumption = Prisma.FuelPriceAssumptionModel
+/**
+ * Model FinanceAssumption
+ * 
+ */
+export type FinanceAssumption = Prisma.FinanceAssumptionModel
+/**
+ * Model LoanProvider
+ * 
+ */
+export type LoanProvider = Prisma.LoanProviderModel
+/**
+ * Model InsuranceProvider
+ * 
+ */
+export type InsuranceProvider = Prisma.InsuranceProviderModel
+/**
+ * Model RepairCostEstimate
+ * 
+ */
+export type RepairCostEstimate = Prisma.RepairCostEstimateModel
+/**
+ * Model CarOwnershipCost
+ * 
+ */
+export type CarOwnershipCost = Prisma.CarOwnershipCostModel
+/**
  * Model CarListing
  * 
  */
