@@ -17,7 +17,6 @@ async function main() {
 
   await seedFuelTypes()
   await seedFuelPriceAssumptions()
-  await seedFinanceAssumption()
   await seedTransmissions()
   await seedDriveTypes()
   await seedColors()
@@ -32,6 +31,10 @@ async function main() {
   await seedDealerCategories()
   await seedCarMakes()
   await seedCarModels()
+  await seedFinanceAssumption()
+  await seedLoanProviders()
+  await seedInsuranceProviders()
+  await seedRepairCostEstimates()
 
   console.log('✅ Seed complete.')
 }
@@ -145,18 +148,6 @@ async function seedFuelPriceAssumptions() {
     ],
   })
   console.log('  ✓ fuel_price_assumptions')
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Finance assumption — singleton row (id=1) driving loan/insurance/maintenance
-// estimates and the default mileage used by the ownership-cost search.
-// ─────────────────────────────────────────────────────────────────────────────
-async function seedFinanceAssumption() {
-  await prisma.financeAssumption.createMany({
-    skipDuplicates: true,
-    data: [{ id: 1 }], // every other field uses its schema default
-  })
-  console.log('  ✓ finance_assumptions')
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -4711,6 +4702,90 @@ async function seedCarModels() {
     data: carModels,
   })
   console.log(`  ✓ car_models (${carModels.length})`)
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Ownership-cost assumptions
+// ─────────────────────────────────────────────────────────────────────────────
+async function seedFinanceAssumption() {
+  await prisma.financeAssumption.upsert({
+    where: { id: 1 },
+    update: {},
+    create: { id: 1, defaultMonthlyMileageKm: 1500 },
+  })
+  console.log('  ✓ finance_assumptions')
+}
+
+// id=1 MUST match the migration `20260721000000_add_ownership_cost_tables`,
+// which inserts this same row directly (needed as a concrete FK target for
+// its backfill). Uses upsert (not createMany) — createMany silently drops
+// JSON column values with the mariadb driver adapter used here.
+async function seedLoanProviders() {
+  await prisma.loanProvider.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      id: 1,
+      name: 'Standard Bank Loan',
+      isDefault: true,
+      interestRateAnnual: 7.5,
+      minTermMonths: 12,
+      maxTermMonths: 84,
+      minDownpaymentPercent: 10.0,
+    },
+  })
+  console.log('  ✓ loan_providers')
+}
+
+// id=1 MUST match the migration (same reasoning as seedLoanProviders).
+// calculationRules multipliers are keyed by FuelType.technicalName.
+async function seedInsuranceProviders() {
+  await prisma.insuranceProvider.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      id: 1,
+      name: 'Standard Insurance',
+      isDefault: true,
+      baseRatePerYear: 650.0,
+      calculationRules: {
+        multipliers: {
+          electric: 0.85,
+          hybrid_petrol: 0.95,
+          hybrid_diesel: 0.95,
+          phev_petrol: 0.95,
+          phev_diesel: 0.95,
+        },
+      },
+    },
+  })
+  console.log('  ✓ insurance_providers')
+}
+
+// Exactly one global fallback (make/model both null), plus example make- and
+// model-level rows. Lookup tiering (exact model > make-only > global) lives
+// in lib/costAssumptions.ts#getRepairCostEstimate.
+//
+// NOTE: MySQL treats every NULL as distinct in a unique index, so
+// createMany({ skipDuplicates: true }) would NOT catch re-inserting the
+// (null, null) global row or the (531, null) make-level row on a second seed
+// run — each check below uses findFirst + conditional create instead.
+async function seedRepairCostEstimates() {
+  const rows: Array<{ makeId: number | null; modelId: number | null; averageMonthlyCost: number }> = [
+    { makeId: null, modelId: null, averageMonthlyCost: 45.0 },
+    { makeId: 531, modelId: null, averageMonthlyCost: 30.0 }, // Toyota, any model
+    { makeId: 531, modelId: 54, averageMonthlyCost: 25.0 }, // Toyota Corolla
+  ]
+
+  for (const row of rows) {
+    const existing = await prisma.repairCostEstimate.findFirst({
+      where: { makeId: row.makeId, modelId: row.modelId },
+    })
+    if (!existing) {
+      await prisma.repairCostEstimate.create({ data: row })
+    }
+  }
+  console.log('  ✓ repair_cost_estimates')
 }
 
 main()

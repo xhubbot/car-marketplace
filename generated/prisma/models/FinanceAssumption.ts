@@ -28,58 +28,28 @@ export type AggregateFinanceAssumption = {
 
 export type FinanceAssumptionAvgAggregateOutputType = {
   id: number | null
-  loanTermMonths: number | null
-  annualInterestPct: runtime.Decimal | null
-  downPaymentPct: runtime.Decimal | null
-  insuranceAnnualPctOfPrice: runtime.Decimal | null
-  maintenanceBaseMonthly: runtime.Decimal | null
-  maintenancePerAgeYearMonthly: runtime.Decimal | null
   defaultMonthlyMileageKm: number | null
 }
 
 export type FinanceAssumptionSumAggregateOutputType = {
   id: number | null
-  loanTermMonths: number | null
-  annualInterestPct: runtime.Decimal | null
-  downPaymentPct: runtime.Decimal | null
-  insuranceAnnualPctOfPrice: runtime.Decimal | null
-  maintenanceBaseMonthly: runtime.Decimal | null
-  maintenancePerAgeYearMonthly: runtime.Decimal | null
   defaultMonthlyMileageKm: number | null
 }
 
 export type FinanceAssumptionMinAggregateOutputType = {
   id: number | null
-  loanTermMonths: number | null
-  annualInterestPct: runtime.Decimal | null
-  downPaymentPct: runtime.Decimal | null
-  insuranceAnnualPctOfPrice: runtime.Decimal | null
-  maintenanceBaseMonthly: runtime.Decimal | null
-  maintenancePerAgeYearMonthly: runtime.Decimal | null
   defaultMonthlyMileageKm: number | null
   updatedAt: Date | null
 }
 
 export type FinanceAssumptionMaxAggregateOutputType = {
   id: number | null
-  loanTermMonths: number | null
-  annualInterestPct: runtime.Decimal | null
-  downPaymentPct: runtime.Decimal | null
-  insuranceAnnualPctOfPrice: runtime.Decimal | null
-  maintenanceBaseMonthly: runtime.Decimal | null
-  maintenancePerAgeYearMonthly: runtime.Decimal | null
   defaultMonthlyMileageKm: number | null
   updatedAt: Date | null
 }
 
 export type FinanceAssumptionCountAggregateOutputType = {
   id: number
-  loanTermMonths: number
-  annualInterestPct: number
-  downPaymentPct: number
-  insuranceAnnualPctOfPrice: number
-  maintenanceBaseMonthly: number
-  maintenancePerAgeYearMonthly: number
   defaultMonthlyMileageKm: number
   updatedAt: number
   _all: number
@@ -88,58 +58,28 @@ export type FinanceAssumptionCountAggregateOutputType = {
 
 export type FinanceAssumptionAvgAggregateInputType = {
   id?: true
-  loanTermMonths?: true
-  annualInterestPct?: true
-  downPaymentPct?: true
-  insuranceAnnualPctOfPrice?: true
-  maintenanceBaseMonthly?: true
-  maintenancePerAgeYearMonthly?: true
   defaultMonthlyMileageKm?: true
 }
 
 export type FinanceAssumptionSumAggregateInputType = {
   id?: true
-  loanTermMonths?: true
-  annualInterestPct?: true
-  downPaymentPct?: true
-  insuranceAnnualPctOfPrice?: true
-  maintenanceBaseMonthly?: true
-  maintenancePerAgeYearMonthly?: true
   defaultMonthlyMileageKm?: true
 }
 
 export type FinanceAssumptionMinAggregateInputType = {
   id?: true
-  loanTermMonths?: true
-  annualInterestPct?: true
-  downPaymentPct?: true
-  insuranceAnnualPctOfPrice?: true
-  maintenanceBaseMonthly?: true
-  maintenancePerAgeYearMonthly?: true
   defaultMonthlyMileageKm?: true
   updatedAt?: true
 }
 
 export type FinanceAssumptionMaxAggregateInputType = {
   id?: true
-  loanTermMonths?: true
-  annualInterestPct?: true
-  downPaymentPct?: true
-  insuranceAnnualPctOfPrice?: true
-  maintenanceBaseMonthly?: true
-  maintenancePerAgeYearMonthly?: true
   defaultMonthlyMileageKm?: true
   updatedAt?: true
 }
 
 export type FinanceAssumptionCountAggregateInputType = {
   id?: true
-  loanTermMonths?: true
-  annualInterestPct?: true
-  downPaymentPct?: true
-  insuranceAnnualPctOfPrice?: true
-  maintenanceBaseMonthly?: true
-  maintenancePerAgeYearMonthly?: true
   defaultMonthlyMileageKm?: true
   updatedAt?: true
   _all?: true
@@ -233,12 +173,6 @@ export type FinanceAssumptionGroupByArgs<ExtArgs extends runtime.Types.Extension
 
 export type FinanceAssumptionGroupByOutputType = {
   id: number
-  loanTermMonths: number
-  annualInterestPct: runtime.Decimal
-  downPaymentPct: runtime.Decimal
-  insuranceAnnualPctOfPrice: runtime.Decimal
-  maintenanceBaseMonthly: runtime.Decimal
-  maintenancePerAgeYearMonthly: runtime.Decimal
   defaultMonthlyMileageKm: number
   updatedAt: Date
   _count: FinanceAssumptionCountAggregateOutputType | null
@@ -268,24 +202,12 @@ export type FinanceAssumptionWhereInput = {
   OR?: Prisma.FinanceAssumptionWhereInput[]
   NOT?: Prisma.FinanceAssumptionWhereInput | Prisma.FinanceAssumptionWhereInput[]
   id?: Prisma.IntFilter<"FinanceAssumption"> | number
-  loanTermMonths?: Prisma.IntFilter<"FinanceAssumption"> | number
-  annualInterestPct?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntFilter<"FinanceAssumption"> | number
   updatedAt?: Prisma.DateTimeFilter<"FinanceAssumption"> | Date | string
 }
 
 export type FinanceAssumptionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -295,24 +217,12 @@ export type FinanceAssumptionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FinanceAssumptionWhereInput | Prisma.FinanceAssumptionWhereInput[]
   OR?: Prisma.FinanceAssumptionWhereInput[]
   NOT?: Prisma.FinanceAssumptionWhereInput | Prisma.FinanceAssumptionWhereInput[]
-  loanTermMonths?: Prisma.IntFilter<"FinanceAssumption"> | number
-  annualInterestPct?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntFilter<"FinanceAssumption"> | number
   updatedAt?: Prisma.DateTimeFilter<"FinanceAssumption"> | Date | string
 }, "id">
 
 export type FinanceAssumptionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.FinanceAssumptionCountOrderByAggregateInput
@@ -327,152 +237,74 @@ export type FinanceAssumptionScalarWhereWithAggregatesInput = {
   OR?: Prisma.FinanceAssumptionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FinanceAssumptionScalarWhereWithAggregatesInput | Prisma.FinanceAssumptionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"FinanceAssumption"> | number
-  loanTermMonths?: Prisma.IntWithAggregatesFilter<"FinanceAssumption"> | number
-  annualInterestPct?: Prisma.DecimalWithAggregatesFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalWithAggregatesFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalWithAggregatesFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalWithAggregatesFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalWithAggregatesFilter<"FinanceAssumption"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntWithAggregatesFilter<"FinanceAssumption"> | number
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FinanceAssumption"> | Date | string
 }
 
 export type FinanceAssumptionCreateInput = {
-  loanTermMonths?: number
-  annualInterestPct?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: number
   updatedAt?: Date | string
 }
 
 export type FinanceAssumptionUncheckedCreateInput = {
   id?: number
-  loanTermMonths?: number
-  annualInterestPct?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: number
   updatedAt?: Date | string
 }
 
 export type FinanceAssumptionUpdateInput = {
-  loanTermMonths?: Prisma.IntFieldUpdateOperationsInput | number
-  annualInterestPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FinanceAssumptionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  loanTermMonths?: Prisma.IntFieldUpdateOperationsInput | number
-  annualInterestPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FinanceAssumptionCreateManyInput = {
   id?: number
-  loanTermMonths?: number
-  annualInterestPct?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: number
   updatedAt?: Date | string
 }
 
 export type FinanceAssumptionUpdateManyMutationInput = {
-  loanTermMonths?: Prisma.IntFieldUpdateOperationsInput | number
-  annualInterestPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FinanceAssumptionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  loanTermMonths?: Prisma.IntFieldUpdateOperationsInput | number
-  annualInterestPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  downPaymentPct?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  insuranceAnnualPctOfPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenanceBaseMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maintenancePerAgeYearMonthly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   defaultMonthlyMileageKm?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FinanceAssumptionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type FinanceAssumptionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
 }
 
 export type FinanceAssumptionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type FinanceAssumptionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type FinanceAssumptionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  loanTermMonths?: Prisma.SortOrder
-  annualInterestPct?: Prisma.SortOrder
-  downPaymentPct?: Prisma.SortOrder
-  insuranceAnnualPctOfPrice?: Prisma.SortOrder
-  maintenanceBaseMonthly?: Prisma.SortOrder
-  maintenancePerAgeYearMonthly?: Prisma.SortOrder
   defaultMonthlyMileageKm?: Prisma.SortOrder
 }
 
@@ -480,12 +312,6 @@ export type FinanceAssumptionSumOrderByAggregateInput = {
 
 export type FinanceAssumptionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  loanTermMonths?: boolean
-  annualInterestPct?: boolean
-  downPaymentPct?: boolean
-  insuranceAnnualPctOfPrice?: boolean
-  maintenanceBaseMonthly?: boolean
-  maintenancePerAgeYearMonthly?: boolean
   defaultMonthlyMileageKm?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["financeAssumption"]>
@@ -494,29 +320,17 @@ export type FinanceAssumptionSelect<ExtArgs extends runtime.Types.Extensions.Int
 
 export type FinanceAssumptionSelectScalar = {
   id?: boolean
-  loanTermMonths?: boolean
-  annualInterestPct?: boolean
-  downPaymentPct?: boolean
-  insuranceAnnualPctOfPrice?: boolean
-  maintenanceBaseMonthly?: boolean
-  maintenancePerAgeYearMonthly?: boolean
   defaultMonthlyMileageKm?: boolean
   updatedAt?: boolean
 }
 
-export type FinanceAssumptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "loanTermMonths" | "annualInterestPct" | "downPaymentPct" | "insuranceAnnualPctOfPrice" | "maintenanceBaseMonthly" | "maintenancePerAgeYearMonthly" | "defaultMonthlyMileageKm" | "updatedAt", ExtArgs["result"]["financeAssumption"]>
+export type FinanceAssumptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "defaultMonthlyMileageKm" | "updatedAt", ExtArgs["result"]["financeAssumption"]>
 
 export type $FinanceAssumptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FinanceAssumption"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    loanTermMonths: number
-    annualInterestPct: runtime.Decimal
-    downPaymentPct: runtime.Decimal
-    insuranceAnnualPctOfPrice: runtime.Decimal
-    maintenanceBaseMonthly: runtime.Decimal
-    maintenancePerAgeYearMonthly: runtime.Decimal
     defaultMonthlyMileageKm: number
     updatedAt: Date
   }, ExtArgs["result"]["financeAssumption"]>
@@ -889,12 +703,6 @@ export interface Prisma__FinanceAssumptionClient<T, Null = never, ExtArgs extend
  */
 export interface FinanceAssumptionFieldRefs {
   readonly id: Prisma.FieldRef<"FinanceAssumption", 'Int'>
-  readonly loanTermMonths: Prisma.FieldRef<"FinanceAssumption", 'Int'>
-  readonly annualInterestPct: Prisma.FieldRef<"FinanceAssumption", 'Decimal'>
-  readonly downPaymentPct: Prisma.FieldRef<"FinanceAssumption", 'Decimal'>
-  readonly insuranceAnnualPctOfPrice: Prisma.FieldRef<"FinanceAssumption", 'Decimal'>
-  readonly maintenanceBaseMonthly: Prisma.FieldRef<"FinanceAssumption", 'Decimal'>
-  readonly maintenancePerAgeYearMonthly: Prisma.FieldRef<"FinanceAssumption", 'Decimal'>
   readonly defaultMonthlyMileageKm: Prisma.FieldRef<"FinanceAssumption", 'Int'>
   readonly updatedAt: Prisma.FieldRef<"FinanceAssumption", 'DateTime'>
 }

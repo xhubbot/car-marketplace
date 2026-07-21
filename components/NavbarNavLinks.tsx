@@ -10,12 +10,12 @@ export default function NavbarNavLinks() {
   const locale = params.locale as string;
 
   const homeHref = `/${locale}`;
-  const classifiedSearchHref = `/${locale}/classified/search`;
+  const browseHref = `/${locale}/browse`;
   const dealersSearchHref = `/${locale}/dealer/search`;
   const dealersRegisterHref = `/${locale}/dealer/register`;
 
   const isHomeActive = pathname === homeHref;
-  const isSearchActive = pathname?.startsWith(classifiedSearchHref);
+  const isSearchActive = pathname?.startsWith(browseHref);
   const isDealersActive = pathname?.startsWith(`/${locale}/dealer`);
 
   return (
@@ -33,7 +33,7 @@ export default function NavbarNavLinks() {
       </Link>
 
       <Link
-        href={classifiedSearchHref}
+        href={browseHref}
         className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 ${
           isSearchActive
             ? 'bg-white text-neutral-900 shadow-sm dark:bg-neutral-800 dark:text-white'

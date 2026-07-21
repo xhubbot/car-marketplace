@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { DollarSign, Sparkles } from 'lucide-react';
-import type { ViewMode } from '@/lib/types';
+import type { ViewMode } from '@/lib/viewMode';
 
 interface NavbarViewModeToggleProps {
   viewMode: ViewMode;

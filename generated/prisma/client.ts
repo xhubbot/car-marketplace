@@ -167,6 +167,26 @@ export type FuelPriceAssumption = Prisma.FuelPriceAssumptionModel
  */
 export type FinanceAssumption = Prisma.FinanceAssumptionModel
 /**
+ * Model LoanProvider
+ * 
+ */
+export type LoanProvider = Prisma.LoanProviderModel
+/**
+ * Model InsuranceProvider
+ * 
+ */
+export type InsuranceProvider = Prisma.InsuranceProviderModel
+/**
+ * Model RepairCostEstimate
+ * 
+ */
+export type RepairCostEstimate = Prisma.RepairCostEstimateModel
+/**
+ * Model CarOwnershipCost
+ * 
+ */
+export type CarOwnershipCost = Prisma.CarOwnershipCostModel
+/**
  * Model CarListing
  * 
  */
@@ -211,3 +231,23 @@ export type FeatureOrderItem = Prisma.FeatureOrderItemModel
  * 
  */
 export type PaymentTransaction = Prisma.PaymentTransactionModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model VerificationCode
+ * 
+ */
+export type VerificationCode = Prisma.VerificationCodeModel
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model UserLoginHistory
+ * 
+ */
+export type UserLoginHistory = Prisma.UserLoginHistoryModel

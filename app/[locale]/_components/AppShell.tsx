@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from '../_context/ThemeContext';
 import Footer from '@/components/Footer';
+import { AuthProvider } from '@/context/AuthContext';
 
 interface AppShellProps {
   children: ReactNode;
@@ -17,10 +18,12 @@ export default function AppShell({ children }: AppShellProps) {
 
   return (
     <SessionProvider>
-      <ThemeProvider>
-        {children}
-        {!isDashboard && <Footer />}
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          {children}
+          {!isDashboard && <Footer />}
+        </ThemeProvider>
+      </AuthProvider>
     </SessionProvider>
   );
 }

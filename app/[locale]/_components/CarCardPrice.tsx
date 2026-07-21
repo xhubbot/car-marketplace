@@ -1,23 +1,17 @@
 'use client';
 
 import { Sparkles } from 'lucide-react';
-import type { CarListing } from '@/lib/types';
+import type { RealListing } from '@/lib/listing';
 
 interface CarCardPriceProps {
-  car: CarListing;
+  car: RealListing;
   isOwnershipMode: boolean;
-  totalMonthlyTCO: number;
-  totalRunningCostOnly: number;
-  monthlyEnergyCost: number;
 }
 
-export default function CarCardPrice({
-  car,
-  isOwnershipMode,
-  totalMonthlyTCO,
-  totalRunningCostOnly,
-  monthlyEnergyCost,
-}: CarCardPriceProps) {
+export default function CarCardPrice({ car, isOwnershipMode }: CarCardPriceProps) {
+  const { loan, insurance, repair, fuel, total } = car.monthlyCost;
+  const runningCostOnly = insurance + repair + fuel;
+
   if (!isOwnershipMode) {
     return (
       <div className="mt-5 border-y border-neutral-100 py-4 dark:border-neutral-800/80">
@@ -27,7 +21,7 @@ export default function CarCardPrice({
               stick price / cash
             </p>
             <p className="font-mono text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-              ${car.price.toLocaleString()}
+              {car.price.toLocaleString()} {car.currency}
             </p>
           </div>
           <div className="text-right">
@@ -35,7 +29,7 @@ export default function CarCardPrice({
               est. finance
             </p>
             <p className="font-mono text-xs font-semibold text-neutral-600 dark:text-neutral-300">
-              From ${car.expenses.loanPayment}/mo
+              From {Math.round(loan)} {car.currency}/mo
             </p>
           </div>
         </div>
@@ -54,8 +48,8 @@ export default function CarCardPrice({
             <Sparkles className="h-3 w-3 text-emerald-500 animate-pulse" />
           </div>
           <p className="font-mono text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400">
-            ${totalMonthlyTCO.toLocaleString()}
-            <span className="text-sm font-normal text-neutral-400 dark:text-neutral-500"> / mo</span>
+            {Math.round(total).toLocaleString()}
+            <span className="text-sm font-normal text-neutral-400 dark:text-neutral-500"> {car.currency}/mo</span>
           </p>
         </div>
         <div className="text-right">
@@ -63,25 +57,23 @@ export default function CarCardPrice({
             pure running
           </p>
           <p className="font-mono text-sm font-bold text-neutral-700 dark:text-neutral-200">
-            ${totalRunningCostOnly.toLocaleString()}/mo
+            {Math.round(runningCostOnly).toLocaleString()} {car.currency}/mo
           </p>
         </div>
       </div>
 
       {/* Expense Proportion Bar */}
       <div className="h-2 w-full flex overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
-        <div className="bg-neutral-900 dark:bg-white" style={{ width: `${(car.expenses.loanPayment / totalMonthlyTCO) * 100}%` }} title={`Finance: $${car.expenses.loanPayment}/mo`} />
-        <div className="bg-emerald-500" style={{ width: `${(monthlyEnergyCost / totalMonthlyTCO) * 100}%` }} title={`Energy: $${Math.round(monthlyEnergyCost)}/mo`} />
-        <div className="bg-amber-500" style={{ width: `${(car.expenses.repairs / totalMonthlyTCO) * 100}%` }} title={`Repairs: $${car.expenses.repairs}/mo`} />
-        <div className="bg-sky-500" style={{ width: `${(car.expenses.insurance / totalMonthlyTCO) * 100}%` }} title={`Insurance: $${car.expenses.insurance}/mo`} />
-        <div className="bg-rose-500" style={{ width: `${(car.expenses.depreciation / totalMonthlyTCO) * 100}%` }} title={`Depreciation: $${car.expenses.depreciation}/mo`} />
+        <div className="bg-neutral-900 dark:bg-white" style={{ width: `${(loan / total) * 100}%` }} title={`Finance: ${Math.round(loan)}/mo`} />
+        <div className="bg-emerald-500" style={{ width: `${(fuel / total) * 100}%` }} title={`Energy: ${Math.round(fuel)}/mo`} />
+        <div className="bg-amber-500" style={{ width: `${(repair / total) * 100}%` }} title={`Repairs: ${Math.round(repair)}/mo`} />
+        <div className="bg-sky-500" style={{ width: `${(insurance / total) * 100}%` }} title={`Insurance: ${Math.round(insurance)}/mo`} />
       </div>
-      <div className="grid grid-cols-5 gap-1 text-[8px] font-mono font-bold text-neutral-400 uppercase tracking-tight">
+      <div className="grid grid-cols-4 gap-1 text-[8px] font-mono font-bold text-neutral-400 uppercase tracking-tight">
         <span className="flex items-center gap-0.5"><span className="h-1.5 w-1.5 rounded-full bg-neutral-900 dark:bg-white" />Fin</span>
         <span className="flex items-center gap-0.5 text-emerald-500"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />Enrg</span>
         <span className="flex items-center gap-0.5"><span className="h-1.5 w-1.5 rounded-full bg-amber-500" />Mnt</span>
         <span className="flex items-center gap-0.5"><span className="h-1.5 w-1.5 rounded-full bg-sky-500" />Insur</span>
-        <span className="flex items-center gap-0.5"><span className="h-1.5 w-1.5 rounded-full bg-rose-500" />Depr</span>
       </div>
     </div>
   );

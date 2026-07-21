@@ -69,9 +69,6 @@ export type CarListingAvgAggregateOutputType = {
   price: runtime.Decimal | null
   discountPrice: runtime.Decimal | null
   exportPrice: runtime.Decimal | null
-  estMonthlyLoan: runtime.Decimal | null
-  estMonthlyInsurance: runtime.Decimal | null
-  estMonthlyMaintenance: runtime.Decimal | null
   viewsCount: number | null
 }
 
@@ -118,9 +115,6 @@ export type CarListingSumAggregateOutputType = {
   price: runtime.Decimal | null
   discountPrice: runtime.Decimal | null
   exportPrice: runtime.Decimal | null
-  estMonthlyLoan: runtime.Decimal | null
-  estMonthlyInsurance: runtime.Decimal | null
-  estMonthlyMaintenance: runtime.Decimal | null
   viewsCount: number | null
 }
 
@@ -184,9 +178,6 @@ export type CarListingMinAggregateOutputType = {
   currency: string | null
   priceIncludesVat: boolean | null
   priceIncludesRegFee: boolean | null
-  estMonthlyLoan: runtime.Decimal | null
-  estMonthlyInsurance: runtime.Decimal | null
-  estMonthlyMaintenance: runtime.Decimal | null
   status: $Enums.ListingStatus | null
   viewsCount: number | null
   createdAt: Date | null
@@ -253,9 +244,6 @@ export type CarListingMaxAggregateOutputType = {
   currency: string | null
   priceIncludesVat: boolean | null
   priceIncludesRegFee: boolean | null
-  estMonthlyLoan: runtime.Decimal | null
-  estMonthlyInsurance: runtime.Decimal | null
-  estMonthlyMaintenance: runtime.Decimal | null
   status: $Enums.ListingStatus | null
   viewsCount: number | null
   createdAt: Date | null
@@ -322,9 +310,6 @@ export type CarListingCountAggregateOutputType = {
   currency: number
   priceIncludesVat: number
   priceIncludesRegFee: number
-  estMonthlyLoan: number
-  estMonthlyInsurance: number
-  estMonthlyMaintenance: number
   status: number
   viewsCount: number
   createdAt: number
@@ -376,9 +361,6 @@ export type CarListingAvgAggregateInputType = {
   price?: true
   discountPrice?: true
   exportPrice?: true
-  estMonthlyLoan?: true
-  estMonthlyInsurance?: true
-  estMonthlyMaintenance?: true
   viewsCount?: true
 }
 
@@ -425,9 +407,6 @@ export type CarListingSumAggregateInputType = {
   price?: true
   discountPrice?: true
   exportPrice?: true
-  estMonthlyLoan?: true
-  estMonthlyInsurance?: true
-  estMonthlyMaintenance?: true
   viewsCount?: true
 }
 
@@ -491,9 +470,6 @@ export type CarListingMinAggregateInputType = {
   currency?: true
   priceIncludesVat?: true
   priceIncludesRegFee?: true
-  estMonthlyLoan?: true
-  estMonthlyInsurance?: true
-  estMonthlyMaintenance?: true
   status?: true
   viewsCount?: true
   createdAt?: true
@@ -560,9 +536,6 @@ export type CarListingMaxAggregateInputType = {
   currency?: true
   priceIncludesVat?: true
   priceIncludesRegFee?: true
-  estMonthlyLoan?: true
-  estMonthlyInsurance?: true
-  estMonthlyMaintenance?: true
   status?: true
   viewsCount?: true
   createdAt?: true
@@ -629,9 +602,6 @@ export type CarListingCountAggregateInputType = {
   currency?: true
   priceIncludesVat?: true
   priceIncludesRegFee?: true
-  estMonthlyLoan?: true
-  estMonthlyInsurance?: true
-  estMonthlyMaintenance?: true
   status?: true
   viewsCount?: true
   createdAt?: true
@@ -785,9 +755,6 @@ export type CarListingGroupByOutputType = {
   currency: string
   priceIncludesVat: boolean
   priceIncludesRegFee: boolean
-  estMonthlyLoan: runtime.Decimal
-  estMonthlyInsurance: runtime.Decimal
-  estMonthlyMaintenance: runtime.Decimal
   status: $Enums.ListingStatus
   viewsCount: number
   createdAt: Date
@@ -877,9 +844,6 @@ export type CarListingWhereInput = {
   currency?: Prisma.StringFilter<"CarListing"> | string
   priceIncludesVat?: Prisma.BoolFilter<"CarListing"> | boolean
   priceIncludesRegFee?: Prisma.BoolFilter<"CarListing"> | boolean
-  estMonthlyLoan?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFilter<"CarListing"> | $Enums.ListingStatus
   viewsCount?: Prisma.IntFilter<"CarListing"> | number
   createdAt?: Prisma.DateTimeFilter<"CarListing"> | Date | string
@@ -902,6 +866,7 @@ export type CarListingWhereInput = {
   images?: Prisma.CarImageListRelationFilter
   premiumFeatures?: Prisma.CarListingPremiumFeatureListRelationFilter
   orderItems?: Prisma.FeatureOrderItemListRelationFilter
+  ownershipCosts?: Prisma.CarOwnershipCostListRelationFilter
 }
 
 export type CarListingOrderByWithRelationInput = {
@@ -964,9 +929,6 @@ export type CarListingOrderByWithRelationInput = {
   currency?: Prisma.SortOrder
   priceIncludesVat?: Prisma.SortOrder
   priceIncludesRegFee?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   status?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -989,6 +951,7 @@ export type CarListingOrderByWithRelationInput = {
   images?: Prisma.CarImageOrderByRelationAggregateInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureOrderByRelationAggregateInput
   orderItems?: Prisma.FeatureOrderItemOrderByRelationAggregateInput
+  ownershipCosts?: Prisma.CarOwnershipCostOrderByRelationAggregateInput
   _relevance?: Prisma.CarListingOrderByRelevanceInput
 }
 
@@ -1055,9 +1018,6 @@ export type CarListingWhereUniqueInput = Prisma.AtLeast<{
   currency?: Prisma.StringFilter<"CarListing"> | string
   priceIncludesVat?: Prisma.BoolFilter<"CarListing"> | boolean
   priceIncludesRegFee?: Prisma.BoolFilter<"CarListing"> | boolean
-  estMonthlyLoan?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFilter<"CarListing"> | $Enums.ListingStatus
   viewsCount?: Prisma.IntFilter<"CarListing"> | number
   createdAt?: Prisma.DateTimeFilter<"CarListing"> | Date | string
@@ -1080,6 +1040,7 @@ export type CarListingWhereUniqueInput = Prisma.AtLeast<{
   images?: Prisma.CarImageListRelationFilter
   premiumFeatures?: Prisma.CarListingPremiumFeatureListRelationFilter
   orderItems?: Prisma.FeatureOrderItemListRelationFilter
+  ownershipCosts?: Prisma.CarOwnershipCostListRelationFilter
 }, "id">
 
 export type CarListingOrderByWithAggregationInput = {
@@ -1142,9 +1103,6 @@ export type CarListingOrderByWithAggregationInput = {
   currency?: Prisma.SortOrder
   priceIncludesVat?: Prisma.SortOrder
   priceIncludesRegFee?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   status?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1219,9 +1177,6 @@ export type CarListingScalarWhereWithAggregatesInput = {
   currency?: Prisma.StringWithAggregatesFilter<"CarListing"> | string
   priceIncludesVat?: Prisma.BoolWithAggregatesFilter<"CarListing"> | boolean
   priceIncludesRegFee?: Prisma.BoolWithAggregatesFilter<"CarListing"> | boolean
-  estMonthlyLoan?: Prisma.DecimalWithAggregatesFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalWithAggregatesFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalWithAggregatesFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusWithAggregatesFilter<"CarListing"> | $Enums.ListingStatus
   viewsCount?: Prisma.IntWithAggregatesFilter<"CarListing"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CarListing"> | Date | string
@@ -1275,9 +1230,6 @@ export type CarListingCreateInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -1300,6 +1252,7 @@ export type CarListingCreateInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateInput = {
@@ -1362,9 +1315,6 @@ export type CarListingUncheckedCreateInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -1374,6 +1324,7 @@ export type CarListingUncheckedCreateInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUpdateInput = {
@@ -1423,9 +1374,6 @@ export type CarListingUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1448,6 +1396,7 @@ export type CarListingUpdateInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateInput = {
@@ -1510,9 +1459,6 @@ export type CarListingUncheckedUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1522,6 +1468,7 @@ export type CarListingUncheckedUpdateInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateManyInput = {
@@ -1584,9 +1531,6 @@ export type CarListingCreateManyInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -1640,9 +1584,6 @@ export type CarListingUpdateManyMutationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1709,9 +1650,6 @@ export type CarListingUncheckedUpdateManyInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1726,6 +1664,11 @@ export type CarListingListRelationFilter = {
 
 export type CarListingOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type CarListingScalarRelationFilter = {
+  is?: Prisma.CarListingWhereInput
+  isNot?: Prisma.CarListingWhereInput
 }
 
 export type CarListingOrderByRelevanceInput = {
@@ -1794,9 +1737,6 @@ export type CarListingCountOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   priceIncludesVat?: Prisma.SortOrder
   priceIncludesRegFee?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   status?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1846,9 +1786,6 @@ export type CarListingAvgOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discountPrice?: Prisma.SortOrder
   exportPrice?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
 }
 
@@ -1912,9 +1849,6 @@ export type CarListingMaxOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   priceIncludesVat?: Prisma.SortOrder
   priceIncludesRegFee?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   status?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1981,9 +1915,6 @@ export type CarListingMinOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   priceIncludesVat?: Prisma.SortOrder
   priceIncludesRegFee?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   status?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -2033,15 +1964,7 @@ export type CarListingSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discountPrice?: Prisma.SortOrder
   exportPrice?: Prisma.SortOrder
-  estMonthlyLoan?: Prisma.SortOrder
-  estMonthlyInsurance?: Prisma.SortOrder
-  estMonthlyMaintenance?: Prisma.SortOrder
   viewsCount?: Prisma.SortOrder
-}
-
-export type CarListingScalarRelationFilter = {
-  is?: Prisma.CarListingWhereInput
-  isNot?: Prisma.CarListingWhereInput
 }
 
 export type CarListingCreateNestedManyWithoutFuelTypeInput = {
@@ -2590,12 +2513,18 @@ export type CarListingUncheckedUpdateManyWithoutDealerNestedInput = {
   deleteMany?: Prisma.CarListingScalarWhereInput | Prisma.CarListingScalarWhereInput[]
 }
 
-export type BigIntFieldUpdateOperationsInput = {
-  set?: bigint | number
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
+export type CarListingCreateNestedOneWithoutOwnershipCostsInput = {
+  create?: Prisma.XOR<Prisma.CarListingCreateWithoutOwnershipCostsInput, Prisma.CarListingUncheckedCreateWithoutOwnershipCostsInput>
+  connectOrCreate?: Prisma.CarListingCreateOrConnectWithoutOwnershipCostsInput
+  connect?: Prisma.CarListingWhereUniqueInput
+}
+
+export type CarListingUpdateOneRequiredWithoutOwnershipCostsNestedInput = {
+  create?: Prisma.XOR<Prisma.CarListingCreateWithoutOwnershipCostsInput, Prisma.CarListingUncheckedCreateWithoutOwnershipCostsInput>
+  connectOrCreate?: Prisma.CarListingCreateOrConnectWithoutOwnershipCostsInput
+  upsert?: Prisma.CarListingUpsertWithoutOwnershipCostsInput
+  connect?: Prisma.CarListingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CarListingUpdateToOneWithWhereWithoutOwnershipCostsInput, Prisma.CarListingUpdateWithoutOwnershipCostsInput>, Prisma.CarListingUncheckedUpdateWithoutOwnershipCostsInput>
 }
 
 export type EnumListingTypeFieldUpdateOperationsInput = {
@@ -2727,9 +2656,6 @@ export type CarListingCreateWithoutFuelTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -2751,6 +2677,7 @@ export type CarListingCreateWithoutFuelTypeInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutFuelTypeInput = {
@@ -2812,9 +2739,6 @@ export type CarListingUncheckedCreateWithoutFuelTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -2824,6 +2748,7 @@ export type CarListingUncheckedCreateWithoutFuelTypeInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutFuelTypeInput = {
@@ -2915,9 +2840,6 @@ export type CarListingScalarWhereInput = {
   currency?: Prisma.StringFilter<"CarListing"> | string
   priceIncludesVat?: Prisma.BoolFilter<"CarListing"> | boolean
   priceIncludesRegFee?: Prisma.BoolFilter<"CarListing"> | boolean
-  estMonthlyLoan?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFilter<"CarListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFilter<"CarListing"> | $Enums.ListingStatus
   viewsCount?: Prisma.IntFilter<"CarListing"> | number
   createdAt?: Prisma.DateTimeFilter<"CarListing"> | Date | string
@@ -2971,9 +2893,6 @@ export type CarListingCreateWithoutTransmissionInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -2995,6 +2914,7 @@ export type CarListingCreateWithoutTransmissionInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutTransmissionInput = {
@@ -3056,9 +2976,6 @@ export type CarListingUncheckedCreateWithoutTransmissionInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3068,6 +2985,7 @@ export type CarListingUncheckedCreateWithoutTransmissionInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutTransmissionInput = {
@@ -3143,9 +3061,6 @@ export type CarListingCreateWithoutDriveTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3167,6 +3082,7 @@ export type CarListingCreateWithoutDriveTypeInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutDriveTypeInput = {
@@ -3228,9 +3144,6 @@ export type CarListingUncheckedCreateWithoutDriveTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3240,6 +3153,7 @@ export type CarListingUncheckedCreateWithoutDriveTypeInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutDriveTypeInput = {
@@ -3315,9 +3229,6 @@ export type CarListingCreateWithoutColorInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3339,6 +3250,7 @@ export type CarListingCreateWithoutColorInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutColorInput = {
@@ -3400,9 +3312,6 @@ export type CarListingUncheckedCreateWithoutColorInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3412,6 +3321,7 @@ export type CarListingUncheckedCreateWithoutColorInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutColorInput = {
@@ -3487,9 +3397,6 @@ export type CarListingCreateWithoutEmissionStandardInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3511,6 +3418,7 @@ export type CarListingCreateWithoutEmissionStandardInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutEmissionStandardInput = {
@@ -3572,9 +3480,6 @@ export type CarListingUncheckedCreateWithoutEmissionStandardInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3584,6 +3489,7 @@ export type CarListingUncheckedCreateWithoutEmissionStandardInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutEmissionStandardInput = {
@@ -3659,9 +3565,6 @@ export type CarListingCreateWithoutCategoryInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3683,6 +3586,7 @@ export type CarListingCreateWithoutCategoryInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutCategoryInput = {
@@ -3744,9 +3648,6 @@ export type CarListingUncheckedCreateWithoutCategoryInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3756,6 +3657,7 @@ export type CarListingUncheckedCreateWithoutCategoryInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutCategoryInput = {
@@ -3831,9 +3733,6 @@ export type CarListingCreateWithoutBodyTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3855,6 +3754,7 @@ export type CarListingCreateWithoutBodyTypeInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutBodyTypeInput = {
@@ -3916,9 +3816,6 @@ export type CarListingUncheckedCreateWithoutBodyTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -3928,6 +3825,7 @@ export type CarListingUncheckedCreateWithoutBodyTypeInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutBodyTypeInput = {
@@ -4003,9 +3901,6 @@ export type CarListingCreateWithoutImportedFromCountryInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4027,6 +3922,7 @@ export type CarListingCreateWithoutImportedFromCountryInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutImportedFromCountryInput = {
@@ -4088,9 +3984,6 @@ export type CarListingUncheckedCreateWithoutImportedFromCountryInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4100,6 +3993,7 @@ export type CarListingUncheckedCreateWithoutImportedFromCountryInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutImportedFromCountryInput = {
@@ -4175,9 +4069,6 @@ export type CarListingCreateWithoutLocationInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4199,6 +4090,7 @@ export type CarListingCreateWithoutLocationInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutLocationInput = {
@@ -4260,9 +4152,6 @@ export type CarListingUncheckedCreateWithoutLocationInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4272,6 +4161,7 @@ export type CarListingUncheckedCreateWithoutLocationInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutLocationInput = {
@@ -4347,9 +4237,6 @@ export type CarListingCreateWithoutMakeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4371,6 +4258,7 @@ export type CarListingCreateWithoutMakeInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutMakeInput = {
@@ -4432,9 +4320,6 @@ export type CarListingUncheckedCreateWithoutMakeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4444,6 +4329,7 @@ export type CarListingUncheckedCreateWithoutMakeInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutMakeInput = {
@@ -4519,9 +4405,6 @@ export type CarListingCreateWithoutModelInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4543,6 +4426,7 @@ export type CarListingCreateWithoutModelInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutModelInput = {
@@ -4604,9 +4488,6 @@ export type CarListingUncheckedCreateWithoutModelInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4616,6 +4497,7 @@ export type CarListingUncheckedCreateWithoutModelInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutModelInput = {
@@ -4691,9 +4573,6 @@ export type CarListingCreateWithoutModelPeriodInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4715,6 +4594,7 @@ export type CarListingCreateWithoutModelPeriodInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutModelPeriodInput = {
@@ -4776,9 +4656,6 @@ export type CarListingUncheckedCreateWithoutModelPeriodInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4788,6 +4665,7 @@ export type CarListingUncheckedCreateWithoutModelPeriodInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutModelPeriodInput = {
@@ -4863,9 +4741,6 @@ export type CarListingCreateWithoutDealerInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4887,6 +4762,7 @@ export type CarListingCreateWithoutDealerInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutDealerInput = {
@@ -4948,9 +4824,6 @@ export type CarListingUncheckedCreateWithoutDealerInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -4960,6 +4833,7 @@ export type CarListingUncheckedCreateWithoutDealerInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutDealerInput = {
@@ -4986,6 +4860,306 @@ export type CarListingUpdateWithWhereUniqueWithoutDealerInput = {
 export type CarListingUpdateManyWithWhereWithoutDealerInput = {
   where: Prisma.CarListingScalarWhereInput
   data: Prisma.XOR<Prisma.CarListingUpdateManyMutationInput, Prisma.CarListingUncheckedUpdateManyWithoutDealerInput>
+}
+
+export type CarListingCreateWithoutOwnershipCostsInput = {
+  id?: bigint | number
+  userId: number
+  listingType?: $Enums.ListingType
+  modelTrim?: string | null
+  vinCode?: string | null
+  regNr?: string | null
+  yearManufactured: number
+  monthManufactured?: number | null
+  mileage: number
+  engineDisplacementCc?: number | null
+  enginePowerKw?: number | null
+  enginePowerHp?: number | null
+  engineInfo?: string | null
+  co2EmissionGkm?: number | null
+  fuelConsumptionCity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: number | null
+  doors?: number | null
+  seats?: number | null
+  vehicleLengthMm?: number | null
+  vehicleWidthMm?: number | null
+  vehicleHeightMm?: number | null
+  wheelbaseMm?: number | null
+  kerbWeightKg?: number | null
+  grossWeightKg?: number | null
+  payloadKg?: number | null
+  towCapacityBrakedKg?: number | null
+  towCapacityUnbrakedKg?: number | null
+  acceleration0100?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: number | null
+  colorFinish?: $Enums.ColorFinish | null
+  inspectionValidUntil?: Date | string | null
+  hasServiceBook?: boolean
+  hasWarranty?: boolean
+  warrantyDescription?: string | null
+  isCrashDamaged?: boolean
+  partsSoldSeparately?: boolean
+  partsInfo?: string | null
+  registeredAsCommercial?: boolean
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string
+  priceIncludesVat?: boolean
+  priceIncludesRegFee?: boolean
+  status?: $Enums.ListingStatus
+  viewsCount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  make: Prisma.CarMakeCreateNestedOneWithoutCarListingsInput
+  model: Prisma.CarModelCreateNestedOneWithoutListingsInput
+  modelPeriod?: Prisma.ModelPeriodCreateNestedOneWithoutListingsInput
+  category?: Prisma.VehicleCategoryCreateNestedOneWithoutListingsInput
+  bodyType?: Prisma.BodyTypeCreateNestedOneWithoutListingsInput
+  fuelType: Prisma.FuelTypeCreateNestedOneWithoutListingsInput
+  transmission?: Prisma.TransmissionCreateNestedOneWithoutListingsInput
+  driveType?: Prisma.DriveTypeCreateNestedOneWithoutListingsInput
+  emissionStandard?: Prisma.EmissionStandardCreateNestedOneWithoutListingsInput
+  color?: Prisma.ColorCreateNestedOneWithoutListingsInput
+  location?: Prisma.LocationCreateNestedOneWithoutListingsInput
+  importedFromCountry?: Prisma.CountryCreateNestedOneWithoutListingsInput
+  dealer?: Prisma.DealerCreateNestedOneWithoutListingsInput
+  translations?: Prisma.CarListingTranslationCreateNestedManyWithoutListingInput
+  features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
+  images?: Prisma.CarImageCreateNestedManyWithoutListingInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
+  orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+}
+
+export type CarListingUncheckedCreateWithoutOwnershipCostsInput = {
+  id?: bigint | number
+  userId: number
+  dealerId?: number | null
+  listingType?: $Enums.ListingType
+  makeId: number
+  modelId: number
+  modelPeriodId?: number | null
+  modelTrim?: string | null
+  categoryId?: number | null
+  bodyTypeId?: number | null
+  vinCode?: string | null
+  regNr?: string | null
+  yearManufactured: number
+  monthManufactured?: number | null
+  mileage: number
+  fuelTypeId: number
+  transmissionId?: number | null
+  driveTypeId?: number | null
+  engineDisplacementCc?: number | null
+  enginePowerKw?: number | null
+  enginePowerHp?: number | null
+  engineInfo?: string | null
+  emissionStandardId?: number | null
+  co2EmissionGkm?: number | null
+  fuelConsumptionCity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: number | null
+  doors?: number | null
+  seats?: number | null
+  vehicleLengthMm?: number | null
+  vehicleWidthMm?: number | null
+  vehicleHeightMm?: number | null
+  wheelbaseMm?: number | null
+  kerbWeightKg?: number | null
+  grossWeightKg?: number | null
+  payloadKg?: number | null
+  towCapacityBrakedKg?: number | null
+  towCapacityUnbrakedKg?: number | null
+  acceleration0100?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: number | null
+  colorId?: number | null
+  colorFinish?: $Enums.ColorFinish | null
+  inspectionValidUntil?: Date | string | null
+  hasServiceBook?: boolean
+  hasWarranty?: boolean
+  warrantyDescription?: string | null
+  isCrashDamaged?: boolean
+  partsSoldSeparately?: boolean
+  partsInfo?: string | null
+  registeredAsCommercial?: boolean
+  locationId?: number | null
+  importedFromCountryId?: number | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string
+  priceIncludesVat?: boolean
+  priceIncludesRegFee?: boolean
+  status?: $Enums.ListingStatus
+  viewsCount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.CarListingTranslationUncheckedCreateNestedManyWithoutListingInput
+  features?: Prisma.CarListingFeatureUncheckedCreateNestedManyWithoutListingInput
+  images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
+  orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+}
+
+export type CarListingCreateOrConnectWithoutOwnershipCostsInput = {
+  where: Prisma.CarListingWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarListingCreateWithoutOwnershipCostsInput, Prisma.CarListingUncheckedCreateWithoutOwnershipCostsInput>
+}
+
+export type CarListingUpsertWithoutOwnershipCostsInput = {
+  update: Prisma.XOR<Prisma.CarListingUpdateWithoutOwnershipCostsInput, Prisma.CarListingUncheckedUpdateWithoutOwnershipCostsInput>
+  create: Prisma.XOR<Prisma.CarListingCreateWithoutOwnershipCostsInput, Prisma.CarListingUncheckedCreateWithoutOwnershipCostsInput>
+  where?: Prisma.CarListingWhereInput
+}
+
+export type CarListingUpdateToOneWithWhereWithoutOwnershipCostsInput = {
+  where?: Prisma.CarListingWhereInput
+  data: Prisma.XOR<Prisma.CarListingUpdateWithoutOwnershipCostsInput, Prisma.CarListingUncheckedUpdateWithoutOwnershipCostsInput>
+}
+
+export type CarListingUpdateWithoutOwnershipCostsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
+  modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearManufactured?: Prisma.IntFieldUpdateOperationsInput | number
+  monthManufactured?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
+  engineDisplacementCc?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerKw?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerHp?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  co2EmissionGkm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelConsumptionCity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleLengthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleWidthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleHeightMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wheelbaseMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  kerbWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grossWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payloadKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityBrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityUnbrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acceleration0100?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorFinish?: Prisma.NullableEnumColorFinishFieldUpdateOperationsInput | $Enums.ColorFinish | null
+  inspectionValidUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasServiceBook?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWarranty?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  warrantyDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isCrashDamaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsSoldSeparately?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registeredAsCommercial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  make?: Prisma.CarMakeUpdateOneRequiredWithoutCarListingsNestedInput
+  model?: Prisma.CarModelUpdateOneRequiredWithoutListingsNestedInput
+  modelPeriod?: Prisma.ModelPeriodUpdateOneWithoutListingsNestedInput
+  category?: Prisma.VehicleCategoryUpdateOneWithoutListingsNestedInput
+  bodyType?: Prisma.BodyTypeUpdateOneWithoutListingsNestedInput
+  fuelType?: Prisma.FuelTypeUpdateOneRequiredWithoutListingsNestedInput
+  transmission?: Prisma.TransmissionUpdateOneWithoutListingsNestedInput
+  driveType?: Prisma.DriveTypeUpdateOneWithoutListingsNestedInput
+  emissionStandard?: Prisma.EmissionStandardUpdateOneWithoutListingsNestedInput
+  color?: Prisma.ColorUpdateOneWithoutListingsNestedInput
+  location?: Prisma.LocationUpdateOneWithoutListingsNestedInput
+  importedFromCountry?: Prisma.CountryUpdateOneWithoutListingsNestedInput
+  dealer?: Prisma.DealerUpdateOneWithoutListingsNestedInput
+  translations?: Prisma.CarListingTranslationUpdateManyWithoutListingNestedInput
+  features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
+  images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
+  orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+}
+
+export type CarListingUncheckedUpdateWithoutOwnershipCostsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listingType?: Prisma.EnumListingTypeFieldUpdateOperationsInput | $Enums.ListingType
+  makeId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  modelPeriodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modelTrim?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bodyTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vinCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regNr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearManufactured?: Prisma.IntFieldUpdateOperationsInput | number
+  monthManufactured?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
+  fuelTypeId?: Prisma.IntFieldUpdateOperationsInput | number
+  transmissionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  driveTypeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineDisplacementCc?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerKw?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  enginePowerHp?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engineInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emissionStandardId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  co2EmissionGkm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelConsumptionCity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionHighway?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelConsumptionMixed?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelTankCapacityL?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleLengthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleWidthMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vehicleHeightMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wheelbaseMm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  kerbWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grossWeightKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payloadKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityBrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  towCapacityUnbrakedKg?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acceleration0100?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  maxSpeedKph?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  colorFinish?: Prisma.NullableEnumColorFinishFieldUpdateOperationsInput | $Enums.ColorFinish | null
+  inspectionValidUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasServiceBook?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWarranty?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  warrantyDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isCrashDamaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsSoldSeparately?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  partsInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registeredAsCommercial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importedFromCountryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  exportPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
+  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.CarListingTranslationUncheckedUpdateManyWithoutListingNestedInput
+  features?: Prisma.CarListingFeatureUncheckedUpdateManyWithoutListingNestedInput
+  images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
+  premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
+  orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateWithoutTranslationsInput = {
@@ -5035,9 +5209,6 @@ export type CarListingCreateWithoutTranslationsInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5059,6 +5230,7 @@ export type CarListingCreateWithoutTranslationsInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutTranslationsInput = {
@@ -5121,9 +5293,6 @@ export type CarListingUncheckedCreateWithoutTranslationsInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5132,6 +5301,7 @@ export type CarListingUncheckedCreateWithoutTranslationsInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutTranslationsInput = {
@@ -5197,9 +5367,6 @@ export type CarListingUpdateWithoutTranslationsInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5221,6 +5388,7 @@ export type CarListingUpdateWithoutTranslationsInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutTranslationsInput = {
@@ -5283,9 +5451,6 @@ export type CarListingUncheckedUpdateWithoutTranslationsInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5294,6 +5459,7 @@ export type CarListingUncheckedUpdateWithoutTranslationsInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateWithoutFeaturesInput = {
@@ -5343,9 +5509,6 @@ export type CarListingCreateWithoutFeaturesInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5367,6 +5530,7 @@ export type CarListingCreateWithoutFeaturesInput = {
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutFeaturesInput = {
@@ -5429,9 +5593,6 @@ export type CarListingUncheckedCreateWithoutFeaturesInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5440,6 +5601,7 @@ export type CarListingUncheckedCreateWithoutFeaturesInput = {
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutFeaturesInput = {
@@ -5505,9 +5667,6 @@ export type CarListingUpdateWithoutFeaturesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5529,6 +5688,7 @@ export type CarListingUpdateWithoutFeaturesInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutFeaturesInput = {
@@ -5591,9 +5751,6 @@ export type CarListingUncheckedUpdateWithoutFeaturesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5602,6 +5759,7 @@ export type CarListingUncheckedUpdateWithoutFeaturesInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateWithoutImagesInput = {
@@ -5651,9 +5809,6 @@ export type CarListingCreateWithoutImagesInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5675,6 +5830,7 @@ export type CarListingCreateWithoutImagesInput = {
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutImagesInput = {
@@ -5737,9 +5893,6 @@ export type CarListingUncheckedCreateWithoutImagesInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5748,6 +5901,7 @@ export type CarListingUncheckedCreateWithoutImagesInput = {
   features?: Prisma.CarListingFeatureUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutImagesInput = {
@@ -5813,9 +5967,6 @@ export type CarListingUpdateWithoutImagesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5837,6 +5988,7 @@ export type CarListingUpdateWithoutImagesInput = {
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutImagesInput = {
@@ -5899,9 +6051,6 @@ export type CarListingUncheckedUpdateWithoutImagesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5910,6 +6059,7 @@ export type CarListingUncheckedUpdateWithoutImagesInput = {
   features?: Prisma.CarListingFeatureUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateWithoutPremiumFeaturesInput = {
@@ -5959,9 +6109,6 @@ export type CarListingCreateWithoutPremiumFeaturesInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -5983,6 +6130,7 @@ export type CarListingCreateWithoutPremiumFeaturesInput = {
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutPremiumFeaturesInput = {
@@ -6045,9 +6193,6 @@ export type CarListingUncheckedCreateWithoutPremiumFeaturesInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -6056,6 +6201,7 @@ export type CarListingUncheckedCreateWithoutPremiumFeaturesInput = {
   features?: Prisma.CarListingFeatureUncheckedCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   orderItems?: Prisma.FeatureOrderItemUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutPremiumFeaturesInput = {
@@ -6121,9 +6267,6 @@ export type CarListingUpdateWithoutPremiumFeaturesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6145,6 +6288,7 @@ export type CarListingUpdateWithoutPremiumFeaturesInput = {
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutPremiumFeaturesInput = {
@@ -6207,9 +6351,6 @@ export type CarListingUncheckedUpdateWithoutPremiumFeaturesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6218,6 +6359,7 @@ export type CarListingUncheckedUpdateWithoutPremiumFeaturesInput = {
   features?: Prisma.CarListingFeatureUncheckedUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateWithoutOrderItemsInput = {
@@ -6267,9 +6409,6 @@ export type CarListingCreateWithoutOrderItemsInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -6291,6 +6430,7 @@ export type CarListingCreateWithoutOrderItemsInput = {
   features?: Prisma.CarListingFeatureCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostCreateNestedManyWithoutListingInput
 }
 
 export type CarListingUncheckedCreateWithoutOrderItemsInput = {
@@ -6353,9 +6493,6 @@ export type CarListingUncheckedCreateWithoutOrderItemsInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -6364,6 +6501,7 @@ export type CarListingUncheckedCreateWithoutOrderItemsInput = {
   features?: Prisma.CarListingFeatureUncheckedCreateNestedManyWithoutListingInput
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutListingInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedCreateNestedManyWithoutListingInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type CarListingCreateOrConnectWithoutOrderItemsInput = {
@@ -6429,9 +6567,6 @@ export type CarListingUpdateWithoutOrderItemsInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6453,6 +6588,7 @@ export type CarListingUpdateWithoutOrderItemsInput = {
   features?: Prisma.CarListingFeatureUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutOrderItemsInput = {
@@ -6515,9 +6651,6 @@ export type CarListingUncheckedUpdateWithoutOrderItemsInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6526,6 +6659,7 @@ export type CarListingUncheckedUpdateWithoutOrderItemsInput = {
   features?: Prisma.CarListingFeatureUncheckedUpdateManyWithoutListingNestedInput
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingCreateManyFuelTypeInput = {
@@ -6587,9 +6721,6 @@ export type CarListingCreateManyFuelTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -6643,9 +6774,6 @@ export type CarListingUpdateWithoutFuelTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6667,6 +6795,7 @@ export type CarListingUpdateWithoutFuelTypeInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutFuelTypeInput = {
@@ -6728,9 +6857,6 @@ export type CarListingUncheckedUpdateWithoutFuelTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6740,6 +6866,7 @@ export type CarListingUncheckedUpdateWithoutFuelTypeInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutFuelTypeInput = {
@@ -6801,9 +6928,6 @@ export type CarListingUncheckedUpdateManyWithoutFuelTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6869,9 +6993,6 @@ export type CarListingCreateManyTransmissionInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -6925,9 +7046,6 @@ export type CarListingUpdateWithoutTransmissionInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6949,6 +7067,7 @@ export type CarListingUpdateWithoutTransmissionInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutTransmissionInput = {
@@ -7010,9 +7129,6 @@ export type CarListingUncheckedUpdateWithoutTransmissionInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7022,6 +7138,7 @@ export type CarListingUncheckedUpdateWithoutTransmissionInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutTransmissionInput = {
@@ -7083,9 +7200,6 @@ export type CarListingUncheckedUpdateManyWithoutTransmissionInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7151,9 +7265,6 @@ export type CarListingCreateManyDriveTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -7207,9 +7318,6 @@ export type CarListingUpdateWithoutDriveTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7231,6 +7339,7 @@ export type CarListingUpdateWithoutDriveTypeInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutDriveTypeInput = {
@@ -7292,9 +7401,6 @@ export type CarListingUncheckedUpdateWithoutDriveTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7304,6 +7410,7 @@ export type CarListingUncheckedUpdateWithoutDriveTypeInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutDriveTypeInput = {
@@ -7365,9 +7472,6 @@ export type CarListingUncheckedUpdateManyWithoutDriveTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7433,9 +7537,6 @@ export type CarListingCreateManyColorInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -7489,9 +7590,6 @@ export type CarListingUpdateWithoutColorInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7513,6 +7611,7 @@ export type CarListingUpdateWithoutColorInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutColorInput = {
@@ -7574,9 +7673,6 @@ export type CarListingUncheckedUpdateWithoutColorInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7586,6 +7682,7 @@ export type CarListingUncheckedUpdateWithoutColorInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutColorInput = {
@@ -7647,9 +7744,6 @@ export type CarListingUncheckedUpdateManyWithoutColorInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7715,9 +7809,6 @@ export type CarListingCreateManyEmissionStandardInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -7771,9 +7862,6 @@ export type CarListingUpdateWithoutEmissionStandardInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7795,6 +7883,7 @@ export type CarListingUpdateWithoutEmissionStandardInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutEmissionStandardInput = {
@@ -7856,9 +7945,6 @@ export type CarListingUncheckedUpdateWithoutEmissionStandardInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7868,6 +7954,7 @@ export type CarListingUncheckedUpdateWithoutEmissionStandardInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutEmissionStandardInput = {
@@ -7929,9 +8016,6 @@ export type CarListingUncheckedUpdateManyWithoutEmissionStandardInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7997,9 +8081,6 @@ export type CarListingCreateManyCategoryInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -8053,9 +8134,6 @@ export type CarListingUpdateWithoutCategoryInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8077,6 +8155,7 @@ export type CarListingUpdateWithoutCategoryInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutCategoryInput = {
@@ -8138,9 +8217,6 @@ export type CarListingUncheckedUpdateWithoutCategoryInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8150,6 +8226,7 @@ export type CarListingUncheckedUpdateWithoutCategoryInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutCategoryInput = {
@@ -8211,9 +8288,6 @@ export type CarListingUncheckedUpdateManyWithoutCategoryInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8279,9 +8353,6 @@ export type CarListingCreateManyBodyTypeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -8335,9 +8406,6 @@ export type CarListingUpdateWithoutBodyTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8359,6 +8427,7 @@ export type CarListingUpdateWithoutBodyTypeInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutBodyTypeInput = {
@@ -8420,9 +8489,6 @@ export type CarListingUncheckedUpdateWithoutBodyTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8432,6 +8498,7 @@ export type CarListingUncheckedUpdateWithoutBodyTypeInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutBodyTypeInput = {
@@ -8493,9 +8560,6 @@ export type CarListingUncheckedUpdateManyWithoutBodyTypeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8561,9 +8625,6 @@ export type CarListingCreateManyImportedFromCountryInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -8617,9 +8678,6 @@ export type CarListingUpdateWithoutImportedFromCountryInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8641,6 +8699,7 @@ export type CarListingUpdateWithoutImportedFromCountryInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutImportedFromCountryInput = {
@@ -8702,9 +8761,6 @@ export type CarListingUncheckedUpdateWithoutImportedFromCountryInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8714,6 +8770,7 @@ export type CarListingUncheckedUpdateWithoutImportedFromCountryInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutImportedFromCountryInput = {
@@ -8775,9 +8832,6 @@ export type CarListingUncheckedUpdateManyWithoutImportedFromCountryInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8843,9 +8897,6 @@ export type CarListingCreateManyLocationInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -8899,9 +8950,6 @@ export type CarListingUpdateWithoutLocationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8923,6 +8971,7 @@ export type CarListingUpdateWithoutLocationInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutLocationInput = {
@@ -8984,9 +9033,6 @@ export type CarListingUncheckedUpdateWithoutLocationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8996,6 +9042,7 @@ export type CarListingUncheckedUpdateWithoutLocationInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutLocationInput = {
@@ -9057,9 +9104,6 @@ export type CarListingUncheckedUpdateManyWithoutLocationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9125,9 +9169,6 @@ export type CarListingCreateManyMakeInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -9181,9 +9222,6 @@ export type CarListingUpdateWithoutMakeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9205,6 +9243,7 @@ export type CarListingUpdateWithoutMakeInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutMakeInput = {
@@ -9266,9 +9305,6 @@ export type CarListingUncheckedUpdateWithoutMakeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9278,6 +9314,7 @@ export type CarListingUncheckedUpdateWithoutMakeInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutMakeInput = {
@@ -9339,9 +9376,6 @@ export type CarListingUncheckedUpdateManyWithoutMakeInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9407,9 +9441,6 @@ export type CarListingCreateManyModelInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -9463,9 +9494,6 @@ export type CarListingUpdateWithoutModelInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9487,6 +9515,7 @@ export type CarListingUpdateWithoutModelInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutModelInput = {
@@ -9548,9 +9577,6 @@ export type CarListingUncheckedUpdateWithoutModelInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9560,6 +9586,7 @@ export type CarListingUncheckedUpdateWithoutModelInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutModelInput = {
@@ -9621,9 +9648,6 @@ export type CarListingUncheckedUpdateManyWithoutModelInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9689,9 +9713,6 @@ export type CarListingCreateManyModelPeriodInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -9745,9 +9766,6 @@ export type CarListingUpdateWithoutModelPeriodInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9769,6 +9787,7 @@ export type CarListingUpdateWithoutModelPeriodInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutModelPeriodInput = {
@@ -9830,9 +9849,6 @@ export type CarListingUncheckedUpdateWithoutModelPeriodInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9842,6 +9858,7 @@ export type CarListingUncheckedUpdateWithoutModelPeriodInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutModelPeriodInput = {
@@ -9903,9 +9920,6 @@ export type CarListingUncheckedUpdateManyWithoutModelPeriodInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9971,9 +9985,6 @@ export type CarListingCreateManyDealerInput = {
   currency?: string
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.ListingStatus
   viewsCount?: number
   createdAt?: Date | string
@@ -10027,9 +10038,6 @@ export type CarListingUpdateWithoutDealerInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10051,6 +10059,7 @@ export type CarListingUpdateWithoutDealerInput = {
   images?: Prisma.CarImageUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateWithoutDealerInput = {
@@ -10112,9 +10121,6 @@ export type CarListingUncheckedUpdateWithoutDealerInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10124,6 +10130,7 @@ export type CarListingUncheckedUpdateWithoutDealerInput = {
   images?: Prisma.CarImageUncheckedUpdateManyWithoutListingNestedInput
   premiumFeatures?: Prisma.CarListingPremiumFeatureUncheckedUpdateManyWithoutListingNestedInput
   orderItems?: Prisma.FeatureOrderItemUncheckedUpdateManyWithoutListingNestedInput
+  ownershipCosts?: Prisma.CarOwnershipCostUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type CarListingUncheckedUpdateManyWithoutDealerInput = {
@@ -10185,9 +10192,6 @@ export type CarListingUncheckedUpdateManyWithoutDealerInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   priceIncludesVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priceIncludesRegFee?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  estMonthlyLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyInsurance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estMonthlyMaintenance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumListingStatusFieldUpdateOperationsInput | $Enums.ListingStatus
   viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10205,6 +10209,7 @@ export type CarListingCountOutputType = {
   images: number
   premiumFeatures: number
   orderItems: number
+  ownershipCosts: number
 }
 
 export type CarListingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10213,6 +10218,7 @@ export type CarListingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   images?: boolean | CarListingCountOutputTypeCountImagesArgs
   premiumFeatures?: boolean | CarListingCountOutputTypeCountPremiumFeaturesArgs
   orderItems?: boolean | CarListingCountOutputTypeCountOrderItemsArgs
+  ownershipCosts?: boolean | CarListingCountOutputTypeCountOwnershipCostsArgs
 }
 
 /**
@@ -10258,6 +10264,13 @@ export type CarListingCountOutputTypeCountPremiumFeaturesArgs<ExtArgs extends ru
  */
 export type CarListingCountOutputTypeCountOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FeatureOrderItemWhereInput
+}
+
+/**
+ * CarListingCountOutputType without action
+ */
+export type CarListingCountOutputTypeCountOwnershipCostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CarOwnershipCostWhereInput
 }
 
 
@@ -10321,9 +10334,6 @@ export type CarListingSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   currency?: boolean
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: boolean
-  estMonthlyInsurance?: boolean
-  estMonthlyMaintenance?: boolean
   status?: boolean
   viewsCount?: boolean
   createdAt?: boolean
@@ -10346,6 +10356,7 @@ export type CarListingSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   images?: boolean | Prisma.CarListing$imagesArgs<ExtArgs>
   premiumFeatures?: boolean | Prisma.CarListing$premiumFeaturesArgs<ExtArgs>
   orderItems?: boolean | Prisma.CarListing$orderItemsArgs<ExtArgs>
+  ownershipCosts?: boolean | Prisma.CarListing$ownershipCostsArgs<ExtArgs>
   _count?: boolean | Prisma.CarListingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carListing"]>
 
@@ -10411,16 +10422,13 @@ export type CarListingSelectScalar = {
   currency?: boolean
   priceIncludesVat?: boolean
   priceIncludesRegFee?: boolean
-  estMonthlyLoan?: boolean
-  estMonthlyInsurance?: boolean
-  estMonthlyMaintenance?: boolean
   status?: boolean
   viewsCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CarListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "dealerId" | "listingType" | "makeId" | "modelId" | "modelPeriodId" | "modelTrim" | "categoryId" | "bodyTypeId" | "vinCode" | "regNr" | "yearManufactured" | "monthManufactured" | "mileage" | "fuelTypeId" | "transmissionId" | "driveTypeId" | "engineDisplacementCc" | "enginePowerKw" | "enginePowerHp" | "engineInfo" | "emissionStandardId" | "co2EmissionGkm" | "fuelConsumptionCity" | "fuelConsumptionHighway" | "fuelConsumptionMixed" | "fuelTankCapacityL" | "doors" | "seats" | "vehicleLengthMm" | "vehicleWidthMm" | "vehicleHeightMm" | "wheelbaseMm" | "kerbWeightKg" | "grossWeightKg" | "payloadKg" | "towCapacityBrakedKg" | "towCapacityUnbrakedKg" | "acceleration0100" | "maxSpeedKph" | "colorId" | "colorFinish" | "inspectionValidUntil" | "hasServiceBook" | "hasWarranty" | "warrantyDescription" | "isCrashDamaged" | "partsSoldSeparately" | "partsInfo" | "registeredAsCommercial" | "locationId" | "importedFromCountryId" | "price" | "discountPrice" | "exportPrice" | "currency" | "priceIncludesVat" | "priceIncludesRegFee" | "estMonthlyLoan" | "estMonthlyInsurance" | "estMonthlyMaintenance" | "status" | "viewsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["carListing"]>
+export type CarListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "dealerId" | "listingType" | "makeId" | "modelId" | "modelPeriodId" | "modelTrim" | "categoryId" | "bodyTypeId" | "vinCode" | "regNr" | "yearManufactured" | "monthManufactured" | "mileage" | "fuelTypeId" | "transmissionId" | "driveTypeId" | "engineDisplacementCc" | "enginePowerKw" | "enginePowerHp" | "engineInfo" | "emissionStandardId" | "co2EmissionGkm" | "fuelConsumptionCity" | "fuelConsumptionHighway" | "fuelConsumptionMixed" | "fuelTankCapacityL" | "doors" | "seats" | "vehicleLengthMm" | "vehicleWidthMm" | "vehicleHeightMm" | "wheelbaseMm" | "kerbWeightKg" | "grossWeightKg" | "payloadKg" | "towCapacityBrakedKg" | "towCapacityUnbrakedKg" | "acceleration0100" | "maxSpeedKph" | "colorId" | "colorFinish" | "inspectionValidUntil" | "hasServiceBook" | "hasWarranty" | "warrantyDescription" | "isCrashDamaged" | "partsSoldSeparately" | "partsInfo" | "registeredAsCommercial" | "locationId" | "importedFromCountryId" | "price" | "discountPrice" | "exportPrice" | "currency" | "priceIncludesVat" | "priceIncludesRegFee" | "status" | "viewsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["carListing"]>
 export type CarListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   make?: boolean | Prisma.CarMakeDefaultArgs<ExtArgs>
   model?: boolean | Prisma.CarModelDefaultArgs<ExtArgs>
@@ -10440,6 +10448,7 @@ export type CarListingInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   images?: boolean | Prisma.CarListing$imagesArgs<ExtArgs>
   premiumFeatures?: boolean | Prisma.CarListing$premiumFeaturesArgs<ExtArgs>
   orderItems?: boolean | Prisma.CarListing$orderItemsArgs<ExtArgs>
+  ownershipCosts?: boolean | Prisma.CarListing$ownershipCostsArgs<ExtArgs>
   _count?: boolean | Prisma.CarListingCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -10464,6 +10473,7 @@ export type $CarListingPayload<ExtArgs extends runtime.Types.Extensions.Internal
     images: Prisma.$CarImagePayload<ExtArgs>[]
     premiumFeatures: Prisma.$CarListingPremiumFeaturePayload<ExtArgs>[]
     orderItems: Prisma.$FeatureOrderItemPayload<ExtArgs>[]
+    ownershipCosts: Prisma.$CarOwnershipCostPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -10525,9 +10535,6 @@ export type $CarListingPayload<ExtArgs extends runtime.Types.Extensions.Internal
     currency: string
     priceIncludesVat: boolean
     priceIncludesRegFee: boolean
-    estMonthlyLoan: runtime.Decimal
-    estMonthlyInsurance: runtime.Decimal
-    estMonthlyMaintenance: runtime.Decimal
     status: $Enums.ListingStatus
     viewsCount: number
     createdAt: Date
@@ -10890,6 +10897,7 @@ export interface Prisma__CarListingClient<T, Null = never, ExtArgs extends runti
   images<T extends Prisma.CarListing$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   premiumFeatures<T extends Prisma.CarListing$premiumFeaturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$premiumFeaturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingPremiumFeaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderItems<T extends Prisma.CarListing$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeatureOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ownershipCosts<T extends Prisma.CarListing$ownershipCostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarListing$ownershipCostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarOwnershipCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10978,9 +10986,6 @@ export interface CarListingFieldRefs {
   readonly currency: Prisma.FieldRef<"CarListing", 'String'>
   readonly priceIncludesVat: Prisma.FieldRef<"CarListing", 'Boolean'>
   readonly priceIncludesRegFee: Prisma.FieldRef<"CarListing", 'Boolean'>
-  readonly estMonthlyLoan: Prisma.FieldRef<"CarListing", 'Decimal'>
-  readonly estMonthlyInsurance: Prisma.FieldRef<"CarListing", 'Decimal'>
-  readonly estMonthlyMaintenance: Prisma.FieldRef<"CarListing", 'Decimal'>
   readonly status: Prisma.FieldRef<"CarListing", 'ListingStatus'>
   readonly viewsCount: Prisma.FieldRef<"CarListing", 'Int'>
   readonly createdAt: Prisma.FieldRef<"CarListing", 'DateTime'>
@@ -11640,6 +11645,30 @@ export type CarListing$orderItemsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.FeatureOrderItemScalarFieldEnum | Prisma.FeatureOrderItemScalarFieldEnum[]
+}
+
+/**
+ * CarListing.ownershipCosts
+ */
+export type CarListing$ownershipCostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CarOwnershipCost
+   */
+  select?: Prisma.CarOwnershipCostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CarOwnershipCost
+   */
+  omit?: Prisma.CarOwnershipCostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CarOwnershipCostInclude<ExtArgs> | null
+  where?: Prisma.CarOwnershipCostWhereInput
+  orderBy?: Prisma.CarOwnershipCostOrderByWithRelationInput | Prisma.CarOwnershipCostOrderByWithRelationInput[]
+  cursor?: Prisma.CarOwnershipCostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CarOwnershipCostScalarFieldEnum | Prisma.CarOwnershipCostScalarFieldEnum[]
 }
 
 /**

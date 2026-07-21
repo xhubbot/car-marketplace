@@ -76,6 +76,10 @@ export const ModelName = {
   DealerMakeLink: 'DealerMakeLink',
   FuelPriceAssumption: 'FuelPriceAssumption',
   FinanceAssumption: 'FinanceAssumption',
+  LoanProvider: 'LoanProvider',
+  InsuranceProvider: 'InsuranceProvider',
+  RepairCostEstimate: 'RepairCostEstimate',
+  CarOwnershipCost: 'CarOwnershipCost',
   CarListing: 'CarListing',
   CarListingTranslation: 'CarListingTranslation',
   CarListingFeature: 'CarListingFeature',
@@ -84,7 +88,11 @@ export const ModelName = {
   CarListingPremiumFeature: 'CarListingPremiumFeature',
   FeatureOrder: 'FeatureOrder',
   FeatureOrderItem: 'FeatureOrderItem',
-  PaymentTransaction: 'PaymentTransaction'
+  PaymentTransaction: 'PaymentTransaction',
+  User: 'User',
+  VerificationCode: 'VerificationCode',
+  PasswordResetToken: 'PasswordResetToken',
+  UserLoginHistory: 'UserLoginHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -366,17 +374,73 @@ export type FuelPriceAssumptionScalarFieldEnum = (typeof FuelPriceAssumptionScal
 
 export const FinanceAssumptionScalarFieldEnum = {
   id: 'id',
-  loanTermMonths: 'loanTermMonths',
-  annualInterestPct: 'annualInterestPct',
-  downPaymentPct: 'downPaymentPct',
-  insuranceAnnualPctOfPrice: 'insuranceAnnualPctOfPrice',
-  maintenanceBaseMonthly: 'maintenanceBaseMonthly',
-  maintenancePerAgeYearMonthly: 'maintenancePerAgeYearMonthly',
   defaultMonthlyMileageKm: 'defaultMonthlyMileageKm',
   updatedAt: 'updatedAt'
 } as const
 
 export type FinanceAssumptionScalarFieldEnum = (typeof FinanceAssumptionScalarFieldEnum)[keyof typeof FinanceAssumptionScalarFieldEnum]
+
+
+export const LoanProviderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isDefault: 'isDefault',
+  interestRateAnnual: 'interestRateAnnual',
+  minTermMonths: 'minTermMonths',
+  maxTermMonths: 'maxTermMonths',
+  minDownpaymentPercent: 'minDownpaymentPercent',
+  calculationRules: 'calculationRules',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LoanProviderScalarFieldEnum = (typeof LoanProviderScalarFieldEnum)[keyof typeof LoanProviderScalarFieldEnum]
+
+
+export const InsuranceProviderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isDefault: 'isDefault',
+  baseRatePerYear: 'baseRatePerYear',
+  calculationRules: 'calculationRules',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InsuranceProviderScalarFieldEnum = (typeof InsuranceProviderScalarFieldEnum)[keyof typeof InsuranceProviderScalarFieldEnum]
+
+
+export const RepairCostEstimateScalarFieldEnum = {
+  id: 'id',
+  makeId: 'makeId',
+  modelId: 'modelId',
+  averageMonthlyCost: 'averageMonthlyCost',
+  currency: 'currency',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RepairCostEstimateScalarFieldEnum = (typeof RepairCostEstimateScalarFieldEnum)[keyof typeof RepairCostEstimateScalarFieldEnum]
+
+
+export const CarOwnershipCostScalarFieldEnum = {
+  id: 'id',
+  listingId: 'listingId',
+  loanProviderId: 'loanProviderId',
+  insuranceProviderId: 'insuranceProviderId',
+  loanTermMonths: 'loanTermMonths',
+  monthlyLoanPayment: 'monthlyLoanPayment',
+  monthlyInsurance: 'monthlyInsurance',
+  monthlyFuel: 'monthlyFuel',
+  monthlyRepair: 'monthlyRepair',
+  totalMonthlyOwning: 'totalMonthlyOwning',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CarOwnershipCostScalarFieldEnum = (typeof CarOwnershipCostScalarFieldEnum)[keyof typeof CarOwnershipCostScalarFieldEnum]
 
 
 export const CarListingScalarFieldEnum = {
@@ -439,9 +503,6 @@ export const CarListingScalarFieldEnum = {
   currency: 'currency',
   priceIncludesVat: 'priceIncludesVat',
   priceIncludesRegFee: 'priceIncludesRegFee',
-  estMonthlyLoan: 'estMonthlyLoan',
-  estMonthlyInsurance: 'estMonthlyInsurance',
-  estMonthlyMaintenance: 'estMonthlyMaintenance',
   status: 'status',
   viewsCount: 'viewsCount',
   createdAt: 'createdAt',
@@ -545,6 +606,55 @@ export const PaymentTransactionScalarFieldEnum = {
 } as const
 
 export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  failedLoginAttempts: 'failedLoginAttempts',
+  lockUntil: 'lockUntil'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const VerificationCodeScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type VerificationCodeScalarFieldEnum = (typeof VerificationCodeScalarFieldEnum)[keyof typeof VerificationCodeScalarFieldEnum]
+
+
+export const PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const UserLoginHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  userAgent: 'userAgent',
+  trusted: 'trusted',
+  createdAt: 'createdAt'
+} as const
+
+export type UserLoginHistoryScalarFieldEnum = (typeof UserLoginHistoryScalarFieldEnum)[keyof typeof UserLoginHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -743,6 +853,44 @@ export const FuelPriceAssumptionOrderByRelevanceFieldEnum = {
 export type FuelPriceAssumptionOrderByRelevanceFieldEnum = (typeof FuelPriceAssumptionOrderByRelevanceFieldEnum)[keyof typeof FuelPriceAssumptionOrderByRelevanceFieldEnum]
 
 
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const LoanProviderOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type LoanProviderOrderByRelevanceFieldEnum = (typeof LoanProviderOrderByRelevanceFieldEnum)[keyof typeof LoanProviderOrderByRelevanceFieldEnum]
+
+
+export const InsuranceProviderOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type InsuranceProviderOrderByRelevanceFieldEnum = (typeof InsuranceProviderOrderByRelevanceFieldEnum)[keyof typeof InsuranceProviderOrderByRelevanceFieldEnum]
+
+
+export const RepairCostEstimateOrderByRelevanceFieldEnum = {
+  currency: 'currency'
+} as const
+
+export type RepairCostEstimateOrderByRelevanceFieldEnum = (typeof RepairCostEstimateOrderByRelevanceFieldEnum)[keyof typeof RepairCostEstimateOrderByRelevanceFieldEnum]
+
+
 export const CarListingOrderByRelevanceFieldEnum = {
   modelTrim: 'modelTrim',
   vinCode: 'vinCode',
@@ -793,23 +941,6 @@ export const FeatureOrderOrderByRelevanceFieldEnum = {
 export type FeatureOrderOrderByRelevanceFieldEnum = (typeof FeatureOrderOrderByRelevanceFieldEnum)[keyof typeof FeatureOrderOrderByRelevanceFieldEnum]
 
 
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
 export const PaymentTransactionOrderByRelevanceFieldEnum = {
   gatewayTransactionId: 'gatewayTransactionId',
   paymentMethod: 'paymentMethod',
@@ -817,4 +948,41 @@ export const PaymentTransactionOrderByRelevanceFieldEnum = {
 } as const
 
 export type PaymentTransactionOrderByRelevanceFieldEnum = (typeof PaymentTransactionOrderByRelevanceFieldEnum)[keyof typeof PaymentTransactionOrderByRelevanceFieldEnum]
+
+
+export const UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password'
+} as const
+
+export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const VerificationCodeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  code: 'code'
+} as const
+
+export type VerificationCodeOrderByRelevanceFieldEnum = (typeof VerificationCodeOrderByRelevanceFieldEnum)[keyof typeof VerificationCodeOrderByRelevanceFieldEnum]
+
+
+export const PasswordResetTokenOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token'
+} as const
+
+export type PasswordResetTokenOrderByRelevanceFieldEnum = (typeof PasswordResetTokenOrderByRelevanceFieldEnum)[keyof typeof PasswordResetTokenOrderByRelevanceFieldEnum]
+
+
+export const UserLoginHistoryOrderByRelevanceFieldEnum = {
+  ipAddress: 'ipAddress',
+  country: 'country',
+  city: 'city',
+  userAgent: 'userAgent'
+} as const
+
+export type UserLoginHistoryOrderByRelevanceFieldEnum = (typeof UserLoginHistoryOrderByRelevanceFieldEnum)[keyof typeof UserLoginHistoryOrderByRelevanceFieldEnum]
 

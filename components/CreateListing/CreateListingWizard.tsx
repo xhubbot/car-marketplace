@@ -51,9 +51,7 @@ export function CreateListingWizard() {
 
     const result = await submitListing()
     if (result.success) {
-      // No real listing detail page exists yet (only the mock-data one at
-      // classified/details/[id]) — land on search, where the new listing shows up.
-      router.push(`/${locale}/classified/search`)
+      router.push(`/${locale}/details/${result.listingId}`)
     } else {
       alert(result.error || 'Failed to create listing')
     }

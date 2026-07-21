@@ -4,7 +4,13 @@ import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import type { ListingType } from '@/generated/prisma/client'
 import { classifiedUploadDir, ImageValidationError, processAndSaveImage } from '@/lib/image-upload'
-import { computeFixedCostEstimates, getFinanceAssumption } from '@/lib/costAssumptions'
+import {
+  getDefaultLoanProvider,
+  getDefaultInsuranceProvider,
+  computeOwnershipCostBundle,
+  clampLoanTermMonths,
+  DEFAULT_LOAN_TERM_MONTHS,
+} from '@/lib/costAssumptions'
 
 const VALID_LISTING_TYPES: ListingType[] = ['sell', 'buy', 'rentWanted', 'rentOffer']
 
@@ -78,13 +84,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'At least one image is required' }, { status: 400 })
     }
 
-    const financeAssumption = await getFinanceAssumption()
-    const { estMonthlyLoan, estMonthlyInsurance, estMonthlyMaintenance } = computeFixedCostEstimates(
-      Number(price),
-      yearManufactured,
-      financeAssumption
-    )
-
     const listing = await prisma.carListing.create({
       data: {
         userId,
@@ -108,9 +107,6 @@ export async function POST(request: NextRequest) {
         price,
         currency,
         locationId,
-        estMonthlyLoan,
-        estMonthlyInsurance,
-        estMonthlyMaintenance,
         features: {
           create: features.map((featureId) => ({ featureId })),
         },
@@ -133,6 +129,45 @@ export async function POST(request: NextRequest) {
     )
 
     await prisma.carImage.createMany({ data: imageRecords })
+
+    // Precompute the default-combo ownership cost so search's fast path (which
+    // joins car_ownership_costs) always has a row for every listing.
+    const fuelType = await prisma.fuelType.findUnique({
+      where: { id: fuelTypeId },
+      select: { technicalName: true },
+    })
+    if (fuelType) {
+      const [loanProvider, insuranceProvider] = await Promise.all([
+        getDefaultLoanProvider(),
+        getDefaultInsuranceProvider(),
+      ])
+      const loanTermMonths = clampLoanTermMonths(DEFAULT_LOAN_TERM_MONTHS, loanProvider)
+      const bundle = await computeOwnershipCostBundle({
+        price: Number(price),
+        fuelTypeTechnicalName: fuelType.technicalName,
+        makeId,
+        modelId,
+        loanProvider,
+        insuranceProvider,
+        loanTermMonths,
+      })
+      await prisma.carOwnershipCost.create({
+        data: {
+          listingId: listing.id,
+          loanProviderId: loanProvider.id,
+          insuranceProviderId: insuranceProvider.id,
+          loanTermMonths,
+          monthlyLoanPayment: bundle.monthlyLoanPayment,
+          monthlyInsurance: bundle.monthlyInsurance,
+          // This form doesn't collect fuelConsumptionMixed, so there's no
+          // basis for a fuel snapshot yet — matches the pre-existing gap
+          // where fuel cost was always search-time-only, never stored.
+          monthlyFuel: 0,
+          monthlyRepair: bundle.monthlyRepair,
+          totalMonthlyOwning: bundle.totalMonthlyOwning,
+        },
+      })
+    }
 
     return NextResponse.json(
       { id: Number(listing.id), message: 'Listing created successfully' },

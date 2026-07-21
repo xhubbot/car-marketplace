@@ -219,6 +219,7 @@ export type CarMakeWhereInput = {
   models?: Prisma.CarModelListRelationFilter
   carListings?: Prisma.CarListingListRelationFilter
   dealers?: Prisma.DealerMakeLinkListRelationFilter
+  repairCostEstimates?: Prisma.RepairCostEstimateListRelationFilter
 }
 
 export type CarMakeOrderByWithRelationInput = {
@@ -230,6 +231,7 @@ export type CarMakeOrderByWithRelationInput = {
   models?: Prisma.CarModelOrderByRelationAggregateInput
   carListings?: Prisma.CarListingOrderByRelationAggregateInput
   dealers?: Prisma.DealerMakeLinkOrderByRelationAggregateInput
+  repairCostEstimates?: Prisma.RepairCostEstimateOrderByRelationAggregateInput
   _relevance?: Prisma.CarMakeOrderByRelevanceInput
 }
 
@@ -245,6 +247,7 @@ export type CarMakeWhereUniqueInput = Prisma.AtLeast<{
   models?: Prisma.CarModelListRelationFilter
   carListings?: Prisma.CarListingListRelationFilter
   dealers?: Prisma.DealerMakeLinkListRelationFilter
+  repairCostEstimates?: Prisma.RepairCostEstimateListRelationFilter
 }, "id" | "name" | "slug">
 
 export type CarMakeOrderByWithAggregationInput = {
@@ -279,6 +282,7 @@ export type CarMakeCreateInput = {
   models?: Prisma.CarModelCreateNestedManyWithoutMakeInput
   carListings?: Prisma.CarListingCreateNestedManyWithoutMakeInput
   dealers?: Prisma.DealerMakeLinkCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeUncheckedCreateInput = {
@@ -290,6 +294,7 @@ export type CarMakeUncheckedCreateInput = {
   models?: Prisma.CarModelUncheckedCreateNestedManyWithoutMakeInput
   carListings?: Prisma.CarListingUncheckedCreateNestedManyWithoutMakeInput
   dealers?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeUpdateInput = {
@@ -300,6 +305,7 @@ export type CarMakeUpdateInput = {
   models?: Prisma.CarModelUpdateManyWithoutMakeNestedInput
   carListings?: Prisma.CarListingUpdateManyWithoutMakeNestedInput
   dealers?: Prisma.DealerMakeLinkUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeUncheckedUpdateInput = {
@@ -311,6 +317,7 @@ export type CarMakeUncheckedUpdateInput = {
   models?: Prisma.CarModelUncheckedUpdateManyWithoutMakeNestedInput
   carListings?: Prisma.CarListingUncheckedUpdateManyWithoutMakeNestedInput
   dealers?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeCreateManyInput = {
@@ -379,6 +386,11 @@ export type CarMakeScalarRelationFilter = {
   isNot?: Prisma.CarMakeWhereInput
 }
 
+export type CarMakeNullableScalarRelationFilter = {
+  is?: Prisma.CarMakeWhereInput | null
+  isNot?: Prisma.CarMakeWhereInput | null
+}
+
 export type CarMakeCreateNestedOneWithoutModelsInput = {
   create?: Prisma.XOR<Prisma.CarMakeCreateWithoutModelsInput, Prisma.CarMakeUncheckedCreateWithoutModelsInput>
   connectOrCreate?: Prisma.CarMakeCreateOrConnectWithoutModelsInput
@@ -407,6 +419,22 @@ export type CarMakeUpdateOneRequiredWithoutDealersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CarMakeUpdateToOneWithWhereWithoutDealersInput, Prisma.CarMakeUpdateWithoutDealersInput>, Prisma.CarMakeUncheckedUpdateWithoutDealersInput>
 }
 
+export type CarMakeCreateNestedOneWithoutRepairCostEstimatesInput = {
+  create?: Prisma.XOR<Prisma.CarMakeCreateWithoutRepairCostEstimatesInput, Prisma.CarMakeUncheckedCreateWithoutRepairCostEstimatesInput>
+  connectOrCreate?: Prisma.CarMakeCreateOrConnectWithoutRepairCostEstimatesInput
+  connect?: Prisma.CarMakeWhereUniqueInput
+}
+
+export type CarMakeUpdateOneWithoutRepairCostEstimatesNestedInput = {
+  create?: Prisma.XOR<Prisma.CarMakeCreateWithoutRepairCostEstimatesInput, Prisma.CarMakeUncheckedCreateWithoutRepairCostEstimatesInput>
+  connectOrCreate?: Prisma.CarMakeCreateOrConnectWithoutRepairCostEstimatesInput
+  upsert?: Prisma.CarMakeUpsertWithoutRepairCostEstimatesInput
+  disconnect?: Prisma.CarMakeWhereInput | boolean
+  delete?: Prisma.CarMakeWhereInput | boolean
+  connect?: Prisma.CarMakeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CarMakeUpdateToOneWithWhereWithoutRepairCostEstimatesInput, Prisma.CarMakeUpdateWithoutRepairCostEstimatesInput>, Prisma.CarMakeUncheckedUpdateWithoutRepairCostEstimatesInput>
+}
+
 export type CarMakeCreateNestedOneWithoutCarListingsInput = {
   create?: Prisma.XOR<Prisma.CarMakeCreateWithoutCarListingsInput, Prisma.CarMakeUncheckedCreateWithoutCarListingsInput>
   connectOrCreate?: Prisma.CarMakeCreateOrConnectWithoutCarListingsInput
@@ -428,6 +456,7 @@ export type CarMakeCreateWithoutModelsInput = {
   createdAt?: Date | string
   carListings?: Prisma.CarListingCreateNestedManyWithoutMakeInput
   dealers?: Prisma.DealerMakeLinkCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeUncheckedCreateWithoutModelsInput = {
@@ -438,6 +467,7 @@ export type CarMakeUncheckedCreateWithoutModelsInput = {
   createdAt?: Date | string
   carListings?: Prisma.CarListingUncheckedCreateNestedManyWithoutMakeInput
   dealers?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeCreateOrConnectWithoutModelsInput = {
@@ -463,6 +493,7 @@ export type CarMakeUpdateWithoutModelsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carListings?: Prisma.CarListingUpdateManyWithoutMakeNestedInput
   dealers?: Prisma.DealerMakeLinkUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeUncheckedUpdateWithoutModelsInput = {
@@ -473,6 +504,7 @@ export type CarMakeUncheckedUpdateWithoutModelsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carListings?: Prisma.CarListingUncheckedUpdateManyWithoutMakeNestedInput
   dealers?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeCreateWithoutDealersInput = {
@@ -482,6 +514,7 @@ export type CarMakeCreateWithoutDealersInput = {
   createdAt?: Date | string
   models?: Prisma.CarModelCreateNestedManyWithoutMakeInput
   carListings?: Prisma.CarListingCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeUncheckedCreateWithoutDealersInput = {
@@ -492,6 +525,7 @@ export type CarMakeUncheckedCreateWithoutDealersInput = {
   createdAt?: Date | string
   models?: Prisma.CarModelUncheckedCreateNestedManyWithoutMakeInput
   carListings?: Prisma.CarListingUncheckedCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeCreateOrConnectWithoutDealersInput = {
@@ -517,6 +551,7 @@ export type CarMakeUpdateWithoutDealersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   models?: Prisma.CarModelUpdateManyWithoutMakeNestedInput
   carListings?: Prisma.CarListingUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeUncheckedUpdateWithoutDealersInput = {
@@ -527,6 +562,65 @@ export type CarMakeUncheckedUpdateWithoutDealersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   models?: Prisma.CarModelUncheckedUpdateManyWithoutMakeNestedInput
   carListings?: Prisma.CarListingUncheckedUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedUpdateManyWithoutMakeNestedInput
+}
+
+export type CarMakeCreateWithoutRepairCostEstimatesInput = {
+  name: string
+  slug: string
+  isActive?: boolean
+  createdAt?: Date | string
+  models?: Prisma.CarModelCreateNestedManyWithoutMakeInput
+  carListings?: Prisma.CarListingCreateNestedManyWithoutMakeInput
+  dealers?: Prisma.DealerMakeLinkCreateNestedManyWithoutMakeInput
+}
+
+export type CarMakeUncheckedCreateWithoutRepairCostEstimatesInput = {
+  id?: number
+  name: string
+  slug: string
+  isActive?: boolean
+  createdAt?: Date | string
+  models?: Prisma.CarModelUncheckedCreateNestedManyWithoutMakeInput
+  carListings?: Prisma.CarListingUncheckedCreateNestedManyWithoutMakeInput
+  dealers?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutMakeInput
+}
+
+export type CarMakeCreateOrConnectWithoutRepairCostEstimatesInput = {
+  where: Prisma.CarMakeWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarMakeCreateWithoutRepairCostEstimatesInput, Prisma.CarMakeUncheckedCreateWithoutRepairCostEstimatesInput>
+}
+
+export type CarMakeUpsertWithoutRepairCostEstimatesInput = {
+  update: Prisma.XOR<Prisma.CarMakeUpdateWithoutRepairCostEstimatesInput, Prisma.CarMakeUncheckedUpdateWithoutRepairCostEstimatesInput>
+  create: Prisma.XOR<Prisma.CarMakeCreateWithoutRepairCostEstimatesInput, Prisma.CarMakeUncheckedCreateWithoutRepairCostEstimatesInput>
+  where?: Prisma.CarMakeWhereInput
+}
+
+export type CarMakeUpdateToOneWithWhereWithoutRepairCostEstimatesInput = {
+  where?: Prisma.CarMakeWhereInput
+  data: Prisma.XOR<Prisma.CarMakeUpdateWithoutRepairCostEstimatesInput, Prisma.CarMakeUncheckedUpdateWithoutRepairCostEstimatesInput>
+}
+
+export type CarMakeUpdateWithoutRepairCostEstimatesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  models?: Prisma.CarModelUpdateManyWithoutMakeNestedInput
+  carListings?: Prisma.CarListingUpdateManyWithoutMakeNestedInput
+  dealers?: Prisma.DealerMakeLinkUpdateManyWithoutMakeNestedInput
+}
+
+export type CarMakeUncheckedUpdateWithoutRepairCostEstimatesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  models?: Prisma.CarModelUncheckedUpdateManyWithoutMakeNestedInput
+  carListings?: Prisma.CarListingUncheckedUpdateManyWithoutMakeNestedInput
+  dealers?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeCreateWithoutCarListingsInput = {
@@ -536,6 +630,7 @@ export type CarMakeCreateWithoutCarListingsInput = {
   createdAt?: Date | string
   models?: Prisma.CarModelCreateNestedManyWithoutMakeInput
   dealers?: Prisma.DealerMakeLinkCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeUncheckedCreateWithoutCarListingsInput = {
@@ -546,6 +641,7 @@ export type CarMakeUncheckedCreateWithoutCarListingsInput = {
   createdAt?: Date | string
   models?: Prisma.CarModelUncheckedCreateNestedManyWithoutMakeInput
   dealers?: Prisma.DealerMakeLinkUncheckedCreateNestedManyWithoutMakeInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedCreateNestedManyWithoutMakeInput
 }
 
 export type CarMakeCreateOrConnectWithoutCarListingsInput = {
@@ -571,6 +667,7 @@ export type CarMakeUpdateWithoutCarListingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   models?: Prisma.CarModelUpdateManyWithoutMakeNestedInput
   dealers?: Prisma.DealerMakeLinkUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUpdateManyWithoutMakeNestedInput
 }
 
 export type CarMakeUncheckedUpdateWithoutCarListingsInput = {
@@ -581,6 +678,7 @@ export type CarMakeUncheckedUpdateWithoutCarListingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   models?: Prisma.CarModelUncheckedUpdateManyWithoutMakeNestedInput
   dealers?: Prisma.DealerMakeLinkUncheckedUpdateManyWithoutMakeNestedInput
+  repairCostEstimates?: Prisma.RepairCostEstimateUncheckedUpdateManyWithoutMakeNestedInput
 }
 
 
@@ -592,12 +690,14 @@ export type CarMakeCountOutputType = {
   models: number
   carListings: number
   dealers: number
+  repairCostEstimates: number
 }
 
 export type CarMakeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   models?: boolean | CarMakeCountOutputTypeCountModelsArgs
   carListings?: boolean | CarMakeCountOutputTypeCountCarListingsArgs
   dealers?: boolean | CarMakeCountOutputTypeCountDealersArgs
+  repairCostEstimates?: boolean | CarMakeCountOutputTypeCountRepairCostEstimatesArgs
 }
 
 /**
@@ -631,6 +731,13 @@ export type CarMakeCountOutputTypeCountDealersArgs<ExtArgs extends runtime.Types
   where?: Prisma.DealerMakeLinkWhereInput
 }
 
+/**
+ * CarMakeCountOutputType without action
+ */
+export type CarMakeCountOutputTypeCountRepairCostEstimatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RepairCostEstimateWhereInput
+}
+
 
 export type CarMakeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -641,6 +748,7 @@ export type CarMakeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   models?: boolean | Prisma.CarMake$modelsArgs<ExtArgs>
   carListings?: boolean | Prisma.CarMake$carListingsArgs<ExtArgs>
   dealers?: boolean | Prisma.CarMake$dealersArgs<ExtArgs>
+  repairCostEstimates?: boolean | Prisma.CarMake$repairCostEstimatesArgs<ExtArgs>
   _count?: boolean | Prisma.CarMakeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carMake"]>
 
@@ -659,6 +767,7 @@ export type CarMakeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   models?: boolean | Prisma.CarMake$modelsArgs<ExtArgs>
   carListings?: boolean | Prisma.CarMake$carListingsArgs<ExtArgs>
   dealers?: boolean | Prisma.CarMake$dealersArgs<ExtArgs>
+  repairCostEstimates?: boolean | Prisma.CarMake$repairCostEstimatesArgs<ExtArgs>
   _count?: boolean | Prisma.CarMakeCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -668,6 +777,7 @@ export type $CarMakePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     models: Prisma.$CarModelPayload<ExtArgs>[]
     carListings: Prisma.$CarListingPayload<ExtArgs>[]
     dealers: Prisma.$DealerMakeLinkPayload<ExtArgs>[]
+    repairCostEstimates: Prisma.$RepairCostEstimatePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1018,6 +1128,7 @@ export interface Prisma__CarMakeClient<T, Null = never, ExtArgs extends runtime.
   models<T extends Prisma.CarMake$modelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarMake$modelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   carListings<T extends Prisma.CarMake$carListingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarMake$carListingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dealers<T extends Prisma.CarMake$dealersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarMake$dealersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealerMakeLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  repairCostEstimates<T extends Prisma.CarMake$repairCostEstimatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarMake$repairCostEstimatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RepairCostEstimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1469,6 +1580,30 @@ export type CarMake$dealersArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.DealerMakeLinkScalarFieldEnum | Prisma.DealerMakeLinkScalarFieldEnum[]
+}
+
+/**
+ * CarMake.repairCostEstimates
+ */
+export type CarMake$repairCostEstimatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RepairCostEstimate
+   */
+  select?: Prisma.RepairCostEstimateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RepairCostEstimate
+   */
+  omit?: Prisma.RepairCostEstimateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RepairCostEstimateInclude<ExtArgs> | null
+  where?: Prisma.RepairCostEstimateWhereInput
+  orderBy?: Prisma.RepairCostEstimateOrderByWithRelationInput | Prisma.RepairCostEstimateOrderByWithRelationInput[]
+  cursor?: Prisma.RepairCostEstimateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RepairCostEstimateScalarFieldEnum | Prisma.RepairCostEstimateScalarFieldEnum[]
 }
 
 /**

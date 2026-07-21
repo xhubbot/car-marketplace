@@ -11,12 +11,12 @@ export default function NavbarActions() {
   const { darkMode, toggleDarkMode } = useTheme();
   const params = useParams();
   const locale = params.locale as string;
-
+  
   return (
     <div className="flex items-center gap-2">
       {/* Sell Car trigger */}
       <Link
-        href={`/${locale}/classified/create`}
+        href={`/${locale}/create`}
         className="flex h-9 items-center gap-1 rounded-full bg-emerald-500 px-3.5 text-xs font-bold text-white shadow-sm hover:bg-emerald-600 transition-colors"
       >
         <Plus className="h-3.5 w-3.5" />
