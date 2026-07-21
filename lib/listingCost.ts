@@ -1,6 +1,8 @@
 import {
   getDefaultLoanProvider,
   getDefaultInsuranceProvider,
+  getLoanProviderById,
+  getInsuranceProviderById,
   getFinanceAssumption,
   getFuelPriceMap,
   resolveOwnershipCostBundles,
@@ -28,24 +30,34 @@ export interface ListingForCost {
   modelId: number
 }
 
-// Resolves the default-combo cost breakdown for a batch of listings in one
-// pass: loan/insurance/repair come from the car_ownership_costs cache (via
-// resolveOwnershipCostBundles), fuel is always computed live for the given
+// Resolves the cost breakdown for a batch of listings in one pass:
+// loan/insurance/repair come from the car_ownership_costs cache (via
+// resolveOwnershipCostBundles, which computes and write-through caches any
+// combo not already cached), fuel is always computed live for the given
 // monthlyKm (defaults to FinanceAssumption.defaultMonthlyMileageKm) since it
 // depends on a value the buyer chooses, never a cached snapshot.
+// loanProviderId/insuranceProviderId let a caller price a specific provider
+// combo (e.g. a search filter); omitted, they fall back to the defaults.
 export async function getMonthlyCostsForListings(
   listings: ListingForCost[],
-  monthlyKm?: number
+  monthlyKm?: number,
+  loanProviderId?: number,
+  insuranceProviderId?: number
 ): Promise<Map<string, MonthlyCost>> {
   const result = new Map<string, MonthlyCost>()
   if (listings.length === 0) return result
 
-  const [loanProvider, insuranceProvider, financeAssumption, fuelPriceMap] = await Promise.all([
-    getDefaultLoanProvider(),
-    getDefaultInsuranceProvider(),
-    getFinanceAssumption(),
-    getFuelPriceMap(),
-  ])
+  const [loanProviderOverride, insuranceProviderOverride, defaultLoanProvider, defaultInsuranceProvider, financeAssumption, fuelPriceMap] =
+    await Promise.all([
+      loanProviderId ? getLoanProviderById(loanProviderId) : Promise.resolve(null),
+      insuranceProviderId ? getInsuranceProviderById(insuranceProviderId) : Promise.resolve(null),
+      getDefaultLoanProvider(),
+      getDefaultInsuranceProvider(),
+      getFinanceAssumption(),
+      getFuelPriceMap(),
+    ])
+  const loanProvider = loanProviderOverride ?? defaultLoanProvider
+  const insuranceProvider = insuranceProviderOverride ?? defaultInsuranceProvider
   const loanTermMonths = clampLoanTermMonths(DEFAULT_LOAN_TERM_MONTHS, loanProvider)
   const effectiveMonthlyKm = monthlyKm ?? financeAssumption.defaultMonthlyMileageKm
 

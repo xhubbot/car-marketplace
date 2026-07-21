@@ -10,7 +10,7 @@ const LOCALES = ["en", "et", "ru"];
 // dashboards that shouldn't be indexed).
 const STATIC_PAGES = [
   { path: "", priority: 1.0, changeFrequency: "weekly" as const },
-  { path: "/browse", priority: 0.8, changeFrequency: "daily" as const },
+  { path: "/search", priority: 0.8, changeFrequency: "daily" as const },
   { path: "/create", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/dealer/search", priority: 0.8, changeFrequency: "daily" as const },
   { path: "/dealer/register", priority: 0.5, changeFrequency: "monthly" as const },
